@@ -1,8 +1,12 @@
-{
+`{
   "name": "rhaego-front-end",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "drakov": "^1.0.4",
+    "material-ui": "^1.0.0-beta.27",
+    "material-ui-icons": "^1.0.0-beta.17",
+    "prop-types": "^15.6.0",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-redux": "^5.0.1",
@@ -15,6 +19,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "mock": "drakov -f ./mock.apib -p 4000"
   }
 }
+`

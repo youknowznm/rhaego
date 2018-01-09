@@ -1,0 +1,16 @@
+# Group 通用接口
+
+## 当前用户基本信息 [GET /who]
+
++ Response 200 (application/json;charset=utf-8)
+  + Attributes
+    + id: 1234 (string, required) - 用户ID
+    + name: `Alley` (string, required) - 用户姓名
+    + token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NjUzNjMyNTksImlzcyI6IjBkYzQyM2YyZGYzYjRlNDJiZDI4NzFkZjczMWY2MjdiIn0.DwM2ez07Y5bLfG5ZvYQKSDCJX_jvV_OgrsUxp32uQG4` (string, required) - 用户token
+    + type (enum, required) - 用户类型：1 学生、2 任课老师、3 班主任、4 管理员、5 其他(校长、年级组长)
+      + Members
+      + 1 (number)
+      + 2 (number)
+      + 3 (number)
+      + 4 (number)
+      + 5 (number)
