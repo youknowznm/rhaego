@@ -17,9 +17,9 @@ const Drawer = ({classes, drawerIsOpen, toggleDrawer}) => {
     <div>
       <div className={classes.drawerHeader} />
       <Divider />
-      <List>{[1,3,4]}</List>
+      <List>Item 1</List>
       <Divider />
-      <List>{[1,3,4]}</List>
+      <List>Item 2</List>
     </div>
   )
   return (
