@@ -10,7 +10,7 @@ import DrawerBody from './drawerBody.js'
 const styles = (theme) => ({
   drawerHeader: theme.mixins.toolbar,
   drawerContent: {
-    width: 240,
+    width: 250,
   },
 })
 

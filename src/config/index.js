@@ -1,1 +1,1 @@
-export const siteName = 'You Know znM'
+export const siteName = 'Material Blog'

@@ -6,7 +6,7 @@ import List, {ListItem, ListItemIcon, ListItemAvatar, ListItemText} from 'materi
 import FolderIcon from 'material-ui-icons/Folder';
 import {SplitToSpans} from '../../../utils'
 
-const styles = () => ({
+const styles = (theme) => ({
   root: {
     padding: 0,
   },
@@ -22,7 +22,7 @@ const DrawerHeader = ({classes}) => (
   <List className={classes.root}>
     <ListItem divider>
       <Avatar className={classes.img} src="/favicon.ico" alt="Site Logo" />
-      <Typography type="subheading" className={classes.hasLeftMargin}>
+      <Typography type="title" className={classes.hasLeftMargin}>
         <SplitToSpans />
       </Typography>
     </ListItem>

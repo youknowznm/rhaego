@@ -10,11 +10,11 @@ import {toggleDrawer} from '../actions.js'
 const drawerWidth = 250
 
 const styles = (theme) => ({
-  flex: {
+  title: {
     flex: 1,
+    marginLeft: 12,
   },
   navIconButton: {
-    marginRight: 20,
     [theme.breakpoints.up('md')]: {
       display: 'none',
     },
@@ -34,7 +34,7 @@ const Header = ({classes, toggleDrawer}) => (
       <IconButton className={classes.navIconButton} onClick={toggleDrawer}>
         <MenuIcon />
       </IconButton>
-      <Typography className={classes.flex} type="title" color="inherit">
+      <Typography className={classes.title} type="title" color="inherit">
         <SplitToSpans />
       </Typography>
       <Button>Login</Button>
