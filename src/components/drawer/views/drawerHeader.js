@@ -13,7 +13,7 @@ const styles = (theme) => ({
   img: {
     borderRadius: 0,
   },
-  hasLeftMargin: {
+  title: {
     marginLeft: 20,
   }
 })
@@ -22,8 +22,8 @@ const DrawerHeader = ({classes}) => (
   <List className={classes.root}>
     <ListItem divider>
       <Avatar className={classes.img} src="/favicon.ico" alt="Site Logo" />
-      <Typography type="title" className={classes.hasLeftMargin}>
-        <SplitToSpans />
+      <Typography type="subheading" className={classes.title} color="inherit">
+          MATERIAL BLOG
       </Typography>
     </ListItem>
   </List>

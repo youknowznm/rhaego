@@ -1,1 +1,3 @@
-import view from './views/content.js'
+import view from './views/main.js'
+
+export {view}
