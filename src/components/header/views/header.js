@@ -35,7 +35,7 @@ const Header = ({classes, toggleDrawer}) => (
         <MenuIcon />
       </IconButton>
       <Typography className={classes.flex} type="title" color="inherit">
-        <SplitToSpans words="Rh ae go" />
+        <SplitToSpans />
       </Typography>
       <Button>Login</Button>
     </Toolbar>

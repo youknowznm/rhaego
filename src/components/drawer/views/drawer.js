@@ -4,22 +4,21 @@ import {connect} from 'react-redux'
 import {withStyles} from 'material-ui'
 import {Drawer as MuiDrawer, Divider, List, Hidden, Typography} from 'material-ui'
 import {toggleDrawer} from '../../header/actions.js'
+import DrawerHeader from './drawerHeader.js'
+import DrawerBody from './drawerBody.js'
 
 const styles = (theme) => ({
   drawerHeader: theme.mixins.toolbar,
   drawerContent: {
-    width: 250,
+    width: 240,
   },
 })
 
 const Drawer = ({classes, drawerIsOpen, toggleDrawer}) => {
   const drawer = (
     <div>
-      <div className={classes.drawerHeader} />
-      <Divider />
-      <List>Item 1</List>
-      <Divider />
-      <List>Item 2</List>
+      <DrawerHeader />
+      <DrawerBody />
     </div>
   )
   return (
