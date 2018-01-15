@@ -4,10 +4,10 @@ import {siteName} from '../config'
 
 import './SplitToSpans.scss'
 
-const SplitToSpans = ({words}) => {
+const SplitToSpans = ({words, className}) => {
   let arr = words.trim().split(/\s+/)
   return (
-    <span>
+    <span className={className}>
       {
         arr.map((item, index) => {
           return <span key={index} className="splited-span">{item}</span>
@@ -19,6 +19,7 @@ const SplitToSpans = ({words}) => {
 
 SplitToSpans.propTypes = {
   words: PropTypes.string.isRequired,
+  className: PropTypes.string,
 }
 
 SplitToSpans.defaultProps = {

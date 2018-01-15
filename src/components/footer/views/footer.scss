@@ -3,6 +3,129 @@
 
 .mb-footer {
   @extend .mb-responsive-container;
+  padding: 0 !important;
+
+  .social {
+    width: 100%;
+    height: 72px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    .social-link {
+      position: relative;
+      list-style: none;
+      width: 24px;
+      height: 24px;
+      margin: 0 15px;
+      background-repeat: no-repeat;
+      background-position: 0 0;
+      background-size: 24px 24px;
+      opacity: .5;
+      vertical-align: middle;
+      transition: opacity .4s ease-out;
+      cursor: pointer;
+      > a {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+      }
+      &.github {
+        background-image: url("../../../assets/images/footer/ic_github.svg");
+      }
+      &.zhihu {
+        background-image: url("../../../assets/images/footer/ic_zhihu.svg");
+      }
+      &.wechat {
+        background-image: url("../../../assets/images/footer/ic_wechat.svg");
+        .hover-content {
+          position: absolute;
+          width: 160px;
+          height: 160px;
+          left: -68px;
+          top: -170px;
+          box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+          transform: scale(0);
+          opacity: 0;
+          transform-origin: bottom;
+          transition: all .2s ease-out;
+        }
+      }
+      &.mail {
+        // opacity: .5;
+        background-image: url("../../../assets/images/footer/ic_email_24px.svg");
+        .hover-content {
+          position: absolute;
+          background: #fff;
+          white-space: nowrap;
+          height: 24px;
+          line-height: 24px;
+          padding: 0 12px;
+          left: 50%;
+          width: 7.2em;
+          margin-left: -3.6em;
+          top: -36px;
+          font-size: 12px;
+          box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+          transform: scale(0);
+          opacity: 0;
+          transform-origin: bottom;
+          transition: all .2s ease-out;
+        }
+      }
+      &:hover {
+        opacity: 1 !important;
+        .hover-content {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+    }
+  }
+
+  &._about {
+    background: #fff;
+    .about {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 144px;
+      .about-item {
+        list-style: none;
+        &:nth-child(2) {
+          span {
+            color: #000;
+          }
+        }
+        .heart-wrap {
+          position: relative;
+          display: inline-block;
+          width: 14px;
+          height: 24px;
+          line-height: 24px;
+          vertical-align: middle;
+          .heart {
+            position: absolute;
+            left: 0;
+            top: 4px;
+          }
+        }
+        .info-link {
+          padding: 8px 0;
+          border-bottom: 2px solid transparent;
+          transition: all .2s ease-out;
+          &:hover {
+            border-bottom-color: #000;
+            padding: 4px 0;
+          }
+        }
+      }
+    }
+  }
+
+
 }
 
 // .mb-footer {
@@ -48,7 +171,7 @@
 //           background-size: 24px 24px;
 //           opacity: .5;
 //           vertical-align: middle;
-//           transition: opacity .4s ease;
+//           transition: opacity .4s ease-out;
 //           cursor: pointer;
 //           > a {
 //             position: absolute;
@@ -58,13 +181,13 @@
 //             height: 100%;
 //           }
 //           &.github {
-//             background-image: url("../_images/footer/ic_github.svg");
+//             background-image: url("../../../assets/images/footer/ic_github.svg");
 //           }
 //           &.zhihu {
-//             background-image: url("../_images/footer/ic_zhihu.svg");
+//             background-image: url("../../../assets/images/footer/ic_zhihu.svg");
 //           }
 //           &.wechat {
-//             background-image: url("../_images/footer/ic_wechat.svg");
+//             background-image: url("../../../assets/images/footer/ic_wechat.svg");
 //             .hover-content {
 //               position: absolute;
 //               width: 160px;
@@ -75,12 +198,12 @@
 //               transform: scale(0);
 //               opacity: 0;
 //               transform-origin: bottom;
-//               transition: all .2s ease;
+//               transition: all .2s ease-out;
 //             }
 //           }
 //           &.mail {
 //             // opacity: .5;
-//             background-image: url("../_images/footer/ic_email_24px.svg");
+//             background-image: url("../../../assets/images/footer/ic_email_24px.svg");
 //             .hover-content {
 //               position: absolute;
 //               background: #fff;
@@ -96,7 +219,7 @@
 //               transform: scale(0);
 //               opacity: 0;
 //               transform-origin: bottom;
-//               transition: all .2s ease;
+//               transition: all .2s ease-out;
 //             }
 //           }
 //           &:hover {

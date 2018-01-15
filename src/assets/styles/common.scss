@@ -1,16 +1,40 @@
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.mono {
+  font-family: "Roboto Mono" !important;
+}
+
 .mb-responsive-container {
   position: relative;
   width: 100%;
+  margin-left: 0;
+  @media (min-width: 1280px) {
+    // 留出左侧drawer的margin
+    margin-left: 250px;
+    width: calc(100% - 250px);
+  }
   > .content {
     position: relative;
     padding: 0 20px;
     width: 100%;
-    // margin: 0 auto;
+    margin: 0 auto;
     @media (min-width: 960px) {
       width: 760px;
       padding: 0;
     }
     @media (min-width: 1280px) {
+      width: 960px;
+      padding: 0;
+    }
+    @media (min-width: 1440px) {
       width: 1160px;
       padding: 0;
     }
@@ -22,3 +46,5 @@
 // md, medium: 960dp or larger
 // lg, large: 1280dp or larger
 // xl, xlarge: 1920dp or larger
+
+// enum: 'display4', 'display3', 'display2', 'display1', 'headline', 'title', 'subheading', 'body2', 'body1', 'caption', 'button'
