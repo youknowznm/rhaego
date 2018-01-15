@@ -50,7 +50,7 @@ const Footer = ({classes}) => (
             </Typography>
           </li>
           <li className="about-item">
-            <Button raised  >
+            <Button href="https://github.com/youknowznm/material-blog">
               view source
             </Button>
           </li>
