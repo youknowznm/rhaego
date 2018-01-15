@@ -13,6 +13,7 @@ const styles = (theme) => ({
   title: {
     flex: 1,
     marginLeft: 12,
+    fontFamily: 'Roboto Mono',
   },
   navIconButton: {
     [theme.breakpoints.up('md')]: {
@@ -25,6 +26,7 @@ const styles = (theme) => ({
     [theme.breakpoints.up('md')]: {
       width: `calc(100% - ${drawerWidth}px)`,
     },
+    // background: primary
   },
 })
 
