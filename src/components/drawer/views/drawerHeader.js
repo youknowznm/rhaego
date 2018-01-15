@@ -15,6 +15,7 @@ const styles = (theme) => ({
   },
   title: {
     marginLeft: 20,
+    fontFamily: 'Roboto Mono',
   }
 })
 

@@ -1,22 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {withStyles} from 'material-ui/styles'
+// import {withStyles} from 'material-ui/styles'
 
-const styles = (theme) => ({
-  root: {
-    width: '100%',
-    background: '#fafafa',
-    height: 72,
-    lineHeight: 72,
-
-  },
-
-})
+import './footer.scss'
 
 const Footer = ({classes}) => (
-  <ul className="root">
-    <li>fuck</li>
-  </ul>
+  <div className="mb-footer">
+    <div className="content">
+      <ul className="social">
+        <li className="item">fuck</li>
+      </ul>  
+    </div>
+
+  </div>
 )
 
-export withStyles(styles)(Footer)
+export default Footer

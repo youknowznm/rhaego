@@ -6,6 +6,8 @@ import Subheader from 'material-ui/List/ListSubheader';
 import IconButton from 'material-ui/IconButton';
 import InfoIcon from 'material-ui-icons/Info';
 
+import './main.scss'
+
 const styles = (theme) => ({
   main: {
     position: 'relative',
@@ -35,11 +37,14 @@ const styles = (theme) => ({
 
 
 const Main = ({classes}) => (
-  <main className={classes.main}>
-    <Card />
-    <Card />
-    <Card />
+  <main className="mb-main">
+    <div className="content">
+      <Card />
+      <Card />
+      <Card />
+    </div>
+
   </main>
 )
 
-export default withStyles(styles)(Main)
+export default Main

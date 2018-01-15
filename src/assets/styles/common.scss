@@ -1,0 +1,24 @@
+.mb-responsive-container {
+  position: relative;
+  width: 100%;
+  > .content {
+    position: relative;
+    padding: 0 20px;
+    width: 100%;
+    // margin: 0 auto;
+    @media (min-width: 960px) {
+      width: 760px;
+      padding: 0;
+    }
+    @media (min-width: 1280px) {
+      width: 1160px;
+      padding: 0;
+    }
+  }
+}
+
+// xs, extra-small: 0dp or larger
+// sm, small: 600dp or larger
+// md, medium: 960dp or larger
+// lg, large: 1280dp or larger
+// xl, xlarge: 1920dp or larger

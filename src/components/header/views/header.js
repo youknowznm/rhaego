@@ -16,14 +16,14 @@ const styles = (theme) => ({
     fontFamily: 'Roboto Mono',
   },
   navIconButton: {
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up('lg')]: {
       display: 'none',
     },
   },
   header: {
     position: 'fixed',
     marginLeft: drawerWidth,
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up('lg')]: {
       width: `calc(100% - ${drawerWidth}px)`,
     },
     // background: primary

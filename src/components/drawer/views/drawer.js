@@ -23,7 +23,7 @@ const Drawer = ({classes, drawerIsOpen, toggleDrawer}) => {
   )
   return (
     <div>
-      <Hidden mdUp>
+      <Hidden lgUp>
         <MuiDrawer
           type="temporary"
           open={drawerIsOpen}
@@ -38,7 +38,7 @@ const Drawer = ({classes, drawerIsOpen, toggleDrawer}) => {
           {drawer}
         </MuiDrawer>
       </Hidden>
-      <Hidden smDown>
+      <Hidden mdDown>
         <MuiDrawer
           type="permanent"
           open
