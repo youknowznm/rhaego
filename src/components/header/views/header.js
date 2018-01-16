@@ -26,20 +26,19 @@ const styles = (theme) => ({
     [theme.breakpoints.up('lg')]: {
       width: `calc(100% - ${drawerWidth}px)`,
     },
-    // background: primary
   },
 })
 
 const Header = ({classes, toggleDrawer}) => (
-  <AppBar color="default" className={classes.header}>
+  <AppBar color="primary" className={classes.header}>
     <Toolbar>
-      <IconButton className={classes.navIconButton} onClick={toggleDrawer}>
+      <IconButton color="inherit" className={classes.navIconButton} onClick={toggleDrawer}>
         <MenuIcon />
       </IconButton>
       <Typography className={classes.title} type="title" color="inherit">
         <SplitToSpans />
       </Typography>
-      <Button>Login</Button>
+      <Button color="inherit">login</Button>
     </Toolbar>
   </AppBar>
 )

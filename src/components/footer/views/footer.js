@@ -33,12 +33,12 @@ const Footer = ({classes}) => (
     <div className="mb-footer _about">
       <div className="content">
         <ul className="about">
-          <li className="about-item">
+          <li className="about-item project-name">
             <Typography type="title">
               <SplitToSpans className="mono"></SplitToSpans>
             </Typography>
           </li>
-          <li className="about-item">
+          <li className="about-item about-author">
             <Typography className="mono" type="caption">
               Made with&nbsp;
               <span className="heart-wrap">
@@ -50,7 +50,7 @@ const Footer = ({classes}) => (
             </Typography>
           </li>
           <li className="about-item">
-            <Button href="https://github.com/youknowznm/material-blog">
+            <Button raised color="accent" target="_blank" href="https://github.com/youknowznm/material-blog">
               view source
             </Button>
           </li>
