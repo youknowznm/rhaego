@@ -3,14 +3,350 @@
 ## 当前用户基本信息 [GET /who]
 
 + Response 200 (application/json;charset=utf-8)
-  + Attributes
-    + id: 1234 (string, required) - 用户ID
-    + name: `Alley` (string, required) - 用户姓名
-    + token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NjUzNjMyNTksImlzcyI6IjBkYzQyM2YyZGYzYjRlNDJiZDI4NzFkZjczMWY2MjdiIn0.DwM2ez07Y5bLfG5ZvYQKSDCJX_jvV_OgrsUxp32uQG4` (string, required) - 用户token
-    + type (enum, required) - 用户类型：1 学生、2 任课老师、3 班主任、4 管理员、5 其他(校长、年级组长)
-      + Members
-      + 1 (number)
-      + 2 (number)
-      + 3 (number)
-      + 4 (number)
-      + 5 (number)
+    + Attributes
+        + id: 1234 (string, required) - 用户ID
+        + name: `Alley` (string, required) - 用户姓名
+        + token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NjUzNjMyNTksImlzcyI6IjBkYzQyM2YyZGYzYjRlNDJiZDI4NzFkZjczMWY2MjdiIn0.DwM2ez07Y5bLfG5ZvYQKSDCJX_jvV_OgrsUxp32uQG4` (string, required) - 用户token
+        + type (enum, required) - 用户类型：1 学生、2 任课老师、3 班主任、4 管理员、5 其他(校长、年级组长)
+          + Members
+            + 1 (number)
+            + 2 (number)
+            + 3 (number)
+            + 4 (number)
+            + 5 (number)
+
+
+## 获取折扣列表信息 [GET /ext/recommendation/items]
+
++ Response 200 (application/json;charset=utf-8)
+    + Attributes (object)
+        + message: ` ` (string, required) - 返回的信息提醒
+        + code: 200 (number, required) - 返回的状态码
+        + data
+            + pageCount: 1 (number, required) - 总页码
+            + count: 8 (number, required) - 总个数
+            + items (array[object], fixed) - 商品列表1
+                + (object)
+                    + id: `8402` (string, required) - 商品id
+                    + ext: `prr|rsl|ps|35|` (string, required) - 埋点使用
+                    + type: 1 (number, required) - 商品类型
+                    + item
+                        + id: `8402` (string, required) - 商品id
+                        + name: `Mobile Ka Amrit Screen Guard for Karbonn A1 Duple` (string, required) 商品名称
+                        + categories (array[object], fixed)
+                            + (object)
+                                + id: `9` (string, required) - 种类ID
+                                + name: `Telecommunications` (string, required) - 种类名
+                                + parentId: `0` (string, required) - 父级种类ID
+                                + level: 0 (number, required) - 级别
+                        + originPrice (object)
+                            + amount: 39900 (number, required) - 价格
+                            + currency: `INR` (string, required) - 货币类型
+                            + symbol: `₹` (string, required) - 货币标志
+                            + alternative: 'Rs' (string, required) - 替代
+                            + align: `LEFT` (string, required) - 所处的位置
+                        + sellingPrice (object)
+                            + amount: 9900 (number, required) - 价格
+                            + currency: `INR` (string, required) - 货币类型
+                            + symbol: `₹` (string, required) - 货币标志
+                            + alternative: `Rs` (string, required) - 替代
+                            + align: `LEFT` (string, required) - 所处的位置
+                        + expectedCashBack(object)
+                            + amount: 300 (number, required) - 价格
+                            + currency: `INR` (string, required) - 货币类型
+                            + symbol: `₹` (string, required) - 货币标志
+                            + alternative: `Rs` (string, required) - 替代
+                            + align: `LEFT` (string, required) - 所处的位置
+                        + discountPercentage: `75` (string, required) - 降价比率
+                        + mainImage: `http://img.fkcdn.com/image/screen-guard/screen-guard/7/q/s/mobile-ka-amrit-ftcsgintex3g-400x400-imae75jhfyrbfj9c.jpeg` (string, required) - 主图
+                        + images (array)
+                        + outerUrl: `http://dl.flipkart.com/dl/mobile-ka-amrit-screen-guard-karbonn-a1-duple/p/itme75xfaydtjguf?pid=ACCE75XFBQ8SSQUV&affid=shanaj123` (string, required) - 输出地址
+                        + source (object)
+                            + name: `Flipkart` (string, required) - 来源名字
+                            + url: `http://35.154.186.101/pictures/37279a0fd3e55d5d81f61712c8923755` (string, required) - 来源地址
+                        + status: 1 (number, required) - 状态
+                        + inStock: true (boolean, required) - 是否有现货
+                + (object)
+                    + id: `8402` (string, required) - 商品id
+                    + ext: `prr|rsl|ps|35|` (string, required) - 埋点使用
+                    + type: 1 (number, required) - 商品类型
+                    + item
+                        + id: `8402` (string, required) - 商品id
+                        + name: `Mobile Ka Amrit Screen Guard for Karbonn A1 Duple` (string, required) 商品名称
+                        + categories (array[object], fixed)
+                            + (object)
+                                + id: `9` (string, required) - 种类ID
+                                + name: `Telecommunications` (string, required) - 种类名
+                                + parentId: `0` (string, required) - 父级种类ID
+                                + level: 0 (number, required) - 级别
+                        + originPrice (object)
+                            + amount: 39900 (number, required) - 价格
+                            + currency: `INR` (string, required) - 货币类型
+                            + symbol: `₹` (string, required) - 货币标志
+                            + alternative: 'Rs' (string, required) - 替代
+                            + align: `LEFT` (string, required) - 所处的位置
+                        + sellingPrice (object)
+                            + amount: 9900 (number, required) - 价格
+                            + currency: `INR` (string, required) - 货币类型
+                            + symbol: `₹` (string, required) - 货币标志
+                            + alternative: `Rs` (string, required) - 替代
+                            + align: `LEFT` (string, required) - 所处的位置
+                        + expectedCashBack(object)
+                            + amount: 300 (number, required) - 价格
+                            + currency: `INR` (string, required) - 货币类型
+                            + symbol: `₹` (string, required) - 货币标志
+                            + alternative: `Rs` (string, required) - 替代
+                            + align: `LEFT` (string, required) - 所处的位置
+                        + discountPercentage: `75` (string, required) - 降价比率
+                        + mainImage: `http://img.fkcdn.com/image/screen-guard/screen-guard/7/q/s/mobile-ka-amrit-ftcsgintex3g-400x400-imae75jhfyrbfj9c.jpeg` (string, required) - 主图
+                        + images (array)
+                        + outerUrl: `http://dl.flipkart.com/dl/mobile-ka-amrit-screen-guard-karbonn-a1-duple/p/itme75xfaydtjguf?pid=ACCE75XFBQ8SSQUV&affid=shanaj123` (string, required) - 输出地址
+                        + source (object)
+                            + name: `Flipkart` (string, required) - 来源名字
+                            + url: `http://35.154.186.101/pictures/37279a0fd3e55d5d81f61712c8923755` (string, required) - 来源地址
+                        + status: 1 (number, required) - 状态
+                        + inStock: true (boolean, required) - 是否有现货
+                + (object)
+                    + id: `8402` (string, required) - 商品id
+                    + ext: `prr|rsl|ps|35|` (string, required) - 埋点使用
+                    + type: 1 (number, required) - 商品类型
+                    + item
+                        + id: `8402` (string, required) - 商品id
+                        + name: `Mobile Ka Amrit Screen Guard for Karbonn A1 Duple` (string, required) 商品名称
+                        + categories (array[object], fixed)
+                            + (object)
+                                + id: `9` (string, required) - 种类ID
+                                + name: `Telecommunications` (string, required) - 种类名
+                                + parentId: `0` (string, required) - 父级种类ID
+                                + level: 0 (number, required) - 级别
+                        + originPrice (object)
+                            + amount: 39900 (number, required) - 价格
+                            + currency: `INR` (string, required) - 货币类型
+                            + symbol: `₹` (string, required) - 货币标志
+                            + alternative: 'Rs' (string, required) - 替代
+                            + align: `LEFT` (string, required) - 所处的位置
+                        + sellingPrice (object)
+                            + amount: 9900 (number, required) - 价格
+                            + currency: `INR` (string, required) - 货币类型
+                            + symbol: `₹` (string, required) - 货币标志
+                            + alternative: `Rs` (string, required) - 替代
+                            + align: `LEFT` (string, required) - 所处的位置
+                        + expectedCashBack(object)
+                            + amount: 300 (number, required) - 价格
+                            + currency: `INR` (string, required) - 货币类型
+                            + symbol: `₹` (string, required) - 货币标志
+                            + alternative: `Rs` (string, required) - 替代
+                            + align: `LEFT` (string, required) - 所处的位置
+                        + discountPercentage: `75` (string, required) - 降价比率
+                        + mainImage: `http://img.fkcdn.com/image/screen-guard/screen-guard/7/q/s/mobile-ka-amrit-ftcsgintex3g-400x400-imae75jhfyrbfj9c.jpeg` (string, required) - 主图
+                        + images (array)
+                        + outerUrl: `http://dl.flipkart.com/dl/mobile-ka-amrit-screen-guard-karbonn-a1-duple/p/itme75xfaydtjguf?pid=ACCE75XFBQ8SSQUV&affid=shanaj123` (string, required) - 输出地址
+                        + source (object)
+                            + name: `Flipkart` (string, required) - 来源名字
+                            + url: `http://35.154.186.101/pictures/37279a0fd3e55d5d81f61712c8923755` (string, required) - 来源地址
+                        + status: 1 (number, required) - 状态
+                        + inStock: true (boolean, required) - 是否有现货
+## 获取banner和mall的列表数据 [GET /combo/mall]
+
++ Response 200 (application/json;charset=utf-8)
+
+    + Attributes
+        + message: ` `(string, required) - 返回的信息提醒
+        + code: 200 (number, required) - 返回的状态码
+        + data
+            + banner
+                + peas (array[object], fixed) - 首屏滑动列表
+                    + (object)
+                        + showPic: `https://i-pre.meixincdn.com/T10yWTBgxT1RXrhCrK.jpg` (string, required) - 图片地址
+                        + link: `https://www.gay.com` (string, required) - 图片跳转链接
+                        + id: `15` (string, required) - 图片ID
+                        + sn: 1 (number, required) - 图片序号
+                        + type: `0` (string, required) - 图片类型
+                        + desc: `这是一个商品` (string, required) - 图片描述
+                    + (object)
+                        + showPic: `http://10.125.31.23/v1/img/T1iRhTBKAT1RXrhCrK.jpg.720.jpg` (string, required) - 图片地址
+                        + link: `https://www.gay.com` (string, required) - 图片跳转链接
+                        + id: `15` (string, required) - 图片ID
+                        + sn: 1 (number, required) - 图片序号
+                        + type: `0` (string, required) - 图片类型
+                        + desc: `这是一个商品` (string, required) - 图片描述
+                + icon: `https://secure.gravatar.com/avatar/aacfaf20821b72fb98bcbbdd5c796b4a.jpg` (string, required) - 图标地址
+                + name: `App首页-banner` (string, required) - 数据代表的类别
+                + id: `84626` (string, required) - 该类别的ID
+                + title: `App首页-banner` (string, required) - 该类别的标题
+            + category
+                + peas (array[object], fixed) - 类别列表
+                    + (object)
+                        + sn: 1 (number, required) - 类别序列号
+                        + categoryId: `3` (string, required) - 类别ID
+                        + id: `3` (string, required) - 类别项ID
+                        + parentId: `1` (string, required) - 父级类别ID
+                        + name: `PAD` (string, required) - 商品名字
+                        + level: 2 (number, required) - 商品所有级别
+                        + status: 1 (number, required) - 商品状态
+                        + hasChildren: false (boolean, required) - 是否有子产品
+                        + creator: `253` (string, required) - 创造者
+                        + createdAt: 1488656348000 (number, required) - 创造时间
+                        + updatedAt: 1488656351000 (number, required) - 修改时间
+                        + hasBinding: false (boolean, required) - 是否绑定
+                + icon: `https://secure.gravatar.com/avatar/aacfaf20821b72fb98bcbbdd5c796b4a.jpg` (string, required) - 图标地址
+                + name: `App首页-类目` (string, required) - 数据代表的类别
+                + id: `26757` (string, required) - 该类别的ID
+                + title: `App首页-类目` (string, required) - 该类别的标题
+            + popular
+                + peas (array[object], fixed) - 受欢迎的商品列表
+                    + (object)
+                        + itemId: `1` (string, required) - 单个商品的ID
+                        + sn: 1 (number, required) - 类别序列号
+                        + id: `1` (string, required) - 类别项ID
+                        + name: `Asus ET2040IUK-BB006M All-in-One (Pentium Quad Core/ 4GB/ 500GB/Free DOS)(Black)` (string, required) - 商品名字
+                        + categories (array[object], fixed) - 类别
+                            + (object)
+                                + id: `54` (string, required) - 商品ID
+                                + name: `uuuu` (string, required) - 商品名字
+                                + parentId: `0` (string, required) - 父级商品ID
+                                + level: 0 (number, required) - 商品级别
+                        + originPrice
+                            + amount: 2499900 (number, required) - 原价
+                            + currency: `INR` (string, required) -货币
+                            + symbol: `₹` (string, required) - 标志
+                            + alternative: `Rs` (string, required) - 替代
+                            + align: `LEFT` (string, required) - 位置
+                        + sellingPrice
+                            + amount: 2499900 (number, required) - 出售价格
+                            + currency: `INR` (string, required) -货币
+                            + symbol: `₹` (string, required) - 标志
+                            + alternative: `Rs` (string, required) - 替代
+                            + align: `LEFT` (string, required) - 位置
+                        + expectedCashBack
+                            + amount: 2499900 (number, required) - 预期价格
+                            + currency: `INR` (string, required) -货币
+                            + symbol: `₹` (string, required) - 标志
+                            + alternative: `Rs` (string, required) - 替代
+                            + align: `LEFT` (string, required) - 位置
+                        + discountPercentage: `2` (string, required) - 降价比率
+                        + mainImage: `https://i-pre.meixincdn.com/T10yWTBgxT1RXrhCrK.jpg` (string, required) - 主图地址
+                        + images (array)
+                        + outerUrl: `http://dl.flipkart.com/dl/asus-et2040iuk-bb006m-all-in-one-pentium-quad-core-4gb-500gb-free-dos/p/itme6nr6fnkjxdu6?pid=AIOE6NR6AT74C7NR&affid=shanaj123` (string, required) - 输出地址
+                        + source (object)
+                            + name: `Flipkart` (string, required) - 来源名字
+                            + url: `http://35.154.186.101/pictures/37279a0fd3e55d5d81f61712c8923755` (string, required) - 来源地址
+                        + status: 1 (number, required) - 状态
+                        + inStock: true (boolean, required) - 是否有现货
+                    + (object)
+                        + itemId: `1` (string, required) - 单个商品的ID
+                        + sn: 1 (number, required) - 类别序列号
+                        + id: `1` (string, required) - 类别项ID
+                        + name: `Asus ET2040IUK-BB006M All-in-One (Pentium Quad Core/ 4GB/ 500GB/Free DOS)(Black)` (string, required) - 商品名字
+                        + categories (array[object], fixed) - 类别
+                            + (object)
+                                + id: `54` (string, required) - 商品ID
+                                + name: `uuuu` (string, required) - 商品名字
+                                + parentId: `0` (string, required) - 父级商品ID
+                                + level: 0 (number, required) - 商品级别
+                        + originPrice
+                            + amount: 2499900 (number, required) - 原价
+                            + currency: `INR` (string, required) -货币
+                            + symbol: `₹` (string, required) - 标志
+                            + alternative: `Rs` (string, required) - 替代
+                            + align: `LEFT` (string, required) - 位置
+                        + sellingPrice
+                            + amount: 2499900 (number, required) - 出售价格
+                            + currency: `INR` (string, required) -货币
+                            + symbol: `₹` (string, required) - 标志
+                            + alternative: `Rs` (string, required) - 替代
+                            + align: `LEFT` (string, required) - 位置
+                        + expectedCashBack
+                            + amount: 2499900 (number, required) - 预期价格
+                            + currency: `INR` (string, required) -货币
+                            + symbol: `₹` (string, required) - 标志
+                            + alternative: `Rs` (string, required) - 替代
+                            + align: `LEFT` (string, required) - 位置
+                        + discountPercentage: `2` (string, required) - 降价比率
+                        + mainImage: `http://10.125.31.23/v1/img/T1iRhTBKAT1RXrhCrK.jpg.720.jpg` (string, required) - 主图地址
+                        + images (array)
+                        + outerUrl: `http://dl.flipkart.com/dl/asus-et2040iuk-bb006m-all-in-one-pentium-quad-core-4gb-500gb-free-dos/p/itme6nr6fnkjxdu6?pid=AIOE6NR6AT74C7NR&affid=shanaj123` (string, required) - 输出地址
+                        + source (object)
+                            + name: `Flipkart` (string, required) - 来源名字
+                            + url: `http://35.154.186.101/pictures/37279a0fd3e55d5d81f61712c8923755` (string, required) - 来源地址
+                        + status: 1 (number, required) - 状态
+                        + inStock: true (boolean, required) - 是否有现货
+                    + (object)
+                        + itemId: `1` (string, required) - 单个商品的ID
+                        + sn: 1 (number, required) - 类别序列号
+                        + id: `1` (string, required) - 类别项ID
+                        + name: `Asus ET2040IUK-BB006M All-in-One (Pentium Quad Core/ 4GB/ 500GB/Free DOS)(Black)` (string, required) - 商品名字
+                        + categories (array[object], fixed) - 类别
+                            + (object)
+                                + id: `54` (string, required) - 商品ID
+                                + name: `uuuu` (string, required) - 商品名字
+                                + parentId: `0` (string, required) - 父级商品ID
+                                + level: 0 (number, required) - 商品级别
+                        + originPrice
+                            + amount: 2499900 (number, required) - 原价
+                            + currency: `INR` (string, required) -货币
+                            + symbol: `₹` (string, required) - 标志
+                            + alternative: `Rs` (string, required) - 替代
+                            + align: `LEFT` (string, required) - 位置
+                        + sellingPrice
+                            + amount: 2499900 (number, required) - 出售价格
+                            + currency: `INR` (string, required) -货币
+                            + symbol: `₹` (string, required) - 标志
+                            + alternative: `Rs` (string, required) - 替代
+                            + align: `LEFT` (string, required) - 位置
+                        + expectedCashBack
+                            + amount: 2499900 (number, required) - 预期价格
+                            + currency: `INR` (string, required) -货币
+                            + symbol: `₹` (string, required) - 标志
+                            + alternative: `Rs` (string, required) - 替代
+                            + align: `LEFT` (string, required) - 位置
+                        + discountPercentage: `2` (string, required) - 降价比率
+                        + mainImage: `https://i-pre.meixincdn.com/T10yWTBgxT1RXrhCrK.jpg` (string, required) - 主图地址
+                        + images (array)
+                        + outerUrl: `http://dl.flipkart.com/dl/asus-et2040iuk-bb006m-all-in-one-pentium-quad-core-4gb-500gb-free-dos/p/itme6nr6fnkjxdu6?pid=AIOE6NR6AT74C7NR&affid=shanaj123` (string, required) - 输出地址
+                        + source (object)
+                            + name: `Flipkart` (string, required) - 来源名字
+                            + url: `http://35.154.186.101/pictures/37279a0fd3e55d5d81f61712c8923755` (string, required) - 来源地址
+                        + status: 1 (number, required) - 状态
+                        + inStock: true (boolean, required) - 是否有现货
+
+
+
+                    + (object)
+                        + itemId: `1` (string, required) - 单个商品的ID
+                        + sn: 1 (number, required) - 类别序列号
+                        + id: `1` (string, required) - 类别项ID
+                        + name: `Asus ET2040IUK-BB006M All-in-One (Pentium Quad Core/ 4GB/ 500GB/Free DOS)(Black)` (string, required) - 商品名字
+                        + categories (array[object], fixed) - 类别
+                            + (object)
+                                + id: `54` (string, required) - 商品ID
+                                + name: `uuuu` (string, required) - 商品名字
+                                + parentId: `0` (string, required) - 父级商品ID
+                                + level: 0 (number, required) - 商品级别
+                        + originPrice
+                            + amount: 2499900 (number, required) - 原价
+                            + currency: `INR` (string, required) -货币
+                            + symbol: `₹` (string, required) - 标志
+                            + alternative: `Rs` (string, required) - 替代
+                            + align: `LEFT` (string, required) - 位置
+                        + sellingPrice
+                            + amount: 2499900 (number, required) - 出售价格
+                            + currency: `INR` (string, required) -货币
+                            + symbol: `₹` (string, required) - 标志
+                            + alternative: `Rs` (string, required) - 替代
+                            + align: `LEFT` (string, required) - 位置
+                        + expectedCashBack
+                            + amount: 2499900 (number, required) - 预期价格
+                            + currency: `INR` (string, required) -货币
+                            + symbol: `₹` (string, required) - 标志
+                            + alternative: `Rs` (string, required) - 替代
+                            + align: `LEFT` (string, required) - 位置
+                        + discountPercentage: `2` (string, required) - 降价比率
+                        + mainImage: `http://10.125.31.23/v1/img/T1iRhTBKAT1RXrhCrK.jpg.720.jpg` (string, required) - 主图地址
+                        + images (array)
+                        + outerUrl: `http://dl.flipkart.com/dl/asus-et2040iuk-bb006m-all-in-one-pentium-quad-core-4gb-500gb-free-dos/p/itme6nr6fnkjxdu6?pid=AIOE6NR6AT74C7NR&affid=shanaj123` (string, required) - 输出地址
+                        + source (object)
+                            + name: `Flipkart` (string, required) - 来源名字
+                            + url: `http://35.154.186.101/pictures/37279a0fd3e55d5d81f61712c8923755` (string, required) - 来源地址
+                        + status: 1 (number, required) - 状态
+                        + inStock: true (boolean, required) - 是否有现货

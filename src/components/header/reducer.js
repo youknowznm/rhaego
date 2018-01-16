@@ -1,4 +1,4 @@
-import {TOGGLE_DRAWER} from './actionTypes.js'
+import {TOGGLE_DRAWER} from './actionTypes'
 
 const thisState = {
   drawerIsOpen: false

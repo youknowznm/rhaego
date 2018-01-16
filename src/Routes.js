@@ -3,12 +3,12 @@ import {Router, Route, IndexRoute, browserHistory} from 'react-router'
 
 import {syncHistoryWithStore} from 'react-router-redux'
 
-import App from './pages/App.js'
-import Home from './pages/Home.js'
-import About from './pages/About.js'
-import NotFound from './pages/NotFound.js'
+import App from './pages/App'
+import Home from './pages/Home'
+import About from './pages/About'
+import NotFound from './pages/NotFound'
 
-import store from './Store.js'
+import store from './Store'
 
 const history = syncHistoryWithStore(browserHistory, store)
 

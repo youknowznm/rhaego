@@ -1,17 +1,10 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import {withStyles} from 'material-ui/styles'
 import List, {ListItem, ListItemIcon, ListItemText} from 'material-ui/List'
 import {Divider} from 'material-ui'
-// import {Collapse} from 'material-ui/transitions'
 import CodeIcon from 'material-ui-icons/Code'
 import InsertDriveFileIcon from 'material-ui-icons/InsertDriveFile'
 import MessagesIcon from 'material-ui-icons/Message'
 import InfoIcon from 'material-ui-icons/Info'
-// import ExpandLess from 'material-ui-icons/ExpandLess'
-// import ExpandMore from 'material-ui-icons/ExpandMore'
-// import PersonIcon from 'material-ui-icons/Person'
-// import WebIcon from 'material-ui-icons/Web'
 
 const DrawerBody = ({classes}) => (
   <div>
@@ -20,7 +13,7 @@ const DrawerBody = ({classes}) => (
         <ListItemIcon>
           <InsertDriveFileIcon />
         </ListItemIcon>
-        <ListItemText primary="Posts" />
+        <ListItemText primary="Articles" />
       </ListItem>
       <ListItem button>
         <ListItemIcon>
@@ -43,7 +36,7 @@ const DrawerBody = ({classes}) => (
         <ListItemIcon>
           <InfoIcon />
         </ListItemIcon>
-        <ListItemText primary="About" />
+        <ListItemText primary="About Author" />
       </ListItem>
     </List>
   </div>

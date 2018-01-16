@@ -1,3 +1,3 @@
-import view from './views/main.js'
+import view from './views/main'
 
 export {view}

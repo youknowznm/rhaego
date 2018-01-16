@@ -1,6 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import {withStyles} from 'material-ui/styles'
 import {Typography, Button} from 'material-ui'
 import {SplitToSpans} from '../../../utils'
 import {socialInfo} from '../../../config'
@@ -14,17 +12,23 @@ const Footer = ({classes}) => (
       <div className="content">
         <ul className="social">
           <li className="social-link wechat">
-            <img className="hover-content" src={socialInfo.wechatQr} />
+            <img className="hover-content" src={socialInfo.wechatQr} alt="wechatQrCode"/>
           </li>
           <li className="social-link mail">
-            <a href={`mailto:${socialInfo.email}`}></a>
+            <a href={`mailto:${socialInfo.email}`}>
+              <span className="no-screen">email</span>
+            </a>
             <div className="hover-content mono">Email me!</div>
           </li>
           <li className="social-link zhihu">
-            <a href={socialInfo.zhihu} target="_blank"></a>
+            <a href={socialInfo.zhihu} target="_blank">
+              <span className="no-screen">email</span>
+            </a>
           </li>
           <li className="social-link github">
-            <a href={socialInfo.github} target="_blank"></a>
+            <a href={socialInfo.github} target="_blank">
+              <span className="no-screen">email</span>
+            </a>
           </li>
         </ul>
       </div>

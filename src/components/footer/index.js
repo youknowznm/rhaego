@@ -1,3 +1,3 @@
-import view from './views/footer.js'
+import view from './views/footer'
 
 export {view}

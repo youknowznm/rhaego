@@ -5,7 +5,7 @@ import {withStyles} from 'material-ui'
 import {AppBar, Toolbar, Typography, Button, IconButton} from 'material-ui'
 import MenuIcon from 'material-ui-icons/Menu'
 import {SplitToSpans} from '../../../utils'
-import {toggleDrawer} from '../actions.js'
+import {toggleDrawer} from '../actions'
 
 const drawerWidth = 250
 

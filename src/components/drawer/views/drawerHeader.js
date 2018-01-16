@@ -1,10 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {withStyles} from 'material-ui/styles'
 import {Avatar, Typography} from 'material-ui'
-import List, {ListItem, ListItemIcon, ListItemAvatar, ListItemText} from 'material-ui/List'
-import FolderIcon from 'material-ui-icons/Folder';
-import {SplitToSpans} from '../../../utils'
+import List, {ListItem} from 'material-ui/List'
 
 const styles = (theme) => ({
   root: {

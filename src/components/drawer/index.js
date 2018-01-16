@@ -1,3 +1,3 @@
-import view from './views/drawer.js'
+import view from './views/drawer'
 
 export {view}

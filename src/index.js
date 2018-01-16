@@ -2,10 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {Provider} from 'react-redux'
 
-// import Routes from './Routes.js'
-import App from './App.js'
+import axios from 'axios'
 
-import store from './Store.js'
+// import Routes from './Routes'
+import App from './App'
+
+import store from './Store'
 
 ReactDOM.render(
   <Provider store={store}>

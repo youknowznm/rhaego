@@ -1,3 +1,3 @@
-import SplitToSpans from './SplitToSpans.js'
+import SplitToSpans from './SplitToSpans'
 
 export {SplitToSpans}

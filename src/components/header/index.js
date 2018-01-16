@@ -1,4 +1,4 @@
-import view from './views/header.js'
-import reducer from './reducer.js'
+import view from './views/header'
+import reducer from './reducer'
 
 export {view, reducer}

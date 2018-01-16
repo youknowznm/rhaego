@@ -2,10 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {withStyles} from 'material-ui'
-import {Drawer as MuiDrawer, Divider, List, Hidden, Typography} from 'material-ui'
-import {toggleDrawer} from '../../header/actions.js'
-import DrawerHeader from './drawerHeader.js'
-import DrawerBody from './drawerBody.js'
+import {Drawer as MuiDrawer, Hidden} from 'material-ui'
+import {toggleDrawer} from '../../header/actions'
+import DrawerHeader from './drawerHeader'
+import DrawerBody from './drawerBody'
 
 const styles = (theme) => ({
   drawerHeader: theme.mixins.toolbar,
