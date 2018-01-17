@@ -1,6 +1,6 @@
 import React from 'react'
 import {withStyles} from 'material-ui/styles'
-import {Card as MuiCard, Badge, Button, Avatar} from 'material-ui'
+import {Card, Badge, Button, Avatar} from 'material-ui'
 import {CardHeader, CardContent, CardActions} from 'material-ui/Card'
 
 import IconButton from 'material-ui/IconButton';
@@ -15,12 +15,12 @@ import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
 
 import './articleCard.scss'
 
-const Card = ({classes, articleData}) => {
+const ArticleCard = ({classes, articleData}) => {
   const {title, date, summary, commentCount, favoriteCount} = articleData
 
   return (
     <div className="card-wrap">
-      <MuiCard className="card">
+      <Card className="card">
         <CardHeader
           avatar={
             <Avatar className="avatar">R</Avatar>
@@ -42,13 +42,13 @@ const Card = ({classes, articleData}) => {
         </CardContent>
 
         <CardActions disableActionSpacing>
-            <IconButton aria-label="Add to favorites" color="primary">
+            <IconButton aria-label="Add to favorites">
               <FavoriteIcon />
             </IconButton>
             <Typography className="count" type="caption">
               {favoriteCount}
             </Typography>
-            <IconButton aria-label="Comment" color="accent">
+            <IconButton aria-label="Comment">
               <CommentIcon />
             </IconButton>
             <Typography className="count" type="caption">
@@ -62,9 +62,9 @@ const Card = ({classes, articleData}) => {
        </div>
 
 
-      </MuiCard>
+      </Card>
     </div>
   );
 }
 
-export default (Card)
+export default ArticleCard
