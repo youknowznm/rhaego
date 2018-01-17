@@ -1,9 +1,14 @@
 import React from 'react'
 import ArticleCard from './articleCard'
 
+import './articles.scss'
+
+
 const article = {
   title: `Srimp and Chorio Paella`,
   date: `Sep 14, 2016`,
+  commentCount:13,
+  favoriteCount: 33,
   summary: `This impressive paella is a perfect party dish and a fun meal to cook together with
         your guests. Add 1 cup of frozen peas along with the mussels, if you like.`,
   content: `Heat 1/2 cup of the broth in a pot until simmering, add saffron and set aside for 10 minutes.
@@ -15,18 +20,20 @@ Add rice and stir very gently to distribute. Top with artichokes and peppers, an
 Set aside off of the heat to let rest for 10 minutes, and then serve.`
 }
 
-const articles = [article, Object.assign({}, article), Object.assign({}, article)]
+const articles = [
+  article,
+  Object.assign({}, article),
+  Object.assign({}, article),
+]
 
 const Articles = () => {
   return (
-    <div>
+    <div className="articles">
       {
         articles.map((item, i) => (
           <ArticleCard
             key={i}
-            title={item.title}
-            date={item.date}
-            summary={item.summary}
+            articleData={item}
           />
         ))
       }

@@ -7,22 +7,17 @@ import MenuIcon from 'material-ui-icons/Menu'
 import {SplitToSpans} from '../../../utils'
 import {toggleDrawer} from '../actions'
 
+import './header.scss'
+
 const drawerWidth = 250
 
 const styles = (theme) => ({
-  title: {
-    flex: 1,
-    marginLeft: 12,
-    fontFamily: 'Roboto Mono',
-  },
   navIconButton: {
     [theme.breakpoints.up('lg')]: {
       display: 'none',
     },
   },
   header: {
-    position: 'fixed',
-    marginLeft: drawerWidth,
     [theme.breakpoints.up('lg')]: {
       width: `calc(100% - ${drawerWidth}px)`,
     },
@@ -35,7 +30,7 @@ const Header = ({classes, toggleDrawer}) => (
       <IconButton color="inherit" className={classes.navIconButton} onClick={toggleDrawer}>
         <MenuIcon />
       </IconButton>
-      <Typography className={classes.title} type="title" color="inherit">
+      <Typography className="title mono" type="title" color="inherit">
         <SplitToSpans />
       </Typography>
       <Button color="inherit">login</Button>

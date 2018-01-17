@@ -1,6 +1,6 @@
 import React from 'react'
 import {withStyles} from 'material-ui/styles'
-import {Card as MuiCard, Avatar} from 'material-ui'
+import {Card as MuiCard, Badge, Button, Avatar} from 'material-ui'
 import {CardHeader, CardContent, CardActions} from 'material-ui/Card'
 
 import IconButton from 'material-ui/IconButton';
@@ -10,40 +10,30 @@ import red from 'material-ui/colors/red';
 
 import FavoriteIcon from 'material-ui-icons/Favorite';
 import ShareIcon from 'material-ui-icons/Share';
+import CommentIcon from 'material-ui-icons/Comment';
 import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
 
-const styles = (theme) => ({
-  card: {
-    // maxWidth: 400,
-    // display: 'inline-block',
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)',
-  },
-  avatar: {
-    backgroundColor: red[500],
-  },
-  flexGrow: {
-    flex: '1 1 auto'
-  }
-})
+import './articleCard.scss'
 
-const Card = ({classes, title, date, summary}) => (
-  <MuiCard className={classes.card}>
-    <CardHeader
-      avatar={
-        <Avatar className={classes.avatar}>R</Avatar>
-      }
-      action={
-        <IconButton>
-          <MoreVertIcon />
-        </IconButton>
-      }
-      title={title}
-      subheader={date}
-    >
-    </CardHeader>
+const Card = ({classes, articleData}) => {
+  const {title, date, summary, commentCount, favoriteCount} = articleData
 
+  return (
+    <div className="card-wrap">
+      <MuiCard className="card">
+        <CardHeader
+          avatar={
+            <Avatar className="avatar">R</Avatar>
+          }
+          action={
+            <IconButton>
+              <MoreVertIcon />
+            </IconButton>
+          }
+          title={title}
+          subheader={date}
+        >
+        </CardHeader>
 
         <CardContent>
           <Typography component="p">
@@ -51,28 +41,30 @@ const Card = ({classes, title, date, summary}) => (
           </Typography>
         </CardContent>
 
-    <CardActions disableActionSpacing>
-           <IconButton aria-label="Add to favorites">
-             <FavoriteIcon />
-           </IconButton>
-           <IconButton aria-label="Share">
-             <ShareIcon />
-           </IconButton>
-           <div className={classes.flexGrow} />
-           <IconButton
-             // className={classnames(classes.expand, {
-             //   [classes.expandOpen]: this.state.expanded,
-             // })}
-             // onClick={this.handleExpandClick}
-             // aria-expanded={this.state.expanded}
-             aria-label="Show more"
-           >
-             <ExpandMoreIcon />
-           </IconButton>
-         </CardActions>
+        <CardActions disableActionSpacing>
+            <IconButton aria-label="Add to favorites" color="primary">
+              <FavoriteIcon />
+            </IconButton>
+            <Typography className="count" type="caption">
+              {favoriteCount}
+            </Typography>
+            <IconButton aria-label="Comment" color="accent">
+              <CommentIcon />
+            </IconButton>
+            <Typography className="count" type="caption">
+              {commentCount}
+            </Typography>
+       </CardActions>
+
+       <div className="tags">
+         <Button dense raised color="default" className="tag">JavaScript</Button>
+         <Button dense raised color="default" className="tag">react native</Button>
+       </div>
 
 
-  </MuiCard>
-)
+      </MuiCard>
+    </div>
+  );
+}
 
-export default withStyles(styles)(Card)
+export default (Card)

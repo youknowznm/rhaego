@@ -96,6 +96,7 @@
       .about-item {
         list-style: none;
         &.project-name {
+          margin-left: 24px;
           span {
             color: $color-theme-main;
           }
@@ -127,6 +128,9 @@
               padding: 4px 0;
             }
           }
+        }
+        &.view-source {
+          margin-right: 24px;
         }
       }
     }

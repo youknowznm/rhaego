@@ -53,7 +53,7 @@ const Footer = ({classes}) => (
               &nbsp;by <a href={socialInfo.github} target="_blank" className="info-link">youknowznm</a>.
             </Typography>
           </li>
-          <li className="about-item">
+          <li className="about-item view-source">
             <Button raised color="accent" target="_blank" href="https://github.com/youknowznm/material-blog">
               view source
             </Button>

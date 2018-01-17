@@ -8,7 +8,6 @@ import DrawerHeader from './drawerHeader'
 import DrawerBody from './drawerBody'
 
 const styles = (theme) => ({
-  drawerHeader: theme.mixins.toolbar,
   drawerContent: {
     width: 250,
   },
