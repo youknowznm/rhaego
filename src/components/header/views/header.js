@@ -25,7 +25,7 @@ const styles = (theme) => ({
 })
 
 const Header = ({classes, toggleDrawer}) => (
-  <AppBar color="default" className={classes.header}>
+  <AppBar color="primary" className={classes.header}>
     <Toolbar>
       <IconButton color="inherit" className={classes.navIconButton} onClick={toggleDrawer}>
         <MenuIcon />

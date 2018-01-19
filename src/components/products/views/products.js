@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import ProductCard from './productCard'
 import {connect} from 'react-redux'
 import {Typography} from 'material-ui'
@@ -11,7 +12,7 @@ import './products.scss'
 class Products extends React.Component {
 
   componentDidMount() {
-    this.props.fetchGithub()
+    this.props.fetchGithubData()
   }
 
   render() {
@@ -19,62 +20,27 @@ class Products extends React.Component {
     return (
       <Loading status={status} data={productsData}>
         {
-          (data) => {
-            // console.log('suc',data);
-            return data.map((item, i) => (
-              <ProductCard
-                key={i}
-                ProductData={item}
-              />
-            ));
-          }
+          () => (
+            <div>
+              {
+                productsData.map((item, i) => (
+                  <ProductCard
+                    key={i}
+                    ProductData={item}
+                  />
+                ))
+              }
+            </div>
+          )
         }
-        {/* <div className="products">
-          {
-            productsData.map((item, i) => (
-              <ProductCard
-                key={i}
-                ProductData={item}
-              />
-            ))
-          }
-        </div> */}
       </Loading>
     );
-
-    // switch (status) {
-    //   case 'loading':
-    //     return (
-    //       <CircularProgress className="mb-loading-placeholder" />
-    //     );
-    //   case 'failure':
-    //     return (
-    //       <div className="mb-loading-placeholder">
-    //         <Typography type="subheading">
-    //           An error occurred.
-    //         </Typography>
-    //         <Typography type="subheading">
-    //           Please try again later.
-    //         </Typography>
-    //       </div>
-    //     );
-    //   case 'success':
-    //     return (
-    //       <div className="products">
-    //         {
-    //           productsData.map((item, i) => (
-    //             <ProductCard
-    //               key={i}
-    //               ProductData={item}
-    //             />
-    //           ))
-    //         }
-    //       </div>
-    //     );
-    //   default:
-    //     throw new Error('unexpected status ' + status);
-    // }
   }
+}
+
+Products.propTypes = {
+  status: PropTypes.string.isRequired,
+  productsData: PropTypes.array.isRequired,
 }
 
 const mapState = (state, ownProps) => {
@@ -85,7 +51,7 @@ const mapState = (state, ownProps) => {
 }
 
 const mapDispatch = (dispatch, ownProps) => ({
-  fetchGithub: () => dispatch(fetchGithub())
+  fetchGithubData: () => dispatch(fetchGithub())
 })
 
 export default connect(mapState, mapDispatch)(Products)
