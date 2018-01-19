@@ -1,5 +1,5 @@
 import SplitToSpans from './splitToSpans'
 import FormatDate from './formatDate'
-import Loading from './loading'
+import LoadingContainer from './loadingContainer'
 
-export {SplitToSpans, FormatDate, Loading}
+export {SplitToSpans, FormatDate, LoadingContainer}

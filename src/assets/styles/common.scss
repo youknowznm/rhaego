@@ -51,6 +51,11 @@ a {
   }
 }
 
+.mb-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .mb-loading-placeholder {
   position: absolute;
   left: 50%;

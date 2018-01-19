@@ -22,27 +22,26 @@
 
   }
 }
-
 .avatar {
   background-color: $color-red-500 !important;
 }
-
 .icons {
   // flex-grow: 1;
 }
 .count {
   margin-right: 6px !important;
 }
-
-.tags {
-  position: absolute;
-  right: 18px;
-  bottom: 12px;
-  .tag {
-    margin-left: 12px;
-  }
+.tag {
+  position: absolute !important;
+  right: 12px;
+  top: 12px;
 }
+.demo-link {
+  position: absolute !important;
+  right: 12px;
+  bottom: 12px;
 
+}
 .rotated {
   transform: rotate(180deg);
 }

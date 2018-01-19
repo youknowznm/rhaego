@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import {Typography} from 'material-ui'
 import {CircularProgress} from 'material-ui/Progress'
 import {fetchGithub} from '../actions'
-import {Loading} from '../../../utils'
+import {LoadingContainer} from '../../../utils'
 
 import './products.scss'
 
@@ -18,10 +18,10 @@ class Products extends React.Component {
   render() {
     const {status, productsData} = this.props
     return (
-      <Loading status={status} data={productsData}>
+      <LoadingContainer status={status} data={productsData}>
         {
           () => (
-            <div>
+            <div className="mb-flex">
               {
                 productsData.map((item, i) => (
                   <ProductCard
@@ -33,7 +33,7 @@ class Products extends React.Component {
             </div>
           )
         }
-      </Loading>
+      </LoadingContainer>
     );
   }
 }

@@ -11,6 +11,7 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         status: 'loading',
+        productsData: [],
       };
     }
     case FETCH_GITHUB_DONE: {
@@ -26,6 +27,7 @@ export default (state = defaultState, action) => {
     case FETCH_GITHUB_FAIL: {
       return {
         status: 'failure',
+        productsData: [],
       };
     }
     default: {

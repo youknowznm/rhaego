@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {Typography} from 'material-ui'
 import {CircularProgress} from 'material-ui/Progress'
 
-class Loading extends React.Component {
+class LoadingContainer extends React.Component {
   constructor() {
     super(...arguments)
   }
@@ -33,9 +33,9 @@ class Loading extends React.Component {
   }
 }
 
-Loading.propTypes = {
+LoadingContainer.propTypes = {
   status: PropTypes.string.isRequired,
   children: PropTypes.func.isRequired,
 }
 
-export default Loading
+export default LoadingContainer
