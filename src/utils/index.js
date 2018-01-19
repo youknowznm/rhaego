@@ -1,4 +1,5 @@
-import SplitToSpans from './SplitToSpans'
-import FormatDate from './FormatDate'
+import SplitToSpans from './splitToSpans'
+import FormatDate from './formatDate'
+import Loading from './loading'
 
-export {SplitToSpans, FormatDate}
+export {SplitToSpans, FormatDate, Loading}
