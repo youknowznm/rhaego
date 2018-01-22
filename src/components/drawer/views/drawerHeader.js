@@ -2,8 +2,6 @@ import React from 'react'
 import {Avatar, Typography} from 'material-ui'
 import List, {ListItem} from 'material-ui/List'
 
-import './drawerHeader.scss'
-
 const DrawerHeader = ({classes}) => (
   <List className="list">
     <ListItem divider>
