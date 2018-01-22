@@ -1,17 +1,13 @@
 import React from 'react'
-import {withStyles} from 'material-ui/styles'
-import {Card, Badge, Button, Avatar} from 'material-ui'
+import {Card, Button, Avatar} from 'material-ui'
 import {CardHeader, CardContent, CardActions} from 'material-ui/Card'
 
 import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui-icons/MoreVert';
 import Typography from 'material-ui/Typography';
-import red from 'material-ui/colors/red';
 
 import FavoriteIcon from 'material-ui-icons/Favorite';
-import ShareIcon from 'material-ui-icons/Share';
 import CommentIcon from 'material-ui-icons/Comment';
-import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
 
 import './articleCard.scss'
 
@@ -55,11 +51,11 @@ const ArticleCard = ({classes, articleData}) => {
               {commentCount}
             </Typography>
        </CardActions>
+       <div className="tags">
+         <Button dense raised color="default" className="tag">JavaScript</Button>
+         <Button dense raised color="default" className="tag">react native</Button>
+       </div>
       </Card>
-      <div className="tags">
-        <Button dense raised color="default" className="tag">JavaScript</Button>
-        <Button dense raised color="default" className="tag">react native</Button>
-      </div>
     </div>
   );
 }

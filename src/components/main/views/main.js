@@ -18,7 +18,7 @@ class Main extends React.Component {
     this.setState({minHeight})
   }
   render() {
-    const {classes, children} = this.props
+    const {children} = this.props
     return (
       <main className="mb-main">
         <div className="content" style={{minHeight: this.state.minHeight}}>

@@ -23,21 +23,15 @@ export const fetchGithub = () => {
 
     dispatch(fetchGithubStart())
 
-    return fetch(apiUrl)
+    return axios.get(apiUrl)
       .then((res) => {
         if (res.status !== 200) {
           throw new Error('Fail to get res with status ' + res.status)
         }
-
-        res.json()
-          .then((resJson) => {
-            dispatch(fetchGithubDone(resJson))
-          })
-          .catch((error) => {
-            dispatch(fetchGithubFail(error))
-          })
+        dispatch(fetchGithubDone(res))
       })
       .catch((error) => {
+        console.log('github fetch err:', error);
         dispatch(fetchGithubFail(error))
       })
   }

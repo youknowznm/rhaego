@@ -8,19 +8,11 @@ import MessagesIcon from 'material-ui-icons/Message'
 import InfoIcon from 'material-ui-icons/Info'
 import {Link} from 'react-router'
 
-// 判断目标字符串和当前的一级pathname是否一致，是则返回‘active’，否则返回空字符串
-const matchesPathname = (target) => {
-  const allPathname = window.location.pathname
-  let regArr = /^\/[^\/]+/.exec(allPathname)
-  let result = regArr ? regArr[0] : '/articles'
-  return result === target ? 'active' : '';
-}
-
-const DrawerBody = ({classes, currentPathname}) => (
+const DrawerBody = ({firstPathname}) => (
   <div>
     <List>
       <Link to="/articles">
-        <ListItem button className={matchesPathname('/articles')}>
+        <ListItem button className={firstPathname === '/articles' ? 'active' : ''}>
           <ListItemIcon>
             <InsertDriveFileIcon />
           </ListItemIcon>
@@ -29,7 +21,7 @@ const DrawerBody = ({classes, currentPathname}) => (
       </Link>
 
       <Link to="/products">
-        <ListItem button className={matchesPathname('/products')}>
+        <ListItem button className={firstPathname === '/products' ? 'active' : ''}>
           <ListItemIcon>
             <CodeIcon />
           </ListItemIcon>
@@ -38,7 +30,7 @@ const DrawerBody = ({classes, currentPathname}) => (
       </Link>
 
       <Link to="/messages">
-        <ListItem button className={matchesPathname('/messages')}>
+        <ListItem button className={firstPathname === '/messages' ? 'active' : ''}>
           <ListItemIcon>
             <MessagesIcon />
           </ListItemIcon>
@@ -52,7 +44,7 @@ const DrawerBody = ({classes, currentPathname}) => (
 
     <List>
       <Link to="/about-author">
-        <ListItem button className={matchesPathname('/about-author')}>
+        <ListItem button className={firstPathname === '/about-author' ? 'active' : ''}>
           <ListItemIcon>
             <InfoIcon />
           </ListItemIcon>
@@ -63,4 +55,8 @@ const DrawerBody = ({classes, currentPathname}) => (
   </div>
 )
 
-export default DrawerBody
+const mapState = (state, ownProps) => ({
+  firstPathname: state.routes.firstPathname,
+})
+
+export default connect(mapState, null)(DrawerBody)

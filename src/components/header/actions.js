@@ -9,5 +9,5 @@ export const closeDrawer = () => ({
 })
 
 export const openDrawer = () => ({
-  type: openDrawer
+  type: OPEN_DRAWER
 })
