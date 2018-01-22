@@ -12,11 +12,11 @@ class LoadingContainer extends React.Component {
     switch (status) {
       case 'loading':
         return (
-          <CircularProgress className="mb-loading-placeholder" />
+          <CircularProgress className="mb-center" />
         )
       case 'failure':
         return (
-          <div className="mb-loading-placeholder">
+          <div className="mb-center">
             <Typography type="subheading">
               An error occurred.
             </Typography>

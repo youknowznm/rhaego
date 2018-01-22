@@ -1,4 +1,5 @@
 import view from './views/header'
 import reducer from './reducer'
+import * as actions from './actions'
 
-export {view, reducer}
+export {view, actions, reducer}
