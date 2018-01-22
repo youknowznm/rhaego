@@ -1,13 +1,10 @@
 import React from 'react'
-import {withStyles} from 'material-ui/styles'
-import {Card, Badge, Button, Avatar} from 'material-ui'
+import {Card, Button, Avatar} from 'material-ui'
 import {CardHeader, CardContent, CardActions} from 'material-ui/Card'
 import {FormatDate} from '../../../utils'
 
 import IconButton from 'material-ui/IconButton';
-import MoreVertIcon from 'material-ui-icons/MoreVert';
 import Typography from 'material-ui/Typography';
-import red from 'material-ui/colors/red';
 
 import StarIcon from 'material-ui-icons/Star';
 import DeviceHubIcon from 'material-ui-icons/DeviceHub';

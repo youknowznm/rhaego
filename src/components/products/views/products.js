@@ -2,8 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ProductCard from './productCard'
 import {connect} from 'react-redux'
-import {Typography} from 'material-ui'
-import {CircularProgress} from 'material-ui/Progress'
 import {fetchGithub} from '../actions'
 import {LoadingContainer} from '../../../utils'
 

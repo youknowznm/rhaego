@@ -1,13 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {Provider} from 'react-redux'
-
-import axios from 'axios'
-
-import App from './App'
-
-import Routes from './Routes'
-
+import {view as Routes} from './containers/routes'
 import store from './Store'
 
 ReactDOM.render(

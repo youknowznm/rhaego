@@ -2,17 +2,15 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Router, Route, IndexRoute, browserHistory} from 'react-router'
 
-import App from './App'
-import {view as Articles} from './components/articles'
-import {view as Products} from './components/products'
-import {view as NotFound} from './components/notFound'
+import App from '../app'
+import {view as Articles} from '../../components/articles'
+import {view as Products} from '../../components/products'
+import {view as NotFound} from '../../components/notFound'
+import {actions as headerActions} from '../../components/header'
+import {updateRoute} from './actions'
 
-import {actions as headerActions} from './components/header'
-
-import store from './Store'
-
-const Routes = ({routeWillUpdate}) => (
-  <Router history={browserHistory} onUpdate={routeWillUpdate}>
+const Routes = ({routeDidUpdate}) => (
+  <Router history={browserHistory} onUpdate={routeDidUpdate}>
     <Route path="/" component={App}>
       <IndexRoute component={Articles} />
       <Route path="articles" component={Articles} />
@@ -23,8 +21,9 @@ const Routes = ({routeWillUpdate}) => (
 )
 
 const mapDispatch = (dispatch, ownProps) => ({
-  routeWillUpdate: () => {
+  routeDidUpdate: () => {
     dispatch(headerActions.closeDrawer())
+    dispatch(updateRoute())
   }
 })
 

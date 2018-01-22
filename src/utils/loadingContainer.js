@@ -4,9 +4,6 @@ import {Typography} from 'material-ui'
 import {CircularProgress} from 'material-ui/Progress'
 
 class LoadingContainer extends React.Component {
-  constructor() {
-    super(...arguments)
-  }
   render() {
     const {status, children} = this.props
     switch (status) {
