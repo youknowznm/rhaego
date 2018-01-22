@@ -55,14 +55,11 @@ const ArticleCard = ({classes, articleData}) => {
               {commentCount}
             </Typography>
        </CardActions>
-
-       <div className="tags">
-         <Button dense raised color="default" className="tag">JavaScript</Button>
-         <Button dense raised color="default" className="tag">react native</Button>
-       </div>
-
-
       </Card>
+      <div className="tags">
+        <Button dense raised color="default" className="tag">JavaScript</Button>
+        <Button dense raised color="default" className="tag">react native</Button>
+      </div>
     </div>
   );
 }

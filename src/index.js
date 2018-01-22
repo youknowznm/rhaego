@@ -4,14 +4,15 @@ import {Provider} from 'react-redux'
 
 import axios from 'axios'
 
-// import Routes from './Routes'
 import App from './App'
+
+import Routes from './Routes'
 
 import store from './Store'
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Routes />
   </Provider>,
   document.getElementById('root')
 )

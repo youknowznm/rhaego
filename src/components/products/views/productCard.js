@@ -60,13 +60,12 @@ const ProductCard = ({classes, ProductData}) => {
               {forks_count}
             </Typography>
           </CardActions>
-
-         <Button dense color="default" disabled className="tag">{language}</Button>
-         {
-           homepage === '' ? '' : <Button dense raised color="primary" className="demo-link" target="_blank" href={homepage}>demo</Button>
-         }
         </a>
       </Card>
+      <Typography type="body2" className="language">{language}</Typography>
+      {
+        homepage === '' ? '' : <Button dense raised className="demo-link" target="_blank" href={homepage}>demo</Button>
+      }
     </div>
   );
 }

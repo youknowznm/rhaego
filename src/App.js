@@ -5,8 +5,8 @@ import {view as Header} from './components/header'
 import {view as Drawer} from './components/drawer'
 import {view as Main} from './components/main'
 import {view as Footer} from './components/footer'
-import {view as Articles} from './components/articles'
-import {view as Products} from './components/products'
+// import {view as Articles} from './components/articles'
+// import {view as Products} from './components/products'
 
 const App = ({children}) => (
   <div>
@@ -14,10 +14,8 @@ const App = ({children}) => (
     <Header />
     <Drawer />
     <Main>
-      {/* <Articles /> */}
-      <Products />
+      {children}
     </Main>
-    {/* {children} */}
     <Footer />
   </div>
 )

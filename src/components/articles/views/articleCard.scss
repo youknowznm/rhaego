@@ -5,40 +5,31 @@
   position: relative;
   min-width: 300px;
   width: 100%;
-  // margin-bottom: 12px;
   @media (min-width: 900px) {
     width: 50%;
   }
   padding: 9px;
-}
-.card {
-  position: relative;
-  // margin-left: 6px;
-  // margin-right: 6px;
-  transition: box-shadow .2s ease-out;
-  &:hover {
-    box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2),0px 12px 17px 2px rgba(0, 0, 0, 0.14),0px 5px 22px 4px rgba(0, 0, 0, 0.12);
-    cursor: pointer;
+  .card {
+    position: relative;
+    transition: box-shadow .2s ease-out;
+    &:hover {
+      box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2),0px 12px 17px 2px rgba(0, 0, 0, 0.14),0px 5px 22px 4px rgba(0, 0, 0, 0.12);
+      cursor: pointer;
 
+    }
+    .avatar {
+      background-color: $color-red-500 !important;
+    }
+    .count {
+      margin-right: 6px !important;
+    }
   }
-}
-
-.avatar {
-  background-color: $color-red-500 !important;
-}
-
-.icons {
-  // flex-grow: 1;
-}
-.count {
-  margin-right: 6px !important;
-}
-
-.tags {
-  position: absolute;
-  right: 18px;
-  bottom: 12px;
-  .tag {
-    margin-left: 12px;
+  .tags {
+    position: absolute;
+    right: 18px;
+    bottom: 18px;
+    .tag {
+      margin-left: 12px;
+    }
   }
 }
