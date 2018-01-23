@@ -25,7 +25,7 @@ const ProductCard = ({classes, productData}) => {
 
   return (
     <a className="card-wrap" href={html_url} target="_blank">
-      <Card className="card" data-hrf={html_url} >
+      <Card className="card">
         <CardHeader
           avatar={
             <Avatar className="avatar">{name.slice(0, 1).toUpperCase()}</Avatar>
