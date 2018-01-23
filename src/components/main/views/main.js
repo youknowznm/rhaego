@@ -1,6 +1,6 @@
 import React from 'react'
 
-import './main.scss'
+import './main.css'
 
 class Main extends React.Component {
   constructor() {

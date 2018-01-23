@@ -1,7 +1,7 @@
 import React from 'react'
 import ArticleCard from './articleCard'
 
-import './articles.scss'
+import './articles.css'
 
 
 const article = {
@@ -20,7 +20,7 @@ Add rice and stir very gently to distribute. Top with artichokes and peppers, an
 Set aside off of the heat to let rest for 10 minutes, and then serve.`
 }
 
-const articles = [
+const articlesData = [
   article,
   Object.assign({}, article),
   Object.assign({}, article),
@@ -30,7 +30,7 @@ const Articles = () => {
   return (
     <div className="articles">
       {
-        articles.map((item, i) => (
+        articlesData.map((item, i) => (
           <ArticleCard
             key={i}
             articleData={item}

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {siteName} from '../config'
 
-import './splitToSpans.scss'
+import './splitToSpans.css'
 
 const SplitToSpans = ({words, className}) => {
   let arr = words.trim().split(/\s+/)

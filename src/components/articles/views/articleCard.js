@@ -9,7 +9,7 @@ import Typography from 'material-ui/Typography';
 import FavoriteIcon from 'material-ui-icons/Favorite';
 import CommentIcon from 'material-ui-icons/Comment';
 
-import './articleCard.scss'
+import './articleCard.css'
 
 const ArticleCard = ({classes, articleData}) => {
   const {title, date, summary, commentCount, favoriteCount} = articleData
@@ -38,18 +38,18 @@ const ArticleCard = ({classes, articleData}) => {
         </CardContent>
 
         <CardActions disableActionSpacing>
-            <IconButton aria-label="Add to favorites">
-              <FavoriteIcon />
-            </IconButton>
-            <Typography className="count" type="caption">
-              {favoriteCount}
-            </Typography>
-            <IconButton aria-label="Comment">
-              <CommentIcon />
-            </IconButton>
-            <Typography className="count" type="caption">
-              {commentCount}
-            </Typography>
+          <IconButton aria-label="Add to favorites">
+            <FavoriteIcon />
+          </IconButton>
+          <Typography className="count" type="caption">
+            {favoriteCount}
+          </Typography>
+          <IconButton aria-label="Comment">
+            <CommentIcon />
+          </IconButton>
+          <Typography className="count" type="caption">
+            {commentCount}
+          </Typography>
        </CardActions>
        <div className="tags">
          <Button dense raised color="default" className="tag">JavaScript</Button>

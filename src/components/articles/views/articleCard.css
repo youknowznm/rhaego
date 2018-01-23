@@ -1,0 +1,78 @@
+html {
+  min-height: 500px; }
+
+ul {
+  margin: 0;
+  padding: 0; }
+
+a {
+  text-decoration: none;
+  color: inherit; }
+
+.mono {
+  font-family: "Roboto Mono" !important; }
+
+.no-screen {
+  display: block; }
+  @media screen {
+    .no-screen {
+      display: none; } }
+
+.mb-responsive-container {
+  position: relative;
+  width: 100%;
+  margin-left: 0; }
+  @media (min-width: 1280px) {
+    .mb-responsive-container {
+      margin-left: 250px;
+      width: calc(100% - 250px); } }
+  .mb-responsive-container > .content {
+    position: relative;
+    padding: 0 24px;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto; }
+    @media (min-width: 1280px) {
+      .mb-responsive-container > .content {
+        width: 960px;
+        padding: 0; } }
+    @media (min-width: 1440px) {
+      .mb-responsive-container > .content {
+        width: 1160px;
+        padding: 0; } }
+
+.mb-flex {
+  display: flex;
+  flex-wrap: wrap; }
+
+.mb-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  text-align: center; }
+
+.card-wrap {
+  position: relative;
+  min-width: 300px;
+  width: 100%;
+  padding: 9px; }
+  @media (min-width: 900px) {
+    .card-wrap {
+      width: 50%; } }
+  .card-wrap .card {
+    position: relative;
+    transition: box-shadow .2s ease-out; }
+    .card-wrap .card:hover {
+      box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 12px 17px 2px rgba(0, 0, 0, 0.14), 0px 5px 22px 4px rgba(0, 0, 0, 0.12);
+      cursor: pointer; }
+    .card-wrap .card .avatar {
+      background-color: #f44336 !important; }
+    .card-wrap .card .count {
+      margin-right: 6px !important; }
+  .card-wrap .tags {
+    position: absolute;
+    right: 12px;
+    bottom: 12px; }
+    .card-wrap .tags .tag {
+      margin-left: 12px; }

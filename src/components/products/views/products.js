@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import {fetchGithub} from '../actions'
 import {LoadingContainer} from '../../../utils'
 
-import './products.scss'
+import './products.css'
 
 class Products extends React.Component {
 

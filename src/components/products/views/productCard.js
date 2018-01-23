@@ -9,7 +9,7 @@ import Typography from 'material-ui/Typography';
 import StarIcon from 'material-ui-icons/Star';
 import DeviceHubIcon from 'material-ui-icons/DeviceHub';
 
-import './productCard.scss'
+import './productCard.css'
 
 const ProductCard = ({classes, productData}) => {
   const {

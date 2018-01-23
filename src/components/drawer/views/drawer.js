@@ -7,7 +7,7 @@ import {toggleDrawer} from '../../header/actions'
 import DrawerHeader from './drawerHeader'
 import DrawerBody from './drawerBody'
 
-import './drawer.scss'
+import './drawer.css'
 
 const styles = (theme) => ({
   drawerContent: {

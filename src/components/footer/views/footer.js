@@ -3,7 +3,7 @@ import {Typography, Button} from 'material-ui'
 import {SplitToSpans} from '../../../utils'
 import {socialInfo} from '../../../config'
 
-import './footer.scss'
+import './footer.css'
 
 const Footer = ({classes}) => (
   <div>

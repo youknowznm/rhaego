@@ -7,7 +7,7 @@ import MenuIcon from 'material-ui-icons/Menu'
 import {SplitToSpans} from '../../../utils'
 import {toggleDrawer} from '../actions'
 
-import './header.scss'
+import './header.css'
 
 const drawerWidth = 250
 
