@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import {Link} from 'react-router'
 import {connect} from 'react-redux'
 import {withStyles} from 'material-ui'
 import {AppBar, Toolbar, Typography, Button, IconButton} from 'material-ui'
@@ -33,7 +34,9 @@ const Header = ({classes, thisToggleDrawer}) => (
       <Typography className="title mono" type="title" color="inherit">
         <SplitToSpans />
       </Typography>
-      <Button color="inherit">login</Button>
+      <Link to="/auth">
+        <Button color="inherit">login</Button>
+      </Link>
     </Toolbar>
   </AppBar>
 )

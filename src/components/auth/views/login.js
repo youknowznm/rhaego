@@ -19,59 +19,60 @@ const styles = theme => ({
 
 const Login = ({classes}) => {
   return (
-    <Card className="auth-content" >
+    <Card className="auth-content">
+      <form className="form login">
+        <FormControl fullWidth margin="normal">
+          <InputLabel
+            htmlFor="login-email"
+            FormControlClasses={{
+              focused: classes.inputLabelFocused
+            }}
+            aria-describedby="email-helper-text"
+          >
+            Email
+          </InputLabel>
+          <Input
+            id="login-email"
+            type="text"
+            classes={{
+              inkbar: classes.inputInkbar
+            }}
+          />
+          <FormHelperText id="email-helper-text">
+            Type your registered email.
+          </FormHelperText>
+        </FormControl>
 
-      <FormControl fullWidth margin="normal">
-        <InputLabel
-          htmlFor="login-email"
-          FormControlClasses={{
-            focused: classes.inputLabelFocused
-          }}
-          aria-describedby="email-helper-text"
-        >
-          Email
-        </InputLabel>
-        <Input
-          id="login-email"
-          type="text"
-          classes={{
-            inkbar: classes.inputInkbar
-          }}
-        />
-        <FormHelperText id="email-helper-text">
-          Any normal email format would do.
-        </FormHelperText>
-      </FormControl>
-
-      <FormControl fullWidth margin="normal">
-        <InputLabel
-          htmlFor="login-password"
-          FormControlClasses={{
-            focused: classes.inputLabelFocused
-          }}
-          aria-describedby="password-helper-text"
-        >
-          Password
-        </InputLabel>
-        <Input
-          id="login-password"
-          type="password"
-          classes={{
-            inkbar: classes.inputInkbar
-          }}
-          endAdornment={
-            <InputAdornment position="end">
-              <IconButton
-              >
-                <VisibilityOff />
-              </IconButton>
-            </InputAdornment>
-          }
-        />
-        <FormHelperText id="password-helper-text">
-          2 to 10 characters are required for password.
-        </FormHelperText>
-      </FormControl>
+        <FormControl fullWidth margin="normal">
+          <InputLabel
+            htmlFor="login-password"
+            FormControlClasses={{
+              focused: classes.inputLabelFocused
+            }}
+            aria-describedby="password-helper-text"
+          >
+            Password
+          </InputLabel>
+          <Input
+            id="login-password"
+            type="password"
+            classes={{
+              inkbar: classes.inputInkbar
+            }}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                >
+                  <VisibilityOff />
+                </IconButton>
+              </InputAdornment>
+            }
+          />
+          <FormHelperText id="password-helper-text">
+            2 to 10 characters are required for password.
+          </FormHelperText>
+        </FormControl>
+      </form>
 
       <Button className="action-button"
         disabled
@@ -81,7 +82,6 @@ const Login = ({classes}) => {
       >
         login
       </Button>
-
     </Card>
   );
 }

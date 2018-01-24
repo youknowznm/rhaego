@@ -10,7 +10,7 @@ import './products.css'
 class Products extends React.Component {
 
   componentDidMount() {
-    this.props.fetchGithubData()
+    this.props.thisFetchGithub()
   }
 
   render() {
@@ -49,7 +49,7 @@ const mapState = (state, ownProps) => {
 }
 
 const mapDispatch = (dispatch, ownProps) => ({
-  fetchGithubData: () => dispatch(fetchGithub())
+  thisFetchGithub: () => dispatch(fetchGithub())
 })
 
 export default connect(mapState, mapDispatch)(Products)

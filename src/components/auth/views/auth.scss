@@ -1,15 +1,29 @@
 .auth {
   position: relative;
-  margin: 120px auto 0;
-  width: 80%;
+  width: 100%;
   min-width: 300px;
   max-width: 450px;
+  margin: 0 auto;
+  top: 36px;
   .auth-content {
     position: relative;
     width: 100%;
+    min-height: 450px;
     padding: 24px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .form {
+      &.login {
+        padding-top: 48px;
+      }
+
+      &.register {
+
+      }
+    }
   }
   .action-button {
-    margin: 48px 0;
+    margin: 48px 0 24px;
   }
 }

@@ -1,2 +1,3 @@
 import view from './views/auth'
-export {view}
+import reducer from './reducer'
+export {view, reducer}

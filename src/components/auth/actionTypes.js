@@ -1,1 +1,1 @@
-export const SWITCH_AUTH_TAB = "AUTH_TAB_SWITCH"
+export const SWITCH_AUTH_TAB = "SWITCH_AUTH_TAB"
