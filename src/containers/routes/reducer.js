@@ -3,7 +3,7 @@ import {UPDATE_ROUTE} from './actionTypes'
 const getFirtsPathname = () => {
   // 获取当前的一级pathname。无则返回‘active’
   const allPathname = window.location.pathname
-  let regArr = /^\/[^\/]+/.exec(allPathname)
+  let regArr = /^\/[^/]+/.exec(allPathname)
   let result = regArr ? regArr[0] : '/articles'
   return result
 }
