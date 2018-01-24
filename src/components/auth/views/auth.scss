@@ -12,12 +12,11 @@
     padding: 24px 60px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     .form {
       &.login {
-        padding-top: 48px;
-      }
 
+      }
       &.register {
 
       }

@@ -1,7 +1,17 @@
 import {SWITCH_AUTH_TAB} from './actionTypes'
 
 const thisState = {
-  activeTabValue: 0
+  activeTabValue: 0,
+  loginFields: {
+    email: '',
+    password: '',
+  },
+  registerFields: {
+    email: '',
+    nickname: '',
+    password: '',
+    confirmPassword: '',
+  },
 }
 
 export default (state = thisState, action) => {
