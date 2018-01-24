@@ -3,9 +3,8 @@ import React from 'react'
 import './main.css'
 
 class Main extends React.Component {
-  constructor() {
-    super(...arguments)
-    this.state = {minHeight: 0}
+  state = {
+    minHeight: 0
   }
   componentDidMount() {
     this.adjustminHeight()

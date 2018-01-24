@@ -9,9 +9,6 @@ import {switchAuthTab} from '../actions'
 import './auth.css'
 
 class Auth extends React.Component {
-  constructor() {
-    super(...arguments)
-  }
   handleChange = (evt, value) => {
     this.props.thisSwitchAuthTab(value)
   }

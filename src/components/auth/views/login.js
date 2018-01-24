@@ -4,46 +4,51 @@ import {Card, TextField, IconButton, Button} from 'material-ui'
 import {FormControl, FormHelperText} from 'material-ui/Form';
 import Input, {InputLabel, InputAdornment} from 'material-ui/Input';
 import {Visibility, VisibilityOff} from 'material-ui-icons';
-import purple from 'material-ui/colors/purple';
 
 class Login extends React.Component {
-  // constructor() {
-  //   super(...arguments)
-  //   this.state = {
-  //     loginFields: {
-  //       email: '',
-  //       password: '',
-  //     },
-  //   }
-  // }
-
   state = {
     emailField: '',
-    passwordField: '',
     emailFieldError: false,
+    passwordField: '',
     passwordFieldError: false,
   }
-
   handleChange = (field) => (evt) => {
     this.setState({
       [field]: evt.target.value
     })
   }
-
   checkLoginFields = () => {
-
+    let s = this.state
+    this.setState({
+      emailFieldError: false,
+      passwordFieldError: false,
+    })
+    setTimeout(() => {
+      // (zhngnmng)(@sina)(.com)(.cn)
+      const emailReg = /^([a-zA-Z0-9]+[\w-]*)(@[\w]{2,})(\.[\w]{2,4})(\.[\w]{2,4})?$/
+      this.setState({
+        emailFieldError: !emailReg.test(s.emailField)
+      })
+      // 12345678
+      const passwordReg = /^.{6,20}$/
+      this.setState({
+        passwordFieldError: !passwordReg.test(s.passwordField)
+      })
+    }, 250)
   }
-
+  handleAction = () => {
+    this.checkLoginFields()
+  }
   render() {
-    const {emailFieldError, passwordFieldError} = this.state
+    const {
+      emailFieldError,
+      passwordFieldError,
+    } = this.state
     return (
       <Card className="auth-content">
         <form className="form login">
           <FormControl fullWidth margin="normal">
-            <InputLabel
-              htmlFor="login-email"
-              aria-describedby="email-helper-text"
-            >
+            <InputLabel htmlFor="login-email">
               Email
             </InputLabel>
             <Input
@@ -52,16 +57,13 @@ class Login extends React.Component {
               error={emailFieldError}
               onChange={this.handleChange('emailField')}
             />
-            <FormHelperText id="email-helper-text">
-              Type your registered email.
+            <FormHelperText className={emailFieldError ? 'error' : ''}>
+              Any common email format would do.
             </FormHelperText>
           </FormControl>
 
           <FormControl fullWidth margin="normal">
-            <InputLabel
-              htmlFor="login-password"
-              aria-describedby="password-helper-text"
-            >
+            <InputLabel htmlFor="login-password">
               Password
             </InputLabel>
             <Input
@@ -78,8 +80,8 @@ class Login extends React.Component {
                 </InputAdornment>
               }
             />
-            <FormHelperText id="password-helper-text">
-              2 to 10 characters are required for password.
+            <FormHelperText className={passwordFieldError ? 'error' : ''}>
+              6 to 20 characters are required for password.
             </FormHelperText>
           </FormControl>
         </form>
@@ -88,6 +90,7 @@ class Login extends React.Component {
           raised
           fullWidth
           color="default"
+          onClick={this.handleAction}
         >
           login
         </Button>
@@ -95,7 +98,6 @@ class Login extends React.Component {
     )
   }
 }
-
 
 // const mapState = (state, ownProps) => ({
 //   // loginFields: state.loginFields,

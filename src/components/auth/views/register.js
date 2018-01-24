@@ -1,91 +1,140 @@
 import React from 'react'
 import {Card, TextField, IconButton, Button} from 'material-ui'
 import {FormControl, FormHelperText} from 'material-ui/Form';
-import Input, {InputLabel, InputAdornment} from 'material-ui/Input';
-import {Visibility, VisibilityOff} from 'material-ui-icons';
-import purple from 'material-ui/colors/purple';
+import Input, {InputLabel} from 'material-ui/Input';
 
-const Register = () => {
-  return (
-    <Card className="auth-content">
-      <form className="form register">
-        <FormControl fullWidth margin="dense">
-          <InputLabel
-            htmlFor="register-email"
-            aria-describedby="email-helper-text"
-          >
-            Email
-          </InputLabel>
-          <Input
-            id="register-email"
-            type="text"
-          />
-          <FormHelperText id="email-helper-text">
-            Any normal email format would do.
-          </FormHelperText>
-        </FormControl>
+class Register extends React.Component {
+  state = {
+    emailField: '',
+    emailFieldError: false,
+    nicknameField: '',
+    nicknameFieldError: false,
+    passwordField: '',
+    passwordFieldError: false,
+    confirmPasswordField: '',
+    confirmPasswordFieldError: false,
+  }
+  handleChange = (field) => (evt) => {
+    this.setState({
+      [field]: evt.target.value
+    })
+  }
+  checkLoginFields = () => {
+    let s = this.state
+    this.setState({
+      emailFieldError: false,
+      nicknameFieldError: false,
+      passwordFieldError: false,
+      confirmPasswordFieldError: false,
+    })
+    setTimeout(() => {
+      // (zhngnmng)(@sina)(.com)(.cn)
+      const emailReg = /^([a-zA-Z0-9]+[\w-]*)(@[\w]{2,})(\.[\w]{2,4})(\.[\w]{2,4})?$/
+      this.setState({
+        emailFieldError: !emailReg.test(s.emailField)
+      })
+      // 张三abc123
+      const nicknameReg = /^[a-zA-Z0-9\u4E00-\u9FA5]{2,10}$/
+      this.setState({
+        nicknameFieldError: !nicknameReg.test(s.nicknameField)
+      })
+      // 12345678
+      const passwordReg = /^.{6,20}$/
+      this.setState({
+        passwordFieldError: !passwordReg.test(s.passwordField)
+      })
+      // 只检查confirmPassword是否和password全等
+      this.setState({
+        confirmPasswordFieldError: s.passwordField !== s.confirmPasswordField
+      })
+    }, 250)
+  }
+  handleAction = () => {
+    this.checkLoginFields()
+  }
+  render() {
+    const {
+      emailFieldError,
+      nicknameFieldError,
+      passwordFieldError,
+      confirmPasswordFieldError,
+    } = this.state
+    return (
+      <Card className="auth-content">
+        <form className="form register">
+          <FormControl fullWidth margin="dense">
+            <InputLabel htmlFor="register-email">
+              Email
+            </InputLabel>
+            <Input
+              id="register-email"
+              type="text"
+              onChange={this.handleChange('emailField')}
+              error={emailFieldError}
+            />
+            <FormHelperText className={emailFieldError ? 'error' : ''}>
+              Any common email format would do.
+            </FormHelperText>
+          </FormControl>
 
-        <FormControl fullWidth margin="dense">
-          <InputLabel
-            htmlFor="register-nickname"
-            aria-describedby="nickname-helper-text"
-          >
-            Nickname
-          </InputLabel>
-          <Input
-            id="register-nickname"
-            type="text"
-          />
-          <FormHelperText id="nickname-helper-text">
-            Nickname consists of 2 to 10 characters.
-          </FormHelperText>
-        </FormControl>
+          <FormControl fullWidth margin="dense">
+            <InputLabel htmlFor="register-nickname">
+              Nickname
+            </InputLabel>
+            <Input
+              id="register-nickname"
+              type="text"
+              onChange={this.handleChange('nicknameField')}
+              error={nicknameFieldError}
+            />
+            <FormHelperText className={nicknameFieldError ? 'error' : ''}>
+              Nickname consists of 2 to 10 characters.
+            </FormHelperText>
+          </FormControl>
 
-        <FormControl fullWidth margin="dense">
-          <InputLabel
-            htmlFor="register-password"
-            aria-describedby="password-helper-text"
-          >
-            Password
-          </InputLabel>
-          <Input
-            id="register-password"
-            type="password"
-          />
-          <FormHelperText id="password-helper-text">
-            2 to 10 characters are required for password.
-          </FormHelperText>
-        </FormControl>
+          <FormControl fullWidth margin="dense">
+            <InputLabel htmlFor="register-password">
+              Password
+            </InputLabel>
+            <Input
+              id="register-password"
+              type="password"
+              onChange={this.handleChange('passwordField')}
+              error={passwordFieldError}
+            />
+            <FormHelperText className={passwordFieldError ? 'error' : ''}>
+              6 to 20 characters are required for password.
+            </FormHelperText>
+          </FormControl>
 
-        <FormControl fullWidth margin="dense">
-          <InputLabel
-            htmlFor="register-confirm-password"
-            aria-describedby="password-helper-text"
-          >
-            Confirm Password
-          </InputLabel>
-          <Input
-            disabled
-            id="register-confirm-password"
-            type="password"
-          />
-          <FormHelperText id="password-helper-text">
-            Type your password again.
-          </FormHelperText>
-        </FormControl>
-      </form>
+          <FormControl fullWidth margin="dense">
+            <InputLabel htmlFor="register-confirm-password">
+              Confirm Password
+            </InputLabel>
+            <Input
+              disabled
+              id="register-confirm-password"
+              type="password"
+              onChange={this.handleChange('confirmPasswordField')}
+              error={confirmPasswordFieldError}
+            />
+            <FormHelperText className={confirmPasswordFieldError ? 'error' : ''}>
+              Type your password again.
+            </FormHelperText>
+          </FormControl>
+        </form>
 
-      <Button className="action-button"
-        disabled
-        raised
-        fullWidth
-        color="default"
-      >
-        Register
-      </Button>
-    </Card>
-  );
+        <Button className="action-button"
+          raised
+          fullWidth
+          color="default"
+          onClick={this.handleAction}
+        >
+          Register
+        </Button>
+      </Card>
+    )
+  }
 }
-
 
 export default Register

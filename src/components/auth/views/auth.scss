@@ -1,3 +1,7 @@
+@charset "UTF-8";
+@import "../../../assets/styles/common.scss";
+
+
 .auth {
   position: relative;
   width: 100%;
@@ -25,4 +29,8 @@
   .action-button {
     margin: 48px 0 24px;
   }
+}
+
+.error {
+  color: $color-red-500 !important;
 }
