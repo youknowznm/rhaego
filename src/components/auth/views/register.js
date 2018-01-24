@@ -13,11 +13,19 @@ class Register extends React.Component {
     passwordFieldError: false,
     confirmPasswordField: '',
     confirmPasswordFieldError: false,
+    confirmPasswordFieldEnabled: false,
   }
   handleChange = (field) => (evt) => {
     this.setState({
       [field]: evt.target.value
     })
+    if (field === 'passwordField') {
+      setTimeout(() => {
+        this.setState({
+          confirmPasswordFieldEnabled: this.state.passwordField !== ''
+        })
+      }, 5)
+    }
   }
   checkLoginFields = () => {
     let s = this.state
@@ -58,6 +66,7 @@ class Register extends React.Component {
       nicknameFieldError,
       passwordFieldError,
       confirmPasswordFieldError,
+      confirmPasswordFieldEnabled,
     } = this.state
     return (
       <Card className="auth-content">
@@ -112,9 +121,9 @@ class Register extends React.Component {
               Confirm Password
             </InputLabel>
             <Input
-              disabled
               id="register-confirm-password"
               type="password"
+              disabled={!confirmPasswordFieldEnabled}
               onChange={this.handleChange('confirmPasswordField')}
               error={confirmPasswordFieldError}
             />

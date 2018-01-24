@@ -11,10 +11,16 @@ class Login extends React.Component {
     emailFieldError: false,
     passwordField: '',
     passwordFieldError: false,
+    passwordVisible: false,
   }
   handleChange = (field) => (evt) => {
     this.setState({
       [field]: evt.target.value
+    })
+  }
+  toggleVisible = () => {
+    this.setState({
+      passwordVisible: !this.state.passwordVisible
     })
   }
   checkLoginFields = () => {
@@ -43,11 +49,12 @@ class Login extends React.Component {
     const {
       emailFieldError,
       passwordFieldError,
+      passwordVisible,
     } = this.state
     return (
       <Card className="auth-content">
         <form className="form login">
-          <FormControl fullWidth margin="normal">
+          <FormControl fullWidth margin="normal" className="login-email">
             <InputLabel htmlFor="login-email">
               Email
             </InputLabel>
@@ -68,14 +75,14 @@ class Login extends React.Component {
             </InputLabel>
             <Input
               id="login-password"
-              type="password"
+              type={passwordVisible ? "text" : "password"}
               onChange={this.handleChange('passwordField')}
               error={passwordFieldError}
               endAdornment={
                 <InputAdornment position="end">
-                  <IconButton
+                  <IconButton onClick={this.toggleVisible}
                   >
-                    <VisibilityOff />
+                    {passwordVisible ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
                 </InputAdornment>
               }

@@ -19,7 +19,9 @@
     justify-content: space-around;
     .form {
       &.login {
-
+        .login-email {
+          margin-bottom: 24px;
+        }
       }
       &.register {
 
