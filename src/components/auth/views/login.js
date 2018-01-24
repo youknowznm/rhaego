@@ -6,8 +6,6 @@ import Input, {InputLabel, InputAdornment} from 'material-ui/Input';
 import {Visibility, VisibilityOff} from 'material-ui-icons';
 import purple from 'material-ui/colors/purple';
 
-import './login.css'
-
 const styles = theme => ({
   inputLabelFocused: {
     color: purple[500],
@@ -25,7 +23,7 @@ const Login = ({classes}) => {
 
       <FormControl fullWidth margin="normal">
         <InputLabel
-          htmlFor="email"
+          htmlFor="login-email"
           FormControlClasses={{
             focused: classes.inputLabelFocused
           }}
@@ -34,20 +32,20 @@ const Login = ({classes}) => {
           Email
         </InputLabel>
         <Input
-          id="email"
+          id="login-email"
           type="text"
           classes={{
             inkbar: classes.inputInkbar
           }}
         />
-        <FormHelperText id="email-helper-text" margin="normal">
+        <FormHelperText id="email-helper-text">
           Any normal email format would do.
         </FormHelperText>
       </FormControl>
 
       <FormControl fullWidth margin="normal">
         <InputLabel
-          htmlFor="password"
+          htmlFor="login-password"
           FormControlClasses={{
             focused: classes.inputLabelFocused
           }}
@@ -56,7 +54,7 @@ const Login = ({classes}) => {
           Password
         </InputLabel>
         <Input
-          id="password"
+          id="login-password"
           type="password"
           classes={{
             inkbar: classes.inputInkbar
@@ -70,8 +68,8 @@ const Login = ({classes}) => {
             </InputAdornment>
           }
         />
-        <FormHelperText id="password-helper-text" margin="normal">
-          6 to 12 characters are required.
+        <FormHelperText id="password-helper-text">
+          2 to 10 characters are required for password.
         </FormHelperText>
       </FormControl>
 

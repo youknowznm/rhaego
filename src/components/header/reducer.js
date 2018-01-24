@@ -7,6 +7,12 @@ const thisState = {
 export default (state = thisState, action) => {
   switch (action.type) {
     case TOGGLE_DRAWER:
+      // const targetStatus =
+      //   typeof action.targetStatus === 'boolean'
+      //   ? action.targetStatus
+      //   : !state.drawerIsOpen
+      //   console.log(1,targetStatus);
+      // return {...state, drawerIsOpen: targetStatus}
       return {...state, drawerIsOpen: !state.drawerIsOpen}
     case OPEN_DRAWER:
       return {...state, drawerIsOpen: true}

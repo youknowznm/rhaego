@@ -1,0 +1,1 @@
+export const SWITCH_AUTH_TAB = "AUTH_TAB_SWITCH"
