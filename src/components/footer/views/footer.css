@@ -50,6 +50,7 @@ a {
   left: 50%;
   top: 50%;
   transform: translateX(-50%) translateY(-50%);
+  margin-top: 80px !important;
   text-align: center; }
 
 .mb-footer {
@@ -61,7 +62,7 @@ a {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    margin-top: 72px; }
+    margin-top: 160px; }
     .mb-footer .social .social-link {
       position: relative;
       list-style: none;

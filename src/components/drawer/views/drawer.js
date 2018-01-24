@@ -15,7 +15,7 @@ const styles = (theme) => ({
   },
 })
 
-const Drawer = ({classes, drawerIsOpen, toggleDrawer}) => {
+const Drawer = ({classes, drawerIsOpen, thisToggleDrawer}) => {
   const drawer = (
     <div>
       <DrawerHeader />
@@ -28,7 +28,7 @@ const Drawer = ({classes, drawerIsOpen, toggleDrawer}) => {
         <MuiDrawer
           type="temporary"
           open={drawerIsOpen}
-          onClose={toggleDrawer}
+          onClose={thisToggleDrawer}
           classes={{
             paper: classes.drawerContent
           }}
@@ -61,12 +61,12 @@ const mapState = (state, ownProps) => {
 }
 
 const mapDispatch = (dispatch, ownProps) => ({
-  toggleDrawer: () => dispatch(toggleDrawer())
+  thisToggleDrawer: () => dispatch(toggleDrawer())
 })
 
 Drawer.propTypes = {
   drawerIsOpen: PropTypes.bool.isRequired,
-  toggleDrawer: PropTypes.func.isRequired,
+  thisToggleDrawer: PropTypes.func.isRequired,
 }
 
 const DrawerWrap = connect(mapState, mapDispatch)(Drawer)

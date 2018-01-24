@@ -3,14 +3,8 @@ import SwipeableViews from 'react-swipeable-views'
 import {AppBar, Tabs as MuiTabs, Typography} from 'material-ui'
 import {Tab as MuiTab} from 'material-ui/Tabs'
 import Login from './login'
-// import Register from './register'
+import Register from './register'
 import './auth.css'
-
-// const TabContainer = ({children}) => (
-//   <Typography>
-//     {children}
-//   </Typography>
-// )
 
 class Tabs extends React.Component {
 
@@ -19,7 +13,7 @@ class Tabs extends React.Component {
       <div className="auth">
         <AppBar position="static" color="default">
           <MuiTabs
-            value={0}
+            value={1}
             // onChange=""
             indicatorColor="primary"
             textColor="primary"
@@ -32,11 +26,11 @@ class Tabs extends React.Component {
 
         <SwipeableViews
           axis="x"
-          index={0}
+          index={1}
           // onChangeIndex={this.handleChangeIndx}
         >
-          <TabContainer>login</TabContainer>
-          <TabContainer>register</TabContainer>
+          <Login />
+          <Register />
         </SwipeableViews>
       </div>
     )

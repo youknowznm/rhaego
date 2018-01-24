@@ -1,9 +1,15 @@
 .auth {
   position: relative;
-  margin: 90px auto 0;
-  min-height: 300px;
+  margin: 120px auto 0;
   width: 80%;
   min-width: 300px;
-  max-width: 500px;
-  background: yellow;
+  max-width: 450px;
+  .auth-content {
+    position: relative;
+    width: 100%;
+    padding: 24px 60px;
+  }
+  .action-button {
+    margin: 48px 0;
+  }
 }

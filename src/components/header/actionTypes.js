@@ -1,3 +1,1 @@
 export const TOGGLE_DRAWER = 'DRAWER/TOGGLE'
-export const CLOSE_DRAWER = 'DRAWER/CLOSE'
-export const OPEN_DRAWER = 'DRAWER/OPEN'

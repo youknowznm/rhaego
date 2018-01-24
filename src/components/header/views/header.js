@@ -24,10 +24,10 @@ const styles = (theme) => ({
   },
 })
 
-const Header = ({classes, toggleDrawer}) => (
+const Header = ({classes, thisToggleDrawer}) => (
   <AppBar color="primary" className={classes.header}>
     <Toolbar>
-      <IconButton color="inherit" className={classes.navIconButton} onClick={toggleDrawer}>
+      <IconButton color="inherit" className={classes.navIconButton} onClick={thisToggleDrawer}>
         <MenuIcon />
       </IconButton>
       <Typography className="title mono" type="title" color="inherit">
@@ -40,19 +40,13 @@ const Header = ({classes, toggleDrawer}) => (
 
 Header.propTypes = {
   classes: PropTypes.object.isRequired,
-  toggleDrawer: PropTypes.func.isRequired,
-}
-
-const mapState = (state, ownProps) => {
-  return {
-    drawerIsOpen: state.header.drawerIsOpen
-  }
+  thisToggleDrawer: PropTypes.func.isRequired,
 }
 
 const mapDispatch = (dispatch, ownProps) => ({
-  toggleDrawer: () => dispatch(toggleDrawer())
+  thisToggleDrawer: () => dispatch(toggleDrawer(null))
 })
 
-const HeaderWrap = connect(mapState, mapDispatch)(Header)
+const HeaderWrap = connect(null, mapDispatch)(Header)
 
 export default withStyles(styles)(HeaderWrap)

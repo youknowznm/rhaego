@@ -1,4 +1,4 @@
-import {TOGGLE_DRAWER, OPEN_DRAWER, CLOSE_DRAWER} from './actionTypes'
+import {TOGGLE_DRAWER} from './actionTypes'
 
 const thisState = {
   drawerIsOpen: false
@@ -7,11 +7,11 @@ const thisState = {
 export default (state = thisState, action) => {
   switch (action.type) {
     case TOGGLE_DRAWER:
-      return {...state, drawerIsOpen: !state.drawerIsOpen}
-    case OPEN_DRAWER:
-      return {...state, drawerIsOpen: true}
-    case CLOSE_DRAWER:
-      return {...state, drawerIsOpen: false}
+      const status =
+        typeof action.status === 'boolean'
+        ? action.status
+        : !state.drawerIsOpen
+      return {...state, drawerIsOpen: status}
     default:
       return state;
   }
