@@ -35,8 +35,8 @@ class Tabs extends React.Component {
           index={0}
           // onChangeIndex={this.handleChangeIndx}
         >
-          <TabContainer>login</TabContainer>
-          <TabContainer>register</TabContainer>
+          <Login></Login>
+          {/* <Register></Register> */}
         </SwipeableViews>
       </div>
     )
