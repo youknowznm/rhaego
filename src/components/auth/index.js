@@ -1,3 +1,5 @@
 import view from './views/auth'
-import reducer from './reducer'
-export {view, reducer}
+import authReducer from './authReducer'
+import registerReducer from './registerReducer'
+import loginReducer from './loginReducer'
+export {view, authReducer, registerReducer, loginReducer}

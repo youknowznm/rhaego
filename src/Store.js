@@ -4,13 +4,15 @@ import thunkMiddleware from 'redux-thunk'
 import {reducer as routesReducer} from './containers/routes'
 import {reducer as headerReducer} from './components/header'
 import {reducer as productsReducer} from './components/products'
-import {reducer as authReducer} from './components/auth'
+import {authReducer, registerReducer, loginReducer} from './components/auth'
 
 const reducer = combineReducers({
   routes: routesReducer,
   header: headerReducer,
   products: productsReducer,
   auth: authReducer,
+  register: registerReducer,
+  login: loginReducer,
 })
 
 const win = window

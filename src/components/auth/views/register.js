@@ -6,69 +6,18 @@ import Input, {InputLabel} from 'material-ui/Input';
 import {updateRegisterField, checkRegisterFields} from '../actions'
 
 class Register extends React.Component {
-  // state = {
-  //   emailField: '',
-  //   emailFieldError: false,
-  //   nicknameField: '',
-  //   nicknameFieldError: false,
-  //   passwordField: '',
-  //   passwordFieldError: false,
-  //   confirmPasswordField: '',
-  //   confirmPasswordFieldError: false,
-  //   confirmPasswordFieldEnabled: false,
-  // }
   handleChange = (field) => (evt) => {
     const fieldName = field
     const fieldValue = evt.target.value
     this.props.thisUpdateRegisterField(fieldName, fieldValue)
-    // this.setState({
-    //   [field]: evt.target.value
-    // })
-    // if (field === 'passwordField') {
-    //   setTimeout(() => {
-    //     this.setState({
-    //       confirmPasswordFieldEnabled: this.state.passwordField !== ''
-    //     })
-    //   }, 5)
-    // }
   }
-  // checkLoginFields = () => {
-  //   let s = this.state
-  //   this.setState({
-  //     emailFieldError: false,
-  //     nicknameFieldError: false,
-  //     passwordFieldError: false,
-  //     confirmPasswordFieldError: false,
-  //   })
-  //   setTimeout(() => {
-  //     // (zhngnmng)(@sina)(.com)(.cn)
-  //     const emailReg = /^([a-zA-Z0-9]+[\w-]*)(@[\w]{2,})(\.[\w]{2,4})(\.[\w]{2,4})?$/
-  //     this.setState({
-  //       emailFieldError: !emailReg.test(s.emailField)
-  //     })
-  //     // 张三abc123
-  //     const nicknameReg = /^[a-zA-Z0-9\u4E00-\u9FA5]{2,10}$/
-  //     this.setState({
-  //       nicknameFieldError: !nicknameReg.test(s.nicknameField)
-  //     })
-  //     // 12345678
-  //     const passwordReg = /^.{6,20}$/
-  //     this.setState({
-  //       passwordFieldError: !passwordReg.test(s.passwordField)
-  //     })
-  //     // 只检查confirmPassword是否和password全等
-  //     this.setState({
-  //       confirmPasswordFieldError: s.passwordField !== s.confirmPasswordField
-  //     })
-  //   }, 250)
-  // }
   handleAction = () => {
     this.props.thisCheckRegisterFields()
     // this.props.thisRequestRegister()
   }
-  // goBack = () => {
-  //   window.history.go(-1)
-  // }
+  goBack = () => {
+    window.history.go(-1)
+  }
   render() {
     const {
       emailFieldError,
@@ -165,13 +114,16 @@ class Register extends React.Component {
   }
 }
 
-const mapState = (state, ownProps) => ({
-  emailFieldError: state.auth.registerFields.emailField.error,
-  passwordFieldError: state.auth.registerFields.passwordField.error,
-  nicknameFieldError: state.auth.registerFields.nicknameField.error,
-  confirmPasswordFieldError: state.auth.registerFields.confirmPasswordField.error,
-  confirmPasswordFieldEnabled: true,
-})
+const mapState = (state, ownProps) => {
+  const thatRegisterFields = state.register.fields
+  return {
+    emailFieldError: thatRegisterFields.emailField.error,
+    passwordFieldError: thatRegisterFields.passwordField.error,
+    nicknameFieldError: thatRegisterFields.nicknameField.error,
+    confirmPasswordFieldError: thatRegisterFields.confirmPasswordField.error,
+    confirmPasswordFieldEnabled: thatRegisterFields.confirmPasswordField.enabled,
+  };
+}
 
 const mapDispatch = (dispatch, ownProps) => ({
   thisUpdateRegisterField: (fieldName, fieldValue) => {
