@@ -51,6 +51,14 @@ class Login extends React.Component {
               type="password"
               onChange={this.handleChange('passwordField')}
               error={passwordFieldError}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton onClick={this.toggleVisible}
+                  >
+                    {passwordVisible ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
             />
             <FormHelperText className={passwordFieldError ? 'error' : ''}>
               6 to 20 characters are required for password.
@@ -87,6 +95,7 @@ const mapState = (state, ownProps) => {
   return {
     emailFieldError: thatLoginFields.emailField.error,
     passwordFieldError: thatLoginFields.passwordField.error,
+    passwordVisible: thatLoginFields.passwordField.visible,
   };
 }
 

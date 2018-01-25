@@ -1,6 +1,7 @@
 import {
   UPDATE_LOGIN_FIELD,
   CHECK_LOGIN_FIELDS,
+  SWITCH_LOGIN_PASSWORD_VISIBILITY,
 } from './actionTypes'
 
 const thisState = {
@@ -12,6 +13,7 @@ const thisState = {
     passwordField: {
       value: '',
       error: false,
+      visible: false,
     },
   },
   fieldsValid: true,
@@ -29,6 +31,12 @@ export default (state = thisState, action) => {
       const {fieldName, fieldValue} = action
       const newfields = state.fields
       newfields[fieldName].value = fieldValue
+      return {
+        ...state,
+        fields: newfields
+      }
+    case SWITCH_LOGIN_PASSWORD_VISIBILITY:
+      // TODO
       return {
         ...state,
         fields: newfields
