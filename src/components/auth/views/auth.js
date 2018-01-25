@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import SwipeableViews from 'react-swipeable-views'
-import {AppBar, Tabs as MuiTabs, Typography} from 'material-ui'
+import {AppBar, Tabs as MuiTabs} from 'material-ui'
 import {Tab as MuiTab} from 'material-ui/Tabs'
 import Login from './login'
 import Register from './register'
@@ -16,7 +16,7 @@ class Auth extends React.Component {
     this.props.thisSwitchAuthTab(index)
   }
   render() {
-    const {thisSwitchAuthTab, activeTabValue} = this.props
+    const {activeTabValue} = this.props
     return (
       <div className="auth">
         <AppBar position="static" color="default">

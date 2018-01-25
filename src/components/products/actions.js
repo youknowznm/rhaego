@@ -7,14 +7,14 @@ export const fetchGithubStart = () => ({
   type: FETCH_GITHUB_START,
 })
 
-export const fetchGithubDone = (res) => ({
+export const fetchGithubDone = (r) => ({
   type: FETCH_GITHUB_DONE,
-  res,
+  r,
 })
 
-export const fetchGithubFail = (err) => ({
+export const fetchGithubFail = (e) => ({
   type: FETCH_GITHUB_FAIL,
-  err,
+  e,
 })
 
 export const fetchGithub = () => {
@@ -23,16 +23,17 @@ export const fetchGithub = () => {
 
     dispatch(fetchGithubStart())
 
-    return axios.get(apiUrl)
-      .then((res) => {
-        if (res.status !== 200) {
-          throw new Error('Fail to get res with status ' + res.status)
+    return axios
+      .get(apiUrl)
+      .then((r) => {
+        if (r.status !== 200) {
+          throw new Error('Fail to get r with status ' + r.status)
         }
-        dispatch(fetchGithubDone(res))
+        dispatch(fetchGithubDone(r))
       })
-      .catch((error) => {
-        console.log('github fetch err:', error);
-        dispatch(fetchGithubFail(error))
+      .catch((e) => {
+        console.log('github fetch err:', e);
+        dispatch(fetchGithubFail(e))
       })
   }
 }
