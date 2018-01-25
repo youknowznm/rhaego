@@ -60,6 +60,9 @@ class Register extends React.Component {
   handleAction = () => {
     this.checkLoginFields()
   }
+  goBack = () => {
+    window.history.go(-1)
+  }
   render() {
     const {
       emailFieldError,
@@ -133,14 +136,24 @@ class Register extends React.Component {
           </FormControl>
         </form>
 
-        <Button className="action-button"
-          raised
-          fullWidth
-          color="default"
-          onClick={this.handleAction}
-        >
-          Register
-        </Button>
+        <div className="buttons">
+          <Button className="action-button"
+            raised
+            fullWidth
+            color="primary"
+            onClick={this.handleAction}
+          >
+            register
+          </Button>
+          <Button className="action-button"
+            raised
+            fullWidth
+            color="default"
+            onClick={this.goBack}
+          >
+            cancel
+          </Button>
+        </div>
       </Card>
     )
   }

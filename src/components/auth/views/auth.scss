@@ -9,27 +9,28 @@
   max-width: 450px;
   margin: 0 auto;
   top: 36px;
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+              0px 4px 5px 0px rgba(0, 0, 0, 0.14),
+              0px 1px 10px 0px rgba(0, 0, 0, 0.12);
   .auth-content {
     position: relative;
     width: 100%;
-    min-height: 450px;
+    height: 480px;
     padding: 24px 60px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
     .form {
       &.login {
-        .login-email {
-          margin-bottom: 24px;
-        }
+        margin: 36px 0 60px;
       }
       &.register {
 
       }
     }
   }
-  .action-button {
-    margin: 48px 0 24px;
+  .buttons {
+    margin-top: 24px;
+    .action-button {
+      margin: 6px 0;
+    }
   }
 }
 

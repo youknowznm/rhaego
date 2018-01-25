@@ -45,6 +45,9 @@ class Login extends React.Component {
   handleAction = () => {
     this.checkLoginFields()
   }
+  goBack = () => {
+    window.history.go(-1)
+  }
   render() {
     const {
       emailFieldError,
@@ -93,14 +96,24 @@ class Login extends React.Component {
           </FormControl>
         </form>
 
-        <Button className="action-button"
-          raised
-          fullWidth
-          color="default"
-          onClick={this.handleAction}
-        >
-          login
-        </Button>
+        <div className="buttons">
+          <Button className="action-button"
+            raised
+            fullWidth
+            color="primary"
+            onClick={this.handleAction}
+          >
+            login
+          </Button>
+          <Button className="action-button"
+            raised
+            fullWidth
+            color="default"
+            onClick={this.goBack}
+          >
+            cancel
+          </Button>
+        </div>
       </Card>
     )
   }
