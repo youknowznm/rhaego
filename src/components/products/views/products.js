@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import ProductCard from './productCard'
 import {connect} from 'react-redux'
 import {fetchGithub} from '../actions'
-import {LoadingContainer} from '../../../utils'
+import {LoadingArea} from '../../../utils'
 
 import './products.css'
 
@@ -16,7 +16,7 @@ class Products extends React.Component {
   render() {
     const {status, productsData} = this.props
     return (
-      <LoadingContainer status={status} data={productsData}>
+      <LoadingArea status={status} data={productsData}>
         {
           () => (
             <div className="mb-flex">
@@ -31,7 +31,7 @@ class Products extends React.Component {
             </div>
           )
         }
-      </LoadingContainer>
+      </LoadingArea>
     );
   }
 }

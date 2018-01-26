@@ -1,4 +1,5 @@
 import React from 'react'
+import {connect} from 'react-redux'
 
 import './main.css'
 
@@ -16,10 +17,10 @@ class Main extends React.Component {
     this.setState({minHeight})
   }
   render() {
-    const {children} = this.props
+    const {children, mainClassName} = this.props
     return (
       <main className="mb-main">
-        <div className="content" style={{minHeight: this.state.minHeight}}>
+        <div className="content" data-route={mainClassName} style={{minHeight: this.state.minHeight}}>
           {children}
         </div>
       </main>
@@ -27,4 +28,8 @@ class Main extends React.Component {
   }
 }
 
-export default Main
+const mapState = (state, ownProps) => ({
+  mainClassName: state.routes.firstPathname.replace('/', '_')
+})
+
+export default connect(mapState, null)(Main)

@@ -1,0 +1,11 @@
+.loading-button-wrap {
+  position: relative;
+  .loading-button-progress {
+    position: absolute;
+    color: #d5d5d5;
+    top: 50%;
+    left: 50%;
+    margin-top: -12px;
+    margin-left: -12px;
+  }
+}

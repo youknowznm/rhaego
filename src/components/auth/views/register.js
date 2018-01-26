@@ -1,8 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Card, Button} from 'material-ui'
-import {FormControl, FormHelperText} from 'material-ui/Form';
-import Input, {InputLabel} from 'material-ui/Input';
+import {CircularProgress} from 'material-ui/Progress'
+import {FormControl, FormHelperText} from 'material-ui/Form'
+import Input, {InputLabel} from 'material-ui/Input'
+import {LoadingButton} from '../../../utils'
 import {updateRegisterField, checkRegisterFields} from '../registerActions'
 
 class Register extends React.Component {
@@ -29,6 +31,7 @@ class Register extends React.Component {
       passwordFieldError,
       confirmPasswordFieldError,
       confirmPasswordFieldEnabled,
+      loading,
     } = this.props
     return (
       <Card className="auth-content">
@@ -100,14 +103,28 @@ class Register extends React.Component {
         </form>
 
         <div className="buttons">
-          <Button className="action-button"
-            raised
-            fullWidth
-            color="primary"
-            onClick={this.handleAction}
+
+          <LoadingButton
+            handleClick={this.handleAction}
+            loading={loading}
+            buttonClassName="button-wrap"
           >
             register
-          </Button>
+          </LoadingButton>
+
+          {/* <div className="button-wrap">
+            <Button className="action-button"
+              raised
+              fullWidth
+              color="primary"
+              disabled={loading ? true : false}
+              onClick={this.handleAction}
+            >
+              {loading ? '' : 'register'}
+            </Button>
+            {loading ? <CircularProgress size={24} className="button-progress" /> : ''}
+          </div> */}
+
           <Button className="action-button"
             raised
             fullWidth
@@ -134,7 +151,8 @@ const mapState = (state, ownProps) => {
     nicknameFieldError: thatRegisterFields.nicknameField.error,
     confirmPasswordFieldError: thatRegisterFields.confirmPasswordField.error,
     confirmPasswordFieldEnabled: thatRegisterFields.confirmPasswordField.enabled,
-  };
+    loading: true,
+  }
 }
 
 const mapDispatch = (dispatch, ownProps) => ({
@@ -145,7 +163,7 @@ const mapDispatch = (dispatch, ownProps) => ({
     dispatch(checkRegisterFields())
   },
   // thisRequestRegister: () => {
-  //   console.log(this);
+  //   console.log(this)
   //   // dispatch(requestRegister())
   // }
 })

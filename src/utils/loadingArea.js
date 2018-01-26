@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {Typography} from 'material-ui'
 import {CircularProgress} from 'material-ui/Progress'
 
-class LoadingContainer extends React.Component {
+class LoadingArea extends React.Component {
   render() {
     const {status, children} = this.props
     switch (status) {
@@ -30,9 +30,9 @@ class LoadingContainer extends React.Component {
   }
 }
 
-LoadingContainer.propTypes = {
+LoadingArea.propTypes = {
   status: PropTypes.string.isRequired,
   children: PropTypes.func.isRequired,
 }
 
-export default LoadingContainer
+export default LoadingArea
