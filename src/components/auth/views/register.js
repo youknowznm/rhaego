@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {Card, Button} from 'material-ui'
 import {FormControl, FormHelperText} from 'material-ui/Form';
 import Input, {InputLabel} from 'material-ui/Input';
-import {updateRegisterField, checkRegisterFields} from '../actions'
+import {updateRegisterField, checkRegisterFields} from '../registerActions'
 
 class Register extends React.Component {
   handleChange = (field) => (evt) => {

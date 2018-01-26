@@ -1,4 +1,8 @@
-import {FETCH_GITHUB_START, FETCH_GITHUB_FAIL, FETCH_GITHUB_DONE} from './actionTypes'
+import {
+  FETCH_GITHUB_START,
+  FETCH_GITHUB_FAIL,
+  FETCH_GITHUB_DONE,
+} from './actionTypes'
 
 const defaultState = {
   status: 'loading',
@@ -6,7 +10,7 @@ const defaultState = {
 }
 
 export default (state = defaultState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case FETCH_GITHUB_START: {
       return {
         ...state,

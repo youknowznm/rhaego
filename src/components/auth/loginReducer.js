@@ -1,8 +1,9 @@
 import {
   UPDATE_LOGIN_FIELD,
   CHECK_LOGIN_FIELDS,
-  SWITCH_LOGIN_PASSWORD_VISIBILITY,
+  TOGGLE_LOGIN_PASSWORD_VISIBILITY,
 } from './actionTypes'
+import {regexps} from '../../utils/'
 
 const thisState = {
   fields: {
@@ -17,13 +18,9 @@ const thisState = {
     },
   },
   fieldsValid: true,
-
 }
 
-// (zhngnmng)(@sina)(.com)(.cn)
-const emailReg = /^([a-zA-Z0-9]+[\w-]*)(@[\w]{2,})(\.[\w]{2,4})(\.[\w]{2,4})?$/
-// 12345678
-const passwordReg = /^.{6,20}$/
+const {emailReg, passwordReg} = regexps
 
 export default (state = thisState, action) => {
   switch (action.type) {
@@ -35,11 +32,12 @@ export default (state = thisState, action) => {
         ...state,
         fields: newfields
       }
-    case SWITCH_LOGIN_PASSWORD_VISIBILITY:
-      // TODO
+    case TOGGLE_LOGIN_PASSWORD_VISIBILITY:
+      const fieldsToSwitch = state.fields
+      fieldsToSwitch.passwordField.visible = !fieldsToSwitch.passwordField.visible
       return {
         ...state,
-        fields: newfields
+        fields: fieldsToSwitch
       }
     case CHECK_LOGIN_FIELDS:
       const fieldsToCheck = state.fields

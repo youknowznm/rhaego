@@ -4,7 +4,7 @@ import {Card, IconButton, Button} from 'material-ui'
 import {FormControl, FormHelperText} from 'material-ui/Form';
 import Input, {InputLabel, InputAdornment} from 'material-ui/Input';
 import {Visibility, VisibilityOff} from 'material-ui-icons';
-import {updateLoginField, checkLoginFields} from '../actions'
+import {updateLoginField, checkLoginFields, toggleVisible} from '../loginActions'
 
 class Login extends React.Component {
   handleChange = (field) => (evt) => {
@@ -23,6 +23,8 @@ class Login extends React.Component {
     const {
       emailFieldError,
       passwordFieldError,
+      passwordVisible,
+      thisToggleVisible,
     } = this.props
     return (
       <Card className="auth-content">
@@ -48,12 +50,12 @@ class Login extends React.Component {
             </InputLabel>
             <Input
               id="login-password"
-              type="password"
+              type={passwordVisible ? "text" : "password"}
               onChange={this.handleChange('passwordField')}
               error={passwordFieldError}
               endAdornment={
                 <InputAdornment position="end">
-                  <IconButton onClick={this.toggleVisible}
+                  <IconButton onClick={thisToggleVisible}
                   >
                     {passwordVisible ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
@@ -105,6 +107,10 @@ const mapDispatch = (dispatch, ownProps) => ({
   },
   thisCheckLoginFields: () => {
     dispatch(checkLoginFields())
+  },
+  thisToggleVisible: () => {
+    console.log('sb');
+    dispatch(toggleVisible())
   },
   // thisRequestLogin: () => {
   //   console.log(this);

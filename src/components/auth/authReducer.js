@@ -1,5 +1,5 @@
 import {
-  SWITCH_AUTH_TAB,
+  TOGGLE_AUTH_TAB,
 } from './actionTypes'
 
 const thisState = {
@@ -8,7 +8,7 @@ const thisState = {
 
 export default (state = thisState, action) => {
   switch (action.type) {
-    case SWITCH_AUTH_TAB:
+    case TOGGLE_AUTH_TAB:
       return {
         ...state,
         activeTabValue: action.targetTabValue

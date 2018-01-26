@@ -5,7 +5,7 @@ import {AppBar, Tabs as MuiTabs} from 'material-ui'
 import {Tab as MuiTab} from 'material-ui/Tabs'
 import Login from './login'
 import Register from './register'
-import {switchAuthTab} from '../actions'
+import {toggleAuthTab} from '../authActions'
 import './auth.css'
 
 class Auth extends React.Component {
@@ -50,7 +50,7 @@ const mapState = (state, ownProps) => ({
 })
 
 const mapDispath = (dispatch, ownProps) => ({
-  thisSwitchAuthTab: (v) => {dispatch(switchAuthTab(v))}
+  thisSwitchAuthTab: (v) => {dispatch(toggleAuthTab(v))}
 })
 
 export default connect(mapState, mapDispath)(Auth)
