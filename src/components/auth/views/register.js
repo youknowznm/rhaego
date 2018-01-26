@@ -103,7 +103,6 @@ class Register extends React.Component {
         </form>
 
         <div className="buttons">
-
           <LoadingButton
             handleClick={this.handleAction}
             loading={loading}
@@ -111,20 +110,6 @@ class Register extends React.Component {
           >
             register
           </LoadingButton>
-
-          {/* <div className="button-wrap">
-            <Button className="action-button"
-              raised
-              fullWidth
-              color="primary"
-              disabled={loading ? true : false}
-              onClick={this.handleAction}
-            >
-              {loading ? '' : 'register'}
-            </Button>
-            {loading ? <CircularProgress size={24} className="button-progress" /> : ''}
-          </div> */}
-
           <Button className="action-button"
             raised
             fullWidth

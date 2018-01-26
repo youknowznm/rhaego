@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {withStyles} from 'material-ui'
 import {Drawer as MuiDrawer, Hidden} from 'material-ui'
@@ -10,7 +9,7 @@ import DrawerBody from './drawerBody'
 import './drawer.css'
 
 const styles = (theme) => ({
-  drawerContent: {
+  'drawer-content': {
     width: 250,
   },
 })
@@ -30,7 +29,7 @@ const Drawer = ({classes, drawerIsOpen, thisToggleDrawer}) => {
           open={drawerIsOpen}
           onClose={thisToggleDrawer}
           classes={{
-            paper: classes.drawerContent
+            paper: classes['drawer-content'],
           }}
           ModalProps={{
             keepMounted: true,
@@ -63,11 +62,6 @@ const mapState = (state, ownProps) => {
 const mapDispatch = (dispatch, ownProps) => ({
   thisToggleDrawer: () => dispatch(toggleDrawer())
 })
-
-Drawer.propTypes = {
-  drawerIsOpen: PropTypes.bool.isRequired,
-  thisToggleDrawer: PropTypes.func.isRequired,
-}
 
 const DrawerWrap = connect(mapState, mapDispatch)(Drawer)
 

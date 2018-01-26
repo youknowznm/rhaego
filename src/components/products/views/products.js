@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import ProductCard from './productCard'
 import {connect} from 'react-redux'
 import {fetchGithub} from '../actions'
@@ -34,11 +33,6 @@ class Products extends React.Component {
       </LoadingArea>
     );
   }
-}
-
-Products.propTypes = {
-  status: PropTypes.string.isRequired,
-  productsData: PropTypes.array.isRequired,
 }
 
 const mapState = (state, ownProps) => {

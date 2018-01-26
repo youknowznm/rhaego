@@ -13,8 +13,8 @@ const styles = (theme) => {
   return {
     active: {
       background: theme.palette.type === 'light'
-        ? 'rgba(0, 0, 0, 0.14) !important'
-        : 'rgba(255, 255, 255, 0.14) !important'
+        ? 'rgba(0, 0, 0, 0.14)'
+        : 'rgba(255, 255, 255, 0.14)'
     }
   }
 }

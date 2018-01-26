@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {Link} from 'react-router'
 import {connect} from 'react-redux'
 import {withStyles} from 'material-ui'
@@ -16,7 +15,7 @@ import './header.css'
 const drawerWidth = 250
 
 const styles = (theme) => ({
-  navIconButton: {
+  'nav-icon-button': {
     [theme.breakpoints.up('lg')]: {
       display: 'none',
     },
@@ -38,7 +37,7 @@ const styles = (theme) => ({
 const Header = ({classes, thisToggleDrawer, isDarkTheme, thisToggleThemeType}) => (
   <AppBar color="primary" className={classes.header}>
     <Toolbar>
-      <IconButton color="inherit" className={classes.navIconButton} onClick={thisToggleDrawer}>
+      <IconButton color="inherit" className={classes['nav-icon-button']} onClick={thisToggleDrawer}>
         <MenuIcon />
       </IconButton>
       <Typography className="title mono" color="inherit" type="title">
@@ -66,11 +65,6 @@ const Header = ({classes, thisToggleDrawer, isDarkTheme, thisToggleThemeType}) =
     </Toolbar>
   </AppBar>
 )
-
-Header.propTypes = {
-  classes: PropTypes.object.isRequired,
-  thisToggleDrawer: PropTypes.func.isRequired,
-}
 
 const mapState = (state, ownProps) => ({
   isDarkTheme: state.theme.type === 'dark'

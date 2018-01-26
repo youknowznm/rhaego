@@ -1,5 +1,4 @@
 import React from 'react'
-import {withStyles} from 'material-ui/styles'
 import {Card, Button, Avatar} from 'material-ui'
 import {CardHeader, CardContent, CardActions} from 'material-ui/Card'
 import {FormatDate} from '../../../utils'
@@ -11,10 +10,6 @@ import StarIcon from 'material-ui-icons/Star';
 import DeviceHubIcon from 'material-ui-icons/DeviceHub';
 
 import './productCard.css'
-
-const styles = (theme) => {
-
-}
 
 const ProductCard = ({classes, productData}) => {
   const {
@@ -70,4 +65,4 @@ const ProductCard = ({classes, productData}) => {
   );
 }
 
-export default withStyles(styles)(ProductCard)
+export default ProductCard
