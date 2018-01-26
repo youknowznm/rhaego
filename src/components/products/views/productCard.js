@@ -1,4 +1,5 @@
 import React from 'react'
+import {withStyles} from 'material-ui/styles'
 import {Card, Button, Avatar} from 'material-ui'
 import {CardHeader, CardContent, CardActions} from 'material-ui/Card'
 import {FormatDate} from '../../../utils'
@@ -10,6 +11,10 @@ import StarIcon from 'material-ui-icons/Star';
 import DeviceHubIcon from 'material-ui-icons/DeviceHub';
 
 import './productCard.css'
+
+const styles = (theme) => {
+
+}
 
 const ProductCard = ({classes, productData}) => {
   const {
@@ -24,7 +29,7 @@ const ProductCard = ({classes, productData}) => {
   } = productData
 
   return (
-    <a className="card-wrap" href={html_url} target="_blank">
+    <a className="card-wrap" href={html_url} target="_blank"  style={classes}>
       <Card className="card">
         <CardHeader
           avatar={
@@ -40,6 +45,10 @@ const ProductCard = ({classes, productData}) => {
           <Typography component="p">
             {description}
           </Typography>
+          <Typography type="body2" className="language">{language}</Typography>
+          {
+            homepage === '' ? '' : <Button dense raised className="demo-link" target="_blank" href={homepage}>demo</Button>
+          }
         </CardContent>
 
         <CardActions disableActionSpacing>
@@ -56,13 +65,9 @@ const ProductCard = ({classes, productData}) => {
             {forks_count}
           </Typography>
         </CardActions>
-        <Typography type="body2" className="language">{language}</Typography>
-        {
-          homepage === '' ? '' : <Button dense raised className="demo-link" target="_blank" href={homepage}>demo</Button>
-        }
       </Card>
     </a>
   );
 }
 
-export default ProductCard
+export default withStyles(styles)(ProductCard)

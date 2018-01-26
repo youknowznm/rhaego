@@ -20,6 +20,10 @@ class Register extends React.Component {
   }
   render() {
     const {
+      emailFieldValue,
+      nicknameFieldValue,
+      passwordFieldValue,
+      confirmPasswordFieldValue,
       emailFieldError,
       nicknameFieldError,
       passwordFieldError,
@@ -37,6 +41,7 @@ class Register extends React.Component {
               id="register-email"
               type="text"
               onChange={this.handleChange('emailField')}
+              defaultValue={emailFieldValue}
               error={emailFieldError}
             />
             <FormHelperText className={emailFieldError ? 'error' : ''}>
@@ -52,6 +57,7 @@ class Register extends React.Component {
               id="register-nickname"
               type="text"
               onChange={this.handleChange('nicknameField')}
+              defaultValue={nicknameFieldValue}
               error={nicknameFieldError}
             />
             <FormHelperText className={nicknameFieldError ? 'error' : ''}>
@@ -67,6 +73,7 @@ class Register extends React.Component {
               id="register-password"
               type="password"
               onChange={this.handleChange('passwordField')}
+              defaultValue={passwordFieldValue}
               error={passwordFieldError}
             />
             <FormHelperText className={passwordFieldError ? 'error' : ''}>
@@ -83,6 +90,7 @@ class Register extends React.Component {
               type="password"
               disabled={!confirmPasswordFieldEnabled}
               onChange={this.handleChange('confirmPasswordField')}
+              defaultValue={confirmPasswordFieldValue}
               error={confirmPasswordFieldError}
             />
             <FormHelperText className={confirmPasswordFieldError ? 'error' : ''}>
@@ -117,6 +125,10 @@ class Register extends React.Component {
 const mapState = (state, ownProps) => {
   const thatRegisterFields = state.register.fields
   return {
+    emailFieldValue: thatRegisterFields.emailField.value,
+    nicknameFieldValue: thatRegisterFields.nicknameField.value,
+    passwordFieldValue: thatRegisterFields.passwordField.value,
+    confirmPasswordFieldValue: thatRegisterFields.confirmPasswordField.value,
     emailFieldError: thatRegisterFields.emailField.error,
     passwordFieldError: thatRegisterFields.passwordField.error,
     nicknameFieldError: thatRegisterFields.nicknameField.error,

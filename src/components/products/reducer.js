@@ -19,7 +19,7 @@ export default (state = defaultState, action) => {
       };
     }
     case FETCH_GITHUB_DONE: {
-      let productsData = action.res.data.sort((p1, p2) => {
+      let productsData = action.r.data.sort((p1, p2) => {
         return -(p1.stargazers_count - p2.stargazers_count)
       })
       return {

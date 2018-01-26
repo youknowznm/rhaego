@@ -54,7 +54,7 @@ const Footer = ({classes}) => (
             </Typography>
           </li>
           <li className="about-item view-source">
-            <Button raised color="primary" target="_blank" href="https://github.com/youknowznm/material-blog">
+            <Button raised color="secondary" target="_blank" href="https://github.com/youknowznm/material-blog">
               view source
             </Button>
           </li>

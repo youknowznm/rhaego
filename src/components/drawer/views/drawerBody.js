@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {withStyles} from 'material-ui/styles'
 import List, {ListItem, ListItemIcon, ListItemText} from 'material-ui/List'
 import {Divider} from 'material-ui'
 import CodeIcon from 'material-ui-icons/Code'
@@ -8,11 +9,20 @@ import MessagesIcon from 'material-ui-icons/Message'
 import InfoIcon from 'material-ui-icons/Info'
 import {Link} from 'react-router'
 
-const DrawerBody = ({firstPathname}) => (
+const styles = (theme) => {
+  const isLightTheme = theme.palette.type === 'light'
+  return {
+    active: {
+      background: isLightTheme ? '#CE93D8 !important' : '#BA68C8 !important'
+    }
+  }
+}
+
+const DrawerBody = ({classes, firstPathname}) => (
   <div>
     <List>
       <Link to="/articles">
-        <ListItem button className={firstPathname === '/articles' ? 'active' : ''}>
+        <ListItem button className={firstPathname === '/articles' ? classes.active : ''}>
           <ListItemIcon>
             <InsertDriveFileIcon />
           </ListItemIcon>
@@ -21,7 +31,7 @@ const DrawerBody = ({firstPathname}) => (
       </Link>
 
       <Link to="/products">
-        <ListItem button className={firstPathname === '/products' ? 'active' : ''}>
+        <ListItem button className={firstPathname === '/products' ? classes.active : ''}>
           <ListItemIcon>
             <CodeIcon />
           </ListItemIcon>
@@ -30,7 +40,7 @@ const DrawerBody = ({firstPathname}) => (
       </Link>
 
       <Link to="/messages">
-        <ListItem button className={firstPathname === '/messages' ? 'active' : ''}>
+        <ListItem button className={firstPathname === '/messages' ? classes.active : ''}>
           <ListItemIcon>
             <MessagesIcon />
           </ListItemIcon>
@@ -44,7 +54,7 @@ const DrawerBody = ({firstPathname}) => (
 
     <List>
       <Link to="/about-author">
-        <ListItem button className={firstPathname === '/about-author' ? 'active' : ''}>
+        <ListItem button className={firstPathname === '/about-author' ? classes.active : ''}>
           <ListItemIcon>
             <InfoIcon />
           </ListItemIcon>
@@ -59,4 +69,6 @@ const mapState = (state, ownProps) => ({
   firstPathname: state.routes.firstPathname,
 })
 
-export default connect(mapState, null)(DrawerBody)
+const DrawerBodyWrap = connect(mapState, null)(DrawerBody)
+
+export default withStyles(styles)(DrawerBodyWrap)

@@ -1,0 +1,1 @@
+export const TOGGLE_THEME_TYPE = 'TOGGLE_THEME_TYPE'

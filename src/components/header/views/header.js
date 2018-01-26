@@ -31,11 +31,11 @@ const Header = ({classes, thisToggleDrawer}) => (
       <IconButton color="inherit" className={classes.navIconButton} onClick={thisToggleDrawer}>
         <MenuIcon />
       </IconButton>
-      <Typography className="title mono" type="title" color="inherit">
+      <Typography className="title mono" type="title">
         <SplitToSpans />
       </Typography>
       <Link to="/auth">
-        <Button color="inherit">login</Button>
+        <Button>login</Button>
       </Link>
     </Toolbar>
   </AppBar>

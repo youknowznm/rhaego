@@ -10,19 +10,19 @@ import {regexps} from '../../utils/'
 const thisState = {
   fields: {
     emailField: {
-      value: '',
+      value: 'znm92@icoud.com',
       error: false,
     },
     nicknameField: {
-      value: '',
+      value: 'icloud',
       error: false,
     },
     passwordField: {
-      value: '',
+      value: '123123',
       error: false,
     },
     confirmPasswordField: {
-      value: '',
+      value: '123123',
       error: false,
       enabled: false,
     },
@@ -57,6 +57,9 @@ export default (state = thisState, action) => {
       // 只检查confirmPassword是否和password全等
       const confirmPasswordError = fieldsToCheck.passwordField.value !== fieldsToCheck.confirmPasswordField.value
       fieldsToCheck.confirmPasswordField.error = confirmPasswordError
+      if (!emailError && !nicknameError && !passwordError && !confirmPasswordError) {
+
+      }
       return {
         ...state,
         fields: fieldsToCheck
