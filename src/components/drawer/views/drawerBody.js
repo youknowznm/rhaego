@@ -10,10 +10,11 @@ import InfoIcon from 'material-ui-icons/Info'
 import {Link} from 'react-router'
 
 const styles = (theme) => {
-  const isLightTheme = theme.palette.type === 'light'
   return {
     active: {
-      background: isLightTheme ? '#CE93D8 !important' : '#BA68C8 !important'
+      background: theme.palette.type === 'light'
+        ? 'rgba(0, 0, 0, 0.14) !important'
+        : 'rgba(255, 255, 255, 0.14) !important'
     }
   }
 }
