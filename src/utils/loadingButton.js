@@ -20,23 +20,26 @@ const styles = (theme) => {
   }
 }
 
-const LoadingButton = ({loading, handleClick, buttonClassName, children, classes}) => (
-  <div className={classes['loading-button-wrap']}>
-    <Button className={buttonClassName}
-      raised
-      fullWidth
-      color="primary"
-      disabled={loading ? true : false}
-      onClick={handleClick}
-    >
-      {loading ? '' : children}
-    </Button>
-    {loading ? <CircularProgress size={24} className={classes['loading-button-progress']} /> : ''}
-  </div>
-)
+const LoadingButton = ({loadingStatus, handleClick, buttonClassName, children, classes}) => {
+  const isLoading = loadingStatus === 'loading'
+  return (
+    <div className={classes['loading-button-wrap']}>
+      <Button className={buttonClassName}
+        raised
+        fullWidth
+        color="primary"
+        disabled={isLoading === 'loading'}
+        onClick={handleClick}
+      >
+        {isLoading ? '' : children}
+      </Button>
+      {isLoading ? <CircularProgress size={24} className={classes['loading-button-progress']} /> : ''}
+    </div>
+  )
+}
 
 LoadingButton.propTypes = {
-  loading: PropTypes.bool.isRequired,
+  loadingStatus: PropTypes.string.isRequired,
   buttonClassName: PropTypes.string,
   handleClick: PropTypes.func,
   children: PropTypes.string.isRequired,

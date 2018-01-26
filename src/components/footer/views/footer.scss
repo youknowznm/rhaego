@@ -5,15 +5,18 @@
   @extend .mb-responsive-container;
   padding: 0 !important;
   background: rgb(245, 245, 245);
-  
-  .social {
+
+  &._placeholder {
     width: 100%;
+    height: 160px;
+  }
+
+  .social {
     height: 72px;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    margin-top: 72px;
     .social-link {
       position: relative;
       list-style: none;

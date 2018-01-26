@@ -5,8 +5,8 @@ import {
   REQUEST_REGISTER_START,
   REQUEST_REGISTER_FAIL,
   REQUEST_REGISTER_DONE,
+  REQUEST_REGISTER_RESET,
 } from './actionTypes'
-
 
 export const updateRegisterField = (fieldName, fieldValue) => ({
   type: UPDATE_REGISTER_FIELD,
@@ -27,6 +27,9 @@ export const requestRegisterFail = (e) => ({
   type: REQUEST_REGISTER_FAIL,
   e,
 })
+export const requestRegisterReset = () => ({
+  type: REQUEST_REGISTER_RESET,
+})
 export const requestRegister = (registerFields) => {
   return (dispatch) => {
     const apiurl = '/register'
@@ -36,12 +39,16 @@ export const requestRegister = (registerFields) => {
     return axios
       .post(apiurl, registerFields)
       .then((r) => {
+        if (r.status !== 200) {
+          throw new Error('Fail to get response with status ' + r.status)
+        }
         console.log(r);
-        dispatch(requestRegisterDone())
+        dispatch(requestRegisterDone(r))
       })
       .catch((e) => {
         console.log(e);
-        dispatch(requestRegisterFail())
+        dispatch(requestRegisterFail(e))
       })
+
   };
 }

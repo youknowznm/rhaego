@@ -8,6 +8,8 @@ import './footer.css'
 const Footer = ({classes}) => (
   <div>
 
+    <div className="mb-footer _placeholder"></div>
+
     <div className="mb-footer _social">
       <div className="content">
         <ul className="social">

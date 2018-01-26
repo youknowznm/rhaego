@@ -5,7 +5,11 @@ import {CircularProgress} from 'material-ui/Progress'
 import {FormControl, FormHelperText} from 'material-ui/Form'
 import Input, {InputLabel} from 'material-ui/Input'
 import {LoadingButton} from '../../../utils'
-import {updateRegisterField, checkRegisterFields} from '../registerActions'
+import {updateRegisterField,
+  checkRegisterFields,
+  requestRegister,
+  requestRegisterReset,
+} from '../registerActions'
 
 class Register extends React.Component {
   handleChange = (field) => (evt) => {
@@ -13,9 +17,17 @@ class Register extends React.Component {
     const fieldValue = evt.target.value
     this.props.thisUpdateRegisterField(fieldName, fieldValue)
   }
-  handleAction = () => {
+  componentWillUpdate (nextProps, nextState) {
+    if (nextProps.allFieldsValid === true && nextProps.registerStatus === 'initial') {
+      this.props.thisRequestRegister()
+    }
+    if (nextProps.registerStatus === 'failure') {
+      alert('failed')
+      this.props.thisRequestRegisterReset()
+    }
+  }
+  handleClick = () => {
     this.props.thisCheckRegisterFields()
-    // this.props.thisRequestRegister()
   }
   goBack = () => {
     window.history.go(-1)
@@ -31,7 +43,7 @@ class Register extends React.Component {
       passwordFieldError,
       confirmPasswordFieldError,
       confirmPasswordFieldEnabled,
-      loading,
+      registerStatus,
     } = this.props
     return (
       <Card className="auth-content">
@@ -104,8 +116,8 @@ class Register extends React.Component {
 
         <div className="buttons">
           <LoadingButton
-            handleClick={this.handleAction}
-            loading={loading}
+            handleClick={this.handleClick}
+            loadingStatus={registerStatus}
             buttonClassName="button-wrap"
           >
             register
@@ -136,7 +148,8 @@ const mapState = (state, ownProps) => {
     nicknameFieldError: thatRegisterFields.nicknameField.error,
     confirmPasswordFieldError: thatRegisterFields.confirmPasswordField.error,
     confirmPasswordFieldEnabled: thatRegisterFields.confirmPasswordField.enabled,
-    loading: true,
+    allFieldsValid: state.register.allFieldsValid,
+    registerStatus: state.register.registerStatus,
   }
 }
 
@@ -147,10 +160,12 @@ const mapDispatch = (dispatch, ownProps) => ({
   thisCheckRegisterFields: () => {
     dispatch(checkRegisterFields())
   },
-  // thisRequestRegister: () => {
-  //   console.log(this)
-  //   // dispatch(requestRegister())
-  // }
+  thisRequestRegister: () => {
+    dispatch(requestRegister())
+  },
+  thisRequestRegisterReset: () => {
+    dispatch(requestRegisterReset())
+  },
 })
 
 export default connect(mapState, mapDispatch)(Register)

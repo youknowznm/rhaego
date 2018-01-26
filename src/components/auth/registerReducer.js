@@ -4,6 +4,7 @@ import {
   REQUEST_REGISTER_START,
   REQUEST_REGISTER_FAIL,
   REQUEST_REGISTER_DONE,
+  REQUEST_REGISTER_RESET,
 } from './actionTypes'
 import {regexps} from '../../utils/'
 
@@ -27,7 +28,9 @@ const thisState = {
       enabled: false,
     },
   },
-  fieldsValid: true,
+  registerStatus: 'initial',
+  registerResult: null,
+  allFieldsValid: false,
 }
 
 const {emailReg, passwordReg, nicknameReg} = regexps
@@ -57,31 +60,38 @@ export default (state = thisState, action) => {
       // 只检查confirmPassword是否和password全等
       const confirmPasswordError = fieldsToCheck.passwordField.value !== fieldsToCheck.confirmPasswordField.value
       fieldsToCheck.confirmPasswordField.error = confirmPasswordError
-      if (!emailError && !nicknameError && !passwordError && !confirmPasswordError) {
-
-      }
+      const allFieldsValid =
+        !emailError && !nicknameError && !passwordError && !confirmPasswordError
       return {
         ...state,
-        fields: fieldsToCheck
+        fields: fieldsToCheck,
+        allFieldsValid,
       }
 
     case REQUEST_REGISTER_START:
       return {
         ...state,
-        status: 'loading',
+        registerStatus: 'loading',
         registerResult: null,
       }
     case REQUEST_REGISTER_DONE:
       return {
         ...state,
-        status: 'success',
+        registerStatus: 'success',
         registerResult: action.r.data,
       }
     case REQUEST_REGISTER_FAIL:
+      console.log('failed');
       return {
         ...state,
-        status: 'failure',
+        registerStatus: 'failure',
         registerResult: action.e,
+      }
+    case REQUEST_REGISTER_RESET:
+      return {
+        ...state,
+        registerStatus: 'initial',
+        registerResult: null,
       }
     default:
       return state

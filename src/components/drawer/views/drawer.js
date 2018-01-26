@@ -43,7 +43,7 @@ const Drawer = ({classes, drawerIsOpen, thisToggleDrawer}) => {
           type="permanent"
           open
           classes={{
-            paper: classes.drawerContent
+            paper: classes['drawer-content'],
           }}
         >
           {drawer}
