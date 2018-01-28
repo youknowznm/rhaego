@@ -4,7 +4,6 @@
 .mb-footer {
   @extend .mb-responsive-container;
   padding: 0 !important;
-  background: rgb(245, 245, 245);
 
   &._placeholder {
     width: 100%;
@@ -91,7 +90,6 @@
   }
 
   &._about {
-    background: rgb(245, 245, 245);
     .about {
       display: flex;
       justify-content: space-between;
@@ -102,14 +100,11 @@
         &.project-name {
           margin-left: 24px;
           span {
-            color: $color-theme-main;
+            color: $mb-theme-primary;
           }
         }
         &.about-author {
           margin-left: -50px;
-          span {
-            color: #000;
-          }
           .heart-wrap {
             position: relative;
             display: inline-block;
@@ -128,7 +123,6 @@
             border-bottom: 2px solid transparent;
             transition: all .2s ease-out;
             &:hover {
-              border-bottom-color: #000;
               padding: 4px 0;
             }
           }
@@ -139,5 +133,15 @@
       }
     }
   }
+}
 
+#mb-light-theme {
+  .about-author .info-link:hover {
+    border-bottom-color: $mb-theme-light-font;
+  }
+}
+#mb-dark-theme {
+  .about-author .info-link:hover {
+    border-bottom-color: $mb-theme-dark-font;
+  }
 }

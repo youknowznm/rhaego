@@ -5,7 +5,7 @@ import {
 } from './actionTypes'
 
 const defaultState = {
-  status: '',
+  status: 'loading',
   productsData: [],
 }
 

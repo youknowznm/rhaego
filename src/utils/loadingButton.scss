@@ -1,0 +1,20 @@
+.loading-button-wrap {
+  position: relative;
+}
+.loading-button-progress {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -12px;
+  margin-left: -12px;
+}
+#mb-light-theme {
+  .loading-button-progress {
+    color: $mb-theme-primary;
+  }
+}
+#mb-dark-theme {
+  .loading-button-progress {
+    color: $mb-theme-secondary;
+  }
+}
