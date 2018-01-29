@@ -1,7 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Card, IconButton, Button, Typography} from 'material-ui'
+import {Card, IconButton, Button, Typography, Snackbar} from 'material-ui'
 import {FormControl, FormHelperText} from 'material-ui/Form';
+import {Slide} from 'material-ui/transitions';
 import Input, {InputLabel, InputAdornment} from 'material-ui/Input';
 import {Visibility, VisibilityOff} from 'material-ui-icons';
 import {LoadingButton} from '../../../utils'
@@ -9,14 +10,12 @@ import {
   updateAuthField,
   checkAuthFields,
   togglePasswordVisibility,
-  requestAuth
+  requestAuth,
+  requestAuthInit,
 } from '../actions'
 
 import './auth.css'
 
-/*
-znm92@icloud.com
-*/
 
 class Auth extends React.Component {
   handleChange = (field) => (evt) => {
@@ -25,13 +24,12 @@ class Auth extends React.Component {
     this.props.thisUpdateAuthField(fieldName, fieldValue)
   }
   componentWillUpdate (nextProps, nState) {
-    // if (nextProps.fieldsValid === true
-    //   && nextProps.emailValue !== ''
-    //   && nextProps.passwordValue !== ''
-    // ) {
-    //   console.log(111);
-    //   this.props.thisRequestAuth()
-    // }
+    if (nextProps.fieldsValid === true
+      && nextProps.authRequestStatus === 'loading'
+    ) {
+      console.log('--- sending');
+      this.props.thisRequestAuth()
+    }
   }
   goBack = () => {
     window.history.go(-1)
@@ -44,6 +42,7 @@ class Auth extends React.Component {
       thisTogglePasswordVisibility,
       authRequestStatus,
       thisCheckAuthFields,
+      thisRequestAuthInit,
     } = this.props
     return (
       <Card className="auth">
@@ -116,6 +115,17 @@ class Auth extends React.Component {
             cancel
           </Button>
         </div>
+
+        <Snackbar
+          open={authRequestStatus === 'failure'}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+          }}
+          // onClose={thisRequestAuthInit}
+          // transition={<Slide direction="up" />}
+          message="Invalid email or password."
+        />
       </Card>
     )
   }
@@ -146,7 +156,10 @@ const mapDispatch = (dispatch) => ({
   },
   thisRequestAuth: () => {
     dispatch(requestAuth())
-  }
+  },
+  thisRequestAuthInit: () => {
+    dispatch(requestAuthInit())
+  },
 })
 
 export default connect(mapState, mapDispatch)(Auth)

@@ -44,12 +44,15 @@ export const requestAuth = (registerFields) => {
         if (r.status !== 200) {
           throw new Error('Fail to get response with status ' + r.status)
         }
-        console.log(r);
+        console.log('r',r);
         dispatch(requestAuthDone(r))
       })
       .catch((e) => {
-        console.log(e);
+        console.log('e', e);
         dispatch(requestAuthFail(e))
+        setTimeout(() => {
+          dispatch(requestAuthInit())
+        }, 3000)
       })
 
   };

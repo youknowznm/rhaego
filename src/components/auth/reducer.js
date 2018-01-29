@@ -61,6 +61,7 @@ export default (state = thisState, action) => {
         ...state,
         fields: fieldsToCheck,
         fieldsValid,
+        authRequestStatus: fieldsValid ? 'loading' : 'initial',
       }
 
     case REQUEST_AUTH_INIT:
