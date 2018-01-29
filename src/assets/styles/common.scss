@@ -71,8 +71,11 @@ $mb-theme-secondary: #69f0ae;
 
 $color-red-500: #f44336;
 
-$mb-theme-light-font: rgba(0, 0, 0, 0.54);
-$mb-theme-dark-font: rgba(255, 255, 255, 0.7);
+$mb-theme-light-font: rgb(22, 22, 22);
+$mb-theme-dark-font: rgb(193, 193, 193);
+
+$mb-theme-light-sidebar-background: #fff;
+$mb-theme-dark-sidebar-background: #424242;
 
 // xs, extra-small: 0dp or larger
 // sm, small: 600dp or larger

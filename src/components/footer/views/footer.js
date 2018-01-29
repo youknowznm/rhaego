@@ -13,10 +13,10 @@ const Footer = ({classes}) => (
     <div className="mb-footer _social">
       <div className="content">
         <ul className="social">
-          <li className="social-link wechat">
-            <img className="hover-content" src={socialInfo.wechatQr} alt="wechatQrCode"/>
+          <li className="social-link wechat" fill='red'>
+            <img className="hover-content" src={socialInfo.wechatQr} alt="wechatQrCode" fill='red'/>
           </li>
-          <li className="social-link mail">
+          <li className="social-link email">
             <a href={`mailto:${socialInfo.email}`}>
               <span className="no-screen">email</span>
             </a>
@@ -56,7 +56,7 @@ const Footer = ({classes}) => (
             </Typography>
           </li>
           <li className="about-item view-source">
-            <Button raised color="secondary" target="_blank" href="https://github.com/youknowznm/material-blog">
+            <Button target="_blank" href="https://github.com/youknowznm/material-blog">
               view source
             </Button>
           </li>

@@ -54,7 +54,8 @@ a {
   text-align: center; }
 
 .mb-footer {
-  padding: 0 !important; }
+  padding: 0 !important;
+  background: #fff; }
   .mb-footer._placeholder {
     width: 100%;
     height: 160px; }
@@ -73,9 +74,7 @@ a {
       background-repeat: no-repeat;
       background-position: 0 0;
       background-size: 24px 24px;
-      opacity: .5;
       vertical-align: middle;
-      transition: opacity .4s ease-out;
       cursor: pointer; }
       .mb-footer .social .social-link > a {
         position: absolute;
@@ -84,11 +83,11 @@ a {
         width: 100%;
         height: 100%; }
       .mb-footer .social .social-link.github {
-        background-image: url("../../../assets/images/footer/ic_github.svg"); }
+        background-image: url("../../../assets/images/footer/ic_github_light.svg"); }
       .mb-footer .social .social-link.zhihu {
-        background-image: url("../../../assets/images/footer/ic_zhihu.svg"); }
+        background-image: url("../../../assets/images/footer/ic_zhihu_light.svg"); }
       .mb-footer .social .social-link.wechat {
-        background-image: url("../../../assets/images/footer/ic_wechat.svg"); }
+        background-image: url("../../../assets/images/footer/ic_wechat_light.svg"); }
         .mb-footer .social .social-link.wechat .hover-content {
           position: absolute;
           width: 160px;
@@ -100,9 +99,9 @@ a {
           opacity: 0;
           transform-origin: bottom;
           transition: all .2s ease-out; }
-      .mb-footer .social .social-link.mail {
-        background-image: url("../../../assets/images/footer/ic_email_24px.svg"); }
-        .mb-footer .social .social-link.mail .hover-content {
+      .mb-footer .social .social-link.email {
+        background-image: url("../../../assets/images/footer/ic_email_light.svg"); }
+        .mb-footer .social .social-link.email .hover-content {
           position: absolute;
           background: #fff;
           white-space: nowrap;
@@ -151,14 +150,30 @@ a {
         .mb-footer._about .about .about-item.about-author .info-link {
           padding: 8px 0;
           border-bottom: 2px solid transparent;
-          transition: all .2s ease-out; }
+          transition: border-bottom .2s ease-out; }
           .mb-footer._about .about .about-item.about-author .info-link:hover {
-            padding: 4px 0; }
+            padding: 4px 0;
+            border-bottom-color: #161616; }
       .mb-footer._about .about .about-item.view-source {
         margin-right: 24px; }
 
-#mb-light-theme .about-author .info-link:hover {
-  border-bottom-color: rgba(0, 0, 0, 0.54); }
+#mb-dark-theme .mb-footer {
+  background: #424242; }
+
+#mb-dark-theme .project-name span {
+  color: #69f0ae; }
 
 #mb-dark-theme .about-author .info-link:hover {
-  border-bottom-color: rgba(255, 255, 255, 0.7); }
+  border-bottom-color: #c1c1c1; }
+
+#mb-dark-theme .social-link.github {
+  background-image: url("../../../assets/images/footer/ic_github_dark.svg"); }
+
+#mb-dark-theme .social-link.zhihu {
+  background-image: url("../../../assets/images/footer/ic_zhihu_dark.svg"); }
+
+#mb-dark-theme .social-link.wechat {
+  background-image: url("../../../assets/images/footer/ic_wechat_dark.svg"); }
+
+#mb-dark-theme .social-link.email {
+  background-image: url("../../../assets/images/footer/ic_email_dark.svg"); }
