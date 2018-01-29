@@ -4,9 +4,19 @@ import {Card, IconButton, Button, Typography} from 'material-ui'
 import {FormControl, FormHelperText} from 'material-ui/Form';
 import Input, {InputLabel, InputAdornment} from 'material-ui/Input';
 import {Visibility, VisibilityOff} from 'material-ui-icons';
-import {updateAuthField, checkAuthFields, togglePasswordVisibility} from '../actions'
+import {LoadingButton} from '../../../utils'
+import {
+  updateAuthField,
+  checkAuthFields,
+  togglePasswordVisibility,
+  requestAuth
+} from '../actions'
 
 import './auth.css'
+
+/*
+znm92@icloud.com
+*/
 
 class Auth extends React.Component {
   handleChange = (field) => (evt) => {
@@ -14,19 +24,26 @@ class Auth extends React.Component {
     const fieldValue = evt.target.value
     this.props.thisUpdateAuthField(fieldName, fieldValue)
   }
-  handleAction = () => {
-    this.props.thisCheckAuthFields()
-    // this.props.thisRequestAuth()
+  componentWillUpdate (nextProps, nState) {
+    // if (nextProps.fieldsValid === true
+    //   && nextProps.emailValue !== ''
+    //   && nextProps.passwordValue !== ''
+    // ) {
+    //   console.log(111);
+    //   this.props.thisRequestAuth()
+    // }
   }
   goBack = () => {
     window.history.go(-1)
   }
   render() {
     const {
-      emailFieldError,
-      passwordFieldError,
+      emailError,
+      passwordError,
       passwordVisible,
       thisTogglePasswordVisibility,
+      authRequestStatus,
+      thisCheckAuthFields,
     } = this.props
     return (
       <Card className="auth">
@@ -41,10 +58,10 @@ class Auth extends React.Component {
             <Input
               id="auth-email"
               type="text"
-              onChange={this.handleChange('emailField')}
-              error={emailFieldError}
+              onChange={this.handleChange('email')}
+              error={emailError}
             />
-            <FormHelperText className={emailFieldError ? 'error' : ''}>
+            <FormHelperText className={emailError ? 'error' : ''}>
               Common email format is required.
             </FormHelperText>
           </FormControl>
@@ -56,8 +73,8 @@ class Auth extends React.Component {
             <Input
               id="auth-password"
               type={passwordVisible ? "text" : "password"}
-              onChange={this.handleChange('passwordField')}
-              error={passwordFieldError}
+              onChange={this.handleChange('password')}
+              error={passwordError}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton onClick={thisTogglePasswordVisibility}
@@ -67,7 +84,7 @@ class Auth extends React.Component {
                 </InputAdornment>
               }
             />
-            <FormHelperText className={passwordFieldError ? 'error' : ''}>
+            <FormHelperText className={passwordError ? 'error' : ''}>
               6 to 20 characters are required for password.
             </FormHelperText>
           </FormControl>
@@ -75,14 +92,21 @@ class Auth extends React.Component {
         </form>
 
         <div className="buttons">
-          <Button className="action-button"
+          <LoadingButton
+            buttonClassName="action-button"
+            loadingStatus={authRequestStatus}
+            handleClick={thisCheckAuthFields}
+          >
+            login
+          </LoadingButton>
+          {/* <Button className="action-button"
             raised
             fullWidth
             color="primary"
             onClick={this.handleAction}
           >
             login
-          </Button>
+          </Button> */}
           <Button className="action-button"
             raised
             fullWidth
@@ -100,9 +124,13 @@ class Auth extends React.Component {
 const mapState = (state) => {
   const thatAuthFields = state.auth.fields
   return {
-    emailFieldError: thatAuthFields.emailField.error,
-    passwordFieldError: thatAuthFields.passwordField.error,
-    passwordVisible: thatAuthFields.passwordField.visible,
+    emailValue: thatAuthFields.email.value,
+    passwordValue: thatAuthFields.password.value,
+    emailError: thatAuthFields.email.error,
+    passwordError: thatAuthFields.password.error,
+    passwordVisible: thatAuthFields.password.visible,
+    authRequestStatus: state.auth.authRequestStatus,
+    fieldsValid: state.auth.fieldsValid,
   };
 }
 
@@ -116,10 +144,9 @@ const mapDispatch = (dispatch) => ({
   thisTogglePasswordVisibility: () => {
     dispatch(togglePasswordVisibility())
   },
-  // thisRequestAuth: () => {
-  //   console.log(this);
-  //   // dispatch(requestAuth())
-  // }
+  thisRequestAuth: () => {
+    dispatch(requestAuth())
+  }
 })
 
 export default connect(mapState, mapDispatch)(Auth)

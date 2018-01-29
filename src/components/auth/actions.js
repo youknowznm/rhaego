@@ -3,6 +3,7 @@ import {
   UPDATE_AUTH_FIELD,
   CHECK_AUTH_FIELDS,
   TOGGLE_PASSWORD_VISIBILITY,
+  REQUEST_AUTH_INIT,
   REQUEST_AUTH_START,
   REQUEST_AUTH_DONE,
   REQUEST_AUTH_FAIL,
@@ -20,16 +21,21 @@ export const updateAuthField = (fieldName, fieldValue) => ({
 export const checkAuthFields = () => ({
   type: CHECK_AUTH_FIELDS,
 })
+export const requestAuthInit = () => ({
+  type: REQUEST_AUTH_INIT,
+})
 export const requestAuthStart = () => ({
   type: REQUEST_AUTH_START,
 })
-export const requestAuthDone = () => ({
+export const requestAuthDone = (r) => ({
   type: REQUEST_AUTH_DONE,
+  r,
 })
-export const requestAuthFail = () => ({
+export const requestAuthFail = (e) => ({
   type: REQUEST_AUTH_FAIL,
+  e,
 })
-export const requestRegister = (registerFields) => {
+export const requestAuth = (registerFields) => {
   return (dispatch) => {
     dispatch(requestAuthStart())
     return axios

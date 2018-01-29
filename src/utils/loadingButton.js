@@ -1,7 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {Typography, Button} from 'material-ui'
+import {Button} from 'material-ui'
 import {CircularProgress} from 'material-ui/Progress'
+
+import './loadingButton.css'
 
 const LoadingButton = ({loadingStatus, handleClick, buttonClassName, children}) => {
   const isLoading = loadingStatus === 'loading'

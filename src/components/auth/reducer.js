@@ -2,28 +2,36 @@ import {
   UPDATE_AUTH_FIELD,
   CHECK_AUTH_FIELDS,
   TOGGLE_PASSWORD_VISIBILITY,
+  REQUEST_AUTH_INIT,
+  REQUEST_AUTH_START,
+  REQUEST_AUTH_DONE,
+  REQUEST_AUTH_FAIL,
 } from './actionTypes'
 import {regexps} from '../../utils/'
 
 const thisState = {
   fields: {
-    emailField: {
+    email: {
       value: '',
       error: false,
     },
-    passwordField: {
+    password: {
       value: '',
       error: false,
       visible: false,
     },
   },
   fieldsValid: true,
+  authRequestStatus: 'initial',
+  authRequestResult: null,
 }
 
 const {emailReg, passwordReg} = regexps
 
 export default (state = thisState, action) => {
+  console.log(state.authRequestStatus);
   switch (action.type) {
+
     case UPDATE_AUTH_FIELD:
       const {fieldName, fieldValue} = action
       const newfields = state.fields
@@ -32,24 +40,57 @@ export default (state = thisState, action) => {
         ...state,
         fields: newfields
       }
+
     case TOGGLE_PASSWORD_VISIBILITY:
       const fieldsToSwitch = state.fields
-      fieldsToSwitch.passwordField.visible = !fieldsToSwitch.passwordField.visible
+      fieldsToSwitch.password.visible =
+        !fieldsToSwitch.password.visible
       return {
         ...state,
         fields: fieldsToSwitch
       }
+
     case CHECK_AUTH_FIELDS:
       const fieldsToCheck = state.fields
-      const EmailError = !emailReg.test(fieldsToCheck.emailField.value)
-      fieldsToCheck.emailField.error = EmailError
-
-      const PasswordError = !passwordReg.test(fieldsToCheck.passwordField.value)
-      fieldsToCheck.passwordField.error = PasswordError
+      const emailError = !emailReg.test(fieldsToCheck.email.value)
+      fieldsToCheck.email.error = emailError
+      const passwordError = !passwordReg.test(fieldsToCheck.password.value)
+      fieldsToCheck.password.error = passwordError
+      const fieldsValid = !emailError && !passwordError
       return {
         ...state,
-        fields: fieldsToCheck
+        fields: fieldsToCheck,
+        fieldsValid,
       }
+
+    case REQUEST_AUTH_INIT:
+      return {
+        ...state,
+        authRequestStatus: 'initial',
+        authRequestResult: null,
+      };
+
+    case REQUEST_AUTH_START:
+      return {
+        ...state,
+        authRequestStatus: 'loading',
+        authRequestResult: null,
+      };
+
+    case REQUEST_AUTH_DONE:
+      return {
+        ...state,
+        authRequestStatus: 'success',
+        authRequestResult: action.r.data,
+      };
+
+    case REQUEST_AUTH_FAIL:
+      return {
+        ...state,
+        authRequestStatus: 'failure',
+        authRequestResult: null,
+      };
+
     default:
       return state
   }

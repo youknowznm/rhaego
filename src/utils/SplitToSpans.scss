@@ -1,13 +1,11 @@
 .splited-span {
   display: inline-block;
 }
-
 .splited-span:after {
   position: relative;
   content: '·';
   opacity: .4;
 }
-
 .splited-span:last-of-type:after {
   content: '¬';
 }

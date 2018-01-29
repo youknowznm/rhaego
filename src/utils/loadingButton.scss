@@ -1,3 +1,5 @@
+@import "../assets/styles/common.scss";
+
 .loading-button-wrap {
   position: relative;
 }
@@ -7,14 +9,7 @@
   left: 50%;
   margin-top: -12px;
   margin-left: -12px;
-}
-#mb-light-theme {
-  .loading-button-progress {
-    color: $mb-theme-primary;
-  }
-}
-#mb-dark-theme {
-  .loading-button-progress {
-    color: $mb-theme-secondary;
+  > svg {
+    color: $mb-theme-dark-font !important;
   }
 }

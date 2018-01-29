@@ -1,7 +1,15 @@
-import {FETCH_GITHUB_START, FETCH_GITHUB_DONE, FETCH_GITHUB_FAIL} from './actionTypes'
+import {
+  FETCH_GITHUB_INIT,
+  FETCH_GITHUB_START,
+  FETCH_GITHUB_DONE,
+  FETCH_GITHUB_FAIL,
+} from './actionTypes'
 import axios from 'axios'
 import {fetchGithub as fetchGithubApi} from '../../api'
 
+export const fetchGithubInit = () => ({
+  type: FETCH_GITHUB_INIT,
+})
 export const fetchGithubStart = () => ({
   type: FETCH_GITHUB_START,
 })

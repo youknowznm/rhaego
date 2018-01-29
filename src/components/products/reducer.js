@@ -1,16 +1,26 @@
 import {
+  FETCH_GITHUB_INIT,
   FETCH_GITHUB_START,
   FETCH_GITHUB_FAIL,
   FETCH_GITHUB_DONE,
 } from './actionTypes'
 
 const defaultState = {
-  status: 'loading',
+  status: 'initial',
   productsData: [],
 }
 
 export default (state = defaultState, action) => {
   switch (action.type) {
+
+    case FETCH_GITHUB_INIT: {
+      return {
+        ...state,
+        status: 'initial',
+        productsData: [],
+      };
+    }
+
     case FETCH_GITHUB_START: {
       return {
         ...state,
@@ -18,6 +28,7 @@ export default (state = defaultState, action) => {
         productsData: [],
       };
     }
+
     case FETCH_GITHUB_DONE: {
       let productsData = action.r.data.sort((p1, p2) => {
         return -(p1.stargazers_count - p2.stargazers_count)
@@ -28,12 +39,14 @@ export default (state = defaultState, action) => {
         productsData,
       };
     }
+
     case FETCH_GITHUB_FAIL: {
       return {
         status: 'failure',
         productsData: [],
       };
     }
+
     default: {
       return state;
     }
