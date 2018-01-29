@@ -6,6 +6,7 @@ import {Divider} from 'material-ui'
 import CodeIcon from 'material-ui-icons/Code'
 import InsertDriveFileIcon from 'material-ui-icons/InsertDriveFile'
 import MessagesIcon from 'material-ui-icons/Message'
+import PersonIcon from 'material-ui-icons/Person'
 import InfoIcon from 'material-ui-icons/Info'
 import {Link} from 'react-router'
 
@@ -60,6 +61,17 @@ const DrawerBody = ({classes, firstPathname}) => (
             <InfoIcon />
           </ListItemIcon>
           <ListItemText primary="About Author" />
+        </ListItem>
+      </Link>
+    </List>
+
+    <List className="stick-bottom">
+      <Link to="/auth">
+        <ListItem button className={firstPathname === '/auth' ? classes.active : ''}>
+          <ListItemIcon>
+            <PersonIcon />
+          </ListItemIcon>
+          <ListItemText primary="Administration" />
         </ListItem>
       </Link>
     </List>

@@ -50,7 +50,6 @@ a {
   left: 50%;
   top: 50%;
   transform: translateX(-50%) translateY(-50%);
-  margin-top: 80px !important;
   text-align: center; }
 
 .mb-footer {
@@ -135,7 +134,8 @@ a {
         .mb-footer._about .about .about-item.project-name span {
           color: #9c27b0; }
       .mb-footer._about .about .about-item.about-author {
-        margin-left: -50px; }
+        margin-left: -50px;
+        transition: all .2s ease-out; }
         .mb-footer._about .about .about-item.about-author .heart-wrap {
           position: relative;
           display: inline-block;
@@ -150,10 +150,10 @@ a {
         .mb-footer._about .about .about-item.about-author .info-link {
           padding: 8px 0;
           border-bottom: 2px solid transparent;
-          transition: border-bottom .2s ease-out; }
+          transition: all .2s ease-out; }
           .mb-footer._about .about .about-item.about-author .info-link:hover {
             padding: 4px 0;
-            border-bottom-color: #161616; }
+            border-bottom-color: rgba(0, 0, 0, 0.54); }
       .mb-footer._about .about .about-item.view-source {
         margin-right: 24px; }
 
@@ -164,7 +164,7 @@ a {
   color: #69f0ae; }
 
 #mb-dark-theme .about-author .info-link:hover {
-  border-bottom-color: #c1c1c1; }
+  border-bottom-color: rgba(255, 255, 255, 0.7); }
 
 #mb-dark-theme .social-link.github {
   background-image: url("../../../assets/images/footer/ic_github_dark.svg"); }
