@@ -1,6 +1,6 @@
 import {FETCH_GITHUB_START, FETCH_GITHUB_DONE, FETCH_GITHUB_FAIL} from './actionTypes'
 import axios from 'axios'
-import {githubUsername} from '../../config'
+import {fetchGithub as fetchGithubApi} from '../../api'
 
 export const fetchGithubStart = () => ({
   type: FETCH_GITHUB_START,
@@ -15,12 +15,9 @@ export const fetchGithubFail = (e) => ({
 })
 export const fetchGithub = () => {
   return (dispatch) => {
-    const apiUrl = `https://api.github.com/users/${githubUsername}/repos?visibility=public`
-
     dispatch(fetchGithubStart())
-
     return axios
-      .get(apiUrl)
+      .get(fetchGithubApi)
       .then((r) => {
         if (r.status !== 200) {
           throw new Error('Fail to get response with status ' + r.status)
@@ -33,4 +30,3 @@ export const fetchGithub = () => {
       })
   }
 }
-// 198.13.49.156

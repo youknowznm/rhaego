@@ -50,7 +50,7 @@ const Header = ({classes, thisToggleDrawer, thisToggleThemeType}) => (
   </AppBar>
 )
 
-const mapDispatch = (dispatch, ownProps) => ({
+const mapDispatch = (dispatch) => ({
   thisToggleDrawer: () => dispatch(toggleDrawer(null)),
   thisToggleThemeType: () => dispatch(themeActions.toggleThemeType()),
 })

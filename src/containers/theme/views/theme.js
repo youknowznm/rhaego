@@ -18,7 +18,7 @@ const Theme = ({type, children}) => {
   )
 }
 
-const mapState = (state, ownProps) => ({
+const mapState = (state) => ({
   type: state.theme.type,
 })
 

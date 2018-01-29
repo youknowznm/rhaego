@@ -22,7 +22,7 @@ const Routes = ({routeDidUpdate}) => (
   </Router>
 )
 
-const mapDispatch = (dispatch, ownProps) => ({
+const mapDispatch = (dispatch) => ({
   routeDidUpdate: () => {
     dispatch(headerActions.toggleDrawer(false))
     dispatch(updateRoute())

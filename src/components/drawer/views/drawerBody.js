@@ -31,7 +31,6 @@ const DrawerBody = ({classes, firstPathname}) => (
           <ListItemText primary="Articles" />
         </ListItem>
       </Link>
-
       <Link to="/products">
         <ListItem button className={firstPathname === '/products' ? classes.active : ''}>
           <ListItemIcon>
@@ -40,7 +39,6 @@ const DrawerBody = ({classes, firstPathname}) => (
           <ListItemText primary="Products" />
         </ListItem>
       </Link>
-
       <Link to="/messages">
         <ListItem button className={firstPathname === '/messages' ? classes.active : ''}>
           <ListItemIcon>
@@ -49,7 +47,6 @@ const DrawerBody = ({classes, firstPathname}) => (
           <ListItemText primary="Messages" />
         </ListItem>
       </Link>
-
     </List>
 
     <Divider />
@@ -78,7 +75,7 @@ const DrawerBody = ({classes, firstPathname}) => (
   </div>
 )
 
-const mapState = (state, ownProps) => ({
+const mapState = (state) => ({
   firstPathname: state.routes.firstPathname,
 })
 

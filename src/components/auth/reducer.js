@@ -1,7 +1,7 @@
 import {
-  UPDATE_LOGIN_FIELD,
-  CHECK_LOGIN_FIELDS,
-  TOGGLE_LOGIN_PASSWORD_VISIBILITY,
+  UPDATE_AUTH_FIELD,
+  CHECK_AUTH_FIELDS,
+  TOGGLE_PASSWORD_VISIBILITY,
 } from './actionTypes'
 import {regexps} from '../../utils/'
 
@@ -24,7 +24,7 @@ const {emailReg, passwordReg} = regexps
 
 export default (state = thisState, action) => {
   switch (action.type) {
-    case UPDATE_LOGIN_FIELD:
+    case UPDATE_AUTH_FIELD:
       const {fieldName, fieldValue} = action
       const newfields = state.fields
       newfields[fieldName].value = fieldValue
@@ -32,14 +32,14 @@ export default (state = thisState, action) => {
         ...state,
         fields: newfields
       }
-    case TOGGLE_LOGIN_PASSWORD_VISIBILITY:
+    case TOGGLE_PASSWORD_VISIBILITY:
       const fieldsToSwitch = state.fields
       fieldsToSwitch.passwordField.visible = !fieldsToSwitch.passwordField.visible
       return {
         ...state,
         fields: fieldsToSwitch
       }
-    case CHECK_LOGIN_FIELDS:
+    case CHECK_AUTH_FIELDS:
       const fieldsToCheck = state.fields
       const EmailError = !emailReg.test(fieldsToCheck.emailField.value)
       fieldsToCheck.emailField.error = EmailError

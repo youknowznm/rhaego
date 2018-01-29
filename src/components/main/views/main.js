@@ -28,7 +28,7 @@ class Main extends React.Component {
   }
 }
 
-const mapState = (state, ownProps) => ({
+const mapState = (state) => ({
   mainClassName: state.routes.firstPathname.replace('/', '_')
 })
 

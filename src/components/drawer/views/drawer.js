@@ -53,13 +53,13 @@ const Drawer = ({classes, drawerIsOpen, thisToggleDrawer}) => {
   );
 }
 
-const mapState = (state, ownProps) => {
+const mapState = (state) => {
   return {
     drawerIsOpen: state.header.drawerIsOpen
   }
 }
 
-const mapDispatch = (dispatch, ownProps) => ({
+const mapDispatch = (dispatch) => ({
   thisToggleDrawer: () => dispatch(toggleDrawer())
 })
 

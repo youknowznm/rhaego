@@ -35,14 +35,14 @@ class Products extends React.Component {
   }
 }
 
-const mapState = (state, ownProps) => {
+const mapState = (state) => {
   return {
     status: state.products.status,
     productsData: state.products.productsData,
   };
 }
 
-const mapDispatch = (dispatch, ownProps) => ({
+const mapDispatch = (dispatch) => ({
   thisFetchGithub: () => dispatch(fetchGithub())
 })
 

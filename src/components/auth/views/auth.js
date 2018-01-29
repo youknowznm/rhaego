@@ -1,56 +1,125 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import SwipeableViews from 'react-swipeable-views'
-import {AppBar, Tabs as MuiTabs} from 'material-ui'
-import {Tab as MuiTab} from 'material-ui/Tabs'
-import Login from './login'
-import Register from './register'
-import {toggleAuthTab} from '../authActions'
+import {Card, IconButton, Button, Typography} from 'material-ui'
+import {FormControl, FormHelperText} from 'material-ui/Form';
+import Input, {InputLabel, InputAdornment} from 'material-ui/Input';
+import {Visibility, VisibilityOff} from 'material-ui-icons';
+import {updateAuthField, checkAuthFields, togglePasswordVisibility} from '../actions'
+
 import './auth.css'
 
 class Auth extends React.Component {
-  handleChange = (evt, value) => {
-    this.props.thisSwitchAuthTab(value)
+  handleChange = (field) => (evt) => {
+    const fieldName = field
+    const fieldValue = evt.target.value
+    this.props.thisUpdateAuthField(fieldName, fieldValue)
   }
-  handleChangeIndex = (index) => {
-    this.props.thisSwitchAuthTab(index)
+  handleAction = () => {
+    this.props.thisCheckAuthFields()
+    // this.props.thisRequestAuth()
+  }
+  goBack = () => {
+    window.history.go(-1)
   }
   render() {
-    const {activeTabValue} = this.props
+    const {
+      emailFieldError,
+      passwordFieldError,
+      passwordVisible,
+      thisTogglePasswordVisibility,
+    } = this.props
     return (
-      <div className="auth">
-        <AppBar position="static" color="default">
-          <MuiTabs
-            value={activeTabValue}
-            onChange={this.handleChange}
-            indicatorColor="primary"
-            textColor="primary"
-            fullWidth
-          >
-            <MuiTab label="login" />
-            <MuiTab label="register" />
-          </MuiTabs>
-        </AppBar>
+      <Card className="auth">
+        <Typography className="info" component="i" type="caption">
+          Only site administrator can write articles and manage comments.
+        </Typography>
+        <form className="form login">
+          <FormControl fullWidth margin="dense">
+            <InputLabel htmlFor="auth-email">
+              Email
+            </InputLabel>
+            <Input
+              id="auth-email"
+              type="text"
+              onChange={this.handleChange('emailField')}
+              error={emailFieldError}
+            />
+            <FormHelperText className={emailFieldError ? 'error' : ''}>
+              Common email format is required.
+            </FormHelperText>
+          </FormControl>
 
-        <SwipeableViews
-          axis="x"
-          index={+activeTabValue}
-          onChangeIndex={this.handleChangeIndex}
-        >
-          <Login />
-          <Register />
-        </SwipeableViews>
-      </div>
-    );
+          <FormControl fullWidth margin="dense">
+            <InputLabel htmlFor="auth-password">
+              Password
+            </InputLabel>
+            <Input
+              id="auth-password"
+              type={passwordVisible ? "text" : "password"}
+              onChange={this.handleChange('passwordField')}
+              error={passwordFieldError}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton onClick={thisTogglePasswordVisibility}
+                  >
+                    {passwordVisible ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
+            <FormHelperText className={passwordFieldError ? 'error' : ''}>
+              6 to 20 characters are required for password.
+            </FormHelperText>
+          </FormControl>
+
+        </form>
+
+        <div className="buttons">
+          <Button className="action-button"
+            raised
+            fullWidth
+            color="primary"
+            onClick={this.handleAction}
+          >
+            login
+          </Button>
+          <Button className="action-button"
+            raised
+            fullWidth
+            color="default"
+            onClick={this.goBack}
+          >
+            cancel
+          </Button>
+        </div>
+      </Card>
+    )
   }
 }
 
-const mapState = (state, ownProps) => ({
-  activeTabValue: state.auth.activeTabValue,
+const mapState = (state) => {
+  const thatAuthFields = state.auth.fields
+  return {
+    emailFieldError: thatAuthFields.emailField.error,
+    passwordFieldError: thatAuthFields.passwordField.error,
+    passwordVisible: thatAuthFields.passwordField.visible,
+  };
+}
+
+const mapDispatch = (dispatch) => ({
+  thisUpdateAuthField: (fieldName, fieldValue) => {
+    dispatch(updateAuthField(fieldName, fieldValue))
+  },
+  thisCheckAuthFields: () => {
+    dispatch(checkAuthFields())
+  },
+  thisTogglePasswordVisibility: () => {
+    dispatch(togglePasswordVisibility())
+  },
+  // thisRequestAuth: () => {
+  //   console.log(this);
+  //   // dispatch(requestAuth())
+  // }
 })
 
-const mapDispath = (dispatch, ownProps) => ({
-  thisSwitchAuthTab: (v) => {dispatch(toggleAuthTab(v))}
-})
-
-export default connect(mapState, mapDispath)(Auth)
+export default connect(mapState, mapDispatch)(Auth)
