@@ -23,6 +23,7 @@ const thisState = {
   },
   fieldsValid: true,
   authRequestStatus: 'initial',
+  authRequestErrorMessage: '',
   authRequestResult: null,
 }
 
@@ -90,6 +91,7 @@ export default (state = thisState, action) => {
         ...state,
         authRequestStatus: 'failure',
         authRequestResult: null,
+        authRequestErrorMessage: action.e.toString(),
       };
 
     default:

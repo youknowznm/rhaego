@@ -7,6 +7,8 @@ class LoadingArea extends React.Component {
   render() {
     const {status, children} = this.props
     switch (status) {
+      case 'initial':
+        return <div></div>
       case 'loading':
         return (
           <CircularProgress className="mb-center" />

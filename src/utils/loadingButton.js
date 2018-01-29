@@ -13,7 +13,7 @@ const LoadingButton = ({loadingStatus, handleClick, buttonClassName, children}) 
         raised
         fullWidth
         color="primary"
-        disabled={isLoading === 'loading'}
+        disabled={loadingStatus === 'failure' || loadingStatus === 'success'}
         onClick={handleClick}
       >
         {isLoading ? '' : children}

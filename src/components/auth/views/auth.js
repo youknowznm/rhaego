@@ -27,7 +27,6 @@ class Auth extends React.Component {
     if (nextProps.fieldsValid === true
       && nextProps.authRequestStatus === 'loading'
     ) {
-      console.log('--- sending');
       this.props.thisRequestAuth()
     }
   }
@@ -43,6 +42,7 @@ class Auth extends React.Component {
       authRequestStatus,
       thisCheckAuthFields,
       thisRequestAuthInit,
+      authRequestErrorMessage,
     } = this.props
     return (
       <Card className="auth">
@@ -124,7 +124,7 @@ class Auth extends React.Component {
           }}
           // onClose={thisRequestAuthInit}
           // transition={<Slide direction="up" />}
-          message="Invalid email or password."
+          message={authRequestErrorMessage}
         />
       </Card>
     )
@@ -141,6 +141,7 @@ const mapState = (state) => {
     passwordVisible: thatAuthFields.password.visible,
     authRequestStatus: state.auth.authRequestStatus,
     fieldsValid: state.auth.fieldsValid,
+    authRequestErrorMessage: state.auth.authRequestErrorMessage,
   };
 }
 
