@@ -1,11 +1,11 @@
 @charset "UTF-8";
 @import "../../../assets/styles/common.scss";
 
-.content[data-route=_auth] {
+.content[data-route=_login] {
   padding: 48px 0;
 }
 
-.auth {
+.login {
   position: relative;
   width: 100%;
   min-width: 320px;

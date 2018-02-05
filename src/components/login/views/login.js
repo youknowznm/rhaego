@@ -7,27 +7,27 @@ import Input, {InputLabel, InputAdornment} from 'material-ui/Input';
 import {Visibility, VisibilityOff} from 'material-ui-icons';
 import {LoadingButton} from '../../../utils'
 import {
-  updateAuthField,
-  checkAuthFields,
+  updateLoginField,
+  checkLoginFields,
   togglePasswordVisibility,
-  requestAuth,
-  requestAuthInit,
+  requestLogin,
+  requestLoginInit,
 } from '../actions'
 
-import './auth.css'
+import './login.css'
 
 
-class Auth extends React.Component {
+class Login extends React.Component {
   handleChange = (field) => (evt) => {
     const fieldName = field
     const fieldValue = evt.target.value
-    this.props.thisUpdateAuthField(fieldName, fieldValue)
+    this.props.thisUpdateLoginField(fieldName, fieldValue)
   }
   componentWillUpdate (nextProps, nState) {
     if (nextProps.fieldsValid === true
-      && nextProps.authRequestStatus === 'loading'
+      && nextProps.loginRequestStatus === 'loading'
     ) {
-      this.props.thisRequestAuth()
+      this.props.thisRequestLogin()
     }
   }
   goBack = () => {
@@ -39,23 +39,22 @@ class Auth extends React.Component {
       passwordError,
       passwordVisible,
       thisTogglePasswordVisibility,
-      authRequestStatus,
-      thisCheckAuthFields,
-      thisRequestAuthInit,
-      authRequestErrorMessage,
+      loginRequestStatus,
+      thisCheckLoginFields,
+      loginRequestErrorMessage,
     } = this.props
     return (
-      <Card className="auth">
+      <Card className="login">
         <Typography className="info" component="i" type="caption">
           Only site administrator can write articles and manage comments.
         </Typography>
-        <form className="form login">
+        <form className="form">
           <FormControl fullWidth margin="dense">
-            <InputLabel htmlFor="auth-email">
+            <InputLabel htmlFor="login-email">
               Email
             </InputLabel>
             <Input
-              id="auth-email"
+              id="login-email"
               type="text"
               onChange={this.handleChange('email')}
               error={emailError}
@@ -66,11 +65,11 @@ class Auth extends React.Component {
           </FormControl>
 
           <FormControl fullWidth margin="dense">
-            <InputLabel htmlFor="auth-password">
+            <InputLabel htmlFor="login-password">
               Password
             </InputLabel>
             <Input
-              id="auth-password"
+              id="login-password"
               type={passwordVisible ? "text" : "password"}
               onChange={this.handleChange('password')}
               error={passwordError}
@@ -93,8 +92,8 @@ class Auth extends React.Component {
         <div className="buttons">
           <LoadingButton
             buttonClassName="action-button"
-            loadingStatus={authRequestStatus}
-            handleClick={thisCheckAuthFields}
+            loadingStatus={loginRequestStatus}
+            handleClick={thisCheckLoginFields}
           >
             login
           </LoadingButton>
@@ -117,14 +116,12 @@ class Auth extends React.Component {
         </div>
 
         <Snackbar
-          open={authRequestStatus === 'failure'}
+          open={loginRequestStatus === 'failure'}
           anchorOrigin={{
             vertical: 'top',
             horizontal: 'center',
           }}
-          // onClose={thisRequestAuthInit}
-          // transition={<Slide direction="up" />}
-          message={authRequestErrorMessage}
+          message={loginRequestErrorMessage}
         />
       </Card>
     )
@@ -132,35 +129,35 @@ class Auth extends React.Component {
 }
 
 const mapState = (state) => {
-  const thatAuthFields = state.auth.fields
+  const thatLoginFields = state.login.fields
   return {
-    emailValue: thatAuthFields.email.value,
-    passwordValue: thatAuthFields.password.value,
-    emailError: thatAuthFields.email.error,
-    passwordError: thatAuthFields.password.error,
-    passwordVisible: thatAuthFields.password.visible,
-    authRequestStatus: state.auth.authRequestStatus,
-    fieldsValid: state.auth.fieldsValid,
-    authRequestErrorMessage: state.auth.authRequestErrorMessage,
+    emailValue: thatLoginFields.email.value,
+    passwordValue: thatLoginFields.password.value,
+    emailError: thatLoginFields.email.error,
+    passwordError: thatLoginFields.password.error,
+    passwordVisible: thatLoginFields.password.visible,
+    loginRequestStatus: state.login.loginRequestStatus,
+    fieldsValid: state.login.fieldsValid,
+    loginRequestErrorMessage: state.login.loginRequestErrorMessage,
   };
 }
 
 const mapDispatch = (dispatch) => ({
-  thisUpdateAuthField: (fieldName, fieldValue) => {
-    dispatch(updateAuthField(fieldName, fieldValue))
+  thisUpdateLoginField: (fieldName, fieldValue) => {
+    dispatch(updateLoginField(fieldName, fieldValue))
   },
-  thisCheckAuthFields: () => {
-    dispatch(checkAuthFields())
+  thisCheckLoginFields: () => {
+    dispatch(checkLoginFields())
   },
   thisTogglePasswordVisibility: () => {
     dispatch(togglePasswordVisibility())
   },
-  thisRequestAuth: () => {
-    dispatch(requestAuth())
+  thisRequestLogin: () => {
+    dispatch(requestLogin())
   },
-  thisRequestAuthInit: () => {
-    dispatch(requestAuthInit())
+  thisRequestLoginInit: () => {
+    dispatch(requestLoginInit())
   },
 })
 
-export default connect(mapState, mapDispatch)(Auth)
+export default connect(mapState, mapDispatch)(Login)

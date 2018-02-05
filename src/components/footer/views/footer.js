@@ -44,7 +44,7 @@ const Footer = ({classes}) => (
               <SplitToSpans className="mono"></SplitToSpans>
             </Typography>
           </li>
-          <li className="about-item about-author">
+          <li className="about-item about-loginor">
             <Typography className="mono" type="caption">
               Made with&nbsp;
               <span className="heart-wrap">

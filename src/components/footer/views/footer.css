@@ -133,25 +133,25 @@ a {
         margin-left: 24px; }
         .mb-footer._about .about .about-item.project-name span {
           color: #9c27b0; }
-      .mb-footer._about .about .about-item.about-author {
+      .mb-footer._about .about .about-item.about-loginor {
         margin-left: -50px;
         transition: all .2s ease-out; }
-        .mb-footer._about .about .about-item.about-author .heart-wrap {
+        .mb-footer._about .about .about-item.about-loginor .heart-wrap {
           position: relative;
           display: inline-block;
           width: 14px;
           height: 24px;
           line-height: 24px;
           vertical-align: middle; }
-          .mb-footer._about .about .about-item.about-author .heart-wrap .heart {
+          .mb-footer._about .about .about-item.about-loginor .heart-wrap .heart {
             position: absolute;
             left: 0;
             top: 4px; }
-        .mb-footer._about .about .about-item.about-author .info-link {
+        .mb-footer._about .about .about-item.about-loginor .info-link {
           padding: 8px 0;
           border-bottom: 2px solid transparent;
           transition: all .2s ease-out; }
-          .mb-footer._about .about .about-item.about-author .info-link:hover {
+          .mb-footer._about .about .about-item.about-loginor .info-link:hover {
             padding: 4px 0;
             border-bottom-color: rgba(0, 0, 0, 0.54); }
       .mb-footer._about .about .about-item.view-source {
@@ -163,7 +163,7 @@ a {
 #mb-dark-theme .project-name span {
   color: #69f0ae; }
 
-#mb-dark-theme .about-author .info-link:hover {
+#mb-dark-theme .about-loginor .info-link:hover {
   border-bottom-color: rgba(255, 255, 255, 0.7); }
 
 #mb-dark-theme .social-link.github {

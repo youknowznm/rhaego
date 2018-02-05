@@ -104,7 +104,7 @@
             color: $mb-theme-primary;
           }
         }
-        &.about-author {
+        &.about-loginor {
           margin-left: -50px;
           transition: all .2s ease-out;
           .heart-wrap {
@@ -145,7 +145,7 @@
   .project-name span {
     color: $mb-theme-secondary;
   }
-  .about-author .info-link:hover {
+  .about-loginor .info-link:hover {
     border-bottom-color: $mb-theme-dark-font;
   }
   .social-link {
