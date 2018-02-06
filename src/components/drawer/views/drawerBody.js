@@ -63,8 +63,8 @@ const DrawerBody = ({classes, firstPathname}) => (
     </List>
 
     <List className="stick-bottom">
-      <Link to="/login">
-        <ListItem button className={firstPathname === '/login' ? classes.active : ''}>
+      <Link to="/admin">
+        <ListItem button className={firstPathname === '/admin' ? classes.active : ''}>
           <ListItemIcon>
             <PersonIcon />
           </ListItemIcon>

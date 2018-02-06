@@ -1,12 +1,12 @@
 import axios from 'axios'
 import {
-  UPDATE_AUTH_FIELD,
-  CHECK_AUTH_FIELDS,
+  UPDATE_LOGIN_FIELD,
+  CHECK_LOGIN_FIELDS,
   TOGGLE_PASSWORD_VISIBILITY,
-  REQUEST_AUTH_INIT,
-  REQUEST_AUTH_START,
-  REQUEST_AUTH_DONE,
-  REQUEST_AUTH_FAIL,
+  REQUEST_LOGIN_INIT,
+  REQUEST_LOGIN_START,
+  REQUEST_LOGIN_DONE,
+  REQUEST_LOGIN_FAIL,
 } from './actionTypes'
 import {login as loginApi} from '../../api'
 
@@ -14,25 +14,25 @@ export const togglePasswordVisibility = () => ({
   type: TOGGLE_PASSWORD_VISIBILITY,
 })
 export const updateLoginField = (fieldName, fieldValue) => ({
-  type: UPDATE_AUTH_FIELD,
+  type: UPDATE_LOGIN_FIELD,
   fieldName,
   fieldValue,
 })
 export const checkLoginFields = () => ({
-  type: CHECK_AUTH_FIELDS,
+  type: CHECK_LOGIN_FIELDS,
 })
 export const requestLoginInit = () => ({
-  type: REQUEST_AUTH_INIT,
+  type: REQUEST_LOGIN_INIT,
 })
 export const requestLoginStart = () => ({
-  type: REQUEST_AUTH_START,
+  type: REQUEST_LOGIN_START,
 })
 export const requestLoginDone = (r) => ({
-  type: REQUEST_AUTH_DONE,
+  type: REQUEST_LOGIN_DONE,
   r,
 })
 export const requestLoginFail = (e) => ({
-  type: REQUEST_AUTH_FAIL,
+  type: REQUEST_LOGIN_FAIL,
   e,
 })
 export const requestLogin = (registerFields) => {
@@ -42,6 +42,9 @@ export const requestLogin = (registerFields) => {
       .post(loginApi, registerFields)
       .then((r) => {
         dispatch(requestLoginDone(r))
+        setTimeout(() => {
+          window.location.assign('/admin')
+        }, 2000)
       })
       .catch((e) => {
         const msg = e.response.data.msg

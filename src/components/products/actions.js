@@ -38,8 +38,3 @@ export const fetchGithub = () => {
       })
   }
 }
-
-
-/*
-znm92@icloud.com
-*/

@@ -5,6 +5,7 @@ import {AppBar, Toolbar, Typography, IconButton} from 'material-ui'
 import {green} from 'material-ui/colors'
 import MenuIcon from 'material-ui-icons/Menu'
 import LightbulbOutlineIcon from 'material-ui-icons/LightbulbOutline'
+import TranslateIcon from 'material-ui-icons/Translate'
 import {SplitToSpans} from '../../../utils'
 import {toggleDrawer} from '../actions'
 import {actions as themeActions} from '../../../containers/theme'
@@ -42,6 +43,9 @@ const Header = ({classes, thisToggleDrawer, thisToggleThemeType}) => (
       <Typography className="title mono" color="inherit" type="title">
         <SplitToSpans />
       </Typography>
+      <IconButton>
+        <TranslateIcon />
+      </IconButton>
       <IconButton onClick={thisToggleThemeType}>
         <LightbulbOutlineIcon />
       </IconButton>

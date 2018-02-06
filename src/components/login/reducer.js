@@ -1,11 +1,11 @@
 import {
-  UPDATE_AUTH_FIELD,
-  CHECK_AUTH_FIELDS,
+  UPDATE_LOGIN_FIELD,
+  CHECK_LOGIN_FIELDS,
   TOGGLE_PASSWORD_VISIBILITY,
-  REQUEST_AUTH_INIT,
-  REQUEST_AUTH_START,
-  REQUEST_AUTH_DONE,
-  REQUEST_AUTH_FAIL,
+  REQUEST_LOGIN_INIT,
+  REQUEST_LOGIN_START,
+  REQUEST_LOGIN_DONE,
+  REQUEST_LOGIN_FAIL,
 } from './actionTypes'
 import {regexps} from '../../utils/'
 
@@ -23,17 +23,17 @@ const thisState = {
   },
   fieldsValid: true,
   loginRequestStatus: 'initial',
-  loginRequestErrorMessage: '',
+  loginRequestResultMessage: '',
   loginRequestResult: null,
 }
 
 const {emailReg, passwordReg} = regexps
 
 export default (state = thisState, action) => {
-  console.log(state.loginRequestStatus)
   switch (action.type) {
 
-    case UPDATE_AUTH_FIELD:
+    // 更新登录字段
+    case UPDATE_LOGIN_FIELD:
       const {fieldName, fieldValue} = action
       const newfields = state.fields
       newfields[fieldName].value = fieldValue
@@ -42,6 +42,7 @@ export default (state = thisState, action) => {
         fields: newfields
       }
 
+    // 切换密码的可见状态
     case TOGGLE_PASSWORD_VISIBILITY:
       const fieldsToSwitch = state.fields
       fieldsToSwitch.password.visible =
@@ -51,7 +52,8 @@ export default (state = thisState, action) => {
         fields: fieldsToSwitch
       }
 
-    case CHECK_AUTH_FIELDS:
+    // 检查登录字段是否全部有效
+    case CHECK_LOGIN_FIELDS:
       const fieldsToCheck = state.fields
       const emailError = !emailReg.test(fieldsToCheck.email.value)
       fieldsToCheck.email.error = emailError
@@ -65,33 +67,38 @@ export default (state = thisState, action) => {
         loginRequestStatus: fieldsValid ? 'loading' : 'initial',
       }
 
-    case REQUEST_AUTH_INIT:
+    // 初始化登录状态
+    case REQUEST_LOGIN_INIT:
       return {
         ...state,
         loginRequestStatus: 'initial',
         loginRequestResult: null,
       }
 
-    case REQUEST_AUTH_START:
+    // 开始登录
+    case REQUEST_LOGIN_START:
       return {
         ...state,
         loginRequestStatus: 'loading',
         loginRequestResult: null,
       }
 
-    case REQUEST_AUTH_DONE:
+    // 登录成功
+    case REQUEST_LOGIN_DONE:
       return {
         ...state,
         loginRequestStatus: 'success',
         loginRequestResult: action.r.data,
+        loginRequestResultMessage: action.r.data.msg,
       }
 
-    case REQUEST_AUTH_FAIL:
+    // 登录失败
+    case REQUEST_LOGIN_FAIL:
       return {
         ...state,
         loginRequestStatus: 'failure',
         loginRequestResult: null,
-        loginRequestErrorMessage: action.e,
+        loginRequestResultMessage: action.e,
       }
 
     default:
