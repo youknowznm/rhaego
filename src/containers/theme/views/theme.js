@@ -1,13 +1,13 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
-import {purple, green} from 'material-ui/colors'
+import {blue, yellow} from 'material-ui/colors'
 
 const Theme = ({type, children}) => {
   const materialBlogTheme = createMuiTheme({
     palette: {
-      primary: {main: purple[500]},
-      secondary: { main: green['A200'] },
+      primary: {main: blue[500]},
+      secondary: { main: yellow['A200']},
       type,
     },
   })

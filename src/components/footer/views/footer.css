@@ -132,7 +132,7 @@ a {
       .mb-footer._about .about .about-item.project-name {
         margin-left: 24px; }
         .mb-footer._about .about .about-item.project-name span {
-          color: #9c27b0; }
+          color: #2196f3; }
       .mb-footer._about .about .about-item.about-loginor {
         margin-left: -50px;
         transition: all .2s ease-out; }
@@ -161,7 +161,7 @@ a {
   background: #424242; }
 
 #mb-dark-theme .project-name span {
-  color: #69f0ae; }
+  color: #FFFF00; }
 
 #mb-dark-theme .about-loginor .info-link:hover {
   border-bottom-color: rgba(255, 255, 255, 0.7); }

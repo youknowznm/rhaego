@@ -41,16 +41,12 @@ export const requestLogin = (registerFields) => {
     return axios
       .post(loginApi, registerFields)
       .then((r) => {
-          dispatch(requestLoginDone(r))
+        dispatch(requestLoginDone(r))
       })
       .catch((e) => {
-        console.log('e', e.response)
-        console.log('e', e.request)
-        console.log('e', e.message)
-
-        // dispatch(requestLoginFail(e))
-
-        dispatch(requestLoginFail(e))
+        const msg = e.response.data.msg
+        const error = (msg !== undefined ? msg : e)
+        dispatch(requestLoginFail(error))
         setTimeout(() => {
           dispatch(requestLoginInit())
         }, 3000)

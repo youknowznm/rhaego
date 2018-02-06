@@ -30,7 +30,7 @@ const thisState = {
 const {emailReg, passwordReg} = regexps
 
 export default (state = thisState, action) => {
-  console.log(state.loginRequestStatus);
+  console.log(state.loginRequestStatus)
   switch (action.type) {
 
     case UPDATE_AUTH_FIELD:
@@ -70,29 +70,29 @@ export default (state = thisState, action) => {
         ...state,
         loginRequestStatus: 'initial',
         loginRequestResult: null,
-      };
+      }
 
     case REQUEST_AUTH_START:
       return {
         ...state,
         loginRequestStatus: 'loading',
         loginRequestResult: null,
-      };
+      }
 
     case REQUEST_AUTH_DONE:
       return {
         ...state,
         loginRequestStatus: 'success',
         loginRequestResult: action.r.data,
-      };
+      }
 
     case REQUEST_AUTH_FAIL:
       return {
         ...state,
         loginRequestStatus: 'failure',
         loginRequestResult: null,
-        loginRequestErrorMessage: action.e.toString(),
-      };
+        loginRequestErrorMessage: action.e,
+      }
 
     default:
       return state
