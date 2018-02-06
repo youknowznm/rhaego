@@ -23,10 +23,13 @@ class Admin extends React.Component {
           adminLoggedIn: true
         })
       })
-      .catch(() => {
-        that.setState({
-          adminLoggedIn: false
-        })
+      .catch((e) => {
+        if (e.response) {
+          that.setState({
+            adminLoggedIn: false
+          })
+        }
+        console.error(e)
       })
   }
   render() {

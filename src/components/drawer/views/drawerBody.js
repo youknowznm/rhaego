@@ -52,12 +52,12 @@ const DrawerBody = ({classes, firstPathname}) => (
     <Divider />
 
     <List>
-      <Link to="/about-loginor">
-        <ListItem button className={firstPathname === '/about-loginor' ? classes.active : ''}>
+      <Link to="/about-author">
+        <ListItem button className={firstPathname === '/about-author' ? classes.active : ''}>
           <ListItemIcon>
             <InfoIcon />
           </ListItemIcon>
-          <ListItemText primary="About Loginor" />
+          <ListItemText primary="About author" />
         </ListItem>
       </Link>
     </List>

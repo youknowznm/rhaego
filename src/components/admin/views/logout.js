@@ -1,13 +1,24 @@
 import React from 'react'
-import {Button, Snackbar} from 'material-ui'
+import {Button, Snackbar, Divider} from 'material-ui'
+import {withStyles} from 'material-ui/styles'
 import axios from 'axios'
 import {logout as logoutApi} from '../../../api'
+import ExitToAppIcon from 'material-ui-icons/ExitToApp'
+import NoteAddIcon from 'material-ui-icons/NoteAdd'
+import {Link} from 'react-router'
+import List, {
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+} from 'material-ui/List'
 import Dialog,{
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
 } from 'material-ui/Dialog'
+
+import './logout.css'
 
 class Logout extends React.Component {
   constructor() {
@@ -36,7 +47,7 @@ class Logout extends React.Component {
       .post(logoutApi)
       .then(() => {
         that.setState({
-          logoutResultMessage: 'Logout successful. Redirecting to index.',
+          logoutResultMessage: 'Logout successful. Redirecting to homepage.',
         })
         setTimeout(() => {
           window.location.assign('/')
@@ -57,10 +68,35 @@ class Logout extends React.Component {
     const {
       dialogOpen,
       logoutResultMessage,
+      minHeight,
     } = this.state
+    const {
+      classes,
+    } = this.props
     return (
-      <div>
-        <Button onClick={this.openConfirmDialog} raised>log out</Button>
+      <div className="ul">
+        <List>
+          <Link to="/products">
+            <ListItem button>
+              <ListItemIcon>
+                <NoteAddIcon />
+              </ListItemIcon>
+              <ListItemText inset primary="New Article" />
+            </ListItem>
+          </Link>
+        </List>
+
+        <Divider />
+
+        <List>
+          <ListItem button onClick={this.openConfirmDialog}>
+            <ListItemIcon>
+              <ExitToAppIcon />
+            </ListItemIcon>
+            <ListItemText inset primary="Log Out" />
+          </ListItem>
+        </List>
+
         <Dialog
           open={dialogOpen}
           onClose={this.closeConfirmDialog}
@@ -70,7 +106,7 @@ class Logout extends React.Component {
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              Once logged out, you won't be able to manage articles, comment or messages.
+              Once logged out, you won't be able to create articles or manage comments.
             </DialogContentText>
           </DialogContent>
           <DialogActions>
