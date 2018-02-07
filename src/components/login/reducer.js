@@ -3,9 +3,12 @@ import {
   CHECK_LOGIN_FIELDS,
   TOGGLE_PASSWORD_VISIBILITY,
   REQUEST_LOGIN_INIT,
-  REQUEST_LOGIN_START,
-  REQUEST_LOGIN_DONE,
-  REQUEST_LOGIN_FAIL,
+  // REQUEST_LOGIN_START,
+  // REQUEST_LOGIN_DONE,
+  // REQUEST_LOGIN_FAIL,
+  REQUEST_LOGIN,
+  REQUEST_LOGIN_COMPLETED,
+  REQUEST_LOGIN_FAILED,
 } from './actionTypes'
 import {regexps} from '../../utils/'
 
@@ -74,31 +77,35 @@ export default (state = thisState, action) => {
         loginRequestStatus: 'initial',
         loginRequestResult: null,
       }
-
-    // 开始登录
-    case REQUEST_LOGIN_START:
-      return {
-        ...state,
-        loginRequestStatus: 'loading',
-        loginRequestResult: null,
-      }
+    //
+    // // 开始登录
+    // case REQUEST_LOGIN_START:
+    //   return {
+    //     ...state,
+    //     loginRequestStatus: 'loading',
+    //     loginRequestResult: null,
+    //   }
 
     // 登录成功
-    case REQUEST_LOGIN_DONE:
+    case REQUEST_LOGIN_COMPLETED:
+      const resultData = action.payload.data
+      console.log(11,resultData);
       return {
         ...state,
         loginRequestStatus: 'success',
-        loginRequestResult: action.r.data,
-        loginRequestResultMessage: action.r.data.msg,
+        loginRequestResult: resultData,
+        loginRequestResultMessage: resultData.msg,
       }
 
     // 登录失败
-    case REQUEST_LOGIN_FAIL:
+    case REQUEST_LOGIN_FAILED:
+      const errorData = action.payload.response.data
+      console.log(22,errorData);
       return {
         ...state,
         loginRequestStatus: 'failure',
         loginRequestResult: null,
-        loginRequestResultMessage: action.e,
+        loginRequestResultMessage: typeof errorData === 'string' ? errorData : errorData.msg,
       }
 
     default:

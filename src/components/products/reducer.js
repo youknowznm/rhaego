@@ -1,6 +1,5 @@
 import {FETCH_GITHUB} from './actionTypes'
 import {createReducer} from 'redux-action-tools'
-import {fetchGithub} from './actions'
 
 const defaultState = {
   status: 'initial',

@@ -25,11 +25,11 @@ class Login extends React.Component {
     if (nextProps.fieldsValid === true
       && nextProps.loginRequestStatus === 'loading'
     ) {
-      const registerFields = {
+      const loginFields = {
         email: this.props.emailValue,
         password: this.props.passwordValue,
       }
-      this.props.thisRequestLogin(registerFields)
+      this.props.thisRequestLogin(loginFields)
     }
   }
   goBack = () => {
@@ -149,8 +149,8 @@ const mapDispatch = (dispatch) => ({
   thisTogglePasswordVisibility: () => {
     dispatch(togglePasswordVisibility())
   },
-  thisRequestLogin: (registerFields) => {
-    dispatch(requestLogin(registerFields))
+  thisRequestLogin: (loginFields) => {
+    dispatch(requestLogin(loginFields))
   },
   thisRequestLoginInit: () => {
     dispatch(requestLoginInit())
