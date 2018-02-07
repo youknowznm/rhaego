@@ -13,9 +13,13 @@ class Products extends React.Component {
   }
 
   render() {
-    const {status, productsData} = this.props
+    const {status, productsData, statusMsg} = this.props
     return (
-      <LoadingArea status={status} data={productsData}>
+      <LoadingArea
+        status={status}
+        data={productsData}
+        statusMsg={statusMsg}
+      >
         {
           () => (
             <div className="mb-flex">
@@ -39,6 +43,7 @@ const mapState = (state) => {
   return {
     status: state.products.status,
     productsData: state.products.productsData,
+    statusMsg: state.products.statusMsg,
   };
 }
 

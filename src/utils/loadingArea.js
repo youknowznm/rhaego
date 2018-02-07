@@ -5,7 +5,13 @@ import {CircularProgress} from 'material-ui/Progress'
 
 class LoadingArea extends React.Component {
   render() {
-    const {status, children} = this.props
+    let {status, children, statusMsg} = this.props
+    statusMsg =
+      typeof statusMsg === 'string'
+      ? statusMsg
+      : <Typography type="subheading">
+          Please try again later.
+        </Typography>
     switch (status) {
       case 'initial':
         return <div></div>
@@ -16,12 +22,7 @@ class LoadingArea extends React.Component {
       case 'failure':
         return (
           <div className="mb-center">
-            <Typography type="subheading">
-              An error occurred.
-            </Typography>
-            <Typography type="subheading">
-              Please try again later.
-            </Typography>
+            {statusMsg}
           </div>
         )
       case 'success':
@@ -35,6 +36,7 @@ class LoadingArea extends React.Component {
 LoadingArea.propTypes = {
   status: PropTypes.string.isRequired,
   children: PropTypes.func.isRequired,
+  statusMsg: PropTypes.string,
 }
 
 export default LoadingArea

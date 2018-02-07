@@ -1,5 +1,6 @@
 import {createStore, compose, combineReducers, applyMiddleware} from 'redux'
 import thunkMiddleware from 'redux-thunk'
+import promiseMiddleware from 'redux-promise'
 
 import {reducer as routesReducer} from './containers/routes'
 import {reducer as headerReducer} from './components/header'
@@ -17,7 +18,7 @@ const reducer = combineReducers({
 
 const win = window
 
-const middlewares = [thunkMiddleware]
+const middlewares = [thunkMiddleware, promiseMiddleware]
 
 const storeEnhancers = compose(
   applyMiddleware(...middlewares),

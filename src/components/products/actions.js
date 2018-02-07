@@ -1,40 +1,10 @@
-import {
-  FETCH_GITHUB_INIT,
-  FETCH_GITHUB_START,
-  FETCH_GITHUB_DONE,
-  FETCH_GITHUB_FAIL,
-} from './actionTypes'
+import {FETCH_GITHUB} from './actionTypes'
 import axios from 'axios'
 import {fetchGithub as fetchGithubApi} from '../../api'
 
-export const fetchGithubInit = () => ({
-  type: FETCH_GITHUB_INIT,
+import {createAsyncAction} from 'redux-action-tools'
+
+export const fetchGithub = createAsyncAction(FETCH_GITHUB, (g, dispatch, getState) => {
+  // return axios.get('https://api.github.com/users/youknowznm/reposs')
+  return axios.get(fetchGithubApi)
 })
-export const fetchGithubStart = () => ({
-  type: FETCH_GITHUB_START,
-})
-export const fetchGithubDone = (r) => ({
-  type: FETCH_GITHUB_DONE,
-  r,
-})
-export const fetchGithubFail = (e) => ({
-  type: FETCH_GITHUB_FAIL,
-  e,
-})
-export const fetchGithub = () => {
-  return (dispatch) => {
-    dispatch(fetchGithubStart())
-    return axios
-      .get(fetchGithubApi)
-      .then((r) => {
-        if (r.status !== 200) {
-          throw new Error('Fail to get response with status ' + r.status)
-        }
-        dispatch(fetchGithubDone(r))
-      })
-      .catch((e) => {
-        console.log('github fetch err:', e);
-        dispatch(fetchGithubFail(e))
-      })
-  }
-}
