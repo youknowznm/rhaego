@@ -1,4 +1,5 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import {Button, Snackbar, Divider} from 'material-ui'
 import {withStyles} from 'material-ui/styles'
 import axios from 'axios'
@@ -17,61 +18,36 @@ import Dialog,{
   DialogContentText,
   DialogTitle,
 } from 'material-ui/Dialog'
+import {requestLogout, toggleLogoutDialog} from '../actions'
 
 import './logout.css'
 
 class Logout extends React.Component {
-  constructor() {
-    super(...arguments)
-    this.state = {
-      dialogOpen: false,
-      logoutResultMessage: '',
-    }
-  }
-  openConfirmDialog = () => {
-    this.setState({
-      dialogOpen: true
-    })
-  }
-  closeConfirmDialog = () => {
-    this.setState({
-      dialogOpen: false
-    })
-  }
-  logout = () => {
-    let that = this
-    that.setState({
-      dialogOpen: false
-    })
-    axios
-      .post(logoutApi)
-      .then(() => {
-        that.setState({
-          logoutResultMessage: 'Logout successful. Redirecting to homepage.',
-        })
+  componentWillUpdate(nextProps) {
+    console.log(1,nextProps.requestLogoutStatus);
+    switch (nextProps.requestLogoutStatus) {
+      case 'completed':
         setTimeout(() => {
           window.location.assign('/')
         }, 2000)
-      })
-      .catch(() => {
-        that.setState({
-          logoutResultMessage: 'An error occurred. Please try again later.',
-        })
+        break;
+      case 'failed':
         setTimeout(() => {
-          that.setState({
-            logoutResultMessage: '',
-          })
+          this.props.thisRequestLogoutInit()
         }, 2000)
-      })
+        break;
+      default:
+        return
+    }
   }
   render() {
     const {
-      dialogOpen,
+      openLogoutDialog,
+      closeLogoutDialog,
+      thisRequestLogout,
+      requestLogoutStatus,
       logoutResultMessage,
-      minHeight,
-    } = this.state
-    const {
-      classes,
+      dialogOpen,
     } = this.props
     return (
       <div className="ul">
@@ -89,7 +65,7 @@ class Logout extends React.Component {
         <Divider />
 
         <List>
-          <ListItem button onClick={this.openConfirmDialog}>
+          <ListItem button onClick={openLogoutDialog}>
             <ListItemIcon>
               <ExitToAppIcon />
             </ListItemIcon>
@@ -99,7 +75,7 @@ class Logout extends React.Component {
 
         <Dialog
           open={dialogOpen}
-          onClose={this.closeConfirmDialog}
+          onClose={closeLogoutDialog}
         >
           <DialogTitle id="alert-dialog-title">
             Confirm logout?
@@ -110,10 +86,10 @@ class Logout extends React.Component {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.logout} color="primary">
+            <Button onClick={thisRequestLogout} color="primary">
               confirm
             </Button>
-            <Button onClick={this.closeConfirmDialog} color="default" autoFocus>
+            <Button onClick={closeLogoutDialog} color="default" autoFocus>
               cancel
             </Button>
           </DialogActions>
@@ -132,4 +108,23 @@ class Logout extends React.Component {
   }
 }
 
-export default Logout
+const mapState = (state) => ({
+  dialogOpen: state.admin.dialogOpen,
+  requestLogoutStatus: state.admin.requestLogoutStatus,
+  logoutResultMessage: state.admin.logoutResultMessage,
+})
+
+const mapDispatch = (dispatch) => ({
+  thisRequestLogout: () => {
+    dispatch(toggleLogoutDialog(false))
+    dispatch(requestLogout())
+  },
+  openLogoutDialog: () => {
+    dispatch(toggleLogoutDialog(true))
+  },
+  closeLogoutDialog: () => {
+    dispatch(toggleLogoutDialog(false))
+  },
+})
+
+export default connect(mapState, mapDispatch)(Logout)

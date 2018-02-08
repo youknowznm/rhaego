@@ -1,12 +1,6 @@
 import {FETCH_GITHUB} from './actionTypes'
 import {createReducer} from 'redux-action-tools'
 
-const defaultState = {
-  status: 'initial',
-  productsData: [],
-  statusMsg: '',
-}
-
 export default createReducer()
   .when(FETCH_GITHUB, (state, action) => {
     return {
@@ -34,4 +28,8 @@ export default createReducer()
       productsData: [],
     }
   })
-  .build(defaultState)
+  .build({
+    status: 'initial',
+    productsData: [],
+    statusMsg: '',
+  })

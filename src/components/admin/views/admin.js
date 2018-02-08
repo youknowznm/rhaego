@@ -6,34 +6,14 @@ import axios from 'axios'
 import {view as Login} from '../../login'
 import Logout from './logout'
 import {checkLoginStatus as checkLoginStatusApi} from '../../../api'
+import {checkLoginStatus} from '../actions'
 
 class Admin extends React.Component {
-  constructor() {
-    super(...arguments)
-    this.state = {
-      adminLoggedIn: null,
-    }
-  }
   componentDidMount() {
-    let that = this
-    axios
-      .get(checkLoginStatusApi)
-      .then(() => {
-        that.setState({
-          adminLoggedIn: true
-        })
-      })
-      .catch((e) => {
-        if (e.response) {
-          that.setState({
-            adminLoggedIn: false
-          })
-        }
-        console.error(e)
-      })
+    this.props.thisCheckLoginStatus()
   }
   render() {
-    const {adminLoggedIn} = this.state
+    const {adminLoggedIn} = this.props
     switch (adminLoggedIn) {
       case true:
         return <Logout />
@@ -44,6 +24,12 @@ class Admin extends React.Component {
     }
   }
 }
-
-
-export default Admin
+const mapState = (state) => ({
+  adminLoggedIn: state.admin.adminLoggedIn
+})
+const mapDispatch = (dispatch) => ({
+  thisCheckLoginStatus: () => {
+    dispatch(checkLoginStatus())
+  },
+})
+export default connect(mapState, mapDispatch)(Admin)
