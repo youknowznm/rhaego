@@ -32,12 +32,12 @@ class Login extends React.Component {
           this.props.thisRequestLogin(loginFields)
         }
         break
-      case 'failure':
+      case 'failed':
         setTimeout(() => {
           this.props.thisRequestLoginInit()
         }, 2000)
         break
-      case 'success':
+      case 'completed':
         setTimeout(() => {
           window.location.assign('/admin')
         }, 2000)
@@ -124,7 +124,7 @@ class Login extends React.Component {
           </div>
 
           <Snackbar
-            open={['failure', 'success'].includes(loginRequestStatus)}
+            open={['failed', 'completed'].includes(loginRequestStatus)}
             anchorOrigin={{
               vertical: 'top',
               horizontal: 'center',

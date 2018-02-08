@@ -1,52 +1,31 @@
 import {
   CHECK_LOGIN_STATUS,
-  CHECK_LOGIN_STATUS_INIT,
-  CHECK_LOGIN_STATUS_START,
-  CHECK_LOGIN_STATUS_DONE,
-  CHECK_LOGIN_STATUS_FAIL,
 } from './actionTypes'
+import {createReducer} from 'redux-action-tools'
 
 const defaultState = {
   status: 'initial',
   adminLoggedIn: false,
 }
 
-export default (state = defaultState, action) => {
-  switch (action.type) {
-
-    case CHECK_LOGIN_STATUS_INIT: {
-      return {
-        ...state,
-        status: 'initial',
-        adminLoggedIn: false,
-      };
+export default createReducer()
+  .when(CHECK_LOGIN_STATUS, (state, action) => {
+    return {
+      ...state,
+      status: 'loading'
     }
-
-    case CHECK_LOGIN_STATUS_START: {
-      return {
-        ...state,
-        status: 'loading',
-        adminLoggedIn: false,
-      };
+  })
+  .done((state, action) => {
+    return {
+      ...state,
+      status: 'completed',
+      adminLoggedIn: true,
     }
-
-    case FETCH_GITHUB_DONE: {
-      return {
-        ...state,
-        status: 'success',
-        adminLoggedIn: true,
-      };
+  })
+  .failed((state, action) => {
+    return {
+      ...state,
+      status: 'failed',
+      adminLoggedIn: false,
     }
-
-    case FETCH_GITHUB_FAIL: {
-      return {
-        status: 'failure',
-        adminLoggedIn: false,
-      };
-    }
-
-    default: {
-      return state;
-    }
-  }
-}
+  })

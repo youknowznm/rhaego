@@ -80,7 +80,7 @@ export default (state = thisState, action) => {
       const resultData = action.payload.data
       return {
         ...state,
-        loginRequestStatus: 'success',
+        loginRequestStatus: 'completed',
         loginRequestResult: resultData,
         loginRequestResultMessage: resultData.msg,
       }
@@ -90,7 +90,7 @@ export default (state = thisState, action) => {
       const errorData = action.payload.response.data
       return {
         ...state,
-        loginRequestStatus: 'failure',
+        loginRequestStatus: 'failed',
         loginRequestResult: null,
         loginRequestResultMessage: typeof errorData === 'string' ? errorData : errorData.msg,
       }

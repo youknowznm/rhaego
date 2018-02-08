@@ -1,3 +1,4 @@
 import view from './views/admin'
+import reducer from './reducer'
 
-export {view}
+export {view, reducer}

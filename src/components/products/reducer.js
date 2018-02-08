@@ -8,7 +8,12 @@ const defaultState = {
 }
 
 export default createReducer()
-  .when(FETCH_GITHUB, (oldState, action) => oldState)
+  .when(FETCH_GITHUB, (state, action) => {
+    return {
+      ...state,
+      status: 'loading',
+    }
+  })
   .done((state, action) => {
     const data = action.payload.data
     let productsData = data.sort((p1, p2) => {
@@ -16,7 +21,7 @@ export default createReducer()
     })
     return {
       ...state,
-      status: 'success',
+      status: 'completed',
       statusMsg: 'Fetch completed.',
       productsData,
     }
@@ -24,7 +29,7 @@ export default createReducer()
   .failed((state, action) => {
     return {
       ...state,
-      status: 'failure',
+      status: 'failed',
       statusMsg: 'Fetch failed. Please try again later.',
       productsData: [],
     }

@@ -19,13 +19,13 @@ class LoadingArea extends React.Component {
         return (
           <CircularProgress className="mb-center" />
         )
-      case 'failure':
+      case 'failed':
         return (
           <div className="mb-center">
             {statusMsg}
           </div>
         )
-      case 'success':
+      case 'completed':
         return children()
       default:
         throw new Error('unexpected status ' + status)
