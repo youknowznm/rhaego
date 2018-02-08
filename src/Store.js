@@ -9,7 +9,7 @@ import {reducer as loginReducer} from './components/login'
 import {reducer as themeReducer} from './containers/theme'
 
 const reducer = combineReducers({
-  routes: routesReducer,
+	routes: routesReducer,
   header: headerReducer,
   products: productsReducer,
   login: loginReducer,

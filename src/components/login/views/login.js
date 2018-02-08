@@ -22,14 +22,26 @@ class Login extends React.Component {
     this.props.thisUpdateLoginField(fieldName, fieldValue)
   }
   componentWillUpdate (nextProps, nState) {
-    if (nextProps.fieldsValid === true
-      && nextProps.loginRequestStatus === 'loading'
-    ) {
-      const loginFields = {
-        email: this.props.emailValue,
-        password: this.props.passwordValue,
-      }
-      this.props.thisRequestLogin(loginFields)
+    switch (nextProps.loginRequestStatus) {
+      case 'loading':
+        if (nextProps.fieldsValid === true) {
+           const loginFields = {
+            email: this.props.emailValue,
+            password: this.props.passwordValue,
+          }
+          this.props.thisRequestLogin(loginFields)
+        }
+        break
+      case 'failure':
+        setTimeout(() => {
+          this.props.thisRequestLoginInit()
+        }, 2000)
+        break
+      case 'success':
+        setTimeout(() => {
+          window.location.assign('/admin')
+        }, 2000)
+        break
     }
   }
   goBack = () => {
