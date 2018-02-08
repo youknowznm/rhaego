@@ -17,8 +17,7 @@ class Products extends React.Component {
     return (
       <LoadingArea
         status={status}
-        data={productsData}
-        statusMsg={statusMsg}
+        failedMsg={statusMsg}
       >
         {
           () => (

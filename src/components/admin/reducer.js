@@ -13,7 +13,7 @@ import {
 import {createReducer} from 'redux-action-tools'
 
 const defaultState = {
-  checkLoginStatus: 'initial',
+  checkIfLoggedIn: 'initial',
   adminLoggedIn: null,
 
   dialogOpen: false,
@@ -26,19 +26,19 @@ export default (state = defaultState, action) => {
     case CHECK_IF_LOGGEDIN:
       return {
         ...state,
-        checkLoginStatus: 'loading',
+        checkIfLoggedIn: 'loading',
         adminLoggedIn: null,
       }
     case CHECK_IF_LOGGEDIN_COMPLETED:
       return {
         ...state,
-        checkLoginStatus: 'completed',
+        checkIfLoggedIn: 'completed',
         adminLoggedIn: true,
       }
     case CHECK_IF_LOGGEDIN_FAILED:
       return {
         ...state,
-        checkLoginStatus: 'failed',
+        checkIfLoggedIn: 'failed',
         adminLoggedIn: false,
       }
 

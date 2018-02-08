@@ -39,7 +39,7 @@ class Login extends React.Component {
         break
       case 'completed':
         setTimeout(() => {
-          window.location.assign('/admin')
+          window.history.go(-1)
         }, 2000)
         break
     }

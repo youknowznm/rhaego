@@ -6,13 +6,13 @@ import {
 } from './actionTypes'
 import axios from 'axios'
 import {
-	checkLoginStatus as checkLoginStatusApi,
+	checkIfLoggedIn as checkIfLoggedInApi,
 	logout as requestLogoutApi,
 } from '../../api'
 import {createAsyncAction} from 'redux-action-tools'
 
-export const checkLoginStatus = createAsyncAction(CHECK_IF_LOGGEDIN, () => {
-  return axios.get(checkLoginStatusApi)
+export const checkIfLoggedIn = createAsyncAction(CHECK_IF_LOGGEDIN, () => {
+  return axios.get(checkIfLoggedInApi)
 })
 export const requestLogout = createAsyncAction(REQUEST_LOGOUT, () => {
   return axios.post(requestLogoutApi)

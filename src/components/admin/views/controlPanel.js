@@ -51,7 +51,7 @@ class ControlPanel extends React.Component {
     return (
       <div className="ul">
         <List>
-          <Link to="/products">
+          <Link to="/editor">
             <ListItem button>
               <ListItemIcon>
                 <NoteAddIcon />

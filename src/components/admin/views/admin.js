@@ -5,12 +5,12 @@ import {CircularProgress} from 'material-ui/Progress'
 import axios from 'axios'
 import {view as Login} from '../../login'
 import ControlPanel from './controlPanel'
-import {checkLoginStatus as checkLoginStatusApi} from '../../../api'
-import {checkLoginStatus} from '../actions'
+import {checkIfLoggedIn as checkIfLoggedInApi} from '../../../api'
+import {checkIfLoggedIn} from '../actions'
 
 class Admin extends React.Component {
   componentDidMount() {
-    this.props.thisCheckLoginStatus()
+    this.props.thisCheckIfLoggedIn()
   }
   render() {
     const {adminLoggedIn} = this.props
@@ -28,8 +28,8 @@ const mapState = (state) => ({
   adminLoggedIn: state.admin.adminLoggedIn
 })
 const mapDispatch = (dispatch) => ({
-  thisCheckLoginStatus: () => {
-    dispatch(checkLoginStatus())
+  thisCheckIfLoggedIn: () => {
+    dispatch(checkIfLoggedIn())
   },
 })
 export default connect(mapState, mapDispatch)(Admin)
