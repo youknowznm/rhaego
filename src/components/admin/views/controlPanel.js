@@ -22,9 +22,8 @@ import {requestLogout, toggleLogoutDialog} from '../actions'
 
 import './logout.css'
 
-class Logout extends React.Component {
+class ControlPanel extends React.Component {
   componentWillUpdate(nextProps) {
-    console.log(1,nextProps.requestLogoutStatus);
     switch (nextProps.requestLogoutStatus) {
       case 'completed':
         setTimeout(() => {
@@ -127,4 +126,4 @@ const mapDispatch = (dispatch) => ({
   },
 })
 
-export default connect(mapState, mapDispatch)(Logout)
+export default connect(mapState, mapDispatch)(ControlPanel)

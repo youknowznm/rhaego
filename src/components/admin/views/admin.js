@@ -4,7 +4,7 @@ import {Button, Typography} from 'material-ui'
 import {CircularProgress} from 'material-ui/Progress'
 import axios from 'axios'
 import {view as Login} from '../../login'
-import Logout from './logout'
+import ControlPanel from './controlPanel'
 import {checkLoginStatus as checkLoginStatusApi} from '../../../api'
 import {checkLoginStatus} from '../actions'
 
@@ -16,7 +16,7 @@ class Admin extends React.Component {
     const {adminLoggedIn} = this.props
     switch (adminLoggedIn) {
       case true:
-        return <Logout />
+        return <ControlPanel />
       case false:
         return <Login />
       default:

@@ -14,7 +14,7 @@ import {createReducer} from 'redux-action-tools'
 
 const defaultState = {
   checkLoginStatus: 'initial',
-  adminLoggedIn: false,
+  adminLoggedIn: null,
 
   dialogOpen: false,
   requestLogoutStatus: 'initial',
@@ -27,7 +27,7 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         checkLoginStatus: 'loading',
-        adminLoggedIn: false,
+        adminLoggedIn: null,
       }
     case CHECK_IF_LOGGEDIN_COMPLETED:
       return {
@@ -73,8 +73,6 @@ export default (state = defaultState, action) => {
         requestLogoutStatus: 'failed',
         logoutResultMessage: 'An error occurred. Please try again later.',
       }
-
-
 
     default:
       return state
