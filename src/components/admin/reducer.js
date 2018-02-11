@@ -1,8 +1,4 @@
 import {
-  CHECK_IF_LOGGEDIN,
-  CHECK_IF_LOGGEDIN_COMPLETED,
-  CHECK_IF_LOGGEDIN_FAILED,
-
   REQUEST_LOGOUT_INIT,
   REQUEST_LOGOUT,
   REQUEST_LOGOUT_COMPLETED,
@@ -13,9 +9,6 @@ import {
 import {createReducer} from 'redux-action-tools'
 
 const defaultState = {
-  checkIfLoggedIn: 'initial',
-  adminLoggedIn: null,
-
   dialogOpen: false,
   requestLogoutStatus: 'initial',
   logoutResultMessage: '',
@@ -23,24 +16,6 @@ const defaultState = {
 
 export default (state = defaultState, action) => {
   switch (action.type) {
-    case CHECK_IF_LOGGEDIN:
-      return {
-        ...state,
-        checkIfLoggedIn: 'loading',
-        adminLoggedIn: null,
-      }
-    case CHECK_IF_LOGGEDIN_COMPLETED:
-      return {
-        ...state,
-        checkIfLoggedIn: 'completed',
-        adminLoggedIn: true,
-      }
-    case CHECK_IF_LOGGEDIN_FAILED:
-      return {
-        ...state,
-        checkIfLoggedIn: 'failed',
-        adminLoggedIn: false,
-      }
 
     case TOGGLE_LOGOUT_DIALOG:
       return {
@@ -60,10 +35,11 @@ export default (state = defaultState, action) => {
         requestLogoutStatus: 'loading',
       }
     case REQUEST_LOGOUT_COMPLETED:
+      localStorage.setItem('adminLoggedIn', 'false')
       return {
         ...state,
         requestLogoutStatus: 'completed',
-        logoutResultMessage: 'Logout successful. Redirecting to homepage.',
+        logoutResultMessage: 'Logout successful.',
       }
 
     case REQUEST_LOGOUT_FAILED:

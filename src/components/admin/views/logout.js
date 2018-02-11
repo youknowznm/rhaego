@@ -1,18 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Button, Snackbar, Divider} from 'material-ui'
-import {withStyles} from 'material-ui/styles'
-import axios from 'axios'
-import {logout as logoutApi} from '../../../api'
-import ExitToAppIcon from 'material-ui-icons/ExitToApp'
-import NoteAddIcon from 'material-ui-icons/NoteAdd'
-import {Link} from 'react-router'
-import List, {
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-} from 'material-ui/List'
-import Dialog,{
+import Dialog, {
   DialogActions,
   DialogContent,
   DialogContentText,
@@ -20,20 +9,18 @@ import Dialog,{
 } from 'material-ui/Dialog'
 import {requestLogout, toggleLogoutDialog} from '../actions'
 
-import './controlPanel.css'
-
-class ControlPanel extends React.Component {
+class Logout extends React.Component {
   componentWillUpdate(nextProps) {
     switch (nextProps.requestLogoutStatus) {
       case 'completed':
         setTimeout(() => {
           window.location.assign('/')
-        }, 2000)
+        }, 1500)
         break;
       case 'failed':
         setTimeout(() => {
           this.props.thisRequestLogoutInit()
-        }, 2000)
+        }, 1500)
         break;
       default:
         return
@@ -41,7 +28,6 @@ class ControlPanel extends React.Component {
   }
   render() {
     const {
-      openLogoutDialog,
       closeLogoutDialog,
       thisRequestLogout,
       requestLogoutStatus,
@@ -49,29 +35,7 @@ class ControlPanel extends React.Component {
       dialogOpen,
     } = this.props
     return (
-      <div className="ul">
-        <List>
-          <Link to="/editor">
-            <ListItem button>
-              <ListItemIcon>
-                <NoteAddIcon />
-              </ListItemIcon>
-              <ListItemText inset primary="New Article" />
-            </ListItem>
-          </Link>
-        </List>
-
-        <Divider />
-
-        <List>
-          <ListItem button onClick={openLogoutDialog}>
-            <ListItemIcon>
-              <ExitToAppIcon />
-            </ListItemIcon>
-            <ListItemText inset primary="Log Out" />
-          </ListItem>
-        </List>
-
+      <div>
         <Dialog
           open={dialogOpen}
           onClose={closeLogoutDialog}
@@ -106,24 +70,19 @@ class ControlPanel extends React.Component {
     )
   }
 }
-
 const mapState = (state) => ({
   dialogOpen: state.admin.dialogOpen,
   requestLogoutStatus: state.admin.requestLogoutStatus,
   logoutResultMessage: state.admin.logoutResultMessage,
 })
-
 const mapDispatch = (dispatch) => ({
   thisRequestLogout: () => {
     dispatch(toggleLogoutDialog(false))
     dispatch(requestLogout())
-  },
-  openLogoutDialog: () => {
-    dispatch(toggleLogoutDialog(true))
   },
   closeLogoutDialog: () => {
     dispatch(toggleLogoutDialog(false))
   },
 })
 
-export default connect(mapState, mapDispatch)(ControlPanel)
+export default connect(mapState, mapDispatch)(Logout)

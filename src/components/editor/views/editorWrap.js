@@ -16,7 +16,7 @@ class EditorWrap extends React.Component {
     if (this.props.loginStatusString === 'failed') {
       setTimeout(() => {
         window.history.go(-1)
-      }, 2000)
+      }, 1500)
     }
   }
   render() {

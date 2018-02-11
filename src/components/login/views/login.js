@@ -4,7 +4,7 @@ import {Card, IconButton, Button, Typography, Snackbar} from 'material-ui'
 import {FormControl, FormHelperText} from 'material-ui/Form'
 import Input, {InputLabel, InputAdornment} from 'material-ui/Input'
 import {Visibility, VisibilityOff} from 'material-ui-icons'
-import {LoadingButton} from '../../../utils'
+import {getQueryObj, LoadingButton} from '../../../utils'
 import {
   updateLoginField,
   checkLoginFields,
@@ -16,7 +16,7 @@ import {
 import './login.css'
 
 class Login extends React.Component {
-  handleChange = (field) => (evt) => {
+  valueDidChange = (field) => (evt) => {
     const fieldName = field
     const fieldValue = evt.target.value
     this.props.thisUpdateLoginField(fieldName, fieldValue)
@@ -35,17 +35,22 @@ class Login extends React.Component {
       case 'failed':
         setTimeout(() => {
           this.props.thisRequestLoginInit()
-        }, 2000)
+        }, 1500)
         break
       case 'completed':
         setTimeout(() => {
-          window.history.go(-1)
-        }, 2000)
+          this.backToReferer()
+        }, 1500)
         break
     }
   }
-  goBack = () => {
-    window.history.go(-1)
+  backToReferer = () => {
+    const referer = getQueryObj().referer
+    if (referer !== undefined) {
+      window.location.assign(referer)
+    } else {
+      window.history.go(-1)
+    }
   }
   render() {
     const {
@@ -71,7 +76,7 @@ class Login extends React.Component {
               <Input
                 id="login-email"
                 type="text"
-                onChange={this.handleChange('email')}
+                onChange={this.valueDidChange('email')}
                 error={emailError}
               />
               <FormHelperText className={emailError ? 'error' : ''}>
@@ -86,7 +91,7 @@ class Login extends React.Component {
               <Input
                 id="login-password"
                 type={passwordVisible ? "text" : "password"}
-                onChange={this.handleChange('password')}
+                onChange={this.valueDidChange('password')}
                 error={passwordError}
                 endAdornment={
                   <InputAdornment position="end">
@@ -108,7 +113,7 @@ class Login extends React.Component {
             <LoadingButton
               buttonClassName="action-button"
               loadingStatus={loginRequestStatus}
-              handleClick={thisCheckLoginFields}
+              didClick={thisCheckLoginFields}
               color="secondary"
             >
               log in
@@ -117,7 +122,7 @@ class Login extends React.Component {
               raised
               fullWidth
               color="default"
-              onClick={this.goBack}
+              onClick={this.backToReferer}
             >
               cancel
             </Button>

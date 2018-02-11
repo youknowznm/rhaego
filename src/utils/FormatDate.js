@@ -3,7 +3,7 @@ const addZero = (str) => {
   return str.length === 1 ? `0${str}` : str;
 }
 
-const FormatDate = (dateObj, precise) => {
+const formatDate = (dateObj, precise) => {
   if (!(dateObj instanceof Date)) {
     dateObj = new Date(dateObj)
   }
@@ -23,4 +23,4 @@ const FormatDate = (dateObj, precise) => {
   return res;
 }
 
-export default FormatDate
+export default formatDate

@@ -78,6 +78,7 @@ export default (state = thisState, action) => {
     // 登录成功
     case REQUEST_LOGIN_COMPLETED:
       const resultData = action.payload.data
+      localStorage.setItem('adminLoggedIn', 'true')
       return {
         ...state,
         loginRequestStatus: 'completed',

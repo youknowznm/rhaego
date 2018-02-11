@@ -5,7 +5,7 @@ import {CircularProgress} from 'material-ui/Progress'
 
 import './loadingButton.css'
 
-const LoadingButton = ({loadingStatus, handleClick, buttonClassName, children}) => {
+const LoadingButton = ({loadingStatus, didClick, buttonClassName, children}) => {
   const isLoading = loadingStatus === 'loading'
   return (
     <div className="loading-button-wrap">
@@ -14,7 +14,7 @@ const LoadingButton = ({loadingStatus, handleClick, buttonClassName, children}) 
         fullWidth
         color="primary"
         disabled={loadingStatus === 'failed' || loadingStatus === 'completed'}
-        onClick={handleClick}
+        onClick={didClick}
       >
         {isLoading ? '' : children}
       </Button>
@@ -26,7 +26,7 @@ const LoadingButton = ({loadingStatus, handleClick, buttonClassName, children}) 
 LoadingButton.propTypes = {
   loadingStatus: PropTypes.string.isRequired,
   buttonClassName: PropTypes.string,
-  handleClick: PropTypes.func,
+  didClick: PropTypes.func,
   children: PropTypes.string.isRequired,
 }
 

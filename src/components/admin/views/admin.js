@@ -1,35 +1,63 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Button, Typography} from 'material-ui'
-import {CircularProgress} from 'material-ui/Progress'
-import axios from 'axios'
-import {view as Login} from '../../login'
-import ControlPanel from './controlPanel'
-import {checkIfLoggedIn as checkIfLoggedInApi} from '../../../api'
-import {checkIfLoggedIn} from '../actions'
+import {Divider} from 'material-ui'
+import ExitToAppIcon from 'material-ui-icons/ExitToApp'
+import NoteAddIcon from 'material-ui-icons/NoteAdd'
+import {Link} from 'react-router'
+import List, {
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+} from 'material-ui/List'
+import {toggleLogoutDialog} from '../actions'
+import Logout from './logout'
 
-class Admin extends React.Component {
-  componentDidMount() {
-    this.props.thisCheckIfLoggedIn()
-  }
+import './admin.css'
+
+class ControlPanel extends React.Component {
   render() {
-    const {adminLoggedIn} = this.props
-    switch (adminLoggedIn) {
-      case true:
-        return <ControlPanel />
-      case false:
-        return <Login />
-      default:
-        return <CircularProgress className="mb-center" />
-    }
+    const {
+      openLogoutDialog,
+    } = this.props
+    return (
+      <div className="admin-items">
+        <List>
+          <Link to="/admin/editor">
+            <ListItem button>
+              <ListItemIcon>
+                <NoteAddIcon />
+              </ListItemIcon>
+              <ListItemText inset primary="New Article" />
+            </ListItem>
+          </Link>
+        </List>
+
+        <Divider />
+
+        <List>
+          <ListItem button onClick={openLogoutDialog}>
+            <ListItemIcon>
+              <ExitToAppIcon />
+            </ListItemIcon>
+            <ListItemText inset primary="Log Out" />
+          </ListItem>
+        </List>
+
+        <Logout />
+
+      </div>
+    )
   }
 }
+
 const mapState = (state) => ({
-  adminLoggedIn: state.admin.adminLoggedIn
+  dialogOpen: state.admin.dialogOpen,
 })
+
 const mapDispatch = (dispatch) => ({
-  thisCheckIfLoggedIn: () => {
-    dispatch(checkIfLoggedIn())
+  openLogoutDialog: () => {
+    dispatch(toggleLogoutDialog(true))
   },
 })
-export default connect(mapState, mapDispatch)(Admin)
+
+export default connect(mapState, mapDispatch)(ControlPanel)

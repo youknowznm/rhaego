@@ -31,7 +31,7 @@ class Main extends React.Component {
 const mapState = (state) => {
   let {pathname} = state.routing.locationBeforeTransitions
   return {
-    mainClassName: pathname.replace('/', '_')
+    mainClassName: pathname.replace('/', '')
   }
 }
 

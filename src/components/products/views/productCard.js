@@ -1,7 +1,7 @@
 import React from 'react'
 import {Card, Button, Avatar} from 'material-ui'
 import {CardHeader, CardContent, CardActions} from 'material-ui/Card'
-import {FormatDate} from '../../../utils'
+import {formatDate} from '../../../utils'
 
 import IconButton from 'material-ui/IconButton';
 import Typography from 'material-ui/Typography';
@@ -31,7 +31,7 @@ const ProductCard = ({classes, productData}) => {
             <Avatar className="avatar">{name.slice(0, 1).toUpperCase()}</Avatar>
           }
           title={name}
-          subheader={FormatDate(created_at)}
+          subheader={formatDate(created_at)}
         >
           <Button>{language}</Button>
         </CardHeader>

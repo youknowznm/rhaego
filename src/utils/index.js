@@ -1,12 +1,14 @@
 import SplitToSpans from './splitToSpans'
-import FormatDate from './formatDate'
+import formatDate from './formatDate'
+import getQueryObj from './getQueryObj'
 import LoadingArea from './loadingArea'
 import LoadingButton from './loadingButton'
 import regexps from './regexps'
 
 export {
   SplitToSpans,
-  FormatDate,
+  formatDate,
+  getQueryObj,
   LoadingArea,
   LoadingButton,
   regexps,
