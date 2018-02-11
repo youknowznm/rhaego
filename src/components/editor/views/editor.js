@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {TextField} from 'material-ui'
 import {actions} from '../../admin'
+import Chip from 'material-ui/Chip';
 
 import './editor.css'
 
@@ -12,28 +13,91 @@ class Editor extends React.Component {
   render() {
     return (
       <div className="editor-wrap">
+        <div className="row">
+          {/* 标题 */}
+          <TextField
+            className="editor-title"
+            label="Title"
+            margin="normal"
+          />
+          {/* 标签 */}
+          <div className="editor-tags">
+            <TextField
+              className=""
+              label="Tags"
+              margin="normal"
+              fullWidth
+            />
+            <div className="tags-container">
+              <Chip
+                key="1"
+                label="sb"
+                // onDelete={this.handleDelete(data)}
+                className="chip"
+                />
+              <Chip
+                key="2"
+                label="sb"
+                // onDelete={this.handleDelete(data)}
+                className="chip"
+                />
+            </div>
+          </div>
+          {/* 日期 */}
+          <TextField
+            className="editor-date"
+            label="Created"
+            type="date"
+            margin="normal"
+            defaultValue="2017-05-24"
+          />
+        </div>
 
-        <TextField
-          id="name"
-          label="Name"
-          margin="normal"
-        />
+        <div className="row">
+          {/* 摘要 */}
+          <TextField
+            className="editor-summary"
+            label="Summary"
+            margin="normal"
+            fullWidth
+          />
+          {/* <TextField
+            className="editor-title"
+            label="Title"
+            margin="normal"
+          />
+          <TextField
+            className="editor-summary"
+            label="Summary"
+            margin="normal"
+          /> */}
+        </div>
 
-        <div>
+        <div className="row">
 
           <TextField
-            id="multiline-static"
-            label="Multiline"
+            className="editor-content"
+            label="Content"
             multiline
             rows="40"
             // value="multiline"
             // onChange={this.handleChange('multiline')}
-            placeholder="placeholder"
-            className="s"
+            placeholder="Using markdown."
             margin="normal"
           />
 
-          <div className="f"></div>
+          <TextField
+            className="editor-preview"
+            disabled
+            label="Preview"
+            multiline
+            rows="40"
+            value="multiline"
+            // onChange={this.handleChange('multiline')}
+            // placeholder="placeholder"
+            margin="normal"
+          />
+
 
         </div>
       </div>
@@ -41,8 +105,8 @@ class Editor extends React.Component {
   }
 }
 
-const mapState = (state) => {
-}
+const mapState = (state) => ({
+})
 const mapDispatch = (dispatch) => ({
 })
 

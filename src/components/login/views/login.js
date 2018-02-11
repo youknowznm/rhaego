@@ -66,7 +66,7 @@ class Login extends React.Component {
       <div className="login-wrap">
         <Card className="login">
           <Typography className="info" component="i" type="caption">
-            Only site administrator can write articles and manage comments.
+            Login as administrator to manage articles and comments.
           </Typography>
           <form className="form">
             <FormControl fullWidth margin="dense">

@@ -22,9 +22,9 @@ const Routes = ({routeWillUpdate, willEnterAdminRoute}) => (
       <Route path="articles" component={Articles} />
       <Route path="products" component={Products} />
       <Route path="login" component={Login} />
-      <Route path="admin" onEnter={willEnterAdminRoute} component={Admin}>
-        <Route path="index" component={Admin} />
-        {/* <Route path="editor" component={Editor} /> */}
+      <Route path="admin" onEnter={willEnterAdminRoute}>
+        <IndexRoute component={Admin} />
+        <Route path="editor" component={Editor} />
       </Route>
       <Route path="*" component={NotFound} />
     </Route>
@@ -32,12 +32,12 @@ const Routes = ({routeWillUpdate, willEnterAdminRoute}) => (
 )
 const mapState = (state) => ({})
 const mapDispatch = (dispatch) => ({
+  // 普通路由更新时关闭抽屉
   routeWillUpdate: () => {
-    // console.log('routeWillUpdate', store.getState().routing.locationBeforeTransitions);
     dispatch(headerActions.toggleDrawer(false))
   },
+  // 针对 /admin 下的路由做权限判定，否决则跳至登录页
   willEnterAdminRoute: (nextState, replace) => {
-    // console.log('willEnterAdminRoute', nextState);
     const adminLoggedIn = localStorage.getItem('adminLoggedIn') === 'true'
     const {pathname, search} = nextState.location
     const targetUrl = encodeURIComponent(`${pathname}${search}`)

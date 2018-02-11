@@ -1,3 +1,3 @@
-import view from './views/editorWrap'
+import view from './views/editor'
 
 export {view}
