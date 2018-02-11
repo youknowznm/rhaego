@@ -76,7 +76,7 @@ const DrawerBody = ({classes, firstPathname}) => (
 )
 
 const mapState = (state) => ({
-  firstPathname: state.routes.firstPathname,
+  firstPathname: state.routing.locationBeforeTransitions.pathname,
 })
 
 const DrawerBodyWrap = connect(mapState, null)(DrawerBody)

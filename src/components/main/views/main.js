@@ -28,8 +28,11 @@ class Main extends React.Component {
   }
 }
 
-const mapState = (state) => ({
-  mainClassName: state.routes.firstPathname.replace('/', '_')
-})
+const mapState = (state) => {
+  let {pathname} = state.routing.locationBeforeTransitions
+  return {
+    mainClassName: pathname.replace('/', '_')
+  }
+}
 
-export default connect(mapState, null)(Main)
+export default connect(mapState)(Main)

@@ -48,7 +48,6 @@ export default (state = defaultState, action) => {
         dialogOpen: action.targetDialogStatus,
       }
 
-
     case REQUEST_LOGOUT_INIT:
       return {
         ...state,

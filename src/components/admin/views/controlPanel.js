@@ -20,7 +20,7 @@ import Dialog,{
 } from 'material-ui/Dialog'
 import {requestLogout, toggleLogoutDialog} from '../actions'
 
-import './logout.css'
+import './controlPanel.css'
 
 class ControlPanel extends React.Component {
   componentWillUpdate(nextProps) {
