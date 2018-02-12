@@ -12,6 +12,7 @@ const defaultState = {
     created: new Date(),
     content: '',
   },
+  tagsWidth: 0,
 }
 
 export default (state = defaultState, action) => {

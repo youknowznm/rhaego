@@ -20,7 +20,13 @@ class Editor extends React.Component {
     this.props.thisRemoveTag(index)
     this.setState({})
   }
+  componentWillMount() {
+    setTimeout(() => {
+      console.log(getComputedStyle(document.querySelector('.tags-container')).width);
+    }, 20)
+  }
   componentWillUpdate() {
+    console.log(getComputedStyle(document.querySelector('.tags-container')).width);
   }
   render() {
     const {
@@ -41,7 +47,7 @@ class Editor extends React.Component {
           {/* 标签 */}
           <div className="editor-tags">
             <TextField
-              className=""
+              className="fff"
               label="Tags"
               margin="normal"
               helperText="3~12 characters are required for each tag. 1~2 tags are required."
