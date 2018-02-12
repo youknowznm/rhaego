@@ -5,8 +5,8 @@ import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
 const Theme = ({type, children}) => {
   const materialBlogTheme = createMuiTheme({
     palette: {
-      primary: {main: '#2196f3'},
-      secondary: { main: '#FFFF00'},
+      primary: {main: '#2196F3'},
+      secondary: { main: '#FFC107'},
       type,
     },
   })

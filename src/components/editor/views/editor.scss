@@ -1,33 +1,50 @@
 .row {
   position: relative;
   width: 100%;
-  // min-height: 72px;
+  min-height: 72px;
   display: flex;
   flex-wrap: nowrap;
   justify-content: flex-start;
+
+  .button-wrap {
+    display: flex;
+    min-height: 72px;
+    align-items: center;
+    &.upload-wrap {
+      flex-grow: 1;
+    }
+    .upload-help-text {
+      line-height: 72px;
+      margin-left: 12px;
+    }
+    .button-save {
+      margin-right: 18px;
+    }
+  }
 
   // 标题
   .editor-title {
     position: relative;
     margin-right: 12px;
-    flex-grow: 1.2;
+    flex-grow: 1;
   }
   // 标签
   .editor-tags {
     position: relative;
-    margin-right: 12px;
-    flex-grow: 0.8;
+    flex-grow: 1;
     .tags-container {
       position: absolute;
     }
-  }
-  // 日期
-  .editor-date {
   }
 
   // 摘要
   .editor-summary {
     position: relative;
+    flex-grow: 1;
+    margin-right: 12px;
+  }
+  // 日期
+  .editor-created-date {
   }
 
   // 内容
@@ -35,26 +52,46 @@
     position: relative;
     margin-right: 12px;
     flex-grow: 1;
+    font-size: 14px;
   }
   // 预览
   .editor-preview {
     position: relative;
     flex-grow: 1;
+    font-size: 14px;
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 700px) {
+    .button-wrap {
+      width: 100% !important;
+      justify-content: space-around;
+    }
+    .button-save,
+    .button-cancel {
+      width: 40% !important;
+    }
+    .upload-help-text {
+      display: none;
+    }
     flex-wrap: wrap;
     .editor-title,
     .editor-summary,
     .editor-tags,
-    .editor-date,
+    .editor-created-date,
     .editor-content {
       width: 100% !important;
-      // margin-right: 0 !important;
     }
     .editor-preview {
       display: none;
     }
   }
 
+  .icon-right {
+    margin-left: 6px;
+  }
+
+}
+
+.full-width {
+  width: 100%;
 }
