@@ -8,6 +8,7 @@ import {reducer as productsReducer} from './components/products'
 import {reducer as loginReducer} from './components/login'
 import {reducer as themeReducer} from './containers/theme'
 import {reducer as adminReducer} from './components/admin'
+import {reducer as editorReducer} from './components/editor'
 
 const reducer = combineReducers({
 	routing: routerReducer,
@@ -15,7 +16,8 @@ const reducer = combineReducers({
   products: productsReducer,
   login: loginReducer,
   theme: themeReducer,
-  admin: adminReducer,
+	admin: adminReducer,
+  editor: editorReducer,
 })
 
 const win = window

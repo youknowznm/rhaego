@@ -3,31 +3,30 @@ import {connect} from 'react-redux'
 import {withStyles} from 'material-ui/styles'
 import {TextField, Button, Typography} from 'material-ui'
 import FileUpload from 'material-ui-icons/FileUpload'
-import {actions} from '../../admin'
 import Chip from 'material-ui/Chip'
+import {removeTag} from '../actions'
 
 import './editor.css'
 
 const styles = (theme) => ({
-  button: {
-    margin: '12px',
-  },
-  leftIcon: {
-    marginRight: '12px',
-  },
-  rightIcon: {
-    marginLeft: '12px',
-  },
-});
 
+});
 
 class Editor extends React.Component {
   constructor() {
     super(...arguments)
   }
+  handleDelete = (index) => () => {
+    this.props.thisRemoveTag(index)
+    this.setState({})
+  }
+  componentWillUpdate() {
+  }
   render() {
     const {
       classes,
+      thisRemoveTag,
+      articleDetail
     } = this.props
     return (
       <div className="editor-wrap">
@@ -36,7 +35,7 @@ class Editor extends React.Component {
           <TextField
             className="editor-title"
             label="Title"
-            margin="dense"
+            margin="normal"
             helperText="10~20 characters are required for title."
           />
           {/* 标签 */}
@@ -44,23 +43,21 @@ class Editor extends React.Component {
             <TextField
               className=""
               label="Tags"
-              margin="dense"
+              margin="normal"
               helperText="3~12 characters are required for each tag. 1~2 tags are required."
               fullWidth
             />
             <div className="tags-container">
-              <Chip
-                key="1"
-                label="sb"
-                // onDelete={this.handleDelete(data)}
-                className="chip"
-                />
-              <Chip
-                key="2"
-                label="sb"
-                // onDelete={this.handleDelete(data)}
-                className="chip"
-                />
+              {
+                articleDetail.tags.map((tag, index) => (
+                  <Chip
+                    key={index}
+                    label={tag}
+                    onDelete={this.handleDelete(index)}
+                    className="tag"
+                    />
+                ))
+              }
             </div>
           </div>
 
@@ -112,12 +109,6 @@ class Editor extends React.Component {
           />
         </div>
 
-
-        {/* <div className="row space-between">
-
-
-        </div> */}
-
         <div className="row">
           <div className="button-wrap upload-wrap">
             <Button>
@@ -153,8 +144,13 @@ class Editor extends React.Component {
 }
 
 const mapState = (state) => ({
+  articleDetail: state.editor.articleDetail,
 })
+
 const mapDispatch = (dispatch) => ({
+  thisRemoveTag: (index) => {
+    dispatch(removeTag(index))
+  }
 })
 
 const EditorWrap = connect(mapState, mapDispatch)(Editor)
