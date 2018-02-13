@@ -58,14 +58,30 @@
   .editor-content {
     position: relative;
     margin-right: 12px;
-    flex-grow: 1;
-    font-size: 14px;
+    width: 50%;
+    textarea {
+      font-size: 14px !important;
+    }
   }
   // 预览
   .editor-preview {
     position: relative;
-    flex-grow: 1;
+    width: 50%;
     font-size: 14px;
+    margin: 16px 0 8px 12px;
+    .preview-caption {
+      // margin-top: 6px;
+    }
+    .editor-preview-viewer {
+      position: relative;
+      width: 100%;
+      font-size: 14px;
+      margin-top: 8px;
+      font-family: "Roboto";
+      > *:first-child {
+        margin-top: 0 !important;
+      }
+    }
   }
 
   @media (max-width: 700px) {

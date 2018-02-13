@@ -6,7 +6,18 @@ import {FormControl, FormHelperText} from 'material-ui/Form'
 import Input, {InputLabel} from 'material-ui/Input'
 import FileUpload from 'material-ui-icons/FileUpload'
 import Chip from 'material-ui/Chip'
-import {removeTag, adjustTagInputIndent, addTag} from '../actions'
+import store from '../../../Store'
+import {
+  updateTitleField,
+  updateSummaryField,
+  updateCreatedDateField,
+  updateContentField,
+
+  addTag,
+  removeTag,
+  adjustTagInputIndent,
+  previewContent,
+} from '../actions'
 
 import './editor.css'
 
@@ -24,7 +35,7 @@ class Editor extends React.Component {
   componentDidUpdate() {
     this.props.thisAdjustTagInputIndent()
   }
-  handleDelete = (index) => () => {
+  handleRemoveTag = (index) => () => {
     this.props.thisRemoveTag(index)
     this.setState({})
   }
@@ -33,20 +44,30 @@ class Editor extends React.Component {
     const trimmedTagContent = target.value.trim()
     if (evt.key === 'Enter'
       && trimmedTagContent.length >= 3
-      && this.props.articleDetail.tags.length <= 1
+      && this.props.articleFields.tags.length <= 1
     ) {
       this.props.thisAddTag(trimmedTagContent)
       target.value = ''
       this.setState({})
     }
   }
+  handleFieldChange = (fieldName) => (evt) => {
+    const fieldActionMap = {
+      title: updateTitleField,
+      summary: updateSummaryField,
+      createdDate: updateCreatedDateField,
+      content: updateContentField,
+    }
+    store.dispatch(fieldActionMap[fieldName](evt.target.value))
+  }
   render() {
     const {
       classes,
       thisRemoveTag,
-      articleDetail
+      articleFields,
+      parsedHTMLContent,
     } = this.props
-    const maximumTagsReached = (articleDetail.tags.length === 2)
+    const maximumTagsReached = (articleFields.tags.value.length === 2)
     return (
       <div className="editor-wrap">
         <div className="row">
@@ -56,7 +77,11 @@ class Editor extends React.Component {
             label="Title"
             margin="normal"
             helperText="10~20 characters are required for title."
-            error
+            defaultValue={articleFields.title.value}
+            onChange={this.handleFieldChange('title')}
+            inputProps={{
+              'maxLength': '20',
+            }}
           />
           {/* 标签 */}
           <div className="editor-tags">
@@ -85,11 +110,11 @@ class Editor extends React.Component {
             </FormControl>
             <div className="tags-container">
               {
-                articleDetail.tags.map((tag, index) => (
+                articleFields.tags.value.map((tag, index) => (
                   <Chip
                     key={index}
                     label={tag}
-                    onDelete={this.handleDelete(index)}
+                    onDelete={this.handleRemoveTag(index)}
                     className="tag"
                     />
                 ))
@@ -104,45 +129,46 @@ class Editor extends React.Component {
           <TextField
             className="editor-summary"
             label="Summary"
-            margin="dense"
+            margin="normal"
+            defaultValue={articleFields.summary.value}
             helperText="10~50 characters are required for summary."
+            onChange={this.handleFieldChange('summary')}
+            inputProps={{
+              'maxLength': '50',
+            }}
           />
           {/* 日期 */}
           <TextField
             className="editor-created-date"
             label="Created"
             type="date"
-            margin="dense"
-            defaultValue="2018-01-01"
+            margin="normal"
+            defaultValue={articleFields.createdDate.value}
             helperText="A valid create date is required."
           />
         </div>
 
         <div className="row">
+          {/* 内容 */}
           <TextField
             className="editor-content"
             label="Content"
             multiline
+            defaultValue={articleFields.content.value}
             rows="35"
-            // value="multiline"
-            // onChange={this.handleChange('multiline')}
+            onChange={this.handleFieldChange('content')}
             helperText="Content will be parsed as markdown."
-            margin="dense"
+            margin="normal"
           />
+          {/* 预览 */}
+          <div className="editor-preview">
+            <Typography type="caption" className="preview-caption">Preview</Typography>
+            <article
+              className="editor-preview-viewer"
+              dangerouslySetInnerHTML={{__html: parsedHTMLContent}}
+            ></article>
+          </div>
 
-          <TextField
-            className="editor-preview"
-            disabled
-            label="Preview"
-            multiline
-            rows="35"
-            // value="multiline"
-            helperText="Markdown preview is displayed above."
-
-            // onChange={this.handleChange('multiline')}
-            // helperText="helperText"
-            margin="dense"
-          />
         </div>
 
         <div className="row">
@@ -180,8 +206,9 @@ class Editor extends React.Component {
 }
 
 const mapState = (state) => ({
-  articleDetail: state.editor.articleDetail,
+  articleFields: state.editor.articleFields,
   tagsWidth: state.editor.tagsWidth,
+  parsedHTMLContent: state.editor.parsedHTMLContent,
 })
 
 const mapDispatch = (dispatch) => ({
@@ -193,6 +220,9 @@ const mapDispatch = (dispatch) => ({
   },
   thisAddTag: (tagContent) => {
     dispatch(addTag(tagContent))
+  },
+  thisPreviewContent: () => {
+    dispatch(previewContent())
   },
 })
 
