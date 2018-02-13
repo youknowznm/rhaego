@@ -2,9 +2,11 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {withStyles} from 'material-ui/styles'
 import {TextField, Button, Typography} from 'material-ui'
+import {FormControl, FormHelperText} from 'material-ui/Form'
+import Input, {InputLabel} from 'material-ui/Input'
 import FileUpload from 'material-ui-icons/FileUpload'
 import Chip from 'material-ui/Chip'
-import {removeTag} from '../actions'
+import {removeTag, adjustTagInputIndent, addTag} from '../actions'
 
 import './editor.css'
 
@@ -16,17 +18,27 @@ class Editor extends React.Component {
   constructor() {
     super(...arguments)
   }
+  componentDidMount() {
+    this.props.thisAdjustTagInputIndent()
+  }
+  componentDidUpdate() {
+    this.props.thisAdjustTagInputIndent()
+  }
   handleDelete = (index) => () => {
     this.props.thisRemoveTag(index)
     this.setState({})
   }
-  componentWillMount() {
-    setTimeout(() => {
-      console.log(getComputedStyle(document.querySelector('.tags-container')).width);
-    }, 20)
-  }
-  componentWillUpdate() {
-    console.log(getComputedStyle(document.querySelector('.tags-container')).width);
+  handleTagInputKeyUp = (evt) => {
+    const target = evt.target
+    const trimmedTagContent = target.value.trim()
+    if (evt.key === 'Enter'
+      && trimmedTagContent.length >= 3
+      && this.props.articleDetail.tags.length <= 1
+    ) {
+      this.props.thisAddTag(trimmedTagContent)
+      target.value = ''
+      this.setState({})
+    }
   }
   render() {
     const {
@@ -34,6 +46,7 @@ class Editor extends React.Component {
       thisRemoveTag,
       articleDetail
     } = this.props
+    const maximumTagsReached = (articleDetail.tags.length === 2)
     return (
       <div className="editor-wrap">
         <div className="row">
@@ -43,16 +56,33 @@ class Editor extends React.Component {
             label="Title"
             margin="normal"
             helperText="10~20 characters are required for title."
+            error
           />
           {/* 标签 */}
           <div className="editor-tags">
-            <TextField
-              className="fff"
-              label="Tags"
+            <FormControl
+              // className="editor-title"
               margin="normal"
-              helperText="3~12 characters are required for each tag. 1~2 tags are required."
               fullWidth
-            />
+              >
+              <InputLabel
+                shrink={true}
+              >
+                Tags
+              </InputLabel>
+              <Input
+                className="editor-tags-input"
+                placeholder={maximumTagsReached ? '' : "Type and press enter."}
+                inputProps={{
+                  'maxLength': '12',
+                }}
+                disabled={maximumTagsReached}
+                onKeyUp={this.handleTagInputKeyUp}
+              />
+              <FormHelperText>
+                1~2 tags are required. 3~12 characters are required for each tag.
+              </FormHelperText>
+            </FormControl>
             <div className="tags-container">
               {
                 articleDetail.tags.map((tag, index) => (
@@ -151,12 +181,19 @@ class Editor extends React.Component {
 
 const mapState = (state) => ({
   articleDetail: state.editor.articleDetail,
+  tagsWidth: state.editor.tagsWidth,
 })
 
 const mapDispatch = (dispatch) => ({
   thisRemoveTag: (index) => {
     dispatch(removeTag(index))
-  }
+  },
+  thisAdjustTagInputIndent: () => {
+    dispatch(adjustTagInputIndent())
+  },
+  thisAddTag: (tagContent) => {
+    dispatch(addTag(tagContent))
+  },
 })
 
 const EditorWrap = connect(mapState, mapDispatch)(Editor)
