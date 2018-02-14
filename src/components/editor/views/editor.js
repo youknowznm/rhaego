@@ -44,21 +44,12 @@ class Editor extends React.Component {
     const trimmedTagContent = target.value.trim()
     if (evt.key === 'Enter'
       && trimmedTagContent.length >= 3
-      && this.props.articleFields.tags.length <= 1
+      && this.props.articleFields.tags.value.length <= 1
     ) {
       this.props.thisAddTag(trimmedTagContent)
       target.value = ''
       this.setState({})
     }
-  }
-  handleFieldChange = (fieldName) => (evt) => {
-    const fieldActionMap = {
-      title: updateTitleField,
-      summary: updateSummaryField,
-      createdDate: updateCreatedDateField,
-      content: updateContentField,
-    }
-    store.dispatch(fieldActionMap[fieldName](evt.target.value))
   }
   render() {
     const {
@@ -66,6 +57,7 @@ class Editor extends React.Component {
       thisRemoveTag,
       articleFields,
       parsedHTMLContent,
+      thisUpdateTargetField,
     } = this.props
     const maximumTagsReached = (articleFields.tags.value.length === 2)
     return (
@@ -78,7 +70,7 @@ class Editor extends React.Component {
             margin="normal"
             helperText="10~20 characters are required for title."
             defaultValue={articleFields.title.value}
-            onChange={this.handleFieldChange('title')}
+            onChange={thisUpdateTargetField('title')}
             inputProps={{
               'maxLength': '20',
             }}
@@ -89,12 +81,8 @@ class Editor extends React.Component {
               // className="editor-title"
               margin="normal"
               fullWidth
-              >
-              <InputLabel
-                shrink={true}
-              >
-                Tags
-              </InputLabel>
+            >
+              <InputLabel shrink={true}>Tags</InputLabel>
               <Input
                 className="editor-tags-input"
                 placeholder={maximumTagsReached ? '' : "Type and press enter."}
@@ -116,7 +104,7 @@ class Editor extends React.Component {
                     label={tag}
                     onDelete={this.handleRemoveTag(index)}
                     className="tag"
-                    />
+                  />
                 ))
               }
             </div>
@@ -132,20 +120,30 @@ class Editor extends React.Component {
             margin="normal"
             defaultValue={articleFields.summary.value}
             helperText="10~50 characters are required for summary."
-            onChange={this.handleFieldChange('summary')}
+            onChange={thisUpdateTargetField('summary')}
             inputProps={{
               'maxLength': '50',
             }}
           />
           {/* 日期 */}
-          <TextField
+          <FormControl
             className="editor-created-date"
-            label="Created"
-            type="date"
             margin="normal"
-            defaultValue={articleFields.createdDate.value}
-            helperText="A valid create date is required."
-          />
+          >
+            <InputLabel shrink={true}>
+              Created Date
+            </InputLabel>
+            <Input
+              type="date"
+              inputProps={{
+                'maxLength': '12',
+              }}
+              defaultValue={articleFields.createdDate.value}
+            />
+            <FormHelperText>
+              A valid create date is required.
+            </FormHelperText>
+          </FormControl>
         </div>
 
         <div className="row">
@@ -156,7 +154,7 @@ class Editor extends React.Component {
             multiline
             defaultValue={articleFields.content.value}
             rows="35"
-            onChange={this.handleFieldChange('content')}
+            onChange={thisUpdateTargetField('content')}
             helperText="Content will be parsed as markdown."
             margin="normal"
           />
@@ -168,10 +166,10 @@ class Editor extends React.Component {
               dangerouslySetInnerHTML={{__html: parsedHTMLContent}}
             ></article>
           </div>
-
         </div>
 
         <div className="row">
+          {/* 上传图片按钮 */}
           <div className="button-wrap upload-wrap">
             <Button>
               upload picture
@@ -182,6 +180,7 @@ class Editor extends React.Component {
               after successful upload.
             </Typography>
           </div>
+          {/* 保存和取消按钮 */}
           <div className="button-wrap">
             <Button raised className="button-save" color="primary">
               save
@@ -193,8 +192,9 @@ class Editor extends React.Component {
         </div>
 
         <div className="row">
+          {/* 删除文章按钮 */}
           <div className="button-wrap full-width">
-            <Button raised fullWidth color="secondary" className="">
+            <Button raised color="secondary" fullWidth className="">
               delete article
             </Button>
           </div>
@@ -221,6 +221,17 @@ const mapDispatch = (dispatch) => ({
   thisAddTag: (tagContent) => {
     dispatch(addTag(tagContent))
   },
+  thisUpdateTargetField: (fieldName) => (evt) => {
+    const fieldActionMap = {
+      title: updateTitleField,
+      summary: updateSummaryField,
+      createdDate: updateCreatedDateField,
+      content: updateContentField,
+    }
+    dispatch(fieldActionMap[fieldName](evt.target.value))
+  },
+
+
   thisPreviewContent: () => {
     dispatch(previewContent())
   },

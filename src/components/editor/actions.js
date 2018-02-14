@@ -25,7 +25,6 @@ export const adjustTagInputIndent = () => ({
   type: ADJUST_TAG_INPUT_INDENT,
 })
 
-
 export const updateTitleField = (newValue) => ({
   type: UPDATE_TITLE_FIELD,
   newValue,

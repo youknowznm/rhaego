@@ -73,6 +73,7 @@ export default (state = defaultState, action) => {
         articleFields: fields_4,
         parsedHTMLContent,
       }
+      
     case ADD_TAG:
       let tags_1 = state.articleFields.tags
       tags_1.value.push(action.tagContent)
@@ -82,7 +83,7 @@ export default (state = defaultState, action) => {
       };
     case REMOVE_TAG:
       let tags_2 = state.articleFields.tags
-      tags_2.value = tags_2.value.splice(action.tagIndex, 1)
+      tags_2.value.splice(action.tagIndex, 1)
       return {
         ...state,
         tags: tags_2,
@@ -94,12 +95,7 @@ export default (state = defaultState, action) => {
         ...state,
         tagsWidth,
       }
-    // case PREVIEW_CONTENT:
-    //   let parsedHTMLContent = marked(state.article.content.value)
-    //   return {
-    //     ...state,
-    //     parsedHTMLContent,
-    //   }
+
     default:
       return state;
   }
