@@ -66,9 +66,9 @@ class Editor extends React.Component {
           {/* 标题 */}
           <TextField
             className="editor-title"
-            label="Title"
+            label="标题"
             margin="normal"
-            helperText="10~20 characters are required for title."
+            helperText="输入10至20字作为标题"
             defaultValue={articleFields.title.value}
             onChange={thisUpdateTargetField('title')}
             inputProps={{
@@ -82,10 +82,10 @@ class Editor extends React.Component {
               margin="normal"
               fullWidth
             >
-              <InputLabel shrink={true}>Tags</InputLabel>
+              <InputLabel shrink={true}>标签</InputLabel>
               <Input
                 className="editor-tags-input"
-                placeholder={maximumTagsReached ? '' : "Type and press enter."}
+                placeholder={maximumTagsReached ? '' : "输入后按回车以确认"}
                 inputProps={{
                   'maxLength': '12',
                 }}
@@ -93,7 +93,7 @@ class Editor extends React.Component {
                 onKeyUp={this.handleTagInputKeyUp}
               />
               <FormHelperText>
-                1~2 tags are required. 3~12 characters are required for each tag.
+                需1至2个标签，每个标签需3至12字。
               </FormHelperText>
             </FormControl>
             <div className="tags-container">
@@ -116,10 +116,10 @@ class Editor extends React.Component {
           {/* 摘要 */}
           <TextField
             className="editor-summary"
-            label="Summary"
+            label="摘要"
             margin="normal"
             defaultValue={articleFields.summary.value}
-            helperText="10~50 characters are required for summary."
+            helperText="输入10至50字作为摘要。"
             onChange={thisUpdateTargetField('summary')}
             inputProps={{
               'maxLength': '50',
@@ -131,7 +131,7 @@ class Editor extends React.Component {
             margin="normal"
           >
             <InputLabel shrink={true}>
-              Created Date
+              创建时间
             </InputLabel>
             <Input
               type="date"
@@ -141,7 +141,7 @@ class Editor extends React.Component {
               defaultValue={articleFields.createdDate.value}
             />
             <FormHelperText>
-              A valid create date is required.
+              需提供有效的创建日期。
             </FormHelperText>
           </FormControl>
         </div>
@@ -150,17 +150,17 @@ class Editor extends React.Component {
           {/* 内容 */}
           <TextField
             className="editor-content"
-            label="Content"
+            label="内容"
             multiline
             defaultValue={articleFields.content.value}
             rows="35"
             onChange={thisUpdateTargetField('content')}
-            helperText="Content will be parsed as markdown."
+            helperText="内容将以 Markdown 渲染。"
             margin="normal"
           />
           {/* 预览 */}
           <div className="editor-preview">
-            <Typography type="caption" className="preview-caption">Preview</Typography>
+            <Typography type="caption" className="preview-caption">预览</Typography>
             <article
               className="editor-preview-viewer"
               dangerouslySetInnerHTML={{__html: parsedHTMLContent}}
@@ -172,21 +172,20 @@ class Editor extends React.Component {
           {/* 上传图片按钮 */}
           <div className="button-wrap upload-wrap">
             <Button>
-              upload picture
+              上传图片
               <FileUpload className="icon-right" />
             </Button>
             <Typography type="caption" className="upload-help-text">
-              Refer to picture as "youknowznm.com/pic/[PICTURE_NAME]"
-              after successful upload.
+              上传成功后以"youknowznm.com/pic/[PICTURE_NAME]"的形式引用图片。
             </Typography>
           </div>
           {/* 保存和取消按钮 */}
           <div className="button-wrap">
             <Button raised className="button-save" color="primary">
-              save
+              保存
             </Button>
             <Button raised className="button-cancel">
-              cancel
+              取消
             </Button>
           </div>
         </div>
@@ -195,7 +194,7 @@ class Editor extends React.Component {
           {/* 删除文章按钮 */}
           <div className="button-wrap full-width">
             <Button raised color="secondary" fullWidth className="">
-              delete article
+              删除文章
             </Button>
           </div>
         </div>

@@ -41,19 +41,19 @@ class Logout extends React.Component {
           onClose={closeLogoutDialog}
         >
           <DialogTitle id="alert-dialog-title">
-            Confirm logout?
+            确定注销？
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              Once logged out, you won't be able to create articles or manage comments.
+              注销后将无法创建文章或管理评论。
             </DialogContentText>
           </DialogContent>
           <DialogActions>
             <Button onClick={thisRequestLogout} color="primary">
-              confirm
+              确认
             </Button>
             <Button onClick={closeLogoutDialog} color="default" autoFocus>
-              cancel
+              取消
             </Button>
           </DialogActions>
         </Dialog>

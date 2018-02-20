@@ -28,7 +28,7 @@ const DrawerBody = ({classes, firstPathname}) => (
           <ListItemIcon>
             <InsertDriveFileIcon />
           </ListItemIcon>
-          <ListItemText primary="Articles" />
+          <ListItemText primary="文章" />
         </ListItem>
       </Link>
       <Link to="/products">
@@ -36,7 +36,7 @@ const DrawerBody = ({classes, firstPathname}) => (
           <ListItemIcon>
             <CodeIcon />
           </ListItemIcon>
-          <ListItemText primary="Products" />
+          <ListItemText primary="作品" />
         </ListItem>
       </Link>
       <Link to="/messages">
@@ -44,7 +44,7 @@ const DrawerBody = ({classes, firstPathname}) => (
           <ListItemIcon>
             <MessagesIcon />
           </ListItemIcon>
-          <ListItemText primary="Messages" />
+          <ListItemText primary="留言" />
         </ListItem>
       </Link>
     </List>
@@ -57,7 +57,7 @@ const DrawerBody = ({classes, firstPathname}) => (
           <ListItemIcon>
             <InfoIcon />
           </ListItemIcon>
-          <ListItemText primary="About" />
+          <ListItemText primary="关于" />
         </ListItem>
       </Link>
     </List>
@@ -68,7 +68,7 @@ const DrawerBody = ({classes, firstPathname}) => (
           <ListItemIcon>
             <PersonIcon />
           </ListItemIcon>
-          <ListItemText primary="Administration" />
+          <ListItemText primary="管理" />
         </ListItem>
       </Link>
     </List>

@@ -16,7 +16,7 @@ export default createReducer()
     return {
       ...state,
       status: 'completed',
-      statusMsg: 'Fetch completed.',
+      statusMsg: '获取成功。',
       productsData,
     }
   })
@@ -24,7 +24,7 @@ export default createReducer()
     return {
       ...state,
       status: 'failed',
-      statusMsg: 'Fetch failed. Please try again later.',
+      statusMsg: '获取失败。请稍后重试。',
       productsData: [],
     }
   })

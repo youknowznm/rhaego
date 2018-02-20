@@ -27,7 +27,7 @@ class ControlPanel extends React.Component {
               <ListItemIcon>
                 <NoteAddIcon />
               </ListItemIcon>
-              <ListItemText inset primary="New Article" />
+              <ListItemText inset primary="新建文章" />
             </ListItem>
           </Link>
         </List>
@@ -39,7 +39,7 @@ class ControlPanel extends React.Component {
             <ListItemIcon>
               <ExitToAppIcon />
             </ListItemIcon>
-            <ListItemText inset primary="Log Out" />
+            <ListItemText inset primary="注销" />
           </ListItem>
         </List>
 

@@ -4,7 +4,7 @@ import {Typography} from 'material-ui'
 const NotFound = () => {
   return (
     <Typography className="mb-center" type="subheading">
-      The requested URL was not found.
+      未找到请求的 URL。
     </Typography>
   );
 }

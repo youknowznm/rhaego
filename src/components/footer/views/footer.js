@@ -57,7 +57,7 @@ const Footer = ({classes}) => (
           </li>
           <li className="about-item view-source">
             <Button target="_blank" href="https://github.com/youknowznm/material-blog">
-              view source
+              查看源码
             </Button>
           </li>
         </ul>

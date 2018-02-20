@@ -66,12 +66,12 @@ class Login extends React.Component {
       <div className="login-wrap">
         <Card className="login">
           <Typography className="info" component="i" type="caption">
-            Login as administrator to manage articles and comments.
+            以管理员身份登录，管理文章和评论。
           </Typography>
           <form className="form">
             <FormControl fullWidth margin="dense">
               <InputLabel htmlFor="login-email">
-                Email
+                邮箱地址
               </InputLabel>
               <Input
                 id="login-email"
@@ -80,13 +80,13 @@ class Login extends React.Component {
                 error={emailError}
               />
               <FormHelperText className={emailError ? 'error' : ''}>
-                Common email format is required.
+                输入常见的邮箱格式。
               </FormHelperText>
             </FormControl>
 
             <FormControl fullWidth margin="dense">
               <InputLabel htmlFor="login-password">
-                Password
+                密码
               </InputLabel>
               <Input
                 id="login-password"
@@ -103,7 +103,7 @@ class Login extends React.Component {
                 }
               />
               <FormHelperText className={passwordError ? 'error' : ''}>
-                6 to 20 characters are required for password.
+                密码由6至20个字符组成。
               </FormHelperText>
             </FormControl>
 
@@ -116,7 +116,7 @@ class Login extends React.Component {
               didClick={thisCheckLoginFields}
               color="secondary"
             >
-              log in
+              登录
             </LoadingButton>
             <Button className="action-button"
               raised
@@ -124,7 +124,7 @@ class Login extends React.Component {
               color="default"
               onClick={this.backToReferer}
             >
-              cancel
+              取消
             </Button>
           </div>
 

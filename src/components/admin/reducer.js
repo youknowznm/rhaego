@@ -39,14 +39,14 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         requestLogoutStatus: 'completed',
-        logoutResultMessage: 'Logout successful.',
+        logoutResultMessage: '注销成功。',
       }
 
     case REQUEST_LOGOUT_FAILED:
       return {
         ...state,
         requestLogoutStatus: 'failed',
-        logoutResultMessage: 'An error occurred. Please try again later.',
+        logoutResultMessage: '未知错误。请稍后重试',
       }
 
     default:
