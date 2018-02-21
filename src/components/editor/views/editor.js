@@ -68,7 +68,7 @@ class Editor extends React.Component {
             className="editor-title"
             label="标题"
             margin="normal"
-            helperText="输入10至20字作为标题"
+            helperText="输入10至20字作为标题。"
             defaultValue={articleFields.title.value}
             onChange={thisUpdateTargetField('title')}
             inputProps={{
@@ -159,10 +159,20 @@ class Editor extends React.Component {
             margin="normal"
           />
           {/* 预览 */}
-          <div className="editor-preview">
-            <Typography type="caption" className="preview-caption">预览</Typography>
+          <div className="editor-preview-wrap">
+            <TextField
+              className="editor-preview-placeholder"
+              defaultValue=" "
+              label="预览"
+              fullWidth
+              multiline
+              rows="35"
+              margin="normal"
+              disabled
+              helperText="以上是转换后的 HTML。"
+            />
             <article
-              className="editor-preview-viewer"
+              className="editor-preview mb-article"
               dangerouslySetInnerHTML={{__html: parsedHTMLContent}}
             ></article>
           </div>
@@ -176,7 +186,7 @@ class Editor extends React.Component {
               <FileUpload className="icon-right" />
             </Button>
             <Typography type="caption" className="upload-help-text">
-              上传成功后以"youknowznm.com/pic/[PICTURE_NAME]"的形式引用图片。
+              上传成功后以 "youknowznm.com/pic/[PICTURE_NAME]" 的形式引用。
             </Typography>
           </div>
           {/* 保存和取消按钮 */}
@@ -229,11 +239,9 @@ const mapDispatch = (dispatch) => ({
     }
     dispatch(fieldActionMap[fieldName](evt.target.value))
   },
-
-
-  thisPreviewContent: () => {
-    dispatch(previewContent())
-  },
+  // thisPreviewContent: () => {
+  //   dispatch(previewContent())
+  // },
 })
 
 const EditorWrap = connect(mapState, mapDispatch)(Editor)

@@ -154,7 +154,7 @@ module.exports = {
   },
   p39: {
     en: 'Refer to picture as "youknowznm.com/pic/[PICTURE_NAME]" after successful upload.',
-    zh: '上传成功后以"youknowznm.com/pic/[PICTURE_NAME]"的形式引用图片。',
+    zh: '上传成功后以 "youknowznm.com/pic/[PICTURE_NAME]" 的形式引用。',
   },
   p40: {
     en: '',

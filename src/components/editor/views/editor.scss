@@ -1,3 +1,6 @@
+@charset "UTF-8";
+@import "../../../assets/styles/common.scss";
+
 .row {
   position: relative;
   width: 100%;
@@ -64,23 +67,23 @@
     }
   }
   // 预览
-  .editor-preview {
+  .editor-preview-wrap {
     position: relative;
     width: 50%;
-    font-size: 14px;
-    margin: 16px 0 8px 12px;
-    .preview-caption {
-      // margin-top: 6px;
-    }
-    .editor-preview-viewer {
+    .editor-preview-placeholder {
       position: relative;
-      width: 100%;
-      font-size: 14px;
-      margin-top: 8px;
-      font-family: "Roboto";
-      > *:first-child {
-        margin-top: 0 !important;
+      textarea {
+        font-size: 14px !important;
       }
+    }
+    .editor-preview {
+      position: absolute;
+      top: 38px;
+      left: 0;
+      bottom: 35px;
+      right: 0;
+      background: #eee;
+      overflow-y: scroll;
     }
   }
 
@@ -101,7 +104,7 @@
     .editor-content {
       width: 100% !important;
     }
-    .editor-preview {
+    .editor-preview-wrap {
       display: none;
     }
   }

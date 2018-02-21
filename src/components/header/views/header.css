@@ -1,3 +1,100 @@
+.mb-article {
+  text-align: left;
+  font-family: "Roboto";
+  font-size: 14px !important;
+  line-height: 24px !important;
+  color: #212121; }
+  .mb-article b {
+    font-size: 500; }
+  .mb-article u {
+    text-decoration: none;
+    border-bottom: 2px solid #212121;
+    padding-bottom: 0; }
+  .mb-article strike {
+    text-decoration: strike-through; }
+  .mb-article h1, .mb-article h2, .mb-article h3, .mb-article h4, .mb-article h5, .mb-article h6 {
+    color: #212121;
+    line-height: 32px; }
+    .mb-article h1:first-child, .mb-article h2:first-child, .mb-article h3:first-child, .mb-article h4:first-child, .mb-article h5:first-child, .mb-article h6:first-child {
+      margin-top: 0 !important; }
+  .mb-article h1 {
+    border-bottom: 1px solid #ebebeb;
+    font-size: 24px;
+    font-family: "Roboto Mono";
+    letter-spacing: -.01em;
+    margin: 40px 0 20px;
+    padding-bottom: 3px; }
+  .mb-article h2, .mb-article h3, .mb-article h4, .mb-article h5, .mb-article h6 {
+    font-size: 20px;
+    margin: 32px 0 16px; }
+  .mb-article p {
+    font-family: "Roboto";
+    margin: 16px 0;
+    padding: 0;
+    font-size: 16px;
+    line-height: 24px; }
+  .mb-article blockquote {
+    padding-left: 12px;
+    box-sizing: border-box;
+    font-family: "Roboto";
+    font-size: 13px;
+    line-height: 20px;
+    margin: 16px 0;
+    border-left: 4px solid #cfd8e6;
+    color: #757575; }
+  .mb-article code {
+    font-weight: 500;
+    font-size: .9em;
+    line-height: 1em;
+    word-break: break-word;
+    font-family: "Roboto Mono";
+    background-color: #f7f7f7;
+    color: #37474f; }
+  .mb-article pre {
+    font-size: 14px;
+    line-height: 20px;
+    font-family: 'Roboto Mono';
+    background-color: #f7f7f7;
+    color: #37474f;
+    margin: 16px 0;
+    overflow-x: auto;
+    padding: 8px;
+    position: relative; }
+  .mb-article li {
+    font-size: 14px;
+    font-family: "Roboto"; }
+  .mb-article ul, .mb-article ol {
+    margin: 0;
+    padding-left: 40px; }
+    .mb-article ul li, .mb-article ol li {
+      margin: 8px 0;
+      padding: 0;
+      list-style-position: outside; }
+  .mb-article ul > li {
+    list-style-type: disc; }
+  .mb-article ol > li {
+    list-style-type: decimal; }
+  .mb-article a {
+    color: #039be5;
+    box-sizing: border-box;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 4px;
+    transition: all .2s ease-out;
+    outline: 0; }
+    .mb-article a:hover {
+      border-bottom-color: #039be5;
+      padding-bottom: 2px; }
+  .mb-article img {
+    display: block;
+    margin: 30px auto;
+    width: 100%;
+    max-width: 800px; }
+  .mb-article hr {
+    border: 0;
+    width: 60%;
+    margin: 18px auto;
+    border-bottom: 1px solid #333; }
+
 html {
   min-height: 500px; }
 
