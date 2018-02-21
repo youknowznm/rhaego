@@ -6,7 +6,6 @@ import {
 
   TOGGLE_LOGOUT_DIALOG,
 } from './actionTypes'
-import {createReducer} from 'redux-action-tools'
 
 const defaultState = {
   dialogOpen: false,

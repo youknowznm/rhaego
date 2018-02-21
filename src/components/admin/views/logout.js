@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Button, Snackbar, Divider} from 'material-ui'
+import {Button, Snackbar} from 'material-ui'
 import Dialog, {
   DialogActions,
   DialogContent,
@@ -30,7 +30,6 @@ class Logout extends React.Component {
     const {
       closeLogoutDialog,
       thisRequestLogout,
-      requestLogoutStatus,
       logoutResultMessage,
       dialogOpen,
     } = this.props

@@ -1,12 +1,12 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {withStyles} from 'material-ui/styles'
 import {TextField, Button, Typography} from 'material-ui'
 import {FormControl, FormHelperText} from 'material-ui/Form'
 import Input, {InputLabel} from 'material-ui/Input'
 import FileUpload from 'material-ui-icons/FileUpload'
 import Chip from 'material-ui/Chip'
 import store from '../../../Store'
+import {highlightAllPre} from '../../../utils'
 import {
   updateTitleField,
   updateSummaryField,
@@ -16,55 +16,21 @@ import {
   addTag,
   removeTag,
   adjustTagInputIndent,
-  previewContent,
 } from '../actions'
-
-import SyntaxHighlighter from 'react-syntax-highlighter'
-import { atomOneDark } from 'react-syntax-highlighter/styles/hljs'
-// import { render } from 'jsx-to-html';
-import ReactDOMServer from 'react-dom/server';
-import {getHighlightedHTML} from '../../../utils';
 
 import './editor.css'
 
-
-const styles = (theme) => ({
-
-});
-
-const highlightAllPre = () => {
-  const preArr = document.querySelector('.editor-preview').getElementsByTagName('pre')
-  Array.prototype.forEach.call(preArr, ((preEle) => {
-    const codeEle = preEle.querySelector('code')
-    const highlightedJSX = (
-      <SyntaxHighlighter language="javascript" style={atomOneDark}>
-        {codeEle.innerHTML}
-      </SyntaxHighlighter>
-    )
-    console.log(ReactDOMServer.renderToString(highlightedJSX));
-    codeEle.innerHTML = getHighlightedHTML(ReactDOMServer.renderToString(highlightedJSX))
-  }))
-}
-
-
-
 class Editor extends React.Component {
-  constructor() {
-    super(...arguments)
-  }
   componentDidMount() {
     this.props.thisAdjustTagInputIndent()
     // 初始化时进行预览
     store.dispatch(updateContentField(this.props.articleFields.content.value))
-
-    setTimeout(function(argument) {
-      highlightAllPre()
-    }, 1000)
-
-
   }
-  componentDidUpdate() {
+  componentDidUpdate(nextProps) {
     this.props.thisAdjustTagInputIndent()
+    if (this.props.parsedHTMLContent !== nextProps.parsedHTMLContent) {
+      highlightAllPre('.editor-preview')
+    }
   }
   handleRemoveTag = (index) => () => {
     this.props.thisRemoveTag(index)
@@ -84,8 +50,6 @@ class Editor extends React.Component {
   }
   render() {
     const {
-      classes,
-      thisRemoveTag,
       articleFields,
       parsedHTMLContent,
       thisUpdateTargetField,
@@ -274,4 +238,4 @@ const mapDispatch = (dispatch) => ({
 
 const EditorWrap = connect(mapState, mapDispatch)(Editor)
 
-export default withStyles(styles)(EditorWrap)
+export default EditorWrap

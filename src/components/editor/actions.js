@@ -7,7 +7,6 @@ import {
   ADD_TAG,
   REMOVE_TAG,
   ADJUST_TAG_INPUT_INDENT,
-  PREVIEW_CONTENT,
 } from './actionTypes'
 
 export const addTag = (tagContent) => ({
@@ -17,9 +16,6 @@ export const addTag = (tagContent) => ({
 export const removeTag = (tagIndex) => ({
   type: REMOVE_TAG,
   tagIndex,
-})
-export const previewContent = () => ({
-  type: PREVIEW_CONTENT,
 })
 export const adjustTagInputIndent = () => ({
   type: ADJUST_TAG_INPUT_INDENT,

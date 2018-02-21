@@ -5,7 +5,6 @@ import {
 } from './actionTypes'
 import axios from 'axios'
 import {
-	checkIfLoggedIn as checkIfLoggedInApi,
 	logout as requestLogoutApi,
 } from '../../api'
 import {createAsyncAction} from 'redux-action-tools'

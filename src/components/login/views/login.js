@@ -42,6 +42,8 @@ class Login extends React.Component {
           this.backToReferer()
         }, 1500)
         break
+      default:
+        return
     }
   }
   backToReferer = () => {

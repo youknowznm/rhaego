@@ -9,7 +9,6 @@ import {
   ADD_TAG,
   REMOVE_TAG,
   ADJUST_TAG_INPUT_INDENT,
-  PREVIEW_CONTENT,
 } from './actionTypes'
 
 const defaultState = {
@@ -46,11 +45,27 @@ paragraph
 
 \`\`\`javascript
 
-import SyntaxHighlighter from 'react-syntax-highlighter/prism';
-import { dark } from 'react-syntax-highlighter/styles/prism';
-const Component = () => {
-  const codeString = '(num) => num + 1';
-  return <SyntaxHighlighter language='javascript' style={dark}>{codeString}</SyntaxHighlighter>;  
+class Editor extends React.Component {
+  constructor() {
+    super(...arguments)
+  }
+  componentDidMount() {
+    this.props.thisAdjustTagInputIndent()
+    // 初始化时进行预览
+    store.dispatch(updateContentField(this.props.articleFields.content.value))
+  }
+  componentWillUpdate(nextProps) {
+  }
+  componentDidUpdate(nextProps) {
+    this.props.thisAdjustTagInputIndent()
+    if (this.props.parsedHTMLContent !== nextProps.parsedHTMLContent) {
+      highlightAllPre('.editor-preview')
+    }
+  }
+  handleRemoveTag = (index) => () => {
+    this.props.thisRemoveTag(index)
+    this.setState({})
+  }
 }
 \`\`\`
 
