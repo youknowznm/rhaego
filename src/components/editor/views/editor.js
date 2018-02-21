@@ -19,11 +19,34 @@ import {
   previewContent,
 } from '../actions'
 
+import SyntaxHighlighter from 'react-syntax-highlighter'
+import { atomOneDark } from 'react-syntax-highlighter/styles/hljs'
+// import { render } from 'jsx-to-html';
+import ReactDOMServer from 'react-dom/server';
+import {getHighlightedHTML} from '../../../utils';
+
 import './editor.css'
+
 
 const styles = (theme) => ({
 
 });
+
+const highlightAllPre = () => {
+  const preArr = document.querySelector('.editor-preview').getElementsByTagName('pre')
+  Array.prototype.forEach.call(preArr, ((preEle) => {
+    const codeEle = preEle.querySelector('code')
+    const highlightedJSX = (
+      <SyntaxHighlighter language="javascript" style={atomOneDark}>
+        {codeEle.innerHTML}
+      </SyntaxHighlighter>
+    )
+    console.log(ReactDOMServer.renderToString(highlightedJSX));
+    codeEle.innerHTML = getHighlightedHTML(ReactDOMServer.renderToString(highlightedJSX))
+  }))
+}
+
+
 
 class Editor extends React.Component {
   constructor() {
@@ -31,6 +54,14 @@ class Editor extends React.Component {
   }
   componentDidMount() {
     this.props.thisAdjustTagInputIndent()
+    // 初始化时进行预览
+    store.dispatch(updateContentField(this.props.articleFields.content.value))
+
+    setTimeout(function(argument) {
+      highlightAllPre()
+    }, 1000)
+
+
   }
   componentDidUpdate() {
     this.props.thisAdjustTagInputIndent()
@@ -239,9 +270,6 @@ const mapDispatch = (dispatch) => ({
     }
     dispatch(fieldActionMap[fieldName](evt.target.value))
   },
-  // thisPreviewContent: () => {
-  //   dispatch(previewContent())
-  // },
 })
 
 const EditorWrap = connect(mapState, mapDispatch)(Editor)

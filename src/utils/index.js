@@ -4,6 +4,7 @@ import debounce from './debounce'
 import getQueryObj from './getQueryObj'
 import LoadingArea from './loadingArea'
 import LoadingButton from './loadingButton'
+import getHighlightedHTML from './getHighlightedHTML'
 import regexps from './regexps'
 
 export {
@@ -14,4 +15,5 @@ export {
   LoadingArea,
   LoadingButton,
   regexps,
+  getHighlightedHTML,
 }

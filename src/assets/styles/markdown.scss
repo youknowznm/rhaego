@@ -1,0 +1,180 @@
+@charset "UTF-8";
+@import "./highlight.scss";
+
+$mb-article-font-light: rgba(0, 0, 0, .87);
+$mb-article-font-dark: #fff;
+
+// rgba(255, 255, 255, .7)
+$mb-article-border-light: rgba(0, 0, 0, .12);
+$mb-article-border-dark: rgba(255, 255, 255, .12);
+
+$mb-article-link: #039be5;
+
+$mb-article-code-background-light: #fff;
+$mb-article-code-background-dark: rgb(66, 66, 66);
+
+$mb-article-pre-background: rgb(40, 44, 52);
+
+$mb-article-pre-color: #abb2bf;
+
+$mb-article-quote-light: rgba(0, 0, 0, .54);
+$mb-article-quote-dark: #fff;
+
+// 全局文章样式
+// 用于编辑页的预览区和文章详情页
+// 参考 material-ui 的 typography 部分
+// https://material-ui-next.com/style/typography/#typography
+
+.mb-article {
+  font-family: "Roboto";
+  text-align: left;
+  padding: 0 6px;
+  // font-size: 14px !important;
+  // line-height: 20px !important;
+  color: $mb-article-font-light;
+  p {
+    font-family: "Roboto";
+    margin-bottom: 5px;
+    padding: 0;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  b {
+    font-size: 500;
+  }
+  i {
+
+  }
+  u {
+    text-decoration: none;
+    border-bottom: 2px solid $mb-article-font-light;
+    padding-bottom: 0;
+  }
+  strike {
+    text-decoration: strike-through;
+  }
+  h1 {
+    border-bottom: 1px solid $mb-article-border-light;
+    font-size: 24px;
+    line-height: 1.35;
+    font-family: "Roboto Mono";
+    letter-spacing: -.01em;
+    margin-bottom: 8px;
+    padding-bottom: 3px;
+    color: $mb-article-font-light;
+  }
+  h2, h3, h4, h5, h6 {
+    color: $mb-article-font-light;
+    font-size: 16px;
+    margin-bottom: 5px;
+    line-height: 1.5;
+  }
+  blockquote {
+    padding-left: 12px;
+    box-sizing: border-box;
+    font-family: "Roboto";
+    p {
+      font-size: 12px;
+    }
+    line-height: 1.375;
+    margin: 0;
+    margin-bottom: 4px;
+    border-left: 4px solid rgb(207, 216, 230);
+    color: $mb-article-quote-light;
+  }
+  code {
+    padding: 3px 6px;
+    font-size: 14px;
+    line-height: 1.6;
+    // word-break: break-word;
+    font-family: "Roboto Mono";
+    background-color: $mb-article-code-background-light;
+  }
+  pre {
+    font-family: "monospace";
+    border-radius: 3px;
+    margin: 24px 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0 18px 18px;
+    position: relative;
+    background-color: $mb-article-pre-background;
+    line-height: 1.4;
+    code {
+      color: $mb-article-pre-color;
+      background-color: $mb-article-pre-background;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+  }
+  li {
+    font-size: 14px;
+    font-family: "Roboto";
+  }
+  ul, ol {
+    margin: 0;
+    padding-left: 24px;
+    li {
+      margin: 8px 0;
+      padding: 0;
+      list-style-position: outside;
+    }
+  }
+  ul > li {
+    list-style-type: disc;
+  }
+  ol > li {
+    list-style-type: decimal;
+  }
+  a {
+    color: $mb-article-link;
+    box-sizing: border-box;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 4px;
+    transition: all .2s ease-out;
+    outline: 0;
+    &:hover {
+      border-bottom-color: $mb-article-link;
+      padding-bottom: 2px;
+    }
+  }
+  img {
+    display: block;
+    margin: 30px auto;
+    width: 100%;
+    max-width: 800px;
+  }
+  hr {
+    border: 0;
+    width: 60%;
+    margin: 18px auto;
+    border-bottom: 1px solid $mb-article-border-light;
+  }
+}
+
+#mb-dark-theme {
+  .mb-article {
+    * {
+      color: $mb-article-font-dark;
+    }
+    h1,
+    hr {
+      border-color: $mb-article-border-dark;
+    }
+    a {
+      color: $mb-article-link;
+      &:hover {
+        border-color: $mb-article-link;
+      }
+    }
+    code {
+      background: $mb-article-code-background-dark;
+    }
+    pre code {
+      background: $mb-article-pre-background;
+    }
+    blockquote {
+      color: $mb-article-quote-dark;
+    }
+  }
+}
