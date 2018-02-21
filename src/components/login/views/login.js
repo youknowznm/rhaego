@@ -115,7 +115,7 @@ class Login extends React.Component {
             <LoadingButton
               buttonClassName="action-button"
               loadingStatus={loginRequestStatus}
-              didClick={thisCheckLoginFields}
+              onClick={thisCheckLoginFields}
               color="secondary"
             >
               登录

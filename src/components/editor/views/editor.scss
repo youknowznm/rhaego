@@ -87,6 +87,10 @@
     }
   }
 
+  #upload-picture {
+    display: none;
+  }
+
   @media (max-width: 700px) {
     .button-wrap {
       width: 100% !important;

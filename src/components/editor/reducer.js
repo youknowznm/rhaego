@@ -9,6 +9,9 @@ import {
   ADD_TAG,
   REMOVE_TAG,
   ADJUST_TAG_INPUT_INDENT,
+
+  UPLOAD_PICTURE_COMPLETED,
+  UPLOAD_PICTURE_FAILED,
 } from './actionTypes'
 
 const defaultState = {
@@ -36,6 +39,8 @@ const defaultState = {
 - **首都师范大学／本科／英语语言文学** *2010 - 2014*
 # h1
 ## h2
+
+![图片](https://oimagea4.ydstatic.com/image?id=-2562901240275817120&product=adpublish)
 
 paragraph
 
@@ -118,6 +123,9 @@ class Editor extends React.Component {
   },
   tagsWidth: 0,
   parsedHTMLContent: '',
+  pictureFile: null,
+  requestUploadStatus: '',
+  uploadResultMessage: '',
 }
 
 export default (state = defaultState, action) => {
@@ -173,6 +181,21 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         tagsWidth,
+      }
+
+    case UPLOAD_PICTURE_COMPLETED:
+      const resultData = action.payload.data
+      return {
+        ...state,
+        requestUploadStatus: 'completed',
+        uploadResultMessage: resultData.msg,
+      }
+    case UPLOAD_PICTURE_FAILED:
+      const errorData = action.payload.response.data
+      return {
+        ...state,
+        requestUploadStatus: 'failed',
+        uploadResultMessage: typeof errorData === 'string' ? errorData : errorData.msg,
       }
 
     default:

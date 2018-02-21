@@ -16,6 +16,8 @@ import {
   addTag,
   removeTag,
   adjustTagInputIndent,
+
+  uploadPicture,
 } from '../actions'
 
 import './editor.css'
@@ -53,6 +55,7 @@ class Editor extends React.Component {
       articleFields,
       parsedHTMLContent,
       thisUpdateTargetField,
+      thisUploadPicture,
     } = this.props
     const maximumTagsReached = (articleFields.tags.value.length === 2)
     return (
@@ -176,12 +179,29 @@ class Editor extends React.Component {
         <div className="row">
           {/* 上传图片按钮 */}
           <div className="button-wrap upload-wrap">
-            <Button>
-              上传图片
-              <FileUpload className="icon-right" />
+            <input
+              accept="image/*"
+              id="upload-picture"
+              type="file"
+              onChange={thisUploadPicture}
+            />
+            <label htmlFor="upload-picture">
+
+              <LoadingButton
+                buttonClassName="action-button"
+                loadingStatus={loginRequestStatus}
+                onClick={thisCheckLoginFields}
+                color="secondary"
+                component="span"
+              >
+                上传图片
+                <FileUpload className="icon-right" />
+              </LoadingButton>
+
             </Button>
+            </label>
             <Typography type="caption" className="upload-help-text">
-              上传成功后以 "youknowznm.com/pic/[PICTURE_NAME]" 的形式引用。
+              上传成功后以 "youknowznm.com/pictures/[PICTURE_NAME]" 的形式引用。
             </Typography>
           </div>
           {/* 保存和取消按钮 */}
@@ -234,6 +254,10 @@ const mapDispatch = (dispatch) => ({
     }
     dispatch(fieldActionMap[fieldName](evt.target.value))
   },
+  thisUploadPicture: (evt) => {
+    console.log(evt.target.files[0]);
+    dispatch(uploadPicture(evt.target.files[0]))
+  }
 })
 
 const EditorWrap = connect(mapState, mapDispatch)(Editor)
