@@ -1,9 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {TextField, Button, Typography} from 'material-ui'
+import {TextField, Button} from 'material-ui'
 import {FormControl, FormHelperText} from 'material-ui/Form'
 import Input, {InputLabel} from 'material-ui/Input'
-import FileUpload from 'material-ui-icons/FileUpload'
 import Chip from 'material-ui/Chip'
 import store from '../../../Store'
 import {highlightAllPre} from '../../../utils'
@@ -16,10 +15,9 @@ import {
   addTag,
   removeTag,
   adjustTagInputIndent,
-
-  uploadPicture,
 } from '../actions'
 
+import {view as Upload} from '../../upload'
 import './editor.css'
 
 class Editor extends React.Component {
@@ -27,6 +25,9 @@ class Editor extends React.Component {
     this.props.thisAdjustTagInputIndent()
     // 初始化时进行预览
     store.dispatch(updateContentField(this.props.articleFields.content.value))
+  }
+  componentWillUpdate(nextProps) {
+
   }
   componentDidUpdate(nextProps) {
     this.props.thisAdjustTagInputIndent()
@@ -55,7 +56,6 @@ class Editor extends React.Component {
       articleFields,
       parsedHTMLContent,
       thisUpdateTargetField,
-      thisUploadPicture,
     } = this.props
     const maximumTagsReached = (articleFields.tags.value.length === 2)
     return (
@@ -178,32 +178,7 @@ class Editor extends React.Component {
 
         <div className="row">
           {/* 上传图片按钮 */}
-          <div className="button-wrap upload-wrap">
-            <input
-              accept="image/*"
-              id="upload-picture"
-              type="file"
-              onChange={thisUploadPicture}
-            />
-            <label htmlFor="upload-picture">
-
-              <LoadingButton
-                buttonClassName="action-button"
-                loadingStatus={loginRequestStatus}
-                onClick={thisCheckLoginFields}
-                color="secondary"
-                component="span"
-              >
-                上传图片
-                <FileUpload className="icon-right" />
-              </LoadingButton>
-
-            </Button>
-            </label>
-            <Typography type="caption" className="upload-help-text">
-              上传成功后以 "youknowznm.com/pictures/[PICTURE_NAME]" 的形式引用。
-            </Typography>
-          </div>
+          <Upload />
           {/* 保存和取消按钮 */}
           <div className="button-wrap">
             <Button raised className="button-save" color="primary">
@@ -254,10 +229,6 @@ const mapDispatch = (dispatch) => ({
     }
     dispatch(fieldActionMap[fieldName](evt.target.value))
   },
-  thisUploadPicture: (evt) => {
-    console.log(evt.target.files[0]);
-    dispatch(uploadPicture(evt.target.files[0]))
-  }
 })
 
 const EditorWrap = connect(mapState, mapDispatch)(Editor)

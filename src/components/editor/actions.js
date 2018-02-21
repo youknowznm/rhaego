@@ -8,10 +8,10 @@ import {
   REMOVE_TAG,
   ADJUST_TAG_INPUT_INDENT,
 
-  UPLOAD_PICTURE,
+  CHECK_ARTICLE_FIELDS,
 } from './actionTypes'
 import {createAsyncAction} from 'redux-action-tools'
-import {uploadPicture as uploadPictureAPI} from '../../api'
+// import {uploadPicture as uploadPictureAPI} from '../../api'
 import axios from 'axios'
 
 export const addTag = (tagContent) => ({
@@ -41,16 +41,4 @@ export const updateCreatedDateField = (newValue) => ({
 export const updateContentField = (newValue) => ({
   type: UPDATE_CONTENT_FIELD,
   newValue,
-})
-
-export const uploadPicture = createAsyncAction(UPLOAD_PICTURE, (pictureFile) => {
-  const form = new FormData()
-  form.append('pictureFile', pictureFile)
-  return axios.post(
-    uploadPictureAPI,
-    form,
-    {
-      headers: {'Content-Type': 'multipart/form-data'},
-    }
-  )
 })

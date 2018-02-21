@@ -89,6 +89,7 @@ hue-6-2: #e6c07b
   color: rgba(0, 0, 0, 0.87); }
   .mb-article p {
     font-family: "Roboto";
+    margin: 0;
     margin-bottom: 5px;
     padding: 0;
     font-size: 14px;
@@ -262,7 +263,7 @@ a {
   min-width: 300px;
   width: 100%;
   padding: 9px; }
-  @media (min-width: 900px) {
+  @media (min-width: 750px) {
     .card-wrap {
       width: 50%; } }
   .card-wrap .card {

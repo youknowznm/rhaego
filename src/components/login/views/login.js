@@ -21,7 +21,7 @@ class Login extends React.Component {
     const fieldValue = evt.target.value
     this.props.thisUpdateLoginField(fieldName, fieldValue)
   }
-  componentWillUpdate (nextProps, nState) {
+  componentWillUpdate (nextProps) {
     switch (nextProps.loginRequestStatus) {
       case 'loading':
         if (nextProps.fieldsValid === true) {
@@ -35,15 +35,15 @@ class Login extends React.Component {
       case 'failed':
         setTimeout(() => {
           this.props.thisRequestLoginInit()
-        }, 1500)
+        }, 2000)
         break
       case 'completed':
         setTimeout(() => {
           this.backToReferer()
-        }, 1500)
+        }, 2000)
         break
       default:
-        return
+        break
     }
   }
   backToReferer = () => {
