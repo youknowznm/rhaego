@@ -1,6 +1,11 @@
 @charset "UTF-8";
 @import "./markdown.scss";
 
+// @font-face {
+//   src: url('../fonts/Roboto-Regular.ttf');
+//   font-family: 'Roboto';
+// }
+
 // reset
 html {
   min-height: 500px;
@@ -78,6 +83,40 @@ $mb-theme-dark-font: rgba(255, 255, 255, 0.7); // rgb(193,193,193)
 $mb-theme-light-sidebar-background: #fff;
 $mb-theme-dark-sidebar-background: #424242;
 
+.z-index-2 {
+  z-index: 2 !important;
+  *:not(.mb-bg-wrap) {
+    z-index: 2 !important;
+  }
+}
+.light-font {
+  color: #fff !important;
+  * {
+    color: #fff !important;
+  }
+}
+.holder {
+  height: 98px;
+}
+.custom-card-content {
+  font-family: "Roboto";
+  font-size: 14px;
+  position: absolute;
+  line-height: 20px;
+  height: 98px;
+  top: 80px;
+  left: 0;
+  right: 0;
+  padding: 16px;
+  margin: 0;
+}
+.content-card-header {
+  > div:nth-child(2) {
+    > span:nth-child(2) {
+      color: rgba(255, 255, 255, .7) !important;
+    }
+  }
+}
 // xs, extra-small: 0dp or larger
 // sm, small: 600dp or larger
 // md, medium: 960dp or larger

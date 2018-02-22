@@ -13,7 +13,6 @@ class Products extends React.Component {
   }
 
   componentDidUpdate(nextProps) {
-    console.log(nextProps.productsData, this.props.productsData);
     if (this.props.productsData !== nextProps.productsData) {
       useMaterialBackground('.content .card')
     }

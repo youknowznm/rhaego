@@ -49,20 +49,23 @@ const useMaterialBackground = (selector) => {
     wrapElem.setAttribute('style', `transform: rotate(${wrapRotateAngle}deg);
                                     background-color: ${colorPalette[paletteIndex][0]};`)
 
-    let blocksCount = Math.floor(Math.random() * 2 + 2)
+    // let blocksCount = Math.floor(Math.random() * 2 + 1)
+    let blocksCount = 1
     for (let i = 0; i < blocksCount; i++) {
       let shadowStrength = (Math.random() < .5) ? 'light' : 'strong'
-      let width = Math.floor(Math.random() * 50 + 130)
+      let height = Math.floor(Math.random() * 80 + 120)
       let rotateAngle = Math.floor(Math.random() * 180 + 1)
+      let topOffset = Math.floor(Math.random() * 50 + 100)
       let blockElem = document.createElement('div')
       blockElem.setAttribute('class', `mb-bg-block mb-shadow-${shadowStrength}`)
-      blockElem.setAttribute('style', `width: ${width}px;
+      blockElem.setAttribute('style', `height: ${height}px;
                                        transform: rotate(${rotateAngle}deg);
+                                       left: -${topOffset}px;
                                        background-color: ${colorPalette[paletteIndex][1]};`)
       wrapElem.appendChild(blockElem)
     }
-    elem.insertBefore(wrapElem, elem.querySelector('div'));
-    // elem.append(wrapElem);
+    // elem.insertBefore(wrapElem, elem.querySelector('div'));
+    elem.append(wrapElem);
   })
 
 }

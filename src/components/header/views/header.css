@@ -258,6 +258,34 @@ a {
   transform: translateX(-50%) translateY(-50%);
   text-align: center; }
 
+.z-index-2 {
+  z-index: 2 !important; }
+  .z-index-2 *:not(.mb-bg-wrap) {
+    z-index: 2 !important; }
+
+.light-font {
+  color: #fff !important; }
+  .light-font * {
+    color: #fff !important; }
+
+.holder {
+  height: 98px; }
+
+.custom-card-content {
+  font-family: "Roboto";
+  font-size: 14px;
+  position: absolute;
+  line-height: 20px;
+  height: 98px;
+  top: 80px;
+  left: 0;
+  right: 0;
+  padding: 16px;
+  margin: 0; }
+
+.content-card-header > div:nth-child(2) > span:nth-child(2) {
+  color: rgba(255, 255, 255, 0.7) !important; }
+
 .title {
   flex: 1;
   margin-left: 12px; }
