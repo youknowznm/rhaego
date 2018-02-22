@@ -1,5 +1,6 @@
 import React from 'react'
 import ArticleCard from './articleCard'
+import {useMaterialBackground} from '../../../utils'
 
 import './articles.css'
 
@@ -26,20 +27,27 @@ const articlesData = [
   Object.assign({}, article),
 ]
 
-const Articles = () => {
-  return (
-    <div className="articles">
-      {
-        articlesData.map((item, i) => (
-          <ArticleCard
-            key={i}
-            articleData={item}
-          />
-        ))
-      }
-    </div>
-
-  );
+class Articles extends React.Component {
+  componentDidMount(nextProps) {
+    // console.log(nextProps.productsData, this.props.productsData);
+    // if (this.props.productsData !== nextProps.productsData) {
+      useMaterialBackground('.content .card')
+    // }
+  }
+  render() {
+    return (
+      <div className="articles">
+        {
+          articlesData.map((item, i) => (
+            <ArticleCard
+              key={i}
+              articleData={item}
+            />
+          ))
+        }
+      </div>
+    )
+  }
 }
 
 export default Articles

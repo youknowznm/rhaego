@@ -2,7 +2,7 @@ import React from 'react'
 import ProductCard from './productCard'
 import {connect} from 'react-redux'
 import {fetchGithub} from '../actions'
-import {LoadingArea} from '../../../utils'
+import {LoadingArea, useMaterialBackground} from '../../../utils'
 
 import './products.css'
 
@@ -10,6 +10,13 @@ class Products extends React.Component {
 
   componentDidMount() {
     this.props.thisFetchGithub()
+  }
+
+  componentDidUpdate(nextProps) {
+    console.log(nextProps.productsData, this.props.productsData);
+    if (this.props.productsData !== nextProps.productsData) {
+      useMaterialBackground('.content .card')
+    }
   }
 
   render() {
@@ -26,7 +33,7 @@ class Products extends React.Component {
                 productsData.map((item, i) => (
                   <ProductCard
                     key={i}
-                    productData={item}
+                    eachProductData={item}
                   />
                 ))
               }

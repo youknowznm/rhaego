@@ -272,8 +272,6 @@ a {
     .card-wrap .card:hover {
       box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 12px 17px 2px rgba(0, 0, 0, 0.14), 0px 5px 22px 4px rgba(0, 0, 0, 0.12);
       cursor: pointer; }
-    .card-wrap .card .avatar {
-      background-color: #f44336 !important; }
     .card-wrap .card .count {
       margin-right: 6px !important; }
     .card-wrap .card .rotated {
@@ -286,3 +284,8 @@ a {
     position: absolute !important;
     right: 12px;
     bottom: 12px; }
+  .card-wrap .light-font-important {
+    color: #fff !important;
+    z-index: 2; }
+  .card-wrap .card-header {
+    z-index: 2; }

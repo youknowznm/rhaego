@@ -6,6 +6,7 @@ import formatDate from './formatDate'
 import debounce from './debounce'
 import getQueryObj from './getQueryObj'
 import highlightAllPre from './highlightAllPre'
+import useMaterialBackground from './useMaterialBackground'
 
 import regexps from './regexps'
 
@@ -18,6 +19,7 @@ export {
   debounce,
   getQueryObj,
   highlightAllPre,
+  useMaterialBackground,
   
   regexps,
 }

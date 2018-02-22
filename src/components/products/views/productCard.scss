@@ -18,9 +18,6 @@
                   0px 5px 22px 4px rgba(0, 0, 0, 0.12);
       cursor: pointer;
     }
-    .avatar {
-      background-color: $color-red-500 !important;
-    }
     .count {
       margin-right: 6px !important;
     }
@@ -38,4 +35,14 @@
     right: 12px;
     bottom: 12px;
   }
+  .light-font-important  {
+    color: #fff !important;
+    z-index: 2;
+  }
+  .card-header {
+    z-index: 2;
+  }
+  // .light-bg-important {
+  //   background: #fff !important;
+  // }
 }
