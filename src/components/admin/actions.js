@@ -5,13 +5,16 @@ import {
 } from './actionTypes'
 import axios from 'axios'
 import {
-	logout as requestLogoutApi,
+	logout as requestLogoutAPI,
 } from '../../api'
 import {createAsyncAction} from 'redux-action-tools'
 
-export const requestLogout = createAsyncAction(REQUEST_LOGOUT, () => {
-  return axios.post(requestLogoutApi)
-})
+export const requestLogout = createAsyncAction(
+  REQUEST_LOGOUT,
+  () => {
+    return axios.post(requestLogoutAPI)
+  }
+)
 export const requestLogoutInit = () => ({
   type: REQUEST_LOGOUT_INIT,
 })

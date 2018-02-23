@@ -4,3 +4,4 @@ export const fetchGithub = `https://api.github.com/users/${githubUsername}/repos
 export const login = '/login'
 export const logout = '/logout'
 export const uploadPicture = '/picture'
+export const article = '/article'

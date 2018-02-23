@@ -16,7 +16,7 @@ import {
 import './login.css'
 
 class Login extends React.Component {
-  valueDidChange = (field) => (evt) => {
+  onChangeValue = (field) => (evt) => {
     const fieldName = field
     const fieldValue = evt.target.value
     this.props.thisUpdateLoginField(fieldName, fieldValue)
@@ -78,7 +78,7 @@ class Login extends React.Component {
               <Input
                 id="login-email"
                 type="text"
-                onChange={this.valueDidChange('email')}
+                onChange={this.onChangeValue('email')}
                 error={emailError}
               />
               <FormHelperText className={emailError ? 'error' : ''}>
@@ -93,7 +93,7 @@ class Login extends React.Component {
               <Input
                 id="login-password"
                 type={passwordVisible ? "text" : "password"}
-                onChange={this.valueDidChange('password')}
+                onChange={this.onChangeValue('password')}
                 error={passwordError}
                 endAdornment={
                   <InputAdornment position="end">

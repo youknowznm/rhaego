@@ -1,14 +1,16 @@
 import {
   UPDATE_LOGIN_FIELD,
-  CHECK_LOGIN_FIELDS,
   TOGGLE_PASSWORD_VISIBILITY,
+
+  CHECK_LOGIN_FIELDS,
+
   REQUEST_LOGIN_INIT,
   REQUEST_LOGIN_COMPLETED,
   REQUEST_LOGIN_FAILED,
 } from './actionTypes'
 import {regexps} from '../../utils/'
 
-const thisState = {
+const defaultState = {
   fields: {
     email: {
       value: '',
@@ -23,12 +25,14 @@ const thisState = {
   fieldsValid: true,
   loginRequestStatus: 'initial',
   loginRequestResultMessage: '',
-  loginRequestResult: null,
 }
 
-const {emailReg, passwordReg} = regexps
+const {
+  emailReg,
+  passwordReg,
+} = regexps.login
 
-export default (state = thisState, action) => {
+export default (state = defaultState, action) => {
   switch (action.type) {
 
     // 更新登录字段
@@ -71,7 +75,6 @@ export default (state = thisState, action) => {
       return {
         ...state,
         loginRequestStatus: 'initial',
-        loginRequestResult: null,
       }
 
     // 登录成功
@@ -81,7 +84,6 @@ export default (state = thisState, action) => {
       return {
         ...state,
         loginRequestStatus: 'completed',
-        loginRequestResult: resultData,
         loginRequestResultMessage: resultData.msg,
       }
 
@@ -91,7 +93,6 @@ export default (state = thisState, action) => {
       return {
         ...state,
         loginRequestStatus: 'failed',
-        loginRequestResult: null,
         loginRequestResultMessage: typeof errorData === 'string' ? errorData : errorData.msg,
       }
 

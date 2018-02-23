@@ -1,11 +1,6 @@
 @charset "UTF-8";
 @import "./markdown.scss";
 
-// @font-face {
-//   src: url('../fonts/Roboto-Regular.ttf');
-//   font-family: 'Roboto';
-// }
-
 // reset
 html {
   min-height: 500px;
@@ -31,7 +26,6 @@ a {
     }
   }
 }
-
 
 .mb-responsive-container {
   position: relative;
@@ -103,7 +97,6 @@ $mb-theme-dark-sidebar-background: #424242;
   font-size: 14px;
   position: absolute;
   line-height: 20px;
-  height: 98px;
   top: 80px;
   left: 0;
   right: 0;

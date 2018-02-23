@@ -11,10 +11,12 @@ import {
   updateSummaryField,
   updateCreatedDateField,
   updateContentField,
-
   addTag,
   removeTag,
   adjustTagInputIndent,
+  checkArticleFields,
+  requestSaveArticle,
+  requestSaveArticleInit,
 } from '../actions'
 
 import {view as Upload} from '../../upload'
@@ -27,7 +29,17 @@ class Editor extends React.Component {
     store.dispatch(updateContentField(this.props.articleFields.content.value))
   }
   componentWillUpdate(nextProps) {
+    switch (nextProps.saveArticleRequestStatus) {
+      case 'loading':
+        if (nextProps.fieldsValid === true) {
+          const articleFields = {
+            
+          }
+        }
+        break;
+      default:
 
+    }
   }
   componentDidUpdate(nextProps) {
     this.props.thisAdjustTagInputIndent()
@@ -208,6 +220,7 @@ const mapState = (state) => ({
   articleFields: state.editor.articleFields,
   tagsWidth: state.editor.tagsWidth,
   parsedHTMLContent: state.editor.parsedHTMLContent,
+  saveArticleRequestStatus: state.editor.saveArticleRequestStatus,
 })
 
 const mapDispatch = (dispatch) => ({
@@ -229,8 +242,19 @@ const mapDispatch = (dispatch) => ({
     }
     dispatch(fieldActionMap[fieldName](evt.target.value))
   },
+  thisCheckArticleFields: () => {
+    dispatch(checkArticleFields())
+  },
+  thisCheckArticleFields: () => {
+    dispatch(checkArticleFields())
+  },
 })
 
 const EditorWrap = connect(mapState, mapDispatch)(Editor)
 
 export default EditorWrap
+
+
+// new Fingerprint2(options).get(function(result) {
+//   console.log(result)
+// })

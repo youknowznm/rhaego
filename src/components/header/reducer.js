@@ -1,10 +1,10 @@
 import {TOGGLE_DRAWER} from './actionTypes'
 
-const thisState = {
+const defaultState = {
   drawerIsOpen: false
 }
 
-export default (state = thisState, action) => {
+export default (state = defaultState, action) => {
   switch (action.type) {
     case TOGGLE_DRAWER:
       const status =

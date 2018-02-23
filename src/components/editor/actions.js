@@ -9,9 +9,12 @@ import {
   ADJUST_TAG_INPUT_INDENT,
 
   CHECK_ARTICLE_FIELDS,
+
+  REQUEST_SAVE_ARTICLE,
+  REQUEST_SAVE_ARTICLE_INIT,
 } from './actionTypes'
 import {createAsyncAction} from 'redux-action-tools'
-// import {uploadPicture as uploadPictureAPI} from '../../api'
+import {article as saveArticleAPI} from '../../api'
 import axios from 'axios'
 
 export const addTag = (tagContent) => ({
@@ -42,3 +45,16 @@ export const updateContentField = (newValue) => ({
   type: UPDATE_CONTENT_FIELD,
   newValue,
 })
+
+export const checkArticleFields = () => ({
+  type: CHECK_ARTICLE_FIELDS,
+})
+export const requestSaveArticleInit = () => ({
+  type: REQUEST_SAVE_ARTICLE_INIT,
+})
+export const requestSaveArticle = createAsyncAction(
+  REQUEST_SAVE_ARTICLE,
+  (articleFields) => {
+    return axios.post(saveArticleAPI, articleFields)
+  }
+)

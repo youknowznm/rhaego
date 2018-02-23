@@ -1,5 +1,6 @@
 import marked from 'marked'
-import {formatDate} from '../../utils'
+import {formatDate, regexps} from '../../utils'
+import sample from './sample'
 import {
   UPDATE_TITLE_FIELD,
   UPDATE_SUMMARY_FIELD,
@@ -10,10 +11,18 @@ import {
   REMOVE_TAG,
   ADJUST_TAG_INPUT_INDENT,
 
-  // CHECK_ARTICLE_FIELDS,
-  // REQUEST_SAVE_ARTICLE,
+  CHECK_ARTICLE_FIELDS,
+  REQUEST_SAVE_ARTICLE,
+  REQUEST_SAVE_ARTICLE_COMPLETED,
+  REQUEST_SAVE_ARTICLE_FAILED,
 } from './actionTypes'
-import sample from './sample'
+
+const {
+  titleReg,
+  summaryReg,
+  createdDateReg,
+  contentReg,
+} = regexps.editor
 
 const defaultState = {
   articleFields: {
@@ -41,14 +50,13 @@ const defaultState = {
       error: false,
     },
   },
+  fieldsValid: true,
+
   tagsWidth: 0,
   parsedHTMLContent: '',
 
-  requestUploadStatus: '',
-  uploadResultMessage: '',
-
-  requestSaveStatus: '',
-  saveResultMessage: '',
+  saveArticleRequestStatus: '',
+  saveArticleResultMessage: '',
 }
 
 export default (state = defaultState, action) => {
@@ -106,7 +114,29 @@ export default (state = defaultState, action) => {
         tagsWidth,
       }
 
-    // case CHECK_ARTICLE_FIELDS:
+    // 检查登录字段是否全部有效
+    case CHECK_ARTICLE_FIELDS:
+      const fieldsToCheck = state.fields
+      const titleError = !titleReg.test(fieldsToCheck.title.value)
+      fieldsToCheck.title.error = titleError
+      const summaryError = !summaryReg.test(fieldsToCheck.summary.value)
+      fieldsToCheck.summary.error = summaryError
+      const createdDateError = !createdDateReg.test(fieldsToCheck.createdDate.value)
+      fieldsToCheck.createdDate.error = createdDateError
+      const contentError = !contentReg.test(fieldsToCheck.content.value)
+      fieldsToCheck.content.error = contentError
+      const tagsError = (fieldsToCheck.tags.length < 3 && fieldsToCheck.tags.length > 0)
+      fieldsToCheck.tags.error = tagsError
+
+      const fieldsValid = !titleError && !summaryError && !createdDateError
+        && !tagsError && !contentError
+
+      return {
+        ...state,
+        fields: fieldsToCheck,
+        fieldsValid,
+        saveArticleRequestStatus: fieldsValid ? 'loading' : 'initial',
+      }
 
     default:
       return state;
