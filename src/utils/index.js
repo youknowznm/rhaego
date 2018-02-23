@@ -1,6 +1,6 @@
 import SplitToSpans from './splitToSpans'
 import LoadingArea from './loadingArea'
-import LoadingButton from './loadingButton'
+import AsyncButton from './asyncButton'
 
 import formatDate from './formatDate'
 import debounce from './debounce'
@@ -13,13 +13,13 @@ import regexps from './regexps'
 export {
   SplitToSpans,
   LoadingArea,
-  LoadingButton,
+  AsyncButton,
 
   formatDate,
   debounce,
   getQueryObj,
   highlightAllPre,
   useMaterialBackground,
-  
+
   regexps,
 }

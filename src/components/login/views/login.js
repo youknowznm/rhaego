@@ -4,7 +4,7 @@ import {Card, IconButton, Button, Typography, Snackbar} from 'material-ui'
 import {FormControl, FormHelperText} from 'material-ui/Form'
 import Input, {InputLabel, InputAdornment} from 'material-ui/Input'
 import {Visibility, VisibilityOff} from 'material-ui-icons'
-import {getQueryObj, LoadingButton} from '../../../utils'
+import {getQueryObj, AsyncButton} from '../../../utils'
 import {
   updateLoginField,
   checkLoginFields,
@@ -112,14 +112,17 @@ class Login extends React.Component {
           </form>
 
           <div className="buttons">
-            <LoadingButton
-              buttonClassName="action-button"
-              loadingStatus={loginRequestStatus}
+            <AsyncButton
+              asyncStatus={loginRequestStatus}
+              className="action-button"
               onClick={thisCheckLoginFields}
-              color="secondary"
+              asyncResultMessage={loginRequestResultMessage}
+              color="primary"
+              fullWidth
+              raised
             >
               登录
-            </LoadingButton>
+            </AsyncButton>
             <Button className="action-button"
               raised
               fullWidth
@@ -130,14 +133,6 @@ class Login extends React.Component {
             </Button>
           </div>
 
-          <Snackbar
-            open={['failed', 'completed'].includes(loginRequestStatus)}
-            anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'center',
-            }}
-            message={loginRequestResultMessage}
-          />
         </Card>
       </div>
     )

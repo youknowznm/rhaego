@@ -2,10 +2,6 @@ import marked from 'marked'
 import {formatDate, regexps} from '../../utils'
 import sample from './sample'
 import {
-  // UPDATE_TITLE_FIELD,
-  // UPDATE_SUMMARY_FIELD,
-  // UPDATE_CONTENT_FIELD,
-  // UPDATE_CREATED_DATE_FIELD,
   UPDATE_ARTICLE_FIELD,
 
   ADD_TAG,
@@ -22,28 +18,28 @@ const defaultState = {
   articleId: '',
   articleFields: {
     title: {
-      // value: '1',
-      value: '',
+      value: '标题 标题 fuck 标题',
+      // value: '',
       error: false,
     },
     tags: {
-      // value: ['react', 'express'],
-      value: [],
+      value: ['react', 'express'],
+      // value: [],
       error: false,
     },
     summary: {
-      // value: '2',
-      value: '',
+      value: '摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要',
+      // value: '',
       error: false,
     },
     createdDate: {
-      // value: formatDate(new Date()),
-      value: '',
+      value: formatDate(new Date()),
+      // value: '',
       error: false,
     },
     content: {
-      // value: sample,
-      value: '',
+      value: sample,
+      // value: '',
       error: false,
     },
   },
@@ -63,57 +59,26 @@ export default (state = defaultState, action) => {
       const {fieldName, fieldValue} = action
       const newfields = state.articleFields
       newfields[fieldName].value = fieldValue
+      if (fieldName === 'content') {
+        state.parsedHTMLContent = marked(fieldValue)
+      }
       return {
         ...state,
         articleFields: newfields,
       }
-
-    // case UPDATE_TITLE_FIELD:
-    //   let fields_1 = state.articleFields
-    //   fields_1.title.value = action.newValue
-    //   console.log(1,action.newValue);
-    //   return {
-    //     ...state,
-    //     articleFields: fields_1,
-    //   }
-    // case UPDATE_SUMMARY_FIELD:
-    //   console.log(2,action.newValue);
-    //   let fields_2 = state.articleFields
-    //   fields_2.summary.value = action.newValue
-    //   return {
-    //     ...state,
-    //     articleFields: fields_2,
-    //   }
-    // case UPDATE_CREATED_DATE_FIELD:
-    //   let fields_3 = state.articleFields
-    //   fields_3.createdDate.value = action.newValue
-    //   return {
-    //     ...state,
-    //     articleFields: fields_3,
-    //   }
-    // case UPDATE_CONTENT_FIELD:
-    //   let fields_4 = state.articleFields
-    //   fields_4.content.value = action.newValue
-    //   let parsedHTMLContent = marked(action.newValue)
-    //   return {
-    //     ...state,
-    //     articleFields: fields_4,
-    //     parsedHTMLContent,
-    //   }
-
     case ADD_TAG:
-      let tags_1 = state.articleFields.tags
-      tags_1.value.push(action.tagContent)
+      let tagsToAdd = state.articleFields.tags
+      tagsToAdd.value.push(action.tagContent)
       return {
         ...state,
-        tags: tags_1,
+        tags: tagsToAdd,
       };
     case REMOVE_TAG:
-      let tags_2 = state.articleFields.tags
-      tags_2.value.splice(action.tagIndex, 1)
+      let tagsToRemove = state.articleFields.tags
+      tagsToRemove.value.splice(action.tagIndex, 1)
       return {
         ...state,
-        tags: tags_2,
+        tags: tagsToRemove,
       };
     case ADJUST_TAG_INPUT_INDENT:
       let tagsWidth = getComputedStyle(document.querySelector('.tags-container')).width

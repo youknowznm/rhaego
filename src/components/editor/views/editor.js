@@ -5,7 +5,7 @@ import {FormControl, FormHelperText} from 'material-ui/Form'
 import Input, {InputLabel} from 'material-ui/Input'
 import Chip from 'material-ui/Chip'
 import store from '../../../Store'
-import {highlightAllPre, LoadingButton} from '../../../utils'
+import {highlightAllPre, AsyncButton} from '../../../utils'
 import {
   updateArticleField,
   addTag,
@@ -26,6 +26,7 @@ class Editor extends React.Component {
     this.props.thisUpdateArticleField('content', this.props.contentValue)
   }
   componentWillUpdate(nextProps) {
+    console.log(nextProps.saveArticleRequestStatus);
     switch (nextProps.saveArticleRequestStatus) {
       case 'loading':
         if (nextProps.fieldsValid === true) {
@@ -102,6 +103,7 @@ class Editor extends React.Component {
       parsedHTMLContent,
       saveArticleRequestStatus,
       thisCheckArticleFields,
+      saveArticleResultMessage,
     } = this.props
     const maximumTagsReached = (tagsValue.length === 2)
     return (
@@ -237,15 +239,16 @@ class Editor extends React.Component {
               保存
             </Button> */}
 
-            <LoadingButton
+            <AsyncButton
               raised
-              buttonClassName="button-save"
-              loadingStatus={saveArticleRequestStatus}
+              className="button-save"
+              asyncStatus={saveArticleRequestStatus}
+              asyncResultMessage={saveArticleResultMessage}
               onClick={thisCheckArticleFields}
               color="primary"
             >
               保存
-            </LoadingButton>
+            </AsyncButton>
             <Button raised className="button-cancel">
               取消
             </Button>
@@ -268,6 +271,7 @@ class Editor extends React.Component {
 
 const mapState = (state) => {
   const thatArticleFields = state.editor.articleFields
+  // IDEA: mapState方法返回的对象的键必须是值对象，不能是对象或数组！！
   return {
     articleFields: state.editor.articleFields,
     titleValue: thatArticleFields.title.value,
@@ -284,6 +288,7 @@ const mapState = (state) => {
     tagsWidth: state.editor.tagsWidth,
     parsedHTMLContent: state.editor.parsedHTMLContent,
     saveArticleRequestStatus: state.editor.saveArticleRequestStatus,
+    saveArticleResultMessage: state.editor.saveArticleResultMessage,
   }
 }
 

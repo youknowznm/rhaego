@@ -35,22 +35,6 @@ export const updateArticleField = (fieldName, fieldValue) => ({
   fieldName,
   fieldValue,
 })
-// export const updateTitleField = (newValue) => ({
-//   type: UPDATE_TITLE_FIELD,
-//   newValue,
-// })
-// export const updateSummaryField = (newValue) => ({
-//   type: UPDATE_SUMMARY_FIELD,
-//   newValue,
-// })
-// export const updateCreatedDateField = (newValue) => ({
-//   type: UPDATE_CREATED_DATE_FIELD,
-//   newValue,
-// })
-// export const updateContentField = (newValue) => ({
-//   type: UPDATE_CONTENT_FIELD,
-//   newValue,
-// })
 
 export const checkArticleFields = () => ({
   type: CHECK_ARTICLE_FIELDS,
