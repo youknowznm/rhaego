@@ -145,11 +145,11 @@ class Login extends React.Component {
 }
 
 const mapState = (state) => {
-  const thatLoginFields = state.login.fields
+  const thatLoginFields = state.login.loginFields
   return {
     emailValue: thatLoginFields.email.value,
-    passwordValue: thatLoginFields.password.value,
     emailError: thatLoginFields.email.error,
+    passwordValue: thatLoginFields.password.value,
     passwordError: thatLoginFields.password.error,
     passwordVisible: thatLoginFields.password.visible,
     loginRequestStatus: state.login.loginRequestStatus,

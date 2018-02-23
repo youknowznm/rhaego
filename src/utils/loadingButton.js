@@ -11,7 +11,6 @@ const LoadingButton = ({loadingStatus, onClick, buttonClassName, children}) => {
     <div className="loading-button-wrap">
       <Button className={buttonClassName}
         raised
-        fullWidth
         color="primary"
         disabled={loadingStatus === 'failed' || loadingStatus === 'completed'}
         onClick={onClick}

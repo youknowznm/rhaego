@@ -5,12 +5,9 @@ import {FormControl, FormHelperText} from 'material-ui/Form'
 import Input, {InputLabel} from 'material-ui/Input'
 import Chip from 'material-ui/Chip'
 import store from '../../../Store'
-import {highlightAllPre} from '../../../utils'
+import {highlightAllPre, LoadingButton} from '../../../utils'
 import {
-  updateTitleField,
-  updateSummaryField,
-  updateCreatedDateField,
-  updateContentField,
+  updateArticleField,
   addTag,
   removeTag,
   adjustTagInputIndent,
@@ -26,19 +23,36 @@ class Editor extends React.Component {
   componentDidMount() {
     this.props.thisAdjustTagInputIndent()
     // 初始化时进行预览
-    store.dispatch(updateContentField(this.props.articleFields.content.value))
+    this.props.thisUpdateArticleField('content', this.props.contentValue)
   }
   componentWillUpdate(nextProps) {
     switch (nextProps.saveArticleRequestStatus) {
       case 'loading':
         if (nextProps.fieldsValid === true) {
+          console.log(this.props.articleFields);
           const articleFields = {
-            
+            title: this.props.titleValue,
+            summary: this.props.summaryValue,
+            tags: this.props.tagsValue,
+            createdDate: this.props.createdDateValue,
+            content: this.props.contentValue,
           }
+          this.props.thisRequestSaveArticle(articleFields)
         }
         break;
+      case 'failed':
+        setTimeout(() => {
+          this.props.thisRequestSaveArticleInit()
+        }, 2000)
+        break
+      case 'completed':
+        setTimeout(() => {
+          // this.backToReferer()
+          this.props.thisRequestSaveArticleInit()
+        }, 2000)
+        break
       default:
-
+        break
     }
   }
   componentDidUpdate(nextProps) {
@@ -47,11 +61,17 @@ class Editor extends React.Component {
       highlightAllPre('.editor-preview')
     }
   }
-  handleRemoveTag = (index) => () => {
+  onChangeValue = (field) => (evt) => {
+    const fieldName = field
+    const fieldValue = evt.target.value
+    this.props.thisUpdateArticleField(fieldName, fieldValue)
+  }
+  onRemoveTag = (index) => () => {
     this.props.thisRemoveTag(index)
     this.setState({})
+    this.props.thisUpdateArticleField('title', this.props.titleValue)
   }
-  handleTagInputKeyUp = (evt) => {
+  onTagInputKeyUp = (evt) => {
     const target = evt.target
     const trimmedTagContent = target.value.trim()
     if (evt.key === 'Enter'
@@ -61,15 +81,29 @@ class Editor extends React.Component {
       this.props.thisAddTag(trimmedTagContent)
       target.value = ''
       this.setState({})
+      this.props.thisUpdateArticleField('title', this.props.titleValue)
     }
   }
   render() {
     const {
       articleFields,
+
+      titleValue,
+      titleError,
+      summaryValue,
+      summaryError,
+      tagsValue,
+      tagsError,
+      createdDateValue,
+      createdDateError,
+      contentValue,
+      contentError,
+
       parsedHTMLContent,
-      thisUpdateTargetField,
+      saveArticleRequestStatus,
+      thisCheckArticleFields,
     } = this.props
-    const maximumTagsReached = (articleFields.tags.value.length === 2)
+    const maximumTagsReached = (tagsValue.length === 2)
     return (
       <div className="editor-wrap">
         <div className="row">
@@ -79,8 +113,9 @@ class Editor extends React.Component {
             label="标题"
             margin="normal"
             helperText="输入10至20字作为标题。"
-            defaultValue={articleFields.title.value}
-            onChange={thisUpdateTargetField('title')}
+            defaultValue={titleValue}
+            onChange={this.onChangeValue('title')}
+            error={titleError}
             inputProps={{
               'maxLength': '20',
             }}
@@ -91,6 +126,7 @@ class Editor extends React.Component {
               // className="editor-title"
               margin="normal"
               fullWidth
+              error={tagsError}
             >
               <InputLabel shrink={true}>标签</InputLabel>
               <Input
@@ -100,7 +136,7 @@ class Editor extends React.Component {
                   'maxLength': '12',
                 }}
                 disabled={maximumTagsReached}
-                onKeyUp={this.handleTagInputKeyUp}
+                onKeyUp={this.onTagInputKeyUp}
               />
               <FormHelperText>
                 需1至2个标签，每个标签需3至12字。
@@ -108,11 +144,11 @@ class Editor extends React.Component {
             </FormControl>
             <div className="tags-container">
               {
-                articleFields.tags.value.map((tag, index) => (
+                tagsValue.map((tag, index) => (
                   <Chip
                     key={index}
                     label={tag}
-                    onDelete={this.handleRemoveTag(index)}
+                    onDelete={this.onRemoveTag(index)}
                     className="tag"
                   />
                 ))
@@ -128,9 +164,10 @@ class Editor extends React.Component {
             className="editor-summary"
             label="摘要"
             margin="normal"
-            defaultValue={articleFields.summary.value}
+            defaultValue={summaryValue}
             helperText="输入10至50字作为摘要。"
-            onChange={thisUpdateTargetField('summary')}
+            onChange={this.onChangeValue('summary')}
+            error={summaryError}
             inputProps={{
               'maxLength': '50',
             }}
@@ -139,6 +176,7 @@ class Editor extends React.Component {
           <FormControl
             className="editor-created-date"
             margin="normal"
+            error={createdDateError}
           >
             <InputLabel shrink={true}>
               创建时间
@@ -148,7 +186,8 @@ class Editor extends React.Component {
               inputProps={{
                 'maxLength': '12',
               }}
-              defaultValue={articleFields.createdDate.value}
+              defaultValue={createdDateValue}
+              onChange={this.onChangeValue('createdDate')}
             />
             <FormHelperText>
               需提供有效的创建日期。
@@ -162,11 +201,12 @@ class Editor extends React.Component {
             className="editor-content"
             label="内容"
             multiline
-            defaultValue={articleFields.content.value}
-            rows="35"
-            onChange={thisUpdateTargetField('content')}
+            defaultValue={contentValue}
+            rows="17"
+            onChange={this.onChangeValue('content')}
             helperText="内容将以 Markdown 渲染。"
             margin="normal"
+            error={contentError}
           />
           {/* 预览 */}
           <div className="editor-preview-wrap">
@@ -176,7 +216,7 @@ class Editor extends React.Component {
               label="预览"
               fullWidth
               multiline
-              rows="35"
+              rows="17"
               margin="normal"
               disabled
               helperText="以上是转换后的 HTML。"
@@ -193,9 +233,19 @@ class Editor extends React.Component {
           <Upload />
           {/* 保存和取消按钮 */}
           <div className="button-wrap">
-            <Button raised className="button-save" color="primary">
+            {/* <Button raised className="button-save" color="primary">
               保存
-            </Button>
+            </Button> */}
+
+            <LoadingButton
+              raised
+              buttonClassName="button-save"
+              loadingStatus={saveArticleRequestStatus}
+              onClick={thisCheckArticleFields}
+              color="primary"
+            >
+              保存
+            </LoadingButton>
             <Button raised className="button-cancel">
               取消
             </Button>
@@ -216,12 +266,26 @@ class Editor extends React.Component {
   }
 }
 
-const mapState = (state) => ({
-  articleFields: state.editor.articleFields,
-  tagsWidth: state.editor.tagsWidth,
-  parsedHTMLContent: state.editor.parsedHTMLContent,
-  saveArticleRequestStatus: state.editor.saveArticleRequestStatus,
-})
+const mapState = (state) => {
+  const thatArticleFields = state.editor.articleFields
+  return {
+    articleFields: state.editor.articleFields,
+    titleValue: thatArticleFields.title.value,
+    titleError: thatArticleFields.title.error,
+    summaryValue: thatArticleFields.summary.value,
+    summaryError: thatArticleFields.summary.error,
+    tagsValue: thatArticleFields.tags.value,
+    tagsError: thatArticleFields.tags.error,
+    createdDateValue: thatArticleFields.createdDate.value,
+    createdDateError: thatArticleFields.createdDate.error,
+    contentValue: thatArticleFields.content.value,
+    contentError: thatArticleFields.content.error,
+
+    tagsWidth: state.editor.tagsWidth,
+    parsedHTMLContent: state.editor.parsedHTMLContent,
+    saveArticleRequestStatus: state.editor.saveArticleRequestStatus,
+  }
+}
 
 const mapDispatch = (dispatch) => ({
   thisRemoveTag: (index) => {
@@ -233,27 +297,23 @@ const mapDispatch = (dispatch) => ({
   thisAddTag: (tagContent) => {
     dispatch(addTag(tagContent))
   },
-  thisUpdateTargetField: (fieldName) => (evt) => {
-    const fieldActionMap = {
-      title: updateTitleField,
-      summary: updateSummaryField,
-      createdDate: updateCreatedDateField,
-      content: updateContentField,
-    }
-    dispatch(fieldActionMap[fieldName](evt.target.value))
+  thisUpdateArticleField: (fieldName, fieldValue) => {
+    dispatch(updateArticleField(fieldName, fieldValue))
   },
   thisCheckArticleFields: () => {
     dispatch(checkArticleFields())
   },
-  thisCheckArticleFields: () => {
-    dispatch(checkArticleFields())
+  thisRequestSaveArticle: (articleFields) => {
+    dispatch(requestSaveArticle(articleFields))
+  },
+  thisRequestSaveArticleInit: () => {
+    dispatch(requestSaveArticleInit())
   },
 })
 
 const EditorWrap = connect(mapState, mapDispatch)(Editor)
 
 export default EditorWrap
-
 
 // new Fingerprint2(options).get(function(result) {
 //   console.log(result)

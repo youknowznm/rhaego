@@ -11,7 +11,7 @@ import {
 import {regexps} from '../../utils/'
 
 const defaultState = {
-  fields: {
+  loginFields: {
     email: {
       value: '',
       error: false,
@@ -38,26 +38,26 @@ export default (state = defaultState, action) => {
     // 更新登录字段
     case UPDATE_LOGIN_FIELD:
       const {fieldName, fieldValue} = action
-      const newfields = state.fields
-      newfields[fieldName].value = fieldValue
+      const newFields = state.loginFields
+      newFields[fieldName].value = fieldValue
       return {
         ...state,
-        fields: newfields
+        loginFields: newFields
       }
 
     // 切换密码的可见状态
     case TOGGLE_PASSWORD_VISIBILITY:
-      const fieldsToSwitch = state.fields
+      const fieldsToSwitch = state.loginFields
       fieldsToSwitch.password.visible =
         !fieldsToSwitch.password.visible
       return {
         ...state,
-        fields: fieldsToSwitch
+        loginFields: fieldsToSwitch
       }
 
     // 检查登录字段是否全部有效
     case CHECK_LOGIN_FIELDS:
-      const fieldsToCheck = state.fields
+      const fieldsToCheck = state.loginFields
       const emailError = !emailReg.test(fieldsToCheck.email.value)
       fieldsToCheck.email.error = emailError
       const passwordError = !passwordReg.test(fieldsToCheck.password.value)
@@ -65,7 +65,7 @@ export default (state = defaultState, action) => {
       const fieldsValid = !emailError && !passwordError
       return {
         ...state,
-        fields: fieldsToCheck,
+        loginFields: fieldsToCheck,
         fieldsValid,
         loginRequestStatus: fieldsValid ? 'loading' : 'initial',
       }

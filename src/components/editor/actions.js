@@ -1,8 +1,9 @@
 import {
-  UPDATE_TITLE_FIELD,
-  UPDATE_SUMMARY_FIELD,
-  UPDATE_CONTENT_FIELD,
-  UPDATE_CREATED_DATE_FIELD,
+  // UPDATE_TITLE_FIELD,
+  // UPDATE_SUMMARY_FIELD,
+  // UPDATE_CONTENT_FIELD,
+  // UPDATE_CREATED_DATE_FIELD,
+  UPDATE_ARTICLE_FIELD,
 
   ADD_TAG,
   REMOVE_TAG,
@@ -29,22 +30,27 @@ export const adjustTagInputIndent = () => ({
   type: ADJUST_TAG_INPUT_INDENT,
 })
 
-export const updateTitleField = (newValue) => ({
-  type: UPDATE_TITLE_FIELD,
-  newValue,
+export const updateArticleField = (fieldName, fieldValue) => ({
+  type: UPDATE_ARTICLE_FIELD,
+  fieldName,
+  fieldValue,
 })
-export const updateSummaryField = (newValue) => ({
-  type: UPDATE_SUMMARY_FIELD,
-  newValue,
-})
-export const updateCreatedDateField = (newValue) => ({
-  type: UPDATE_CREATED_DATE_FIELD,
-  newValue,
-})
-export const updateContentField = (newValue) => ({
-  type: UPDATE_CONTENT_FIELD,
-  newValue,
-})
+// export const updateTitleField = (newValue) => ({
+//   type: UPDATE_TITLE_FIELD,
+//   newValue,
+// })
+// export const updateSummaryField = (newValue) => ({
+//   type: UPDATE_SUMMARY_FIELD,
+//   newValue,
+// })
+// export const updateCreatedDateField = (newValue) => ({
+//   type: UPDATE_CREATED_DATE_FIELD,
+//   newValue,
+// })
+// export const updateContentField = (newValue) => ({
+//   type: UPDATE_CONTENT_FIELD,
+//   newValue,
+// })
 
 export const checkArticleFields = () => ({
   type: CHECK_ARTICLE_FIELDS,
