@@ -9,6 +9,8 @@ import {reducer as loginReducer} from './components/login'
 import {reducer as themeReducer} from './containers/theme'
 import {reducer as adminReducer} from './components/admin'
 import {reducer as editorReducer} from './components/editor'
+import {reducer as articleReducer} from './components/article'
+import {reducer as articlesReducer} from './components/articles'
 import {reducer as uploadReducer} from './components/upload'
 
 const reducer = combineReducers({
@@ -19,7 +21,9 @@ const reducer = combineReducers({
   theme: themeReducer,
 	admin: adminReducer,
 	editor: editorReducer,
-  upload: uploadReducer,
+	upload: uploadReducer,
+	article: articleReducer,
+  articles: articlesReducer,
 })
 
 const win = window

@@ -9,3 +9,6 @@
 
 .splited-span:last-of-type:after {
   content: '¬'; }
+
+.mb-main .splited-span:after {
+  margin: 0 .2em; }

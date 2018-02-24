@@ -1,34 +1,45 @@
 /**
 生成 material design 风格的背景样式
-http://thezinx.com/wallpapers/25-material-design-wallpapers/
+@author youknowznm
 @param selector {String} 选择字符串
 */
 
+import {
+  red, pink, purple,
+  deepPurple, indigo, blue,
+  lightBlue, cyan, teal,
+  green, lightGreen, lime,
+  orange,
+  deepOrange, brown, grey,
+} from 'material-ui/colors'
+
 import './useMaterialBackground.css'
 
-const useMaterialBackground = (selector) => {
+// 根据最小值和偏移量获取一个随机整数
+const random = (min, topOffset = 0) => {
+  return Math.floor(Math.random() * min + topOffset)
+}
 
+const useMaterialBackground = (selector) => {
   const elemArr = document.querySelectorAll(selector)
 
-  // 使用从 material design 的调色板内选取的颜色对数组
-  // https://material.io/guidelines/style/color.html#color-color-palette
   const colorPalette = [
-    ['#F44336', '#D32F2F'], // red
-    ['#E91E63', '#C2185B'], // pink
-    ['#673AB7', '#512DA8'], // purple
-    ['#3F51B5', '#303F9F'], // indigo
-
-    // ['#2196F3', '#1976D2'], // blue
-    ['#0097A7', '#006064'], // cyan
-    ['#009688', '#00796B'], // teal
-    ['#43A047', '#2E7D32'], // green
-
-    ['#AFB42B', '#827717'], // lime
-    ['#FF5722', '#E64A19'], // orange
-    ['#795548', '#5D4037'], // brown
-    ['#757575', '#424242'], // gray
-
-    ['#607D8B', '#455A64'], // blue gray
+    [red[400], red[600]],
+    [pink[400], pink[600]],
+    [purple[400], purple[600]],
+    [deepPurple[400], deepPurple[600]],
+    [indigo[400], indigo[600]],
+    [blue[500], blue[700]],
+    [lightBlue[600], lightBlue[800]],
+    [cyan[700], cyan[900]],
+    [teal[500], teal[700]],
+    [green[600], green[800]],
+    [lightGreen[700], lightGreen[900]],
+    [lime[700], lime[900]],
+    [orange[700], orange[900]],
+    [deepOrange[400], deepOrange[600]],
+    [brown[400], brown[600]],
+    [grey[600], grey[800]],
   ]
 
   // 打乱数组顺序
@@ -37,25 +48,28 @@ const useMaterialBackground = (selector) => {
   let paletteLength = colorPalette.length
 
   // 获取一个随机的索引偏移量
-  let randomOffset = Math.floor(Math.random() * 5)
+  let randomOffset = random(5)
 
   let $targetBackgroundContainers = this
 
   Array.prototype.forEach.call(elemArr, (elem, index) => {
-    let paletteIndex = index
-    let wrapRotateAngle = Math.floor(Math.random() * 2) * 180
+    let paletteIndex = (index + random(1000)) % paletteLength
+    console.log(paletteIndex);
+    // paletteIndex = index
+
+    let wrapRotateAngle = random(2) * 180
     let wrapElem = document.createElement('div')
     wrapElem.setAttribute('class',  'mb-bg-wrap')
     wrapElem.setAttribute('style', `transform: rotate(${wrapRotateAngle}deg);
                                     background-color: ${colorPalette[paletteIndex][0]};`)
 
-    // let blocksCount = Math.floor(Math.random() * 2 + 1)
-    let blocksCount = 1
+    let blocksCount = random(2, 1)
+    // let blocksCount = 1
     for (let i = 0; i < blocksCount; i++) {
       let shadowStrength = (Math.random() < .5) ? 'light' : 'strong'
-      let height = Math.floor(Math.random() * 80 + 120)
-      let rotateAngle = Math.floor(Math.random() * 180 + 1)
-      let topOffset = Math.floor(Math.random() * 50 + 100)
+      let height = random(80, 120)
+      let rotateAngle = random(180)
+      let topOffset = random(50, 100)
       let blockElem = document.createElement('div')
       blockElem.setAttribute('class', `mb-bg-block mb-shadow-${shadowStrength}`)
       blockElem.setAttribute('style', `height: ${height}px;

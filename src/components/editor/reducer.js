@@ -11,8 +11,8 @@ import {
   REQUEST_SAVE_ARTICLE,
   REQUEST_SAVE_ARTICLE_COMPLETED,
   REQUEST_SAVE_ARTICLE_FAILED,
-  GET_ARTICLE_BY_ID,
-  GET_ARTICLE_BY_ID_COMPLETED,
+  GET_ARTICLE_TO_EDIT,
+  GET_ARTICLE_TO_EDIT_COMPLETED,
 } from './actionTypes'
 
 const defaultState = {
@@ -60,7 +60,7 @@ export default (state = defaultState, action) => {
     /*
     初始化时获取文章
     */
-    case GET_ARTICLE_BY_ID_COMPLETED:
+    case GET_ARTICLE_TO_EDIT_COMPLETED:
       const articleFieldsToEdit = state.articleFields
       const articleObj = action.payload.data.article
       if (articleObj !== null) {

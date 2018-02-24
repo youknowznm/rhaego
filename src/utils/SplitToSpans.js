@@ -4,8 +4,8 @@ import {siteName} from '../config'
 
 import './splitToSpans.css'
 
-const SplitToSpans = ({words, className}) => {
-  let arr = words.trim().split(/\s+/)
+const SplitToSpans = ({className, children}) => {
+  let arr = children.trim().split(/\s+/)
   return (
     <span className={className}>
       {
@@ -18,12 +18,12 @@ const SplitToSpans = ({words, className}) => {
 }
 
 SplitToSpans.propTypes = {
-  words: PropTypes.string.isRequired,
+  children: PropTypes.string.isRequired,
   className: PropTypes.string,
 }
 
 SplitToSpans.defaultProps = {
-  words: siteName,
+  children: siteName,
 }
 
 export default SplitToSpans

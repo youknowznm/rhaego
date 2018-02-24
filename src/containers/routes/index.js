@@ -10,7 +10,9 @@ import {view as Products} from '../../components/products'
 import {view as Login} from '../../components/login'
 import {view as Admin} from '../../components/admin'
 import {view as Editor} from '../../components/editor'
+import {view as Article} from '../../components/article'
 import {view as NotFound} from '../../components/notFound'
+
 import {actions as headerActions} from '../../components/header'
 
 const history = syncHistoryWithStore(browserHistory, store)
@@ -20,6 +22,7 @@ const Routes = ({routeWillUpdate, willEnterAdminRoute}) => (
     <Route path="/" component={App}>
       <IndexRoute component={Articles} />
       <Route path="articles" component={Articles} />
+      <Route path="article" component={Article} />
       <Route path="products" component={Products} />
       <Route path="login" component={Login} />
       <Route path="admin" onEnter={willEnterAdminRoute}>

@@ -14,11 +14,13 @@ import {
   checkArticleFields,
   requestSaveArticle,
   requestSaveArticleInit,
-  getArticleById,
+  getArticleToEdit,
 } from '../actions'
 
 import {view as Upload} from '../../upload'
 import './editor.css'
+
+const contentRowNumber = 33
 
 class Editor extends React.Component {
   componentWillMount() {
@@ -80,7 +82,6 @@ class Editor extends React.Component {
   onRemoveTag = (index) => () => {
     this.props.thisRemoveTag(index)
     this.setState({})
-    this.props.thisUpdateArticleField('title', this.props.titleValue)
   }
   onTagInputKeyUp = (evt) => {
     const target = evt.target
@@ -92,7 +93,6 @@ class Editor extends React.Component {
       this.props.thisAddTag(trimmedTagContent)
       target.value = ''
       this.setState({})
-      this.props.thisUpdateArticleField('title', this.props.titleValue)
     }
   }
   render() {
@@ -122,6 +122,7 @@ class Editor extends React.Component {
           {/* 标题 */}
           <TextField
             className="editor-title"
+            autoFocus
             label="标题"
             margin="normal"
             helperText="输入10至20字作为标题。"
@@ -214,7 +215,7 @@ class Editor extends React.Component {
             label="内容"
             multiline
             value={contentValue}
-            rows="17"
+            rows={contentRowNumber}
             onChange={this.onChangeValue('content')}
             helperText="内容将以 Markdown 渲染。"
             margin="normal"
@@ -228,7 +229,7 @@ class Editor extends React.Component {
               label="预览"
               fullWidth
               multiline
-              rows="17"
+              rows={contentRowNumber}
               margin="normal"
               disabled
               helperText="以上是转换后的 HTML。"
@@ -307,7 +308,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => ({
   thisGetArticleById: () => {
-    dispatch(getArticleById(getQueryObj().articleId || ''))
+    dispatch(getArticleToEdit(getQueryObj().articleId || ''))
   },
   thisRemoveTag: (index) => {
     dispatch(removeTag(index))

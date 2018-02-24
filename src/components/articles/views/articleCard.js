@@ -3,40 +3,41 @@ import {withStyles} from 'material-ui/styles'
 import {Card, Button, Avatar} from 'material-ui'
 import {CardHeader, CardContent, CardActions} from 'material-ui/Card'
 import IconButton from 'material-ui/IconButton'
-import MoreVertIcon from 'material-ui-icons/MoreVert'
 import Typography from 'material-ui/Typography'
 import FavoriteIcon from 'material-ui-icons/Favorite'
 import CommentIcon from 'material-ui-icons/Comment'
-import {grey} from 'material-ui/colors'
+import {blueGrey} from 'material-ui/colors'
+import {SplitToSpans} from '../../../utils'
+
 
 import './articleCard.css'
 
 const styles = (theme) => ({
-  grayAvatar: {
+  titleAvatar: {
     color: '#fff',
-    backgroundColor: grey[500],
+    backgroundColor: blueGrey[500],
+    textTransform: 'uppercase',
   },
 })
 
-
 const ArticleCard = ({classes, articleData}) => {
-  const {title, date, summary, commentCount, favoriteCount} = articleData
-
+  const {_id, title, summary, tags} = articleData
+  const createdDate = articleData.createdDate.slice(0, 10)
+  const commentCount = articleData.comments.length
+  const likedCount = articleData.comments.liked
+  const link = `/article?id=${_id}`
   return (
-    <div className="card-wrap">
+    <a className="card-wrap" href={link}>
       <Card className="card z-index-2">
         <CardHeader
           className="light-font content-card-header"
           avatar={
-            <Avatar className={classes.grayAvatar}>R</Avatar>
+            <Avatar className={classes.titleAvatar}>{title.slice(0, 1)}</Avatar>
           }
-          action={
-            <IconButton>
-              <MoreVertIcon />
-            </IconButton>
+          title={
+            <SplitToSpans>{title}</SplitToSpans>
           }
-          title={title}
-          subheader={date}
+          subheader={createdDate}
         >
         </CardHeader>
 
@@ -47,11 +48,11 @@ const ArticleCard = ({classes, articleData}) => {
         </p>
 
         <CardActions className="light-font" disableActionSpacing>
-          <IconButton color="inherit" aria-label="Add to favorites" disabled>
+          <IconButton color="inherit" aria-label="Like" disabled>
             <FavoriteIcon />
           </IconButton>
           <Typography className="count " type="caption">
-            {favoriteCount}
+            {likedCount}
           </Typography>
           <IconButton color="inherit" aria-label="Comment" disabled>
             <CommentIcon />
@@ -62,12 +63,26 @@ const ArticleCard = ({classes, articleData}) => {
         </CardActions>
 
         <div className="tags">
-          <Button dense raised color="default" className="tag">JavaScript</Button>
-          <Button dense raised color="default" className="tag">react native</Button>
+          {
+            tags.map((tag) => {
+              const taggedLink = `/articles?tag=${tag}`
+              return (
+                <Button className="tag"
+                  dense
+                  raised
+                  color="default"
+                  href={taggedLink}
+                >
+                  {tag}
+                </Button>
+              )
+            })
+          }
         </div>
+
       </Card>
 
-    </div>
+    </a>
   )
 }
 

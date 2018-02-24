@@ -5,7 +5,8 @@ import {fetchGithub as fetchGithubAPI} from '../../api'
 import {createAsyncAction} from 'redux-action-tools'
 
 export const fetchGithub = createAsyncAction(
-  FETCH_GITHUB, () => {
+  FETCH_GITHUB,
+  () => {
     return axios.get(fetchGithubAPI)
   }
 )

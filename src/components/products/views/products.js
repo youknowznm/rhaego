@@ -13,13 +13,13 @@ class Products extends React.Component {
   }
 
   componentDidUpdate(nextProps) {
-    if (this.props.productsData !== nextProps.productsData) {
+    if (this.props.productsArr !== nextProps.productsArr) {
       useMaterialBackground('.content .card')
     }
   }
 
   render() {
-    const {status, productsData, statusMsg} = this.props
+    const {status, productsArr, statusMsg} = this.props
     return (
       <LoadingArea
         status={status}
@@ -29,7 +29,7 @@ class Products extends React.Component {
           () => (
             <div className="mb-flex">
               {
-                productsData.map((item, i) => (
+                productsArr.map((item, i) => (
                   <ProductCard
                     key={i}
                     eachProductData={item}
@@ -47,7 +47,7 @@ class Products extends React.Component {
 const mapState = (state) => {
   return {
     status: state.products.status,
-    productsData: state.products.productsData,
+    productsArr: state.products.productsArr,
     statusMsg: state.products.statusMsg,
   };
 }

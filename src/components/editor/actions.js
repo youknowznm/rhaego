@@ -6,8 +6,8 @@ import {
   CHECK_ARTICLE_FIELDS,
   REQUEST_SAVE_ARTICLE,
   REQUEST_SAVE_ARTICLE_INIT,
-  GET_ARTICLE_BY_ID,
-  GET_ARTICLE_BY_ID_COMPLETED,
+  GET_ARTICLE_TO_EDIT,
+  GET_ARTICLE_TO_EDIT_COMPLETED,
 } from './actionTypes'
 import {createAsyncAction} from 'redux-action-tools'
 import {article as articleAPI} from '../../api'
@@ -44,8 +44,8 @@ export const requestSaveArticle = createAsyncAction(
   }
 )
 
-export const getArticleById = createAsyncAction(
-  GET_ARTICLE_BY_ID,
+export const getArticleToEdit = createAsyncAction(
+  GET_ARTICLE_TO_EDIT,
   (articleId) => {
     return axios.get(`${articleAPI}?articleId=${articleId}`)
   }

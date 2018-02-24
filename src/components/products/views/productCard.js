@@ -7,14 +7,15 @@ import IconButton from 'material-ui/IconButton'
 import Typography from 'material-ui/Typography'
 import StarIcon from 'material-ui-icons/Star'
 import DeviceHubIcon from 'material-ui-icons/DeviceHub'
-import {grey} from 'material-ui/colors'
+import {blueGrey} from 'material-ui/colors'
 
 import './productCard.css'
 
 const styles = (theme) => ({
-  grayAvatar: {
+  titleAvatar: {
     color: '#fff',
-    backgroundColor: grey[500],
+    backgroundColor: blueGrey[500],
+    textTransform: 'uppercase',
   },
 })
 
@@ -36,7 +37,7 @@ const ProductCard = ({classes, eachProductData}) => {
         <CardHeader
           className="light-font content-card-header"
           avatar={
-            <Avatar className={classes.grayAvatar}>{name.slice(0, 1).toUpperCase()}</Avatar>
+            <Avatar className={classes.titleAvatar}>{name.slice(0, 1)}</Avatar>
           }
           title={name}
           subheader={formatDate(created_at)}

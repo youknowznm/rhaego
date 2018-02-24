@@ -10,14 +10,14 @@ export default createReducer()
   })
   .done((state, action) => {
     const data = action.payload.data
-    let productsData = data.sort((p1, p2) => {
+    let productsArr = data.sort((p1, p2) => {
       return -(p1.stargazers_count - p2.stargazers_count)
     })
     return {
       ...state,
       status: 'completed',
       statusMsg: '获取成功。',
-      productsData,
+      productsArr,
     }
   })
   .failed((state, action) => {
@@ -25,11 +25,11 @@ export default createReducer()
       ...state,
       status: 'failed',
       statusMsg: '获取失败。请稍后重试。',
-      productsData: [],
+      productsArr: [],
     }
   })
   .build({
     status: 'initial',
-    productsData: [],
+    productsArr: [],
     statusMsg: '',
   })
