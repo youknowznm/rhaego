@@ -25,7 +25,7 @@ class Login extends React.Component {
     switch (nextProps.loginRequestStatus) {
       case 'loading':
         if (nextProps.fieldsValid === true) {
-           const loginFields = {
+          const loginFields = {
             email: this.props.emailValue,
             password: this.props.passwordValue,
           }

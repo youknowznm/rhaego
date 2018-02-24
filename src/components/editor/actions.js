@@ -1,21 +1,16 @@
 import {
-  // UPDATE_TITLE_FIELD,
-  // UPDATE_SUMMARY_FIELD,
-  // UPDATE_CONTENT_FIELD,
-  // UPDATE_CREATED_DATE_FIELD,
   UPDATE_ARTICLE_FIELD,
-
   ADD_TAG,
   REMOVE_TAG,
   ADJUST_TAG_INPUT_INDENT,
-
   CHECK_ARTICLE_FIELDS,
-
   REQUEST_SAVE_ARTICLE,
   REQUEST_SAVE_ARTICLE_INIT,
+  GET_ARTICLE_BY_ID,
+  GET_ARTICLE_BY_ID_COMPLETED,
 } from './actionTypes'
 import {createAsyncAction} from 'redux-action-tools'
-import {article as saveArticleAPI} from '../../api'
+import {article as articleAPI} from '../../api'
 import axios from 'axios'
 
 export const addTag = (tagContent) => ({
@@ -45,6 +40,13 @@ export const requestSaveArticleInit = () => ({
 export const requestSaveArticle = createAsyncAction(
   REQUEST_SAVE_ARTICLE,
   (articleFields) => {
-    return axios.post(saveArticleAPI, articleFields)
+    return axios.post(articleAPI, articleFields)
+  }
+)
+
+export const getArticleById = createAsyncAction(
+  GET_ARTICLE_BY_ID,
+  (articleId) => {
+    return axios.get(`${articleAPI}?articleId=${articleId}`)
   }
 )

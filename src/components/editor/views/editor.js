@@ -5,7 +5,7 @@ import {FormControl, FormHelperText} from 'material-ui/Form'
 import Input, {InputLabel} from 'material-ui/Input'
 import Chip from 'material-ui/Chip'
 import store from '../../../Store'
-import {highlightAllPre, AsyncButton} from '../../../utils'
+import {highlightAllPre, AsyncButton, getQueryObj} from '../../../utils'
 import {
   updateArticleField,
   addTag,
@@ -14,24 +14,28 @@ import {
   checkArticleFields,
   requestSaveArticle,
   requestSaveArticleInit,
+  getArticleById,
 } from '../actions'
 
 import {view as Upload} from '../../upload'
 import './editor.css'
 
 class Editor extends React.Component {
+  componentWillMount() {
+    // 初始化时根据 query 寻找文章。找不到时则新建文章
+    this.props.thisGetArticleById()
+  }
   componentDidMount() {
     this.props.thisAdjustTagInputIndent()
-    // 初始化时进行预览
-    this.props.thisUpdateArticleField('content', this.props.contentValue)
   }
   componentWillUpdate(nextProps) {
-    console.log(nextProps.saveArticleRequestStatus);
+    console.log('fuck',);
+
     switch (nextProps.saveArticleRequestStatus) {
       case 'loading':
         if (nextProps.fieldsValid === true) {
-          console.log(this.props.articleFields);
           const articleFields = {
+            _id: this.props.articleId,
             title: this.props.titleValue,
             summary: this.props.summaryValue,
             tags: this.props.tagsValue,
@@ -47,10 +51,14 @@ class Editor extends React.Component {
         }, 2000)
         break
       case 'completed':
+      console.log(nextProps);
+        const {articleId} = nextProps
         setTimeout(() => {
-          // this.backToReferer()
           this.props.thisRequestSaveArticleInit()
-        }, 2000)
+          setTimeout(() => {
+            // window.location.assign(`/article?id=${articleId}`)
+          }, 400)
+        }, 1500)
         break
       default:
         break
@@ -58,6 +66,8 @@ class Editor extends React.Component {
   }
   componentDidUpdate(nextProps) {
     this.props.thisAdjustTagInputIndent()
+    // 预览内容
+    this.props.thisUpdateArticleField('content', this.props.contentValue)
     if (this.props.parsedHTMLContent !== nextProps.parsedHTMLContent) {
       highlightAllPre('.editor-preview')
     }
@@ -77,7 +87,7 @@ class Editor extends React.Component {
     const trimmedTagContent = target.value.trim()
     if (evt.key === 'Enter'
       && trimmedTagContent.length >= 3
-      && this.props.articleFields.tags.value.length <= 1
+      && this.props.tagsValue.length <= 1
     ) {
       this.props.thisAddTag(trimmedTagContent)
       target.value = ''
@@ -115,7 +125,7 @@ class Editor extends React.Component {
             label="标题"
             margin="normal"
             helperText="输入10至20字作为标题。"
-            defaultValue={titleValue}
+            value={titleValue}
             onChange={this.onChangeValue('title')}
             error={titleError}
             inputProps={{
@@ -166,7 +176,7 @@ class Editor extends React.Component {
             className="editor-summary"
             label="摘要"
             margin="normal"
-            defaultValue={summaryValue}
+            value={summaryValue}
             helperText="输入10至50字作为摘要。"
             onChange={this.onChangeValue('summary')}
             error={summaryError}
@@ -188,7 +198,7 @@ class Editor extends React.Component {
               inputProps={{
                 'maxLength': '12',
               }}
-              defaultValue={createdDateValue}
+              value={createdDateValue}
               onChange={this.onChangeValue('createdDate')}
             />
             <FormHelperText>
@@ -203,7 +213,7 @@ class Editor extends React.Component {
             className="editor-content"
             label="内容"
             multiline
-            defaultValue={contentValue}
+            value={contentValue}
             rows="17"
             onChange={this.onChangeValue('content')}
             helperText="内容将以 Markdown 渲染。"
@@ -214,7 +224,7 @@ class Editor extends React.Component {
           <div className="editor-preview-wrap">
             <TextField
               className="editor-preview-placeholder"
-              defaultValue=" "
+              value=" "
               label="预览"
               fullWidth
               multiline
@@ -273,7 +283,6 @@ const mapState = (state) => {
   const thatArticleFields = state.editor.articleFields
   // IDEA: mapState方法返回的对象的键必须是值对象，不能是对象或数组！！
   return {
-    articleFields: state.editor.articleFields,
     titleValue: thatArticleFields.title.value,
     titleError: thatArticleFields.title.error,
     summaryValue: thatArticleFields.summary.value,
@@ -285,6 +294,10 @@ const mapState = (state) => {
     contentValue: thatArticleFields.content.value,
     contentError: thatArticleFields.content.error,
 
+    // articleFields: state.editor.articleFields,
+    fieldsValid: state.editor.fieldsValid,
+    articleId: state.editor.articleId,
+
     tagsWidth: state.editor.tagsWidth,
     parsedHTMLContent: state.editor.parsedHTMLContent,
     saveArticleRequestStatus: state.editor.saveArticleRequestStatus,
@@ -293,6 +306,9 @@ const mapState = (state) => {
 }
 
 const mapDispatch = (dispatch) => ({
+  thisGetArticleById: () => {
+    dispatch(getArticleById(getQueryObj().articleId || ''))
+  },
   thisRemoveTag: (index) => {
     dispatch(removeTag(index))
   },

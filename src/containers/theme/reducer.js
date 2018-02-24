@@ -1,8 +1,8 @@
 import {TOGGLE_THEME_TYPE} from './actionTypes'
 
 const defaultState = {
-  type: 'dark',
-  // type: 'light',
+  // type: 'dark',
+  type: 'light',
 }
 
 export default (state = defaultState, action) => {

@@ -1,11 +1,14 @@
 const getQueryObj = () => {
   const queryObj = {}
-  const decodedString = decodeURIComponent(window.location.search.substring(1))
-  const searchArr = decodedString.split('&')
-  searchArr.forEach((i) => {
-    var pair = i.split('=')
-    queryObj[pair[0]] = pair[1]
-  })
+  const originSearch = window.location.search
+  if (originSearch !== '') {
+    const decodedQueryString = decodeURIComponent(originSearch.substring(1))
+    const queryArr = decodedQueryString.split('&')
+    queryArr.forEach((i) => {
+      var pair = i.split('=')
+      queryObj[pair[0]] = pair[1]
+    })
+  }
   return queryObj
 }
 

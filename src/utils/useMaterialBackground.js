@@ -18,7 +18,7 @@ const useMaterialBackground = (selector) => {
     ['#673AB7', '#512DA8'], // purple
     ['#3F51B5', '#303F9F'], // indigo
 
-    ['#2196F3', '#1976D2'], // blue
+    // ['#2196F3', '#1976D2'], // blue
     ['#0097A7', '#006064'], // cyan
     ['#009688', '#00796B'], // teal
     ['#43A047', '#2E7D32'], // green
