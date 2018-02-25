@@ -8,8 +8,8 @@ export default {
   },
 
   editor: {
-    titleReg: /^.{10,20}$/,
-    summaryReg: /^.{10,50}$/,
+    titleReg: /^.{10,40}$/,
+    summaryReg: /^.{10,100}$/,
     createdDateReg: /^\d{4}-\d{2}-\d{2}$/,
     contentReg: /\S/,
   },

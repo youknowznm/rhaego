@@ -53,10 +53,7 @@ const useMaterialBackground = (selector) => {
   let $targetBackgroundContainers = this
 
   Array.prototype.forEach.call(elemArr, (elem, index) => {
-    let paletteIndex = (index + random(1000)) % paletteLength
-    console.log(paletteIndex);
-    // paletteIndex = index
-
+    let paletteIndex = index % paletteLength
     let wrapRotateAngle = random(2) * 180
     let wrapElem = document.createElement('div')
     wrapElem.setAttribute('class',  'mb-bg-wrap')

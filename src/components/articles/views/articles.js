@@ -33,16 +33,16 @@ class Articles extends React.Component {
         )
       case 'failed':
         return (
-          <div className="mb-center">
+          <Typography className="mb-center" type="subheading">
             {getArticlesStatusMessage}
-          </div>
+          </Typography>
         )
       case 'completed':
         if (articlesArr.length === 0) {
           return (
-            <div className="mb-center">
+            <Typography className="mb-center" type="subheading">
               {getArticlesStatusMessage}
-            </div>
+            </Typography>
           )
         }
         return (

@@ -24,7 +24,7 @@ const ArticleCard = ({classes, articleData}) => {
   const {_id, title, summary, tags} = articleData
   const createdDate = articleData.createdDate.slice(0, 10)
   const commentCount = articleData.comments.length
-  const likedCount = articleData.comments.liked
+  const likedCount = articleData.liked
   const link = `/article?id=${_id}`
   return (
     <a className="card-wrap" href={link}>
@@ -35,7 +35,7 @@ const ArticleCard = ({classes, articleData}) => {
             <Avatar className={classes.titleAvatar}>{title.slice(0, 1)}</Avatar>
           }
           title={
-            <SplitToSpans>{title}</SplitToSpans>
+            <SplitToSpans className="mono">{title}</SplitToSpans>
           }
           subheader={createdDate}
         >
@@ -64,10 +64,11 @@ const ArticleCard = ({classes, articleData}) => {
 
         <div className="tags">
           {
-            tags.map((tag) => {
+            tags.map((tag, index) => {
               const taggedLink = `/articles?tag=${tag}`
               return (
                 <Button className="tag"
+                  key={index}
                   dense
                   raised
                   color="default"

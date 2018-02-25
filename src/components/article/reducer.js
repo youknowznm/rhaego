@@ -27,7 +27,6 @@ export default (state = defaultState, action) => {
         getArticleDetailStatusMessage: '获取失败。请稍后重试。',
       }
     case GET_ARTICLE_DETAIL_COMPLETED:
-      const articleDetail = state.articleFields
       const articleObj = action.payload.data.article
       return {
         ...state,

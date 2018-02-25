@@ -1,0 +1,105 @@
+@charset "UTF-8";
+@import "../../../assets/styles/common.scss";
+
+$mb-theme-light-row-background: #fff;
+$mb-theme-dark-row-background: #424242;
+
+.article-content {
+  padding-top: 12px;
+  padding-right: 220px;
+}
+
+.article-nav {
+  position: absolute;
+  box-sizing: border-box;
+  width: 160px;
+  right: 36px;
+  top: 24px;
+  border-left: 4px solid #1e88e5;
+  padding-left: 12px;
+  > li {
+    list-style: none;
+    font-size: 14px;
+    line-height: 16px;
+    // color: #212121;
+    cursor: pointer;
+    font-family: "Roboto";
+    margin-top: 8px;
+    transition: all .2s ease;
+    &:first-child {
+      color: #757575;
+      font-weight: 500;
+      margin: 0;
+    }
+    &.active,
+    &:hover {
+      color: #039be5;
+    }
+  }
+}
+
+
+.article-title {
+  font-family: "Roboto Mono";
+  font-size: 34px;
+  height: 40px;
+  color: #757575;
+  font-weight: 400 !important;
+  margin: 40px 0 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.separator {
+  height: 6px;
+  width: 100%;
+  background: $mb-theme-primary;
+}
+
+.article-info {
+  position: relative;
+  margin: 24px 0 12px;
+  height: 70px;
+  // background: $mb-theme-light-row-background;
+
+  .created-date {
+    line-height: 70px;
+    float: left;
+    // margin-left: 24px;
+    color: #757575;
+  }
+
+  .tag-helper {
+    line-height: 70px;
+    color: #757575;
+    display: inline-block;
+    float: right;
+  }
+
+  .tags {
+    float: right;
+    margin-top: 19px;
+    // margin-right: 24px;
+    .tag {
+      margin-left: 18px;
+    }
+  }
+
+}
+
+#mb-dark-theme {
+  .article-title {
+    color: rgba(255, 255, 255, 0.7);
+
+  }
+  .separator {
+    background: $mb-theme-secondary;
+  }
+  .article-info {
+    // background: $mb-theme-dark-row-background;
+    .created-date {
+      color: $mb-theme-dark-font;
+
+    }
+  }
+}

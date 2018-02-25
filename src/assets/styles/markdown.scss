@@ -1,11 +1,10 @@
 @charset "UTF-8";
 @import "./highlight.scss";
 
-$mb-article-font-light: rgba(0, 0, 0, .87);
+$mb-article-font-light: #212121;
 $mb-article-font-dark: #fff;
 
-// rgba(255, 255, 255, .7)
-$mb-article-border-light: rgba(0, 0, 0, .12);
+$mb-article-border-light: rgba(0, 0, 0, 0.12);
 $mb-article-border-dark: rgba(255, 255, 255, .12);
 
 $mb-article-link: #039be5;
@@ -26,19 +25,16 @@ $mb-article-quote-dark: #fff;
 // https://material-ui-next.com/style/typography/#typography
 
 .mb-article {
-  font-family: "Roboto";
   text-align: left;
   padding: 0 6px;
-  // font-size: 14px !important;
-  // line-height: 20px !important;
   color: $mb-article-font-light;
   p {
     font-family: "Roboto";
-    margin: 0;
-    margin-bottom: 5px;
+    margin: 16px 0;
     padding: 0;
-    font-size: 14px;
-    line-height: 1.6;
+    font-size: 16px;
+    color: #212121;
+    line-height: 24px;
   }
   b {
     font-size: 500;
@@ -57,18 +53,19 @@ $mb-article-quote-dark: #fff;
   h1 {
     border-bottom: 1px solid $mb-article-border-light;
     font-size: 24px;
-    line-height: 1.35;
+    line-height: 32px;
     font-family: "Roboto Mono";
     letter-spacing: -.01em;
-    margin-bottom: 8px;
+    margin: 40px 0 20px;
     padding-bottom: 3px;
     color: $mb-article-font-light;
+    font-weight: 300;
   }
   h2, h3, h4, h5, h6 {
     color: $mb-article-font-light;
-    font-size: 16px;
-    margin-bottom: 5px;
-    line-height: 1.5;
+    font-size: 20px;
+    margin: 32px 0 16px;
+    line-height: 32px;
   }
   blockquote {
     padding-left: 12px;
@@ -114,7 +111,7 @@ $mb-article-quote-dark: #fff;
   }
   ul, ol {
     margin: 0;
-    padding-left: 24px;
+    padding-left: 40px;
     li {
       margin: 8px 0;
       padding: 0;

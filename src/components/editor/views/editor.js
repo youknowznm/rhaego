@@ -125,12 +125,12 @@ class Editor extends React.Component {
             autoFocus
             label="标题"
             margin="normal"
-            helperText="输入10至20字作为标题。"
+            helperText="输入10至40字作为标题。"
             value={titleValue}
             onChange={this.onChangeValue('title')}
             error={titleError}
             inputProps={{
-              'maxLength': '20',
+              'maxLength': '40',
             }}
           />
           {/* 标签 */}
@@ -168,9 +168,8 @@ class Editor extends React.Component {
               }
             </div>
           </div>
-
         </div>
-
+        
         <div className="row">
           {/* 摘要 */}
           <TextField
@@ -178,11 +177,11 @@ class Editor extends React.Component {
             label="摘要"
             margin="normal"
             value={summaryValue}
-            helperText="输入10至50字作为摘要。"
+            helperText="输入10至100字作为摘要。"
             onChange={this.onChangeValue('summary')}
             error={summaryError}
             inputProps={{
-              'maxLength': '50',
+              'maxLength': '100',
             }}
           />
           {/* 日期 */}

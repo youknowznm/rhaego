@@ -7,6 +7,7 @@ import debounce from './debounce'
 import getQueryObj from './getQueryObj'
 import highlightAllPre from './highlightAllPre'
 import useMaterialBackground from './useMaterialBackground'
+import getOffsetToPage from './getOffsetToPage'
 
 import regexps from './regexps'
 
@@ -20,6 +21,7 @@ export {
   getQueryObj,
   highlightAllPre,
   useMaterialBackground,
+  getOffsetToPage,
 
   regexps,
 }
