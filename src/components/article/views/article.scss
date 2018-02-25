@@ -93,12 +93,15 @@ $mb-theme-dark-row-background: #424242;
 }
 
 
-.article-content {
+.article-content,
+.comment-editor,
+.comments-list {
+  margin-right: 0;
   @media (min-width: 850px) {
-    padding-right: 190px;
+    margin-right: 200px;
   }
-  @media (min-width: 1440px) {
-    padding-right: 220px;
+  @media (min-width: 1300px) {
+    margin-right: 220px;
   }
 }
 
@@ -108,5 +111,36 @@ $mb-theme-dark-row-background: #424242;
   }
   @media (min-width: 850px) {
     display: block;
+  }
+}
+
+// 评论
+
+.comment-editor {
+  position: relative;
+  padding: 24px;
+  .row {
+    position: relative;
+    display: flex;
+    align-items: center;
+    .comment-input {
+      width: 40%;
+      margin-right: 12px;
+      max-width: 240px;
+    }
+    .comment-content {
+      flex-grow: 1;
+      max-width: 385px;
+      margin-right: 18px;
+    }
+    .submit-button {
+      height: 36px;
+    }
+  }
+}
+
+.comments-list {
+  .comments-list-item {
+
   }
 }

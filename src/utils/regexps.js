@@ -14,4 +14,10 @@ export default {
     contentReg: /\S/,
   },
 
+  comment: {
+    authorReg: /^.{4,16}$/,
+    emailReg: /^([a-zA-Z0-9]+[\w-]*)(@[\w]{2,})(\.[\w]{2,4})(\.[\w]{2,4})?$/,
+    contentReg: /^.{2,100}$/,
+  },
+
 }

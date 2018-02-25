@@ -31,8 +31,6 @@ class Editor extends React.Component {
     this.props.thisAdjustTagInputIndent()
   }
   componentWillUpdate(nextProps) {
-    console.log('fuck',);
-
     switch (nextProps.saveArticleRequestStatus) {
       case 'loading':
         if (nextProps.fieldsValid === true) {
@@ -53,7 +51,6 @@ class Editor extends React.Component {
         }, 2000)
         break
       case 'completed':
-      console.log(nextProps);
         const {articleId} = nextProps
         setTimeout(() => {
           this.props.thisRequestSaveArticleInit()
@@ -169,7 +166,7 @@ class Editor extends React.Component {
             </div>
           </div>
         </div>
-        
+
         <div className="row">
           {/* 摘要 */}
           <TextField
@@ -280,19 +277,19 @@ class Editor extends React.Component {
 }
 
 const mapState = (state) => {
-  const thatArticleFields = state.editor.articleFields
+  const {articleFields} = state.editor
   // IDEA: mapState方法返回的对象的键必须是值对象，不能是对象或数组！！
   return {
-    titleValue: thatArticleFields.title.value,
-    titleError: thatArticleFields.title.error,
-    summaryValue: thatArticleFields.summary.value,
-    summaryError: thatArticleFields.summary.error,
-    tagsValue: thatArticleFields.tags.value,
-    tagsError: thatArticleFields.tags.error,
-    createdDateValue: thatArticleFields.createdDate.value,
-    createdDateError: thatArticleFields.createdDate.error,
-    contentValue: thatArticleFields.content.value,
-    contentError: thatArticleFields.content.error,
+    titleValue: articleFields.title.value,
+    titleError: articleFields.title.error,
+    summaryValue: articleFields.summary.value,
+    summaryError: articleFields.summary.error,
+    tagsValue: articleFields.tags.value,
+    tagsError: articleFields.tags.error,
+    createdDateValue: articleFields.createdDate.value,
+    createdDateError: articleFields.createdDate.error,
+    contentValue: articleFields.content.value,
+    contentError: articleFields.content.error,
 
     // articleFields: state.editor.articleFields,
     fieldsValid: state.editor.fieldsValid,
@@ -335,7 +332,3 @@ const mapDispatch = (dispatch) => ({
 const EditorWrap = connect(mapState, mapDispatch)(Editor)
 
 export default EditorWrap
-
-// new Fingerprint2(options).get(function(result) {
-//   console.log(result)
-// })
