@@ -129,9 +129,6 @@ class ArticleContent extends React.Component {
                   })
                 }
               </div>
-              {/* <Typography component="i" type="body1" className="tag-helper">
-                查看更多文章：
-              </Typography> */}
             </div>
 
             <ul className="article-nav">

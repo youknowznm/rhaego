@@ -6,7 +6,6 @@ $mb-theme-dark-row-background: #424242;
 
 .article-content {
   padding-top: 12px;
-  padding-right: 220px;
 }
 
 .article-nav {
@@ -38,15 +37,12 @@ $mb-theme-dark-row-background: #424242;
   }
 }
 
-
 .article-title {
   font-family: "Roboto Mono";
   font-size: 34px;
-  height: 40px;
   color: #757575;
   font-weight: 400 !important;
   margin: 40px 0 80px;
-  overflow: hidden;
   text-overflow: ellipsis;
 }
 
@@ -60,26 +56,18 @@ $mb-theme-dark-row-background: #424242;
   position: relative;
   margin: 24px 0 12px;
   height: 70px;
-  // background: $mb-theme-light-row-background;
 
   .created-date {
     line-height: 70px;
     float: left;
-    // margin-left: 24px;
+    margin-left: 12px;
     color: #757575;
-  }
-
-  .tag-helper {
-    line-height: 70px;
-    color: #757575;
-    display: inline-block;
-    float: right;
   }
 
   .tags {
     float: right;
     margin-top: 19px;
-    // margin-right: 24px;
+    margin-right: 12px;
     .tag {
       margin-left: 18px;
     }
@@ -101,5 +89,24 @@ $mb-theme-dark-row-background: #424242;
       color: $mb-theme-dark-font;
 
     }
+  }
+}
+
+
+.article-content {
+  @media (min-width: 850px) {
+    padding-right: 190px;
+  }
+  @media (min-width: 1440px) {
+    padding-right: 220px;
+  }
+}
+
+.article-nav {
+  @media (min-width: 0) {
+    display: none;
+  }
+  @media (min-width: 850px) {
+    display: block;
   }
 }
