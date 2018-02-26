@@ -18,7 +18,9 @@
 
     }
     .avatar {
-      background-color: $color-red-500 !important;
+      background-color: $mb-theme-primary;
+      text-transform: uppercase;
+      color: '#fff';
     }
     .count {
       margin-right: 6px !important;

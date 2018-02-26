@@ -8,8 +8,13 @@ import {
   getOffsetToPage,
 } from '../../../utils'
 import {getArticleDetail} from '../actions'
-import {Button, Typography} from 'material-ui'
+import {Button, Typography, Divider} from 'material-ui'
 import {CircularProgress} from 'material-ui/Progress'
+import Icon from 'material-ui/Icon';
+import IconButton from 'material-ui/IconButton';
+import FavoriteIcon from 'material-ui-icons/Favorite'
+import CommentIcon from 'material-ui-icons/Comment'
+import {CardHeader, CardContent, CardActions} from 'material-ui/Card'
 
 import './article.css'
 
@@ -98,6 +103,10 @@ class ArticleContent extends React.Component {
               <SplitToSpans className="mono">{articleDetail.title}</SplitToSpans>
             </h1>
 
+            <Typography component="i" type="body2" className="created-date">
+              创建于 {articleDetail.createdDate}
+            </Typography>
+
             {/* <div className="separator"></div> */}
 
             <article
@@ -106,11 +115,27 @@ class ArticleContent extends React.Component {
               dangerouslySetInnerHTML={{__html: parsedHTMLContent}}
             ></article>
 
+            <hr className="separator" />
+
             <div className="article-info">
-              <Typography component="i" type="body1" className="created-date">
-                创建于 {articleDetail.createdDate}
-              </Typography>
-              <div className="tags">
+              <div className="article-actions">
+                <CardActions>
+                  <IconButton color="secondary" aria-label="Like">
+                    <FavoriteIcon />
+                  </IconButton>
+                  <Typography className="count " type="caption">
+                    12
+                  </Typography>
+                  <IconButton color="secondary" aria-label="Comment">
+                    <CommentIcon />
+                  </IconButton>
+                  <Typography className="count " type="caption">
+                    12
+                  </Typography>
+                </CardActions>
+
+              </div>
+              <div className="article-tags">
 
                 {
                   articleDetail.tags.map((tag, index) => {
@@ -130,6 +155,7 @@ class ArticleContent extends React.Component {
                 }
               </div>
             </div>
+
 
             <ul className="article-nav">
               {

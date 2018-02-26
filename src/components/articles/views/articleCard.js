@@ -1,5 +1,4 @@
 import React from 'react'
-import {withStyles} from 'material-ui/styles'
 import {Card, Button, Avatar} from 'material-ui'
 import {CardHeader, CardContent, CardActions} from 'material-ui/Card'
 import IconButton from 'material-ui/IconButton'
@@ -9,16 +8,7 @@ import CommentIcon from 'material-ui-icons/Comment'
 import {blueGrey} from 'material-ui/colors'
 import {SplitToSpans} from '../../../utils'
 
-
 import './articleCard.css'
-
-const styles = (theme) => ({
-  titleAvatar: {
-    color: '#fff',
-    backgroundColor: blueGrey[500],
-    textTransform: 'uppercase',
-  },
-})
 
 const ArticleCard = ({classes, articleData}) => {
   const {_id, title, summary, tags} = articleData
@@ -32,7 +22,7 @@ const ArticleCard = ({classes, articleData}) => {
         <CardHeader
           className="light-font content-card-header"
           avatar={
-            <Avatar className={classes.titleAvatar}>{title.slice(0, 1)}</Avatar>
+            <Avatar className="avatar">{title.slice(0, 1)}</Avatar>
           }
           title={
             <SplitToSpans className="mono">{title}</SplitToSpans>
@@ -87,4 +77,4 @@ const ArticleCard = ({classes, articleData}) => {
   )
 }
 
-export default withStyles(styles)(ArticleCard)
+export default ArticleCard

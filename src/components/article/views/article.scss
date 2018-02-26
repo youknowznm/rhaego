@@ -42,31 +42,42 @@ $mb-theme-dark-row-background: #424242;
   font-size: 34px;
   color: #757575;
   font-weight: 400 !important;
-  margin: 40px 0 80px;
+  margin: 40px 0 48px;
   text-overflow: ellipsis;
 }
 
+.created-date {
+  margin-bottom: 48px !important;
+  color: $mb-theme-light-font !important;
+}
+
+#article-content {
+  // margin: 24px 0;
+}
+
 .separator {
-  height: 6px;
-  width: 100%;
-  background: $mb-theme-primary;
+  margin-top: 36px;
+  border-color: $mb-theme-secondary;
 }
 
 .article-info {
   position: relative;
-  margin: 24px 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 12px 0;
   height: 70px;
 
-  .created-date {
+  .article-actions {
     line-height: 70px;
     float: left;
     margin-left: 12px;
     color: #757575;
   }
 
-  .tags {
-    float: right;
-    margin-top: 19px;
+  .article-tags {
+    // float: right;
+    // margin-top: 19px;
     margin-right: 12px;
     .tag {
       margin-left: 18px;
@@ -75,27 +86,10 @@ $mb-theme-dark-row-background: #424242;
 
 }
 
-#mb-dark-theme {
-  .article-title {
-    color: rgba(255, 255, 255, 0.7);
-
-  }
-  .separator {
-    background: $mb-theme-secondary;
-  }
-  .article-info {
-    // background: $mb-theme-dark-row-background;
-    .created-date {
-      color: $mb-theme-dark-font;
-
-    }
-  }
-}
-
 
 .article-content,
 .comment-editor,
-.comments-list {
+.comment-list {
   margin-right: 0;
   @media (min-width: 850px) {
     margin-right: 200px;
@@ -139,8 +133,25 @@ $mb-theme-dark-row-background: #424242;
   }
 }
 
-.comments-list {
-  .comments-list-item {
+.comment-list {
+  .comment-list-item {
+
+  }
+}
+
+// 主题
+
+#mb-dark-theme {
+  .article-title {
+    color: rgba(255, 255, 255, 0.7);
+
+  }
+  .created-date {
+    color: $mb-theme-dark-font !important;
+
+  }
+  .article-info {
+    // background: $mb-theme-dark-row-background;
 
   }
 }

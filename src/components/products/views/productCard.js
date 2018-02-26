@@ -1,5 +1,4 @@
 import React from 'react'
-import {withStyles} from 'material-ui/styles'
 import {Card, Button, Avatar} from 'material-ui'
 import {CardHeader, CardContent, CardActions} from 'material-ui/Card'
 import {formatDate} from '../../../utils'
@@ -10,14 +9,6 @@ import DeviceHubIcon from 'material-ui-icons/DeviceHub'
 import {blueGrey} from 'material-ui/colors'
 
 import './productCard.css'
-
-const styles = (theme) => ({
-  titleAvatar: {
-    color: '#fff',
-    backgroundColor: blueGrey[500],
-    textTransform: 'uppercase',
-  },
-})
 
 const ProductCard = ({classes, eachProductData}) => {
   const {
@@ -37,7 +28,7 @@ const ProductCard = ({classes, eachProductData}) => {
         <CardHeader
           className="light-font content-card-header"
           avatar={
-            <Avatar className={classes.titleAvatar}>{name.slice(0, 1)}</Avatar>
+            <Avatar className="avatar">{name.slice(0, 1)}</Avatar>
           }
           title={name}
           subheader={formatDate(created_at)}
@@ -76,4 +67,4 @@ const ProductCard = ({classes, eachProductData}) => {
   )
 }
 
-export default withStyles(styles)(ProductCard)
+export default ProductCard

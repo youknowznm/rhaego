@@ -21,6 +21,11 @@
     .count {
       margin-right: 6px !important;
     }
+    .avatar {
+      background-color: $mb-theme-primary;
+      text-transform: uppercase;
+      color: '#fff';
+    }
     .rotated {
       transform: rotate(180deg);
     }

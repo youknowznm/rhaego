@@ -1,7 +1,7 @@
 import React from 'react'
 import ArticleContent from './articleContent'
 import CommentEditor from './commentEditor'
-import ArticleComments from './articleComments'
+import CommentList from './commentList'
 
 class Article extends React.Component {
   render() {
@@ -9,7 +9,7 @@ class Article extends React.Component {
       <div>
         <ArticleContent />
         <CommentEditor />
-        <ArticleComments/>
+        <CommentList/>
       </div>
     );
   }
