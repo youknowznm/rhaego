@@ -6,6 +6,7 @@ import {
   SplitToSpans,
   highlightAllPre,
   getOffsetToPage,
+  formatDate,
 } from '../../../utils'
 import {getArticleDetail} from '../actions'
 import {Button, Typography, Divider} from 'material-ui'
@@ -59,7 +60,7 @@ class ArticleContent extends React.Component {
   getHeaderTextArr = () => {
     const articleNav = document.querySelector('.article-nav')
     const contentHeaderElements = document.querySelectorAll('#article-content > h1')
-    const arr = ['目录']
+    const arr = ['索引']
     Array.prototype.forEach.call(contentHeaderElements, (elem, index) => {
       elem.setAttribute('id', `header-anchor-${index}`)
       arr.push(elem.innerHTML)
@@ -104,7 +105,7 @@ class ArticleContent extends React.Component {
             </h1>
 
             <Typography component="i" type="body2" className="created-date">
-              创建于 {articleDetail.createdDate}
+              创建于 {formatDate(new Date(articleDetail.createdDate))}
             </Typography>
 
             {/* <div className="separator"></div> */}

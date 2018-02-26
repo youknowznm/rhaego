@@ -245,7 +245,7 @@ class Editor extends React.Component {
             {/* <Button raised className="button-save" color="primary">
               保存
             </Button> */}
-
+            
             <AsyncButton
               raised
               className="button-save"
@@ -291,7 +291,6 @@ const mapState = (state) => {
     contentValue: articleFields.content.value,
     contentError: articleFields.content.error,
 
-    // articleFields: state.editor.articleFields,
     fieldsValid: state.editor.fieldsValid,
     articleId: state.editor.articleId,
 

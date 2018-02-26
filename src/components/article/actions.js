@@ -5,6 +5,7 @@ import {
   UPDATE_COMMENT_FIELD,
 
   REQUEST_COMMENT,
+  REQUEST_COMMENT_INIT,
 } from './actionTypes'
 import {createAsyncAction} from 'redux-action-tools'
 import {article as articleAPI, comment as commentAPI} from '../../api'
@@ -27,6 +28,9 @@ export const updateCommentField = (fieldName, fieldValue) => ({
   fieldValue,
 })
 
+export const requestCommentInit = () => ({
+  type: REQUEST_COMMENT_INIT,
+})
 export const requestComment = createAsyncAction(
   REQUEST_COMMENT,
   (commentObj) => {

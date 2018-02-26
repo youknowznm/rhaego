@@ -8,6 +8,7 @@ import {
   REQUEST_LOGIN_COMPLETED,
   REQUEST_LOGIN_FAILED,
 } from './actionTypes'
+import Cookies from 'js-cookie'
 import {regexps} from '../../utils/'
 
 const defaultState = {
@@ -80,7 +81,7 @@ export default (state = defaultState, action) => {
     // 登录成功
     case REQUEST_LOGIN_COMPLETED:
       const resultData = action.payload.data
-      localStorage.setItem('adminLoggedIn', 'true')
+      Cookies.set('adminLoggedIn', 'true')
       return {
         ...state,
         loginRequestStatus: 'completed',

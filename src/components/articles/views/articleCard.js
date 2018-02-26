@@ -6,13 +6,13 @@ import Typography from 'material-ui/Typography'
 import FavoriteIcon from 'material-ui-icons/Favorite'
 import CommentIcon from 'material-ui-icons/Comment'
 import {blueGrey} from 'material-ui/colors'
-import {SplitToSpans} from '../../../utils'
+import {SplitToSpans, formatDate} from '../../../utils'
 
 import './articleCard.css'
 
 const ArticleCard = ({classes, articleData}) => {
   const {_id, title, summary, tags} = articleData
-  const createdDate = articleData.createdDate.slice(0, 10)
+  const createdDate = formatDate(new Date(articleData.createdDate))
   const commentCount = articleData.comments.length
   const likedCount = articleData.liked
   const link = `/article?id=${_id}`

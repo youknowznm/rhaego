@@ -11,13 +11,57 @@ import {
   SplitToSpans,
   highlightAllPre,
   getOffsetToPage,
+  getFingerprint,
+  AsyncButton,
 } from '../../../utils'
-import {updateCommentField, checkCommentFields} from '../actions'
+import {
+  updateCommentField,
+  checkCommentFields,
+  requestComment,
+  requestCommentInit,
+} from '../actions'
 import {CircularProgress} from 'material-ui/Progress'
 
 import './article.css'
 
 class CommentEditor extends React.Component {
+  componentWillUpdate(nextProps) {
+    console.log(1, nextProps);
+    console.log(nextProps.commentResultMessage);
+    switch (nextProps.commentRequestStatus) {
+      case 'loading':
+        if (nextProps.fieldsValid === true) {
+          const commentFields = {
+            author: this.props.authorValue,
+            email: this.props.emailValue,
+            content: this.props.contentValue,
+            articleId: this.props.articleId,
+          }
+          let that = this
+          getFingerprint((fingerprint) => {
+            commentFields.clientId = fingerprint
+            that.props.thisRequestComment(commentFields)
+          })
+        }
+        break;
+      case 'failed':
+        setTimeout(() => {
+          this.props.thisRequestCommentInit()
+        }, 2000)
+        break
+      case 'completed':
+        const {articleId} = nextProps
+        setTimeout(() => {
+          this.props.thisRequestCommentInit()
+          setTimeout(() => {
+            // window.location.assign(`/article?id=${articleId}`)
+          }, 400)
+        }, 2000)
+        break
+      default:
+        break
+    }
+  }
   onChangeValue = (field) => (evt) => {
     const fieldName = field
     const fieldValue = evt.target.value
@@ -32,6 +76,9 @@ class CommentEditor extends React.Component {
       authorValue,
       contentError,
       contentValue,
+      thisCheckCommentFields,
+      commentRequestStatus,
+      commentResultMessage,
     } = this.props
     return (
       <div>
@@ -51,6 +98,7 @@ class CommentEditor extends React.Component {
                 value={authorValue}
                 onChange={this.onChangeValue('author')}
                 error={authorError}
+                maxLength="16"
               />
               <FormHelperText className={authorError ? 'error' : ''}>
                 输入4至16个字作为称呼。
@@ -64,6 +112,7 @@ class CommentEditor extends React.Component {
               <Input
                 id="comment-email"
                 type="text"
+                value={emailValue}
                 onChange={this.onChangeValue('email')}
                 error={emailError}
               />
@@ -76,20 +125,23 @@ class CommentEditor extends React.Component {
             <TextField
               className="comment-content"
               label="内容"
-              multiline
               value={contentValue}
-              // rows="2"
               onChange={this.onChangeValue('content')}
-              helperText="输入2至100个字作为评论内容。"
+              helperText="输入4至120个字作为评论内容。"
               margin="normal"
+              maxLength="120"
               error={contentError}
             />
-            <Button className="submit-button"
+            <AsyncButton
               raised
-              color="secondary"
+              className="submit-button"
+              asyncStatus={commentRequestStatus}
+              asyncResultMessage={commentResultMessage}
+              onClick={thisCheckCommentFields}
+              color="primary"
             >
               提交
-            </Button>
+            </AsyncButton>
           </div>
         </Card>
 
@@ -98,17 +150,21 @@ class CommentEditor extends React.Component {
   }
 }
 
-
 const mapState = (state) => {
   const {commentFields} = state.article
   return {
-    articleDetail: state.article.articleDetail,
+    articleId: state.article.articleDetail._id,
     authorError: commentFields.author.error,
     authorValue: commentFields.author.value,
     emailError: commentFields.email.error,
     emailValue: commentFields.email.value,
     contentError: commentFields.content.error,
     contentValue: commentFields.content.value,
+
+    fieldsValid: state.article.commentFieldsValid,
+
+    commentRequestStatus: state.article.commentRequestStatus,
+    commentResultMessage: state.article.commentResultMessage,
   }
 }
 
@@ -117,13 +173,14 @@ const mapDispatch = (dispatch) => ({
     dispatch(updateCommentField(fieldName, fieldValue))
   },
   thisCheckCommentFields: () => {
-    dispatch(checkCommentFields)
+    dispatch(checkCommentFields())
   },
+  thisRequestCommentInit: () => {
+    dispatch(requestCommentInit())
+  },
+  thisRequestComment: (commentFields) => {
+    dispatch(requestComment(commentFields))
+  }
 })
 
 export default connect(mapState, mapDispatch)(CommentEditor)
-
-
-// new Fingerprint2(options).get(function(result) {
-//   console.log(result)
-// })

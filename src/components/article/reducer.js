@@ -8,6 +8,7 @@ import {
   CHECK_COMMENT_FIELDS,
   UPDATE_COMMENT_FIELD,
 
+  REQUEST_COMMENT_INIT,
   REQUEST_COMMENT,
   REQUEST_COMMENT_COMPLETED,
   REQUEST_COMMENT_FAILED,
@@ -15,25 +16,33 @@ import {
 } from './actionTypes'
 
 const defaultState = {
-  articleDetail: null,
+  articleDetail: {
+    _id: '',
+    summary: '',
+    tags: [],
+    content: '',
+    createdDate: '',
+    comments: [],
+  },
   parsedHTMLContent: '',
   getArticleDetailRequestStatus: 'initial',
   getArticleDetailStatusMessage: '',
 
   commentFields: {
     author: {
-      value: '',
+      value: 'znm92',
       error: false,
     },
     email: {
-      value: '',
+      value: 'znm92@icloud.com',
       error: false,
     },
     content: {
-      value: '',
+      value: 'commentRequestStatus, commentRequestStatus.',
       error: false,
     },
   },
+  commentFieldsValid: true,
   commentRequestStatus: 'initial',
   commentResultMessage: '',
 }
@@ -63,7 +72,6 @@ export default (state = defaultState, action) => {
 
     case UPDATE_COMMENT_FIELD:
       const {fieldName, fieldValue} = action
-      console.log(fieldName,fieldValue);
       const newfields = state.commentFields
       newfields[fieldName].value = fieldValue
       return {
@@ -77,24 +85,43 @@ export default (state = defaultState, action) => {
         emailReg,
         contentReg,
       } = regexps.comment
-
       const fieldsToCheck = state.commentFields
       const authorEditor = !authorReg.test(fieldsToCheck.author.value)
-      fieldsToCheck.title.error = authorEditor
+      fieldsToCheck.author.error = authorEditor
       const emailEditor = !emailReg.test(fieldsToCheck.email.value)
-      fieldsToCheck.summary.error = emailEditor
+      fieldsToCheck.email.error = emailEditor
       const contentEditor = !contentReg.test(fieldsToCheck.content.value)
-      fieldsToCheck.createdDate.error = contentEditor
-
-      const fieldsValid = !authorEditor && !emailEditor && !contentEditor
-
+      fieldsToCheck.content.error = contentEditor
+      const commentFieldsValid = !authorEditor && !emailEditor && !contentEditor
       return {
         ...state,
         commentFields: fieldsToCheck,
-        fieldsValid,
-        saveArticleRequestStatus: fieldsValid ? 'loading' : 'initial',
+        commentFieldsValid,
+        commentRequestStatus: commentFieldsValid ? 'loading' : 'initial',
       }
 
+    case REQUEST_COMMENT:
+      return state;
+    case REQUEST_COMMENT_INIT:
+      return {
+        ...state,
+        commentRequestStatus: 'initial',
+      }
+    case REQUEST_COMMENT_COMPLETED:
+      const resultData = action.payload.data
+      return {
+        ...state,
+        commentRequestStatus: 'completed',
+        commentResultMessage: resultData.msg,
+      }
+    case REQUEST_COMMENT_FAILED:
+      const errorData = action.payload.response.data
+      console.log(3,errorData);
+      return {
+        ...state,
+        commentRequestStatus: 'failed',
+        commentResultMessage: typeof errorData === 'string' ? errorData : errorData.msg,
+      }
 
     default:
       return state;

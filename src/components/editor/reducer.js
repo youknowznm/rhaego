@@ -16,8 +16,6 @@ import {
 } from './actionTypes'
 
 const defaultState = {
-  // getArticleSttus:''
-
   articleId: '',
   articleFields: {
     title: {

@@ -6,6 +6,7 @@ import {
 
   TOGGLE_LOGOUT_DIALOG,
 } from './actionTypes'
+import Cookies from 'js-cookie'
 
 const defaultState = {
   dialogOpen: false,
@@ -34,7 +35,7 @@ export default (state = defaultState, action) => {
         requestLogoutStatus: 'loading',
       }
     case REQUEST_LOGOUT_COMPLETED:
-      localStorage.setItem('adminLoggedIn', 'false')
+      Cookies.set('adminLoggedIn', 'false')
       return {
         ...state,
         requestLogoutStatus: 'completed',

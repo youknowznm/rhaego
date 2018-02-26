@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {Router, Route, IndexRoute, browserHistory} from 'react-router'
 import {syncHistoryWithStore} from 'react-router-redux'
 import store from '../../Store'
+import Cookies from 'js-cookie'
 
 import App from '../app'
 import {view as Articles} from '../../components/articles'
@@ -41,7 +42,7 @@ const mapDispatch = (dispatch) => ({
   },
   // 针对 /admin 下的路由做权限判定，否决则跳至登录页
   willEnterAdminRoute: (nextState, replace) => {
-    const adminLoggedIn = localStorage.getItem('adminLoggedIn') === 'true'
+    const adminLoggedIn = Cookies.get('adminLoggedIn') === 'true'
     const {pathname, search} = nextState.location
     const targetUrl = encodeURIComponent(`${pathname}${search}`)
     if (!adminLoggedIn) {
