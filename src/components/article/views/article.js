@@ -19,11 +19,9 @@ class Article extends React.Component {
             </div>
         }
       </div>
-    );
+    )
   }
-
 }
-
 
 const mapState = (state) => {
   return {

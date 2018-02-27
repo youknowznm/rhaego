@@ -6,7 +6,7 @@ const NotFound = () => {
     <Typography className="mb-center" type="subheading">
       未找到请求的 URL。
     </Typography>
-  );
+  )
 }
 
 export default NotFound

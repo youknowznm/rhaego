@@ -68,7 +68,7 @@ const mapState = (state) => {
     getArticlesRequestStatus: state.articles.getArticlesRequestStatus,
     articlesArr: state.articles.articlesArr,
     getArticlesStatusMessage: state.articles.getArticlesStatusMessage,
-  };
+  }
 }
 
 const mapDispatch = (dispatch) => ({

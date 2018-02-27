@@ -70,7 +70,7 @@ const mapState = (state) => ({
 
 const mapDispatch = (dispatch) => ({
   thisUploadPicture: (evt) => {
-    console.log(evt.target.files[0]);
+    console.log(evt.target.files[0])
     dispatch(uploadPicture(evt.target.files[0]))
   },
   thisUploadPictureInit: () => {

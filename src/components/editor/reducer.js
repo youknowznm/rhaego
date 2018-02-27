@@ -95,14 +95,14 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         tags: tagsToAdd,
-      };
+      }
     case REMOVE_TAG:
       let tagsToRemove = state.articleFields.tags
       tagsToRemove.value.splice(action.tagIndex, 1)
       return {
         ...state,
         tags: tagsToRemove,
-      };
+      }
     case ADJUST_TAG_INPUT_INDENT:
       let tagsWidth = getComputedStyle(document.querySelector('.tags-container')).width
       document.querySelector('.editor-tags-input > input').style['text-indent'] = tagsWidth
@@ -201,6 +201,6 @@ export default (state = defaultState, action) => {
       }
 
     default:
-      return state;
+      return state
   }
 }

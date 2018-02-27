@@ -13,6 +13,6 @@ export default (state = defaultState, action) => {
         : !state.drawerIsOpen
       return {...state, drawerIsOpen: status}
     default:
-      return state;
+      return state
   }
 }

@@ -50,7 +50,7 @@ const Drawer = ({classes, drawerIsOpen, thisToggleDrawer}) => {
         </MuiDrawer>
       </Hidden>
     </div>
-  );
+  )
 }
 
 const mapState = (state) => {

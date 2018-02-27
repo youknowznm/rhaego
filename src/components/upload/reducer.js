@@ -39,6 +39,6 @@ export default (state = defaultState, action) => {
         uploadResultMessage: typeof errorData === 'string' ? errorData : errorData.msg,
       }
     default:
-      return state;
+      return state
   }
 }

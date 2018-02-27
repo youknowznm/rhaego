@@ -18,7 +18,6 @@ import {
   requestDeleteArticle,
   requestDeleteArticleInit,
 } from '../actions'
-
 import {view as Upload} from '../../upload'
 import './editor.css'
 
@@ -46,7 +45,7 @@ class Editor extends React.Component {
           }
           this.props.thisRequestSaveArticle(articleFields)
         }
-        break;
+        break
       case 'failed':
         setTimeout(() => {
           this.props.thisRequestSaveArticleInit()

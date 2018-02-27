@@ -40,7 +40,7 @@ class Products extends React.Component {
           )
         }
       </LoadingArea>
-    );
+    )
   }
 }
 
@@ -49,7 +49,7 @@ const mapState = (state) => {
     status: state.products.status,
     productsArr: state.products.productsArr,
     statusMsg: state.products.statusMsg,
-  };
+  }
 }
 
 const mapDispatch = (dispatch) => ({

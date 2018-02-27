@@ -16,12 +16,12 @@ class Logout extends React.Component {
         setTimeout(() => {
           window.location.assign('/')
         }, 1500)
-        break;
+        break
       case 'failed':
         setTimeout(() => {
           this.props.thisRequestLogoutInit()
         }, 1500)
-        break;
+        break
       default:
         return
     }

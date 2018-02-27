@@ -35,9 +35,8 @@ class CommentList extends React.Component {
   }
   componentDidUpdate(prevProps) {
     showAdminOnlyElements()
-    // 新增了评论，滚动至评论末尾
+    // 新增了评论时，滚动至评论末尾
     if (prevProps.comments.length < this.props.comments.length) {
-      console.log(2);
       scrollToCommentEnd()
     }
     if (prevProps.deleteCommentRequestStatus !== this.props.deleteCommentRequestStatus) {

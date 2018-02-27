@@ -1,6 +1,6 @@
 const addZero = (str) => {
   str = str.toString()
-  return str.length === 1 ? `0${str}` : str;
+  return str.length === 1 ? `0${str}` : str
 }
 
 const formatDate = (dateObj, toSeconds) => {
@@ -20,7 +20,7 @@ const formatDate = (dateObj, toSeconds) => {
     let se = addZero(dateObj.getSeconds())
     res += ` ${ho}:${mi}:${se}`
   }
-  return res;
+  return res
 }
 
 export default formatDate

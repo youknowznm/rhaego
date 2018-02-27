@@ -14,7 +14,7 @@ const SplitToSpans = ({className, children}) => {
         })
       }
     </span>
-  );
+  )
 }
 
 SplitToSpans.propTypes = {

@@ -3,7 +3,6 @@ import {
   REQUEST_LOGOUT,
   REQUEST_LOGOUT_COMPLETED,
   REQUEST_LOGOUT_FAILED,
-
   TOGGLE_LOGOUT_DIALOG,
 } from './actionTypes'
 import Cookies from 'js-cookie'

@@ -1,12 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import Cookie from 'js-cookie'
 import {Card, IconButton, Button, Typography, Snackbar, TextField} from 'material-ui'
 import {FormControl, FormHelperText} from 'material-ui/Form'
 import Input, {InputLabel, InputAdornment} from 'material-ui/Input'
-import {
-  getArticleDetail,
-} from '../actions'
-
+import {getArticleDetail} from '../actions'
 import {
   LoadingArea,
   getQueryObj,
@@ -27,6 +25,10 @@ import {CircularProgress} from 'material-ui/Progress'
 import './article.css'
 
 class CommentEditor extends React.Component {
+  componentDidMount() {
+    this.props.thisUpdateCommentField('author', Cookie.get('commentAuthor') || '')
+    this.props.thisUpdateCommentField('email', Cookie.get('commentEmail') || '')
+  }
   componentWillUpdate(nextProps) {
     switch (nextProps.commentRequestStatus) {
       case 'loading':
@@ -43,15 +45,17 @@ class CommentEditor extends React.Component {
             that.props.thisRequestComment(commentFields)
           })
         }
-        break;
+        break
       case 'failed':
         setTimeout(() => {
           this.props.thisRequestCommentInit()
         }, 2000)
         break
       case 'completed':
-        // 评论结束
+        // 评论成功
         this.props.thisGetArticleDetail(getQueryObj().id)
+        Cookie.set('commentAuthor', this.props.authorValue)
+        Cookie.set('commentEmail', this.props.emailValue)
         setTimeout(() => {
           this.props.thisRequestCommentInit()
         }, 2000)
@@ -150,7 +154,7 @@ class CommentEditor extends React.Component {
         </Card>
 
       </div>
-    );
+    )
   }
 }
 
