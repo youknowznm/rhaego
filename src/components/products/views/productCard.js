@@ -28,7 +28,7 @@ const ProductCard = ({classes, eachProductData}) => {
         <CardHeader
           className="light-font content-card-header"
           avatar={
-            <Avatar className="avatar">{name.slice(0, 1)}</Avatar>
+            <Avatar className="avatar">{name.trim().slice(0, 1)}</Avatar>
           }
           title={name}
           subheader={formatDate(created_at)}

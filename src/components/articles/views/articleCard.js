@@ -22,7 +22,7 @@ const ArticleCard = ({classes, articleData}) => {
         <CardHeader
           className="light-font content-card-header"
           avatar={
-            <Avatar className="avatar">{title.slice(0, 1)}</Avatar>
+            <Avatar className="avatar">{title.trim().slice(0, 1)}</Avatar>
           }
           title={
             <SplitToSpans className="mono">{title}</SplitToSpans>

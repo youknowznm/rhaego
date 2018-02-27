@@ -1,14 +1,13 @@
 import {
   GET_ARTICLE_DETAIL,
-
   CHECK_COMMENT_FIELDS,
   UPDATE_COMMENT_FIELD,
-
   REQUEST_COMMENT,
   REQUEST_COMMENT_INIT,
-
   REQUEST_LIKE,
   REQUEST_LIKE_INIT,
+  REQUEST_DELETE_COMMENT,
+  REQUEST_DELETE_COMMENT_INIT,
 } from './actionTypes'
 import {createAsyncAction} from 'redux-action-tools'
 import {
@@ -52,5 +51,15 @@ export const requestLike = createAsyncAction(
   REQUEST_LIKE,
   (likeObj) => {
     return axios.post(`${likeAPI}`, likeObj)
+  }
+)
+
+export const requestDeleteCommentInit = () => ({
+  type: REQUEST_DELETE_COMMENT_INIT,
+})
+export const requestDeleteComment = createAsyncAction(
+  REQUEST_DELETE_COMMENT,
+  (commentId) => {
+    return axios.delete(`${commentAPI}?commentId=${commentId}`)
   }
 )

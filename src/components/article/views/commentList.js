@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {IconButton, Button, Typography, Snackbar,Avatar} from 'material-ui'
-import Card, {CardActions, CardContent, CardHeader} from 'material-ui/Card';
+import Card, {CardActions, CardContent, CardHeader} from 'material-ui/Card'
 import {FormControl, FormHelperText} from 'material-ui/Form'
 import Input, {InputLabel, InputAdornment} from 'material-ui/Input'
 import DeleteIcon from 'material-ui-icons/Delete'
@@ -14,7 +14,11 @@ import {
   toReadableDateString,
   showAdminOnlyElements,
 } from '../../../utils'
-import {getArticleDetail} from '../actions'
+import {
+  getArticleDetail,
+  requestDeleteComment,
+  requestDeleteCommentInit,
+} from '../actions'
 import {CircularProgress} from 'material-ui/Progress'
 
 import './article.css'
@@ -30,12 +34,36 @@ class CommentList extends React.Component {
     showAdminOnlyElements()
   }
   componentDidUpdate(prevProps) {
-    if (prevProps.comments.length !== this.props.length) {
+    showAdminOnlyElements()
+    // 新增了评论，滚动至评论末尾
+    if (prevProps.comments.length < this.props.comments.length) {
+      console.log(2);
       scrollToCommentEnd()
     }
+    if (prevProps.deleteCommentRequestStatus !== this.props.deleteCommentRequestStatus) {
+      switch (this.props.deleteCommentRequestStatus) {
+        case 'completed':
+          setTimeout(() => {
+            this.props.thisGetArticleDetail(getQueryObj().id)
+            this.props.thisRequestDeleteCommentInit()
+          }, 2000)
+        case 'failed':
+          setTimeout(() => {
+            this.props.thisRequestDeleteCommentInit()
+          }, 2000)
+      }
+    }
+  }
+  handleDeleteComment = (commentId) => () => {
+    this.props.thisRequestDeleteComment(commentId)
   }
   render() {
-    const {comments} = this.props
+    const {
+      comments,
+      deleteCommentRequestStatus,
+      deleteCommentResultMessage,
+      thisGetArticleDetail,
+    } = this.props
     const noCommentClassName = `no-comment ${comments.length > 0 ? 'hidden' : ''}`
     return (
       <div className="comment-list">
@@ -53,7 +81,7 @@ class CommentList extends React.Component {
                   className="comment-header"
                   avatar={
                     <Avatar className="comment-avatar">
-                      {comment.author.slice(0,1)}
+                      {comment.author.trim().slice(0,1)}
                     </Avatar>
                   }
                   title={comment.author}
@@ -63,7 +91,7 @@ class CommentList extends React.Component {
 
                 <CardContent className="comment-content">
                   <Typography component="p">
-                    {comment.content}
+                    {comment.content}s
                   </Typography>
                 </CardContent>
 
@@ -71,6 +99,8 @@ class CommentList extends React.Component {
                   <IconButton className="delete-button admin-only"
                     color="default"
                     aria-label="Delete"
+                    onClick={this.handleDeleteComment(comment._id)}
+                    disabled={['failed', 'completed'].includes(deleteCommentRequestStatus)}
                   >
                     <DeleteIcon />
                   </IconButton>
@@ -83,22 +113,43 @@ class CommentList extends React.Component {
                 </div>
 
               </Card>
-            );
+            )
           })
         }
+
+        {/* 删除结果 toast */}
+        <Snackbar
+          open={['failed', 'completed'].includes(deleteCommentRequestStatus)}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+          }}
+          message={deleteCommentResultMessage}
+        />
+
       </div>
-    );
+    )
   }
 }
 
 const mapState = (state) => {
   return {
     comments: state.article.articleDetail.comments,
+    deleteCommentRequestStatus: state.article.deleteCommentRequestStatus,
+    deleteCommentResultMessage: state.article.deleteCommentResultMessage,
   }
 }
 
 const mapDispatch = (dispatch) => ({
-
+  thisRequestDeleteComment: (commentId) => {
+    dispatch(requestDeleteComment(commentId))
+  },
+  thisRequestDeleteCommentInit: () => {
+    dispatch(requestDeleteCommentInit())
+  },
+  thisGetArticleDetail: (articleId) => {
+    dispatch(getArticleDetail(articleId))
+  },
 })
 
 export default connect(mapState, mapDispatch)(CommentList)

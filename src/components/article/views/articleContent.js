@@ -94,7 +94,7 @@ class ArticleContent extends React.Component {
       headerTextArr: arr,
     })
   }
-  handleLike = () => {
+  handleLikeArticle = () => {
     const articleId = this.props.articleDetail._id
     getFingerprint((clientId) => {
       this.props.thisRequestLike({
@@ -167,7 +167,7 @@ class ArticleContent extends React.Component {
                 <CardActions>
                   <IconButton className="like-button"
                     aria-label="Like"
-                    onClick={this.handleLike}
+                    onClick={this.handleLikeArticle}
                     disabled={['failed', 'completed'].includes(likeRequestStatus)}
                   >
                     <FavoriteIcon />

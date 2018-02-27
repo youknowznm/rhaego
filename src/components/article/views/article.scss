@@ -184,6 +184,11 @@ $mb-theme-dark-row-background: #424242;
         color: $color-red-500;
         border: $color-red-500;
         fill: $color-red-500;
+        &[disabled] {
+          color: $color-button-disabled;
+          border: $color-button-disabled;
+          fill: $color-button-disabled;
+        }
       }
       .comment-index {
         color: #607D8B;

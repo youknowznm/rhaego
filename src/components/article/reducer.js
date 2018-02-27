@@ -15,6 +15,11 @@ import {
   REQUEST_LIKE_INIT,
   REQUEST_LIKE_COMPLETED,
   REQUEST_LIKE_FAILED,
+
+  REQUEST_DELETE_COMMENT_INIT,
+  REQUEST_DELETE_COMMENT,
+  REQUEST_DELETE_COMMENT_COMPLETED,
+  REQUEST_DELETE_COMMENT_FAILED,
 } from './actionTypes'
 
 const defaultState = {
@@ -33,15 +38,15 @@ const defaultState = {
 
   commentFields: {
     author: {
-      value: 'znm92',
+      value: '',
       error: false,
     },
     email: {
-      value: 'znm92@icloud.com',
+      value: '',
       error: false,
     },
     content: {
-      value: 'commentRequestStatus, commentRequestStatus.',
+      value: '',
       error: false,
     },
   },
@@ -51,6 +56,9 @@ const defaultState = {
 
   likeRequestStatus: 'initial',
   likeResultMessage: '',
+
+  deleteCommentRequestStatus: 'initial',
+  deleteCommentResultMessage: '',
 }
 
 export default (state = defaultState, action) => {
@@ -150,6 +158,28 @@ export default (state = defaultState, action) => {
         likeResultMessage: typeof likeErrorData === 'string'
           ? likeErrorData
           : likeErrorData.msg,
+      }
+
+    case REQUEST_DELETE_COMMENT_INIT:
+      return {
+        ...state,
+        deleteCommentRequestStatus: 'initial',
+      }
+    case REQUEST_DELETE_COMMENT_COMPLETED:
+      const deleteCommentResultData = action.payload.data
+      return {
+        ...state,
+        deleteCommentRequestStatus: 'completed',
+        deleteCommentResultMessage: deleteCommentResultData.msg,
+      }
+    case REQUEST_DELETE_COMMENT_FAILED:
+      const deleteCommentErrorData = action.payload.response.data
+      return {
+        ...state,
+        deleteCommentRequestStatus: 'failed',
+        deleteCommentResultMessage: typeof deleteCommentErrorData === 'string'
+          ? deleteCommentErrorData
+          : deleteCommentErrorData.msg,
       }
 
     default:
