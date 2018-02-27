@@ -17,7 +17,7 @@ $mb-theme-dark-row-background: #424242;
     margin: 40px 0 48px;
     text-overflow: ellipsis;
     word-wrap: break-word;
-    word-break: break-word;
+    word-break: break-all;
   }
   .row-1 {
     display: flex;
@@ -72,15 +72,17 @@ $mb-theme-dark-row-background: #424242;
   .article-nav {
     position: absolute;
     box-sizing: border-box;
-    width: 160px;
-    right: -200px;
+    width: 90px;
+    right: -120px;
     top: 24px;
     border-left: 4px solid #1e88e5;
     padding-left: 12px;
-    > li {
+    .article-nav-anchor {
       list-style: none;
       font-size: 14px;
-      line-height: 16px;
+      line-height: 18px;
+      word-wrap: break-word;
+      word-break: break-all;
       cursor: pointer;
       font-family: "Roboto";
       margin-top: 8px;
@@ -103,10 +105,10 @@ $mb-theme-dark-row-background: #424242;
 .comment-list {
   margin-right: 0;
   @media (min-width: 850px) {
-    margin-right: 200px;
+    margin-right: 140px;
   }
   @media (min-width: 1300px) {
-    margin-right: 220px;
+    margin-right: 160px;
   }
 }
 

@@ -27,15 +27,18 @@ const getNavClickHandler = (index) => () => {
 }
 
 class Resume extends React.Component {
-  componentDidMount() {
-    window.addEventListener('scroll', handleScroll)
-    this.props.thisFetchResume()
+  constructor() {
+    super(...arguments)
     this.state = {
       headerTextArr: [],
     }
   }
+  componentDidMount() {
+    this.props.thisFetchResume()
+    window.addEventListener('scroll', handleScroll)
+  }
   componentDidUpdate(prevProps) {
-    if (this.props.resumeHTML !== prevProps.resumeHTML) {
+    if (this.props.getResumeRequestStatus !== prevProps.getResumeRequestStatus) {
       this.getHeaderTextArr()
     }
     // 获取内容 h1 元素结束
@@ -44,7 +47,6 @@ class Resume extends React.Component {
     }
   }
   getHeaderTextArr = () => {
-    const articleNav = document.querySelector('.article-nav')
     const contentHeaderElements = document.querySelectorAll('.resume-content > h1')
     const arr = ['索引']
     Array.prototype.forEach.call(contentHeaderElements, (elem, index) => {

@@ -1,15 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {IconButton, Button, Typography, Snackbar,Avatar} from 'material-ui'
-import Card, {CardActions, CardContent, CardHeader} from 'material-ui/Card'
-import {FormControl, FormHelperText} from 'material-ui/Form'
-import Input, {InputLabel, InputAdornment} from 'material-ui/Input'
+import {IconButton, Typography, Snackbar,Avatar} from 'material-ui'
+import Card, {CardContent, CardHeader} from 'material-ui/Card'
 import DeleteIcon from 'material-ui-icons/Delete'
 import {
-  LoadingArea,
   getQueryObj,
-  SplitToSpans,
-  highlightAllPre,
   getOffsetToPage,
   toReadableDateString,
   showAdminOnlyElements,
@@ -19,7 +14,6 @@ import {
   requestDeleteComment,
   requestDeleteCommentInit,
 } from '../actions'
-import {CircularProgress} from 'material-ui/Progress'
 
 import './article.css'
 
@@ -46,10 +40,14 @@ class CommentList extends React.Component {
             this.props.thisGetArticleDetail(getQueryObj().id)
             this.props.thisRequestDeleteCommentInit()
           }, 2000)
+          break
         case 'failed':
           setTimeout(() => {
             this.props.thisRequestDeleteCommentInit()
           }, 2000)
+          break
+        default:
+          return
       }
     }
   }
@@ -61,7 +59,6 @@ class CommentList extends React.Component {
       comments,
       deleteCommentRequestStatus,
       deleteCommentResultMessage,
-      thisGetArticleDetail,
     } = this.props
     const noCommentClassName = `no-comment ${comments.length > 0 ? 'hidden' : ''}`
     return (

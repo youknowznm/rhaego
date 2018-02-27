@@ -11,7 +11,6 @@ import {
   green, lightGreen, lime,
   orange,
   deepOrange, brown, grey,
-  blueGrey,
 } from 'material-ui/colors'
 
 import './useMaterialBackground.css'
@@ -48,11 +47,6 @@ const useMaterialBackground = (selector) => {
   colorPalette.sort(() => 0.5 - Math.random())
 
   let paletteLength = colorPalette.length
-
-  // 获取一个随机的索引偏移量
-  let randomOffset = random(5)
-
-  let $targetBackgroundContainers = this
 
   Array.prototype.forEach.call(elemArr, (elem, index) => {
     let paletteIndex = index % paletteLength

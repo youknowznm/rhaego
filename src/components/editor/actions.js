@@ -7,10 +7,8 @@ import {
   REQUEST_SAVE_ARTICLE,
   REQUEST_SAVE_ARTICLE_INIT,
   GET_ARTICLE_TO_EDIT,
-  GET_ARTICLE_TO_EDIT_COMPLETED,
   REQUEST_DELETE_ARTICLE,
   REQUEST_DELETE_ARTICLE_INIT,
-  REQUEST_DELETE_ARTICLE_COMPLETED,
 } from './actionTypes'
 import {createAsyncAction} from 'redux-action-tools'
 import {article as articleAPI} from '../../api'

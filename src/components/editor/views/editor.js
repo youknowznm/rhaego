@@ -4,7 +4,6 @@ import {TextField, Button} from 'material-ui'
 import {FormControl, FormHelperText} from 'material-ui/Form'
 import Input, {InputLabel} from 'material-ui/Input'
 import Chip from 'material-ui/Chip'
-import store from '../../../Store'
 import {highlightAllPre, AsyncButton, getQueryObj} from '../../../utils'
 import {
   updateArticleField,
@@ -120,9 +119,6 @@ class Editor extends React.Component {
   }
   render() {
     const {
-      articleId,
-      articleFields,
-
       titleValue,
       titleError,
       summaryValue,
@@ -140,7 +136,6 @@ class Editor extends React.Component {
       saveArticleResultMessage,
       deleteArticleRequestStatus,
       deleteArticleResultMessage,
-      thisRequestDeleteArticle,
     } = this.props
     const maximumTagsReached = (tagsValue.length === 2)
     return (

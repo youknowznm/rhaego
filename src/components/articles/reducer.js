@@ -1,4 +1,3 @@
-import {formatDate, regexps} from '../../utils'
 import {
   GET_ARTICLES,
   GET_ARTICLES_COMPLETED,

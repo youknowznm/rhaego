@@ -1,7 +1,7 @@
 .splited-span {
   display: inline-block;
   word-wrap: break-word;
-  word-break: break-word;
+  word-break: break-all;
 }
 .splited-span:after {
   position: relative;

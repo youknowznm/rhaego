@@ -1,5 +1,5 @@
 import marked from 'marked'
-import {formatDate, regexps} from '../../utils'
+import {regexps} from '../../utils'
 import {
   GET_ARTICLE_DETAIL,
   GET_ARTICLE_DETAIL_COMPLETED,
@@ -17,7 +17,6 @@ import {
   REQUEST_LIKE_FAILED,
 
   REQUEST_DELETE_COMMENT_INIT,
-  REQUEST_DELETE_COMMENT,
   REQUEST_DELETE_COMMENT_COMPLETED,
   REQUEST_DELETE_COMMENT_FAILED,
 } from './actionTypes'

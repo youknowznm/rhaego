@@ -1,7 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {
-  LoadingArea,
   getQueryObj,
   SplitToSpans,
   highlightAllPre,
@@ -17,11 +16,10 @@ import {
 } from '../actions'
 import {Button, Typography, Snackbar} from 'material-ui'
 import {CircularProgress} from 'material-ui/Progress'
-import Icon from 'material-ui/Icon'
 import IconButton from 'material-ui/IconButton'
 import FavoriteIcon from 'material-ui-icons/Favorite'
 import CommentIcon from 'material-ui-icons/Comment'
-import {CardHeader, CardContent, CardActions} from 'material-ui/Card'
+import {CardActions} from 'material-ui/Card'
 
 import './article.css'
 
@@ -50,13 +48,16 @@ const getNavClickHandler = (index) => () => {
 }
 
 class ArticleContent extends React.Component {
+  constructor() {
+    super(...arguments)
+    this.state = {
+      headerTextArr: [],
+    }
+  }
   componentDidMount() {
     showAdminOnlyElements()
     this.props.thisGetArticleDetail(getQueryObj().id || '')
     window.addEventListener('scroll', handleScroll)
-    this.state = {
-      headerTextArr: [],
-    }
   }
   componentDidUpdate(prevProps) {
     // 获取文章结束
@@ -83,7 +84,6 @@ class ArticleContent extends React.Component {
     window.removeEventListener('scroll', handleScroll)
   }
   getHeaderTextArr = () => {
-    const articleNav = document.querySelector('.article-nav')
     const contentHeaderElements = document.querySelectorAll('.article-content > h1')
     const arr = ['索引']
     Array.prototype.forEach.call(contentHeaderElements, (elem, index) => {

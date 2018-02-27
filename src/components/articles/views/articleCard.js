@@ -5,7 +5,6 @@ import IconButton from 'material-ui/IconButton'
 import Typography from 'material-ui/Typography'
 import FavoriteIcon from 'material-ui-icons/Favorite'
 import CommentIcon from 'material-ui-icons/Comment'
-import {blueGrey} from 'material-ui/colors'
 import {SplitToSpans, formatDate} from '../../../utils'
 
 import './articleCard.css'

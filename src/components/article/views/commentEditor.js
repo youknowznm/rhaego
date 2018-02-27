@@ -1,16 +1,12 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import Cookie from 'js-cookie'
-import {Card, IconButton, Button, Typography, Snackbar, TextField} from 'material-ui'
+import {Card, Typography, TextField} from 'material-ui'
 import {FormControl, FormHelperText} from 'material-ui/Form'
-import Input, {InputLabel, InputAdornment} from 'material-ui/Input'
+import Input, {InputLabel} from 'material-ui/Input'
 import {getArticleDetail} from '../actions'
 import {
-  LoadingArea,
   getQueryObj,
-  SplitToSpans,
-  highlightAllPre,
-  getOffsetToPage,
   getFingerprint,
   AsyncButton,
 } from '../../../utils'
@@ -20,7 +16,6 @@ import {
   requestComment,
   requestCommentInit,
 } from '../actions'
-import {CircularProgress} from 'material-ui/Progress'
 
 import './article.css'
 

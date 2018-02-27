@@ -14,6 +14,7 @@ import {view as Editor} from '../../components/editor'
 import {view as Article} from '../../components/article'
 import {view as NotFound} from '../../components/notFound'
 import {view as Resume} from '../../components/resume'
+import {view as Messages} from '../../components/messages'
 
 import {actions as headerActions} from '../../components/header'
 
@@ -26,6 +27,7 @@ const Routes = ({routeWillUpdate, willEnterAdminRoute}) => (
       <Route path="articles" component={Articles} />
       <Route path="article" component={Article} />
       <Route path="products" component={Products} />
+      <Route path="messages" component={Messages} />
       <Route path="login" component={Login} />
       <Route path="admin" onEnter={willEnterAdminRoute}>
         <IndexRoute component={Admin} />

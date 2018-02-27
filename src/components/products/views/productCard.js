@@ -6,7 +6,6 @@ import IconButton from 'material-ui/IconButton'
 import Typography from 'material-ui/Typography'
 import StarIcon from 'material-ui-icons/Star'
 import DeviceHubIcon from 'material-ui-icons/DeviceHub'
-import {blueGrey} from 'material-ui/colors'
 
 import './productCard.css'
 

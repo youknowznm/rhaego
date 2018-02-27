@@ -29,10 +29,10 @@ a {
   color: inherit;
 }
 
+// 通用
 .mono {
   font-family: "Roboto Mono" !important;
 }
-
 .no-screen {
   display: block;
   @media screen {
@@ -41,8 +41,6 @@ a {
     }
   }
 }
-
-// 通用
 .mb-responsive-container {
   position: relative;
   width: 100%;
@@ -59,10 +57,14 @@ a {
     height: 100%;
     margin: 0 auto;
     @media (min-width: 1280px) {
-      width: 960px;
+      width: 900px;
       padding: 0;
     }
     @media (min-width: 1440px) {
+      width: 1050px;
+      padding: 0;
+    }
+    @media (min-width: 1550px) {
       width: 1160px;
       padding: 0;
     }
