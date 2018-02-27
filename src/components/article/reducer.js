@@ -9,10 +9,12 @@ import {
   UPDATE_COMMENT_FIELD,
 
   REQUEST_COMMENT_INIT,
-  REQUEST_COMMENT,
   REQUEST_COMMENT_COMPLETED,
   REQUEST_COMMENT_FAILED,
 
+  REQUEST_LIKE_INIT,
+  REQUEST_LIKE_COMPLETED,
+  REQUEST_LIKE_FAILED,
 } from './actionTypes'
 
 const defaultState = {
@@ -23,6 +25,7 @@ const defaultState = {
     content: '',
     createdDate: '',
     comments: [],
+    liked: [],
   },
   parsedHTMLContent: '',
   getArticleDetailRequestStatus: 'initial',
@@ -45,6 +48,9 @@ const defaultState = {
   commentFieldsValid: true,
   commentRequestStatus: 'initial',
   commentResultMessage: '',
+
+  likeRequestStatus: 'initial',
+  likeResultMessage: '',
 }
 
 export default (state = defaultState, action) => {
@@ -62,9 +68,11 @@ export default (state = defaultState, action) => {
       }
     case GET_ARTICLE_DETAIL_COMPLETED:
       const articleObj = action.payload.data.article
+      const originArticleDetail = state.articleDetail
       return {
         ...state,
-        articleDetail: articleObj,
+        // 根据 id 未查到文章时，使用旧的空文章对象
+        articleDetail: articleObj || originArticleDetail,
         parsedHTMLContent: articleObj === null ? '' : marked(articleObj.content),
         getArticleDetailRequestStatus: 'completed',
         getArticleDetailStatusMessage: articleObj === null ? '未找到目标文章。' : '',
@@ -100,27 +108,48 @@ export default (state = defaultState, action) => {
         commentRequestStatus: commentFieldsValid ? 'loading' : 'initial',
       }
 
-    case REQUEST_COMMENT:
-      return state;
     case REQUEST_COMMENT_INIT:
       return {
         ...state,
         commentRequestStatus: 'initial',
       }
     case REQUEST_COMMENT_COMPLETED:
-      const resultData = action.payload.data
+      const commentResultData = action.payload.data
       return {
         ...state,
         commentRequestStatus: 'completed',
-        commentResultMessage: resultData.msg,
+        commentResultMessage: commentResultData.msg,
       }
     case REQUEST_COMMENT_FAILED:
-      const errorData = action.payload.response.data
-      console.log(3,errorData);
+      const commentErrorData = action.payload.response.data
       return {
         ...state,
         commentRequestStatus: 'failed',
-        commentResultMessage: typeof errorData === 'string' ? errorData : errorData.msg,
+        commentResultMessage: typeof commentErrorData === 'string'
+          ? commentErrorData
+          : commentErrorData.msg,
+      }
+
+    case REQUEST_LIKE_INIT:
+      return {
+        ...state,
+        likeRequestStatus: 'initial',
+      }
+    case REQUEST_LIKE_COMPLETED:
+      const likeResultData = action.payload.data
+      return {
+        ...state,
+        likeRequestStatus: 'completed',
+        likeResultMessage: likeResultData.msg,
+      }
+    case REQUEST_LIKE_FAILED:
+      const likeErrorData = action.payload.response.data
+      return {
+        ...state,
+        likeRequestStatus: 'failed',
+        likeResultMessage: typeof likeErrorData === 'string'
+          ? likeErrorData
+          : likeErrorData.msg,
       }
 
     default:

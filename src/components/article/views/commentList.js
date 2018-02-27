@@ -13,7 +13,7 @@ import {
   SplitToSpans,
   highlightAllPre,
   getOffsetToPage,
-  formatDate,
+  toReadableDateString,
 } from '../../../utils'
 import {getArticleDetail} from '../actions'
 import {CircularProgress} from 'material-ui/Progress'
@@ -47,7 +47,7 @@ class CommentList extends React.Component {
                     </Avatar>
                   }
                   title={comment.author}
-                  subheader={formatDate(new Date(comment.createdDate), true)}
+                  subheader={toReadableDateString(new Date(comment.createdDate))}
                 >
                 </CardHeader>
 

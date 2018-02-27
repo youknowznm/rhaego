@@ -7,8 +7,12 @@ import {
   highlightAllPre,
   getOffsetToPage,
   formatDate,
+  getFingerprint,
 } from '../../../utils'
-import {getArticleDetail} from '../actions'
+import {
+  getArticleDetail,
+  requestLike,
+} from '../actions'
 import {Button, Typography, Divider} from 'material-ui'
 import {CircularProgress} from 'material-ui/Progress'
 import Icon from 'material-ui/Icon';
@@ -24,6 +28,12 @@ const handleScroll = () => {
   if (articleNav !== null) {
     articleNav.style['top'] = `${document.scrollingElement.scrollTop + 24}px`
   }
+}
+
+const scrollToCommentEditor = () => {
+  const el = document.querySelector('.comment-editor')
+  const top = getOffsetToPage(el).top
+  document.scrollingElement.scrollTop = top - 84
 }
 
 // 返回一个监听函数：使页面滚动到指定元素位置
@@ -59,7 +69,7 @@ class ArticleContent extends React.Component {
   }
   getHeaderTextArr = () => {
     const articleNav = document.querySelector('.article-nav')
-    const contentHeaderElements = document.querySelectorAll('#article-content > h1')
+    const contentHeaderElements = document.querySelectorAll('.article-content > h1')
     const arr = ['索引']
     Array.prototype.forEach.call(contentHeaderElements, (elem, index) => {
       elem.setAttribute('id', `header-anchor-${index}`)
@@ -67,6 +77,15 @@ class ArticleContent extends React.Component {
     })
     this.setState({
       headerTextArr: arr,
+    })
+  }
+  getLikeListener = () => {
+    const articleId = this.props.articleDetail._id
+    getFingerprint((clientId) => {
+      this.props.thisRequestLike({
+        clientId,
+        articleId
+      })
     })
   }
   render() {
@@ -90,7 +109,7 @@ class ArticleContent extends React.Component {
           </div>
         )
       case 'completed':
-        if (articleDetail === null) {
+        if (articleDetail._id === '') {
           return (
             <div className="mb-center">
               {getArticleDetailStatusMessage}
@@ -98,46 +117,57 @@ class ArticleContent extends React.Component {
           )
         }
         return (
-          <div className="article-content">
+          <div className="article-wrap">
 
             <h1 className="article-title">
-              <SplitToSpans className="mono">{articleDetail.title}</SplitToSpans>
+              <SplitToSpans>{articleDetail.title}</SplitToSpans>
             </h1>
 
-            <Typography component="i" type="body2" className="created-date">
-              创建于 {formatDate(new Date(articleDetail.createdDate))}
-            </Typography>
-
-            {/* <div className="separator"></div> */}
+            <div className="row-1">
+              <Typography component="i" type="body2" className="created-date">
+                创建于 {formatDate(new Date(articleDetail.createdDate))}
+              </Typography>
+              <Button className="edit-button"
+                raised
+                color="secondary"
+                href={`/admin/editor?articleId=${articleDetail._id}`}
+              >
+                编辑
+              </Button>
+            </div>
 
             <article
-              id="article-content"
-              className="mb-article"
+              className="article-content mb-article"
               dangerouslySetInnerHTML={{__html: parsedHTMLContent}}
-            ></article>
+            />
 
             <hr className="separator" />
 
             <div className="article-info">
               <div className="article-actions">
                 <CardActions>
-                  <IconButton color="secondary" aria-label="Like">
+                  <IconButton className="like-button"
+                    aria-label="Like"
+                    onClick={this.getLikeListener}
+                  >
                     <FavoriteIcon />
                   </IconButton>
-                  <Typography className="count " type="caption">
-                    12
+                  <Typography className="count" type="caption">
+                    {articleDetail.liked.length}
                   </Typography>
-                  <IconButton color="secondary" aria-label="Comment">
+                  <IconButton className="comment-button"
+                    color="secondary"
+                    aria-label="Comment"
+                    onClick={scrollToCommentEditor}
+                  >
                     <CommentIcon />
                   </IconButton>
-                  <Typography className="count " type="caption">
-                    12
+                  <Typography className="count" type="caption">
+                    {articleDetail.comments.length}
                   </Typography>
                 </CardActions>
-
               </div>
               <div className="article-tags">
-
                 {
                   articleDetail.tags.map((tag, index) => {
                     const taggedLink = `/articles?tag=${tag}`
@@ -157,7 +187,6 @@ class ArticleContent extends React.Component {
               </div>
             </div>
 
-
             <ul className="article-nav">
               {
                 this.state.headerTextArr.map((headerText, index) => (
@@ -172,6 +201,9 @@ class ArticleContent extends React.Component {
                 ))
               }
             </ul>
+
+
+
           </div>
         )
       default:
@@ -187,11 +219,19 @@ const mapState = (state) => {
     articleDetail: state.article.articleDetail,
     getArticleDetailStatusMessage: state.article.getArticleDetailStatusMessage,
     parsedHTMLContent: state.article.parsedHTMLContent,
+
+    likeRequestStatus: state.article.likeRequestStatus,
+    likeResultMessage: state.article.likeResultMessage,
   }
 }
 
 const mapDispatch = (dispatch) => ({
-  thisGetArticleDetail: (articleId) => dispatch(getArticleDetail(articleId))
+  thisGetArticleDetail: (articleId) => {
+    dispatch(getArticleDetail(articleId))
+  },
+  thisRequestLike: (clientId, articleId) => {
+    dispatch(requestLike(clientId, articleId))
+  },
 })
 
 export default connect(mapState, mapDispatch)(ArticleContent)

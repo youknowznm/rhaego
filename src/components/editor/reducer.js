@@ -13,33 +13,31 @@ import {
   REQUEST_SAVE_ARTICLE_FAILED,
   GET_ARTICLE_TO_EDIT,
   GET_ARTICLE_TO_EDIT_COMPLETED,
+  REQUEST_DELETE_ARTICLE_INIT,
+  REQUEST_DELETE_ARTICLE_COMPLETED,
+  REQUEST_DELETE_ARTICLE_FAILED,
 } from './actionTypes'
 
 const defaultState = {
   articleId: '',
   articleFields: {
     title: {
-      // value: '标题 标题 fuck 标题',
       value: '',
       error: false,
     },
     tags: {
-      // value: ['react', 'express'],
       value: [],
       error: false,
     },
     summary: {
-      // value: '摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要',
       value: '',
       error: false,
     },
     createdDate: {
-      // value: formatDate(new Date()),
-      value: '',
+      value: formatDate(new Date()),
       error: false,
     },
     content: {
-      // value: sample,
       value: '',
       error: false,
     },
@@ -51,6 +49,9 @@ const defaultState = {
 
   saveArticleRequestStatus: '',
   saveArticleResultMessage: '',
+
+  deleteArticleRequestStatus: '',
+  deleteArticleResultMessage: '',
 }
 
 export default (state = defaultState, action) => {
@@ -130,7 +131,8 @@ export default (state = defaultState, action) => {
       fieldsToCheck.createdDate.error = createdDateError
       const contentError = !contentReg.test(fieldsToCheck.content.value)
       fieldsToCheck.content.error = contentError
-      const tagsError = (fieldsToCheck.tags.value.length > 2 || fieldsToCheck.tags.value.length === 0)
+      const tagsError = (fieldsToCheck.tags.value.length > 2
+        || fieldsToCheck.tags.value.length === 0)
       fieldsToCheck.tags.error = tagsError
 
       const fieldsValid = !titleError
@@ -149,27 +151,53 @@ export default (state = defaultState, action) => {
     /*
     保存文章
     */
-    case REQUEST_SAVE_ARTICLE:
-      console.log(444);
-      return state;
     case REQUEST_SAVE_ARTICLE_INIT:
       return {
         ...state,
         saveArticleRequestStatus: 'initial',
       }
     case REQUEST_SAVE_ARTICLE_COMPLETED:
-      const resultData = action.payload.data
+      const saveArticleResultData = action.payload.data
       return {
         ...state,
         saveArticleRequestStatus: 'completed',
-        saveArticleResultMessage: resultData.msg,
+        saveArticleResultMessage: saveArticleResultData.msg,
+        articleId: saveArticleResultData.articleId,
       }
     case REQUEST_SAVE_ARTICLE_FAILED:
-      const errorData = action.payload.response.data
+      const saveArticleErrorData = action.payload.response.data
       return {
         ...state,
         saveArticleRequestStatus: 'failed',
-        saveArticleResultMessage: typeof errorData === 'string' ? errorData : errorData.msg,
+        saveArticleResultMessage: typeof saveArticleErrorData === 'string'
+          ? saveArticleErrorData
+          : saveArticleErrorData.msg,
+      }
+
+    /*
+    删除文章
+    */
+    case REQUEST_DELETE_ARTICLE_INIT:
+      return {
+        ...state,
+        deleteArticleRequestStatus: 'initial',
+        articleId: '',
+      }
+    case REQUEST_DELETE_ARTICLE_COMPLETED:
+      const deleteArticleResultData = action.payload.data
+      return {
+        ...state,
+        deleteArticleRequestStatus: 'completed',
+        deleteArticleResultMessage: deleteArticleResultData.msg,
+      }
+    case REQUEST_DELETE_ARTICLE_FAILED:
+      const deleteArticleErrorData = action.payload.response.data
+      return {
+        ...state,
+        deleteArticleRequestStatus: 'failed',
+        deleteArticleResultMessage: typeof deleteArticleErrorData === 'string'
+          ? deleteArticleErrorData
+          : deleteArticleErrorData.msg,
       }
 
     default:

@@ -3,6 +3,7 @@ import LoadingArea from './loadingArea'
 import AsyncButton from './asyncButton'
 
 import formatDate from './formatDate'
+import toReadableDateString from './toReadableDateString'
 import debounce from './debounce'
 import getQueryObj from './getQueryObj'
 import highlightAllPre from './highlightAllPre'
@@ -18,6 +19,7 @@ export {
   AsyncButton,
 
   formatDate,
+  toReadableDateString,
   debounce,
   getQueryObj,
   highlightAllPre,

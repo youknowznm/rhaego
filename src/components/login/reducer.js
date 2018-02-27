@@ -81,7 +81,7 @@ export default (state = defaultState, action) => {
     // 登录成功
     case REQUEST_LOGIN_COMPLETED:
       const resultData = action.payload.data
-      Cookies.set('adminLoggedIn', 'true')
+      Cookies.set('adminLoggedIn', 'true', { expires: 7 })
       return {
         ...state,
         loginRequestStatus: 'completed',

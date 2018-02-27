@@ -6,9 +6,16 @@ import {
 
   REQUEST_COMMENT,
   REQUEST_COMMENT_INIT,
+
+  REQUEST_LIKE,
+  REQUEST_LIKE_INIT,
 } from './actionTypes'
 import {createAsyncAction} from 'redux-action-tools'
-import {article as articleAPI, comment as commentAPI} from '../../api'
+import {
+  article as articleAPI,
+  comment as commentAPI,
+  like as likeAPI,
+} from '../../api'
 import axios from 'axios'
 
 export const getArticleDetail = createAsyncAction(
@@ -35,5 +42,15 @@ export const requestComment = createAsyncAction(
   REQUEST_COMMENT,
   (commentObj) => {
     return axios.post(`${commentAPI}`, commentObj)
+  }
+)
+
+export const requestLikeInit = () => ({
+  type: REQUEST_LIKE_INIT,
+})
+export const requestLike = createAsyncAction(
+  REQUEST_LIKE,
+  (likeObj) => {
+    return axios.post(`${likeAPI}`, likeObj)
   }
 )

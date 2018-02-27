@@ -89,6 +89,10 @@
     }
   }
 
+  .delete-wrap > div {
+    width: 100%;
+  }
+
   #upload-picture {
     display: none;
   }
@@ -100,7 +104,7 @@
     }
     .button-save,
     .button-cancel {
-      width: 40% !important;
+      // width: 40% !important;
     }
     flex-wrap: wrap;
     .editor-title,

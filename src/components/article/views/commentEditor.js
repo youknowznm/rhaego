@@ -26,7 +26,6 @@ import './article.css'
 
 class CommentEditor extends React.Component {
   componentWillUpdate(nextProps) {
-    console.log(1, nextProps);
     console.log(nextProps.commentResultMessage);
     switch (nextProps.commentRequestStatus) {
       case 'loading':
@@ -65,7 +64,6 @@ class CommentEditor extends React.Component {
   onChangeValue = (field) => (evt) => {
     const fieldName = field
     const fieldValue = evt.target.value
-    console.log(1,fieldName,fieldValue);
     this.props.thisUpdateCommentField(fieldName, fieldValue)
   }
   render() {
@@ -82,7 +80,7 @@ class CommentEditor extends React.Component {
     } = this.props
     return (
       <div>
-
+        
         <Card className="comment-editor">
           <Typography type="caption" component="i">
             欢迎留下您的评论。

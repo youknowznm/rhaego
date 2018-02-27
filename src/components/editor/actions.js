@@ -8,6 +8,9 @@ import {
   REQUEST_SAVE_ARTICLE_INIT,
   GET_ARTICLE_TO_EDIT,
   GET_ARTICLE_TO_EDIT_COMPLETED,
+  REQUEST_DELETE_ARTICLE,
+  REQUEST_DELETE_ARTICLE_INIT,
+  REQUEST_DELETE_ARTICLE_COMPLETED,
 } from './actionTypes'
 import {createAsyncAction} from 'redux-action-tools'
 import {article as articleAPI} from '../../api'
@@ -34,6 +37,7 @@ export const updateArticleField = (fieldName, fieldValue) => ({
 export const checkArticleFields = () => ({
   type: CHECK_ARTICLE_FIELDS,
 })
+
 export const requestSaveArticleInit = () => ({
   type: REQUEST_SAVE_ARTICLE_INIT,
 })
@@ -48,5 +52,15 @@ export const getArticleToEdit = createAsyncAction(
   GET_ARTICLE_TO_EDIT,
   (articleId) => {
     return axios.get(`${articleAPI}?articleId=${articleId}`)
+  }
+)
+
+export const requestDeleteArticleInit = () => ({
+  type: REQUEST_DELETE_ARTICLE_INIT,
+})
+export const requestDeleteArticle = createAsyncAction(
+  REQUEST_DELETE_ARTICLE,
+  (articleId) => {
+    return axios.delete(`${articleAPI}?articleId=${articleId}`)
   }
 )

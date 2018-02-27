@@ -12,16 +12,19 @@ const getHighlightedHTML = (str) => {
 
 // 把指定区域的 pre 标签内容替换为 SyntaxHighlighter 高亮过的 html
 const highlightAllPre = (selector) => {
-  const preArr = document.querySelector(selector).getElementsByTagName('pre')
-  Array.prototype.forEach.call(preArr, ((preEle) => {
-    const codeEle = preEle.querySelector('code')
-    const highlightedJSX = (
-      <SyntaxHighlighter language="javascript" style={atomOneDark}>
-        {codeEle.innerHTML}
-      </SyntaxHighlighter>
-    )
-    codeEle.innerHTML = getHighlightedHTML(ReactDOMServer.renderToString(highlightedJSX))
-  }))
+	const tarEle = document.querySelector(selector)
+	if (tarEle !== null) {
+		const preArr = tarEle.getElementsByTagName('pre')
+	  Array.prototype.forEach.call(preArr, ((preEle) => {
+	    const codeEle = preEle.querySelector('code')
+	    const highlightedJSX = (
+	      <SyntaxHighlighter language="javascript" style={atomOneDark}>
+	        {codeEle.innerHTML}
+	      </SyntaxHighlighter>
+	    )
+	    codeEle.innerHTML = getHighlightedHTML(ReactDOMServer.renderToString(highlightedJSX))
+	  }))
+	}
 }
 
 export default highlightAllPre

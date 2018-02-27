@@ -1,6 +1,8 @@
 @charset "UTF-8";
 .splited-span {
-  display: inline-block; }
+  display: inline-block;
+  word-wrap: break-word;
+  word-break: break-word; }
 
 .splited-span:after {
   position: relative;

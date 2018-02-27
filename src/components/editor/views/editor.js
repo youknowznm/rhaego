@@ -15,6 +15,8 @@ import {
   requestSaveArticle,
   requestSaveArticleInit,
   getArticleToEdit,
+  requestDeleteArticle,
+  requestDeleteArticleInit,
 } from '../actions'
 
 import {view as Upload} from '../../upload'
@@ -55,9 +57,27 @@ class Editor extends React.Component {
         setTimeout(() => {
           this.props.thisRequestSaveArticleInit()
           setTimeout(() => {
-            // window.location.assign(`/article?id=${articleId}`)
-          }, 400)
-        }, 1500)
+            window.location.assign(`/article?id=${articleId}`)
+          })
+        }, 2000)
+        break
+      default:
+        break
+    }
+
+    switch (nextProps.deleteArticleRequestStatus) {
+      case 'failed':
+        setTimeout(() => {
+          this.props.thisRequestDeleteArticleInit()
+        }, 2000)
+        break
+      case 'completed':
+        setTimeout(() => {
+          this.props.thisRequestDeleteArticleInit()
+          setTimeout(() => {
+            window.location.assign(`/articles`)
+          }, 200)
+        }, 2000)
         break
       default:
         break
@@ -92,8 +112,16 @@ class Editor extends React.Component {
       this.setState({})
     }
   }
+  goToArticles() {
+    window.location.assign('/articles')
+  }
+  handleRequestDeleteArticle = () => {
+    const {articleId, thisRequestDeleteArticle} = this.props
+    thisRequestDeleteArticle(articleId)
+  }
   render() {
     const {
+      articleId,
       articleFields,
 
       titleValue,
@@ -111,6 +139,9 @@ class Editor extends React.Component {
       saveArticleRequestStatus,
       thisCheckArticleFields,
       saveArticleResultMessage,
+      deleteArticleRequestStatus,
+      deleteArticleResultMessage,
+      thisRequestDeleteArticle,
     } = this.props
     const maximumTagsReached = (tagsValue.length === 2)
     return (
@@ -242,10 +273,6 @@ class Editor extends React.Component {
           <Upload />
           {/* 保存和取消按钮 */}
           <div className="button-wrap">
-            {/* <Button raised className="button-save" color="primary">
-              保存
-            </Button> */}
-            
             <AsyncButton
               raised
               className="button-save"
@@ -256,20 +283,34 @@ class Editor extends React.Component {
             >
               保存
             </AsyncButton>
-            <Button raised className="button-cancel">
+            <Button className="button-cancel"
+              raised
+              onClick={this.goToArticles}
+            >
               取消
             </Button>
           </div>
         </div>
 
-        <div className="row">
-          {/* 删除文章按钮 */}
-          <div className="button-wrap full-width">
-            <Button raised color="secondary" fullWidth className="">
-              删除文章
-            </Button>
-          </div>
-        </div>
+        {
+          [undefined, ''].includes(getQueryObj().articleId)
+            ? ''
+            : <div className="row">
+              {/* 删除文章按钮 */}
+              <div className="button-wrap full-width delete-wrap">
+                <AsyncButton
+                  raised
+                  asyncStatus={deleteArticleRequestStatus}
+                  asyncResultMessage={deleteArticleResultMessage}
+                  onClick={this.handleRequestDeleteArticle}
+                  color="secondary"
+                  fullWidth
+                >
+                  删除文章
+                </AsyncButton>
+              </div>
+            </div>
+        }
 
       </div>
     )
@@ -296,8 +337,12 @@ const mapState = (state) => {
 
     tagsWidth: state.editor.tagsWidth,
     parsedHTMLContent: state.editor.parsedHTMLContent,
+
     saveArticleRequestStatus: state.editor.saveArticleRequestStatus,
     saveArticleResultMessage: state.editor.saveArticleResultMessage,
+
+    deleteArticleRequestStatus: state.editor.deleteArticleRequestStatus,
+    deleteArticleResultMessage: state.editor.deleteArticleResultMessage,
   }
 }
 
@@ -325,6 +370,12 @@ const mapDispatch = (dispatch) => ({
   },
   thisRequestSaveArticleInit: () => {
     dispatch(requestSaveArticleInit())
+  },
+  thisRequestDeleteArticle: (articleId) => {
+    dispatch(requestDeleteArticle(articleId))
+  },
+  thisRequestDeleteArticleInit: () => {
+    dispatch(requestDeleteArticleInit())
   },
 })
 
