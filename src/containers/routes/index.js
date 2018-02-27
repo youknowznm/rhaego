@@ -13,6 +13,7 @@ import {view as Admin} from '../../components/admin'
 import {view as Editor} from '../../components/editor'
 import {view as Article} from '../../components/article'
 import {view as NotFound} from '../../components/notFound'
+import {view as Resume} from '../../components/resume'
 
 import {actions as headerActions} from '../../components/header'
 
@@ -30,6 +31,7 @@ const Routes = ({routeWillUpdate, willEnterAdminRoute}) => (
         <IndexRoute component={Admin} />
         <Route path="editor" component={Editor} />
       </Route>
+      <Route path="about" component={Resume} />
       <Route path="*" component={NotFound} />
     </Route>
   </Router>

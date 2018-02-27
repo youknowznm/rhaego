@@ -12,6 +12,7 @@ import {reducer as editorReducer} from './components/editor'
 import {reducer as articleReducer} from './components/article'
 import {reducer as articlesReducer} from './components/articles'
 import {reducer as uploadReducer} from './components/upload'
+import {reducer as resumeReducer} from './components/resume'
 
 const reducer = combineReducers({
 	routing: routerReducer,
@@ -23,7 +24,8 @@ const reducer = combineReducers({
 	editor: editorReducer,
 	upload: uploadReducer,
 	article: articleReducer,
-  articles: articlesReducer,
+	articles: articlesReducer,
+  resume: resumeReducer,
 })
 
 const win = window

@@ -26,11 +26,9 @@ store.dispatch(updateContentField(this.props.articleFields.content.value))
 }
 componentWillUpdate(nextProps) {
 }
-componentDidUpdate(nextProps) {
+componentDidUpdate(prevProps) {
 this.props.thisAdjustTagInputIndent()
-if (this.props.parsedHTMLContent !== nextProps.parsedHTMLContent) {
-highlightAllPre('.editor-preview')
-}
+
 }
 handleRemoveTag = (index) => () => {
 this.props.thisRemoveTag(index)

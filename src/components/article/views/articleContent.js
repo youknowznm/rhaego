@@ -58,19 +58,19 @@ class ArticleContent extends React.Component {
       headerTextArr: [],
     }
   }
-  componentDidUpdate(nextProps) {
+  componentDidUpdate(prevProps) {
     // 获取文章结束
-    if (this.props.articleDetail !== nextProps.articleDetail) {
+    if (this.props.articleDetail !== prevProps.articleDetail) {
       this.getHeaderTextArr()
       highlightAllPre('.article-content')
     }
     // 获取内容 h1 元素结束
-    if (this.state.getHeaderTextArr !== nextProps.getHeaderTextArr) {
+    if (this.state.headerTextArr !== prevProps.headerTextArr) {
       getNavClickHandler()
     }
     // 点赞结束
-    if (this.props.likeRequestStatus !== nextProps.likeRequestStatus) {
-      if (nextProps.likeRequestStatus === 'completed') {
+    if (this.props.likeRequestStatus !== prevProps.likeRequestStatus) {
+      if (prevProps.likeRequestStatus === 'completed') {
         const e = document.querySelector('.like-count')
         e.innerHTML = +e.innerHTML + 1
       }

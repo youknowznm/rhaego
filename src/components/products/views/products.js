@@ -7,17 +7,14 @@ import {LoadingArea, useMaterialBackground} from '../../../utils'
 import './products.css'
 
 class Products extends React.Component {
-
   componentDidMount() {
     this.props.thisFetchGithub()
   }
-
-  componentDidUpdate(nextProps) {
-    if (this.props.productsArr !== nextProps.productsArr) {
+  componentDidUpdate(prevProps) {
+    if (this.props.productsArr !== prevProps.productsArr) {
       useMaterialBackground('.content .card')
     }
   }
-
   render() {
     const {status, productsArr, statusMsg} = this.props
     return (

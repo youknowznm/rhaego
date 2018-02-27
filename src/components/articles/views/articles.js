@@ -9,12 +9,12 @@ import {getArticles} from '../actions'
 import './articles.css'
 
 class Articles extends React.Component {
-  componentDidMount(nextProps) {
+  componentDidMount() {
     const targetTag = getQueryObj().tag || ''
     this.props.thisGetArticles(targetTag)
   }
-  componentDidUpdate(nextProps) {
-    if (this.props.articlesArr !== nextProps.articlesArr) {
+  componentDidUpdate(prevProps) {
+    if (this.props.articlesArr !== prevProps.articlesArr) {
       useMaterialBackground('.content .card')
     }
   }

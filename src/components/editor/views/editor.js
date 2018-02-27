@@ -82,11 +82,11 @@ class Editor extends React.Component {
         break
     }
   }
-  componentDidUpdate(nextProps) {
+  componentDidUpdate(prevProps) {
     this.props.thisAdjustTagInputIndent()
     // 预览内容
     this.props.thisUpdateArticleField('content', this.props.contentValue)
-    if (this.props.parsedHTMLContent !== nextProps.parsedHTMLContent) {
+    if (this.props.parsedHTMLContent !== prevProps.parsedHTMLContent) {
       highlightAllPre('.editor-preview')
     }
   }
