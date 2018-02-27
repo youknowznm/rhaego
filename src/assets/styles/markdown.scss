@@ -84,7 +84,7 @@ $mb-article-quote-dark: #fff;
     padding: 3px 6px;
     font-size: 14px;
     line-height: 1.6;
-    // word-break: break-word;
+    word-break: break-word;
     font-family: "Roboto Mono";
     background-color: $mb-article-code-background-light;
   }
@@ -94,7 +94,8 @@ $mb-article-quote-dark: #fff;
     margin: 24px 0;
     overflow-x: auto;
     overflow-y: hidden;
-    padding: 0 18px 18px;
+    // padding: 0 18px 18px;
+    padding: 18px;
     position: relative;
     background-color: $mb-article-pre-background;
     line-height: 1.4;

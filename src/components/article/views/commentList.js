@@ -20,9 +20,17 @@ import {CircularProgress} from 'material-ui/Progress'
 
 import './article.css'
 
+const scrollToCommentEnd = () => {
+  const el = document.querySelector('.mb-footer')
+  const top = getOffsetToPage(el).top
+  document.scrollingElement.scrollTop = top - 84
+}
+
 class CommentList extends React.Component {
-  componentWillReceiveProps(n,s) {
-    console.log(n,s);
+  componentDidUpdate(prevProps) {
+    if (prevProps.comments.length !== this.props.length) {
+      scrollToCommentEnd()
+    }
   }
   render() {
     const {comments} = this.props
@@ -74,7 +82,6 @@ class CommentList extends React.Component {
     );
   }
 }
-
 
 const mapState = (state) => {
   return {

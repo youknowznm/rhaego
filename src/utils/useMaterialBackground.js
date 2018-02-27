@@ -11,6 +11,7 @@ import {
   green, lightGreen, lime,
   orange,
   deepOrange, brown, grey,
+  blueGrey,
 } from 'material-ui/colors'
 
 import './useMaterialBackground.css'
@@ -40,6 +41,7 @@ const useMaterialBackground = (selector) => {
     [deepOrange[400], deepOrange[600]],
     [brown[400], brown[600]],
     [grey[600], grey[800]],
+    // [blueGrey[400], blueGrey[600]],
   ]
 
   // 打乱数组顺序

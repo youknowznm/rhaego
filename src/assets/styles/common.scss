@@ -2,10 +2,12 @@
 @import "./markdown.scss";
 
 // color
-$mb-theme-primary: #607D8B;
-$mb-theme-secondary: #2196f3;
+$mb-theme-primary: #2196f3; // #607D8B;
+$mb-theme-secondary: #FFC107;
 
 $color-red-500: #f44336;
+$color-pink-500: #E91E63;
+$color-button-disabled: rgba(0, 0, 0, 0.26);
 
 $mb-theme-light-font: rgba(0, 0, 0, 0.54); // rgb(22,22,22)
 $mb-theme-dark-font: rgba(255, 255, 255, 0.7); // rgb(193,193,193)

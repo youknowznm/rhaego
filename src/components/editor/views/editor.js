@@ -22,7 +22,7 @@ import {
 import {view as Upload} from '../../upload'
 import './editor.css'
 
-const contentRowNumber = 33
+const contentRowNumber = 30
 
 class Editor extends React.Component {
   componentWillMount() {
@@ -305,6 +305,7 @@ class Editor extends React.Component {
                   onClick={this.handleRequestDeleteArticle}
                   color="secondary"
                   fullWidth
+                  className="delete-button"
                 >
                   删除文章
                 </AsyncButton>

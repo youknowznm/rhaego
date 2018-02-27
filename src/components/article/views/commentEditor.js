@@ -1,9 +1,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
-
 import {Card, IconButton, Button, Typography, Snackbar, TextField} from 'material-ui'
 import {FormControl, FormHelperText} from 'material-ui/Form'
 import Input, {InputLabel, InputAdornment} from 'material-ui/Input'
+import {
+  getArticleDetail,
+} from '../actions'
 
 import {
   LoadingArea,
@@ -49,12 +51,10 @@ class CommentEditor extends React.Component {
         }, 2000)
         break
       case 'completed':
-        const {articleId} = nextProps
+        // 评论结束
+        this.props.thisGetArticleDetail(getQueryObj().id)
         setTimeout(() => {
           this.props.thisRequestCommentInit()
-          setTimeout(() => {
-            // window.location.assign(`/article?id=${articleId}`)
-          }, 400)
         }, 2000)
         break
       default:
@@ -80,7 +80,7 @@ class CommentEditor extends React.Component {
     } = this.props
     return (
       <div>
-        
+
         <Card className="comment-editor">
           <Typography type="caption" component="i">
             欢迎留下您的评论。
@@ -178,7 +178,10 @@ const mapDispatch = (dispatch) => ({
   },
   thisRequestComment: (commentFields) => {
     dispatch(requestComment(commentFields))
-  }
+  },
+  thisGetArticleDetail: (articleId) => {
+    dispatch(getArticleDetail(articleId))
+  },
 })
 
 export default connect(mapState, mapDispatch)(CommentEditor)

@@ -7,11 +7,12 @@ import './asyncButton.css'
 
 const AsyncButton = ({asyncStatus, asyncResultMessage, children, ...otherProps}) => {
   const isLoading = (asyncStatus === 'async')
+  const finished = ['failed', 'completed'].includes(asyncStatus)
   return (
     <div>
       <div className="async-button-wrap">
         <Button
-          disabled={asyncStatus === 'failed' || asyncStatus === 'completed'}
+          disabled={finished}
           {...otherProps}
         >
           {isLoading ? '' : children}
@@ -20,7 +21,7 @@ const AsyncButton = ({asyncStatus, asyncResultMessage, children, ...otherProps})
       </div>
 
       <Snackbar
-        open={['failed', 'completed'].includes(asyncStatus)}
+        open={finished}
         anchorOrigin={{
           vertical: 'top',
           horizontal: 'center',

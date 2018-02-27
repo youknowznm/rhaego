@@ -66,6 +66,7 @@
     width: 50%;
     textarea {
       font-size: 14px !important;
+      font-family: "Roboto Mono";
     }
   }
   // 预览
@@ -74,9 +75,8 @@
     width: 50%;
     .editor-preview-placeholder {
       position: relative;
-      textarea {
-        font-size: 14px !important;
-      }
+      font-size: 14px !important;
+      font-family: "Roboto Mono";
     }
     .editor-preview {
       position: absolute;
@@ -91,6 +91,13 @@
 
   .delete-wrap > div {
     width: 100%;
+    .delete-button {
+      background: $color-red-500;
+      &:hover {
+        background: rgb(170, 46, 37);
+      }
+    }
+
   }
 
   #upload-picture {

@@ -14,7 +14,7 @@ const ArticleCard = ({classes, articleData}) => {
   const {_id, title, summary, tags} = articleData
   const createdDate = formatDate(new Date(articleData.createdDate))
   const commentCount = articleData.comments.length
-  const likedCount = articleData.liked
+  const likedCount = articleData.liked.length
   const link = `/article?id=${_id}`
   return (
     <a className="card-wrap" href={link}>
