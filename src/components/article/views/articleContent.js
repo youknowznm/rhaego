@@ -8,6 +8,7 @@ import {
   getOffsetToPage,
   formatDate,
   getFingerprint,
+  showAdminOnlyElements,
 } from '../../../utils'
 import {
   getArticleDetail,
@@ -50,6 +51,7 @@ const getNavClickHandler = (index) => () => {
 
 class ArticleContent extends React.Component {
   componentDidMount() {
+    showAdminOnlyElements()
     this.props.thisGetArticleDetail(getQueryObj().id || '')
     window.addEventListener('scroll', handleScroll)
     this.state = {
@@ -144,7 +146,7 @@ class ArticleContent extends React.Component {
               <Typography component="i" type="body2" className="created-date">
                 创建于 {formatDate(new Date(articleDetail.createdDate))}
               </Typography>
-              <Button className="edit-button"
+              <Button className="edit-button admin-only"
                 raised
                 color="secondary"
                 href={`/admin/editor?articleId=${articleDetail._id}`}
@@ -174,7 +176,6 @@ class ArticleContent extends React.Component {
                     {articleDetail.liked.length}
                   </Typography>
                   <IconButton className="comment-button"
-                    color="primary"
                     aria-label="Comment"
                     onClick={scrollToCommentEditor}
                   >

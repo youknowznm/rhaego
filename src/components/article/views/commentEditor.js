@@ -28,7 +28,6 @@ import './article.css'
 
 class CommentEditor extends React.Component {
   componentWillUpdate(nextProps) {
-    console.log(nextProps.commentResultMessage);
     switch (nextProps.commentRequestStatus) {
       case 'loading':
         if (nextProps.fieldsValid === true) {
@@ -96,7 +95,9 @@ class CommentEditor extends React.Component {
                 value={authorValue}
                 onChange={this.onChangeValue('author')}
                 error={authorError}
-                maxLength="16"
+                inputProps={{
+                  'maxLength': '16',
+                }}
               />
               <FormHelperText className={authorError ? 'error' : ''}>
                 输入4至16个字作为称呼。
@@ -113,6 +114,9 @@ class CommentEditor extends React.Component {
                 value={emailValue}
                 onChange={this.onChangeValue('email')}
                 error={emailError}
+                inputProps={{
+                  'maxLength': '30',
+                }}
               />
               <FormHelperText className={emailError ? 'error' : ''}>
                 输入常见的邮箱格式。
@@ -127,7 +131,9 @@ class CommentEditor extends React.Component {
               onChange={this.onChangeValue('content')}
               helperText="输入4至120个字作为评论内容。"
               margin="normal"
-              maxLength="120"
+              inputProps={{
+                'maxLength': '120',
+              }}
               error={contentError}
             />
             <AsyncButton

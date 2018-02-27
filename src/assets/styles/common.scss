@@ -1,12 +1,13 @@
 @charset "UTF-8";
 @import "./markdown.scss";
 
-// color
+// 颜色
 $mb-theme-primary: #2196f3; // #607D8B;
 $mb-theme-secondary: #FFC107;
 
 $color-red-500: #f44336;
 $color-pink-500: #E91E63;
+$color-blue-grey-500: #607D8B;
 $color-button-disabled: rgba(0, 0, 0, 0.26);
 
 $mb-theme-light-font: rgba(0, 0, 0, 0.54); // rgb(22,22,22)
@@ -15,7 +16,7 @@ $mb-theme-dark-font: rgba(255, 255, 255, 0.7); // rgb(193,193,193)
 $mb-theme-light-sidebar-background: #fff;
 $mb-theme-dark-sidebar-background: #424242;
 
-// reset
+// 重置
 html {
   min-height: 500px;
 }
@@ -41,6 +42,7 @@ a {
   }
 }
 
+// 通用
 .mb-responsive-container {
   position: relative;
   width: 100%;
@@ -66,12 +68,10 @@ a {
     }
   }
 }
-
 .mb-flex {
   display: flex;
   flex-wrap: wrap;
 }
-
 .mb-center {
   position: absolute;
   left: 50%;
@@ -80,6 +80,7 @@ a {
   text-align: center;
 }
 
+// 文章和作品卡片
 .z-index-2 {
   z-index: 2 !important;
   *:not(.mb-bg-wrap) {
@@ -92,7 +93,7 @@ a {
     color: #fff !important;
   }
 }
-.holder {
+.card-content-holder {
   height: 98px;
 }
 .custom-card-content {
@@ -113,6 +114,15 @@ a {
     }
   }
 }
+
+// 管理员可见
+.admin-only {
+  visibility: hidden !important;
+  &[data-authed=true] {
+    visibility: visible !important;
+  }
+}
+
 // xs, extra-small: 0dp or larger
 // sm, small: 600dp or larger
 // md, medium: 960dp or larger

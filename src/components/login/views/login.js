@@ -80,6 +80,9 @@ class Login extends React.Component {
                 type="text"
                 onChange={this.onChangeValue('email')}
                 error={emailError}
+                inputProps={{
+                  'maxLength': '30',
+                }}
               />
               <FormHelperText className={emailError ? 'error' : ''}>
                 输入常见的邮箱格式。
@@ -95,6 +98,9 @@ class Login extends React.Component {
                 type={passwordVisible ? "text" : "password"}
                 onChange={this.onChangeValue('password')}
                 error={passwordError}
+                inputProps={{
+                  'maxLength': '20',
+                }}
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton onClick={thisTogglePasswordVisibility}

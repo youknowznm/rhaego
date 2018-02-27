@@ -41,7 +41,7 @@ $mb-theme-dark-row-background: #424242;
     justify-content: space-between;
     height: 100px;
     margin-top: 60px;
-    border-top: 2px solid $mb-theme-primary;
+    border-top: 6px solid $mb-theme-primary;
     .article-actions {
       line-height: 70px;
       float: left;
@@ -57,9 +57,9 @@ $mb-theme-dark-row-background: #424242;
         }
       }
       .comment-button {
-        // color: #FF9800;
-        // border: #FF9800;
-        // fill: #FF9800;
+        color: $color-blue-grey-500;
+        border: $color-blue-grey-500;
+        fill: $color-blue-grey-500;
       }
     }
     .article-tags {
@@ -160,8 +160,8 @@ $mb-theme-dark-row-background: #424242;
     margin-bottom: 12px;
     transition: all .2s ease;
     .comment-header {
-      padding-top: 8px;
-      padding-bottom: 8px;
+      padding-top: 12px;
+      padding-bottom: 12px;
       > div:nth-child(2) {
         > span:nth-child(2) {
           font-size: 12px !important;
@@ -175,8 +175,8 @@ $mb-theme-dark-row-background: #424242;
     }
     .comment-actions {
       position: absolute;
-      height: 60px;
-      right: 18px;
+      height: 48px;
+      right: 12px;
       top: 0px;
       display: flex;
       align-items: center;
@@ -203,18 +203,11 @@ $mb-theme-dark-row-background: #424242;
 }
 
 // 主题
-
 #mb-dark-theme {
   .article-title {
     color: rgba(255, 255, 255, 0.7);
-
   }
   .created-date {
     color: $mb-theme-dark-font !important;
-
-  }
-  .article-info {
-    // background: $mb-theme-dark-row-background;
-
   }
 }

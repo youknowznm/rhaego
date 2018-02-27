@@ -1,12 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
-
 import {IconButton, Button, Typography, Snackbar,Avatar} from 'material-ui'
-import Card, { CardActions, CardContent ,CardHeader} from 'material-ui/Card';
+import Card, {CardActions, CardContent, CardHeader} from 'material-ui/Card';
 import {FormControl, FormHelperText} from 'material-ui/Form'
 import Input, {InputLabel, InputAdornment} from 'material-ui/Input'
 import DeleteIcon from 'material-ui-icons/Delete'
-
 import {
   LoadingArea,
   getQueryObj,
@@ -14,6 +12,7 @@ import {
   highlightAllPre,
   getOffsetToPage,
   toReadableDateString,
+  showAdminOnlyElements,
 } from '../../../utils'
 import {getArticleDetail} from '../actions'
 import {CircularProgress} from 'material-ui/Progress'
@@ -27,6 +26,9 @@ const scrollToCommentEnd = () => {
 }
 
 class CommentList extends React.Component {
+  componentDidMount() {
+    showAdminOnlyElements()
+  }
   componentDidUpdate(prevProps) {
     if (prevProps.comments.length !== this.props.length) {
       scrollToCommentEnd()
@@ -66,10 +68,16 @@ class CommentList extends React.Component {
                 </CardContent>
 
                 <div className="comment-actions">
-                  <IconButton className="delete-button" color="default" aria-label="Delete">
+                  <IconButton className="delete-button admin-only"
+                    color="default"
+                    aria-label="Delete"
+                  >
                     <DeleteIcon />
                   </IconButton>
-                  <Typography type="body2" color="secondary" className="comment-index">
+                  <Typography className="comment-index"
+                    type="body2"
+                    color="secondary"
+                  >
                     #{index}
                   </Typography>
                 </div>

@@ -10,6 +10,7 @@ import highlightAllPre from './highlightAllPre'
 import useMaterialBackground from './useMaterialBackground'
 import getOffsetToPage from './getOffsetToPage'
 import getFingerprint from './getFingerprint'
+import showAdminOnlyElements from './showAdminOnlyElements'
 
 import regexps from './regexps'
 
@@ -26,6 +27,7 @@ export {
   useMaterialBackground,
   getOffsetToPage,
   getFingerprint,
+  showAdminOnlyElements,
 
   regexps,
 }

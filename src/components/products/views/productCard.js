@@ -36,7 +36,7 @@ const ProductCard = ({classes, eachProductData}) => {
           <Button>{language}</Button>
         </CardHeader>
 
-        <CardContent className="holder"></CardContent>
+        <CardContent className="card-content-holder"></CardContent>
 
         <p className="custom-card-content light-font">
           {description}

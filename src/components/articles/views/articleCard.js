@@ -31,7 +31,7 @@ const ArticleCard = ({classes, articleData}) => {
         >
         </CardHeader>
 
-        <CardContent className="holder"></CardContent>
+        <CardContent className="card-content-holder"></CardContent>
 
         <p className="custom-card-content light-font z-index-2">
           {summary}
