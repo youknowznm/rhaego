@@ -5,7 +5,10 @@ import IconButton from 'material-ui/IconButton'
 import Typography from 'material-ui/Typography'
 import FavoriteIcon from 'material-ui-icons/Favorite'
 import CommentIcon from 'material-ui-icons/Comment'
-import {SplitToSpans, formatDate} from '../../../utils'
+import {
+  SplitToSpans,
+  formatDate,
+} from '../../../utils'
 
 import './articleCard.css'
 

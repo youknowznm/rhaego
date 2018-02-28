@@ -20,8 +20,8 @@ import {actions as headerActions} from '../../components/header'
 
 const history = syncHistoryWithStore(browserHistory, store)
 
-const Routes = ({routeWillUpdate, willEnterAdminRoute}) => (
-  <Router history={history} onUpdate={routeWillUpdate}>
+const Routes = ({onRouteUpdate, willEnterAdminRoute}) => (
+  <Router history={history} onUpdate={onRouteUpdate}>
     <Route path="/" component={App}>
       <IndexRoute component={Articles} />
       <Route path="articles" component={Articles} />
@@ -41,7 +41,7 @@ const Routes = ({routeWillUpdate, willEnterAdminRoute}) => (
 const mapState = (state) => ({})
 const mapDispatch = (dispatch) => ({
   // 普通路由更新时关闭抽屉
-  routeWillUpdate: () => {
+  onRouteUpdate: (n) => {
     dispatch(headerActions.toggleDrawer(false))
   },
   // 针对 /admin 下的路由做权限判定，否决则跳至登录页

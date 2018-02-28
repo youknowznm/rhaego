@@ -11,6 +11,7 @@ import useMaterialBackground from './useMaterialBackground'
 import getOffsetToPage from './getOffsetToPage'
 import getFingerprint from './getFingerprint'
 import showAdminOnlyElements from './showAdminOnlyElements'
+import changeDocTitle from './changeDocTitle'
 
 import regexps from './regexps'
 
@@ -28,6 +29,7 @@ export {
   getOffsetToPage,
   getFingerprint,
   showAdminOnlyElements,
+  changeDocTitle,
 
   regexps,
 }

@@ -18,7 +18,7 @@ const styles = (theme) => ({
       display: 'none',
     },
   },
-  header: {
+  'header-header': {
     [theme.breakpoints.up('lg')]: {
       width: `calc(100% - ${drawerWidth}px)`,
     },
@@ -26,12 +26,12 @@ const styles = (theme) => ({
 })
 
 const Header = ({classes, thisToggleDrawer, thisToggleThemeType}) => (
-  <AppBar color="primary" className={classes.header}>
+  <AppBar color="primary" className={classes['header-header']}>
     <Toolbar>
       <IconButton color="inherit" className={classes['nav-icon-button']} onClick={thisToggleDrawer}>
         <MenuIcon />
       </IconButton>
-      <Typography className="title mono" color="inherit" type="title">
+      <Typography className="header-title mono" color="inherit" type="title">
         <SplitToSpans />
       </Typography>
       <IconButton onClick={thisToggleThemeType}>

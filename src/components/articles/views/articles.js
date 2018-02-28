@@ -3,7 +3,11 @@ import {connect} from 'react-redux'
 import {Typography} from 'material-ui'
 import {CircularProgress} from 'material-ui/Progress'
 import ArticleCard from './articleCard'
-import {useMaterialBackground, getQueryObj} from '../../../utils'
+import {
+  useMaterialBackground,
+  getQueryObj,
+  changeDocTitle,
+} from '../../../utils'
 import {getArticles} from '../actions'
 
 import './articles.css'
@@ -12,6 +16,7 @@ class Articles extends React.Component {
   componentDidMount() {
     const targetTag = getQueryObj().tag || ''
     this.props.thisGetArticles(targetTag)
+    changeDocTitle('文章')
   }
   componentDidUpdate(prevProps) {
     if (this.props.articlesArr !== prevProps.articlesArr) {

@@ -33,6 +33,9 @@ a {
 .mono {
   font-family: "Roboto Mono" !important;
 }
+.full-width {
+  width: 100%;
+}
 .no-screen {
   display: block;
   @media screen {
@@ -40,6 +43,9 @@ a {
       display: none;
     }
   }
+}
+.icon-right {
+  margin-left: 6px;
 }
 .mb-responsive-container {
   position: relative;
@@ -52,10 +58,13 @@ a {
   }
   > .content {
     position: relative;
-    padding: 0 24px;
     width: 100%;
     height: 100%;
+    padding: 0 6px;
     margin: 0 auto;
+    @media (min-width: 350px) {
+      padding: 0 12px;
+    }
     @media (min-width: 1280px) {
       width: 900px;
       padding: 0;

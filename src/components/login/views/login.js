@@ -4,7 +4,11 @@ import {Card, IconButton, Button, Typography} from 'material-ui'
 import {FormControl, FormHelperText} from 'material-ui/Form'
 import Input, {InputLabel, InputAdornment} from 'material-ui/Input'
 import {Visibility, VisibilityOff} from 'material-ui-icons'
-import {getQueryObj, AsyncButton} from '../../../utils'
+import {
+  getQueryObj,
+  AsyncButton,
+  changeDocTitle,
+} from '../../../utils'
 import {
   updateLoginField,
   checkLoginFields,
@@ -16,6 +20,9 @@ import {
 import './login.css'
 
 class Login extends React.Component {
+  componentDidMount() {
+    changeDocTitle('管理员登录')
+  }
   onChangeValue = (field) => (evt) => {
     const fieldName = field
     const fieldValue = evt.target.value

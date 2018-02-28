@@ -9,7 +9,6 @@ const AsyncButton = ({asyncStatus, asyncResultMessage, children, ...otherProps})
   const isLoading = (asyncStatus === 'async')
   const finished = ['failed', 'completed'].includes(asyncStatus)
   return (
-    <div>
       <div className="async-button-wrap">
         <Button
           disabled={finished}
@@ -18,17 +17,17 @@ const AsyncButton = ({asyncStatus, asyncResultMessage, children, ...otherProps})
           {isLoading ? '' : children}
         </Button>
         {isLoading ? <CircularProgress size={24} className="async-button-progress" /> : ''}
+        <Snackbar
+          open={finished}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+          }}
+          message={asyncResultMessage}
+        />
       </div>
 
-      <Snackbar
-        open={finished}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'center',
-        }}
-        message={asyncResultMessage}
-      />
-    </div>
+
   )
 }
 

@@ -1,16 +1,26 @@
 @charset "UTF-8";
 @import "../../../assets/styles/common.scss";
 
-.list {
-  padding: 0 !important;
-}
-.logo {
+.drawer-logo {
   border-radius: 0 !important;
 }
-.title {
+.drawer-title {
   margin-left: 24px !important;
 }
-.stick-bottom {
+
+.drawer-list {
+  padding: 0 !important;
+}
+.drawer-nav-item {
+  padding: 0 !important;
+  .drawer-nav-icon {
+    // margin-left: 24px;
+  }
+  .drawer-nav-text {
+    padding: 0 16px;
+  }
+}
+.drawer-stick-bottom {
   position: absolute !important;
   width: 100%;
   bottom: 0;

@@ -44,7 +44,7 @@ const Footer = ({classes}) => (
               <SplitToSpans className="mono"></SplitToSpans>
             </Typography>
           </li>
-          <li className="about-item about-loginor">
+          <li className="about-item about-author">
             <Typography className="mono" type="caption">
               Made with&nbsp;
               <span className="heart-wrap">
@@ -56,8 +56,8 @@ const Footer = ({classes}) => (
             </Typography>
           </li>
           <li className="about-item view-source">
-            <Button color="secondary" target="_blank" href="https://github.com/youknowznm/material-blog">
-              查看源码
+            <Button color="default" raised target="_blank" href="https://github.com/youknowznm/material-blog">
+              查看站点源码
             </Button>
           </li>
         </ul>

@@ -1,11 +1,17 @@
 @charset "UTF-8";
 @import "../../../assets/styles/common.scss";
 
-.title {
+.header-title {
   flex: 1;
-  margin-left: 12px;
+  margin-left: 6px !important;
 }
-.header {
+.header-header {
   position: fixed;
   margin-left: 250px;
+}
+
+@media (min-width: 350px) {
+  .header-title {
+    margin-left: 24px !important;
+  }
 }

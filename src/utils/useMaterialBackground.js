@@ -6,7 +6,7 @@
 
 import {
   red, pink, purple,
-  deepPurple, indigo, blue,
+  deepPurple, indigo,
   lightBlue, cyan, teal,
   green, lightGreen, lime,
   orange,
@@ -29,7 +29,7 @@ const useMaterialBackground = (selector) => {
     [purple[400], purple[600]],
     [deepPurple[400], deepPurple[600]],
     [indigo[400], indigo[600]],
-    [blue[500], blue[700]],
+    // [blue[500], blue[700]],
     [lightBlue[600], lightBlue[800]],
     [cyan[700], cyan[900]],
     [teal[500], teal[700]],

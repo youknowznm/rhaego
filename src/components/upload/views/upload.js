@@ -34,14 +34,17 @@ class Upload extends React.Component {
       <div className="button-wrap upload-wrap">
         <input
           accept="image/*"
-          id="upload-picture"
+          id="upload-picture-input"
           type="file"
           onChange={thisUploadPicture}
         />
-        <label htmlFor="upload-picture">
+        <label htmlFor="upload-picture-input">
           <Button
             component="span"
+            raised
+            color="secondary"
             disabled={requestUploadStatus === 'loading'}
+            className="upload-button"
           >
             上传图片
             <FileUpload className="icon-right" />

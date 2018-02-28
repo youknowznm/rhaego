@@ -83,8 +83,8 @@ class CommentEditor extends React.Component {
           <Typography type="caption" component="i">
             欢迎留下您的评论。
           </Typography>
-          <div className="row">
-            <FormControl className="comment-input" margin="normal">
+          <div className="row comment-wrap-1">
+            <FormControl className="comment-input comment-author" margin="normal">
               <InputLabel htmlFor="comment-author">
                 称呼
               </InputLabel>
@@ -99,11 +99,11 @@ class CommentEditor extends React.Component {
                 }}
               />
               <FormHelperText className={authorError ? 'error' : ''}>
-                输入4至16个字作为称呼。
+                称呼由4至16个字组成。
               </FormHelperText>
             </FormControl>
 
-            <FormControl className="comment-input" margin="normal">
+            <FormControl className="comment-input comment-email" margin="normal">
               <InputLabel htmlFor="comment-email">
                 邮箱
               </InputLabel>
@@ -124,7 +124,7 @@ class CommentEditor extends React.Component {
           </div>
           <div className="row">
             <TextField
-              className="comment-content"
+              className="comment-input-content"
               label="内容"
               value={contentValue}
               onChange={this.onChangeValue('content')}

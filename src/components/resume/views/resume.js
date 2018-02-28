@@ -5,6 +5,7 @@ import {
   LoadingArea,
   SplitToSpans,
   getOffsetToPage,
+  changeDocTitle,
 } from '../../../utils'
 import {fetchResume} from '../actions'
 
@@ -36,6 +37,7 @@ class Resume extends React.Component {
   componentDidMount() {
     this.props.thisFetchResume()
     window.addEventListener('scroll', handleScroll)
+    changeDocTitle('简历')
   }
   componentDidUpdate(prevProps) {
     if (this.props.getResumeRequestStatus !== prevProps.getResumeRequestStatus) {

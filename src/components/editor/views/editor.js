@@ -4,7 +4,12 @@ import {TextField, Button} from 'material-ui'
 import {FormControl, FormHelperText} from 'material-ui/Form'
 import Input, {InputLabel} from 'material-ui/Input'
 import Chip from 'material-ui/Chip'
-import {highlightAllPre, AsyncButton, getQueryObj} from '../../../utils'
+import {
+  highlightAllPre,
+  AsyncButton,
+  getQueryObj,
+  changeDocTitle,
+} from '../../../utils'
 import {
   updateArticleField,
   addTag,
@@ -26,6 +31,7 @@ class Editor extends React.Component {
   componentWillMount() {
     // 初始化时根据 query 寻找文章。找不到时则新建文章
     this.props.thisGetArticleById()
+    changeDocTitle('编辑文章')
   }
   componentDidMount() {
     this.props.thisAdjustTagInputIndent()
@@ -262,28 +268,35 @@ class Editor extends React.Component {
           </div>
         </div>
 
-        <div className="row">
+        <div className="row button-row">
           {/* 上传图片按钮 */}
           <Upload />
-          {/* 保存和取消按钮 */}
-          <div className="button-wrap">
-            <AsyncButton
-              raised
-              className="button-save"
-              asyncStatus={saveArticleRequestStatus}
-              asyncResultMessage={saveArticleResultMessage}
-              onClick={thisCheckArticleFields}
-              color="primary"
-            >
-              保存
-            </AsyncButton>
-            <Button className="button-cancel"
-              raised
-              onClick={this.goToArticles}
-            >
-              取消
-            </Button>
-          </div>
+        </div>
+
+        <div className="row button-row">
+          {/* 保存按钮 */}
+          <AsyncButton
+            raised
+            className="button-save"
+            asyncStatus={saveArticleRequestStatus}
+            asyncResultMessage={saveArticleResultMessage}
+            onClick={thisCheckArticleFields}
+            color="primary"
+            fullWidth
+          >
+            保存
+          </AsyncButton>
+        </div>
+
+        <div className="row button-row">
+          {/* 取消按钮 */}
+          <Button className="button-cancel"
+            raised
+            fullWidth
+            onClick={this.goToArticles}
+          >
+            取消
+          </Button>
         </div>
 
         {

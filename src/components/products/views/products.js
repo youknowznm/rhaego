@@ -2,13 +2,18 @@ import React from 'react'
 import ProductCard from './productCard'
 import {connect} from 'react-redux'
 import {fetchGithub} from '../actions'
-import {LoadingArea, useMaterialBackground} from '../../../utils'
+import {
+  LoadingArea,
+  useMaterialBackground,
+  changeDocTitle,
+} from '../../../utils'
 
 import './products.css'
 
 class Products extends React.Component {
   componentDidMount() {
     this.props.thisFetchGithub()
+    changeDocTitle('作品')
   }
   componentDidUpdate(prevProps) {
     if (this.props.productsArr !== prevProps.productsArr) {

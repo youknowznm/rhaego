@@ -3,8 +3,12 @@ import {connect} from 'react-redux'
 import ArticleContent from './articleContent'
 import CommentEditor from './commentEditor'
 import CommentList from './commentList'
+import {changeDocTitle} from '../../../utils'
 
 class Article extends React.Component {
+  componentDidMount() {
+    changeDocTitle('文章')
+  }
   render() {
     const {articleDetail} = this.props
     return (

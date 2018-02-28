@@ -22,13 +22,13 @@ const styles = (theme) => {
 
 const DrawerBody = ({classes, firstPathname}) => (
   <div>
-    <List>
+    <List className="drawer-nav-item">
       <Link to="/articles">
         <ListItem button className={firstPathname === '/articles' ? classes.active : ''}>
           <ListItemIcon>
             <InsertDriveFileIcon />
           </ListItemIcon>
-          <ListItemText primary="文章" />
+          <ListItemText primary="文章" className="drawer-nav-text" />
         </ListItem>
       </Link>
       <Link to="/products">
@@ -36,7 +36,7 @@ const DrawerBody = ({classes, firstPathname}) => (
           <ListItemIcon>
             <CodeIcon />
           </ListItemIcon>
-          <ListItemText primary="作品" />
+          <ListItemText primary="作品" className="drawer-nav-text" />
         </ListItem>
       </Link>
       <Link to="/messages">
@@ -44,31 +44,31 @@ const DrawerBody = ({classes, firstPathname}) => (
           <ListItemIcon>
             <MessagesIcon />
           </ListItemIcon>
-          <ListItemText primary="留言" />
+          <ListItemText primary="留言" className="drawer-nav-text" />
         </ListItem>
       </Link>
     </List>
 
     <Divider />
 
-    <List>
+    <List className="drawer-nav-item">
       <Link to="/about">
         <ListItem button className={firstPathname === '/about' ? classes.active : ''}>
           <ListItemIcon>
             <InfoIcon />
           </ListItemIcon>
-          <ListItemText primary="关于" />
+          <ListItemText primary="关于" className="drawer-nav-text" />
         </ListItem>
       </Link>
     </List>
 
-    <List className="stick-bottom">
+    <List className="drawer-stick-bottom drawer-nav-item">
       <Link to="/admin">
         <ListItem button className={firstPathname === '/admin' ? classes.active : ''}>
           <ListItemIcon>
             <PersonIcon />
           </ListItemIcon>
-          <ListItemText primary="管理" />
+          <ListItemText primary="管理" className="drawer-nav-text" />
         </ListItem>
       </Link>
     </List>

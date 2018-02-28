@@ -2,7 +2,7 @@
 .splited-span {
   display: inline-block;
   word-wrap: break-word;
-  word-break: break-all; }
+  word-break: normal; }
 
 .splited-span:after {
   position: relative;

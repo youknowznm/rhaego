@@ -4,6 +4,7 @@ import {Divider} from 'material-ui'
 import ExitToAppIcon from 'material-ui-icons/ExitToApp'
 import NoteAddIcon from 'material-ui-icons/NoteAdd'
 import {Link} from 'react-router'
+import {changeDocTitle} from '../../../utils'
 import List, {
   ListItem,
   ListItemIcon,
@@ -15,6 +16,9 @@ import Logout from './logout'
 import './admin.css'
 
 class ControlPanel extends React.Component {
+  componentDidMount () {
+    changeDocTitle('管理')
+  }
   render() {
     const {
       openLogoutDialog,

@@ -7,7 +7,6 @@
   background: $mb-theme-light-sidebar-background;
 
   &._placeholder {
-    // width: 100%;
     height: 160px;
   }
 
@@ -104,8 +103,7 @@
             color: $mb-theme-primary;
           }
         }
-        &.about-loginor {
-          margin-left: -50px;
+        &.about-author {
           transition: all .2s ease-out;
           .heart-wrap {
             position: relative;
@@ -145,7 +143,7 @@
   .project-name span {
     color: $mb-theme-secondary;
   }
-  .about-loginor .info-link:hover {
+  .about-author .info-link:hover {
     border-bottom-color: $mb-theme-dark-font;
   }
   .social-link {
@@ -161,5 +159,36 @@
     &.email {
       background-image: url("../../../assets/images/footer/ic_email_dark.svg");
     }
+  }
+}
+
+@media (min-width: 0) {
+  .mb-footer {
+    .social {
+      justify-content: center;
+    }
+    .about {
+      justify-content: center !important;
+      .project-name,
+      .view-source {
+        display: none;
+      }
+    }
+  }
+}
+@media (min-width: 630px) {
+  .mb-footer {
+    .social {
+      justify-content: flex-end;
+    }
+    .about {
+      justify-content: space-between !important;
+      .project-name,
+      .view-source {
+        display: block !important;
+      }
+
+    }
+
   }
 }

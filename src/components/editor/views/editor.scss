@@ -8,13 +8,19 @@
   display: flex;
   flex-wrap: nowrap;
   justify-content: flex-start;
+  &.button-row {
+    min-height: 48px;
+    align-items: center;
+  }
 
   .button-wrap {
     display: flex;
     min-height: 72px;
     align-items: center;
     &.upload-wrap {
-      flex-grow: 1;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
     }
     .upload-help-text {
       line-height: 72px;
@@ -64,6 +70,9 @@
     position: relative;
     margin-right: 12px;
     width: 50%;
+    > div {
+      height: 100%;
+    }
     textarea {
       font-size: 14px !important;
       font-family: "Roboto Mono";
@@ -77,6 +86,9 @@
       position: relative;
       font-size: 14px !important;
       font-family: "Roboto Mono";
+      > div {
+        height: 100%;
+      }
     }
     .editor-preview {
       position: absolute;
@@ -97,21 +109,25 @@
         background: rgb(170, 46, 37);
       }
     }
-
   }
 
-  #upload-picture {
+
+  .button-cancel {
+    height: 36px;
+  }
+
+  #upload-picture-input {
     display: none;
   }
 
-  @media (max-width: 700px) {
+  @media (min-width: 0) and (max-width: 700px) {
     .button-wrap {
       width: 100% !important;
-      justify-content: space-around;
-    }
-    .button-save,
-    .button-cancel {
-      // width: 40% !important;
+      justify-content: space-around !important;
+      > * {
+        width: 100%;
+      }
+      align-items: center;
     }
     flex-wrap: wrap;
     .editor-title,
@@ -120,23 +136,19 @@
     .editor-created-date,
     .editor-content {
       width: 100% !important;
+      margin-right: 0;
     }
     .editor-preview-wrap {
       display: none;
     }
-  }
-  @media (max-width: 920px) {
+    .upload-button {
+      width: 100%;
+    }
     .upload-help-text {
       display: none;
     }
+    .async-button-wrap {
+      width: 100%;
+    }
   }
-
-  .icon-right {
-    margin-left: 6px;
-  }
-
-}
-
-.full-width {
-  width: 100%;
 }

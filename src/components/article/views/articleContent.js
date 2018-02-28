@@ -8,6 +8,7 @@ import {
   formatDate,
   getFingerprint,
   showAdminOnlyElements,
+  changeDocTitle,
 } from '../../../utils'
 import {
   getArticleDetail,
@@ -64,6 +65,7 @@ class ArticleContent extends React.Component {
     if (this.props.articleDetail !== prevProps.articleDetail) {
       this.getHeaderTextArr()
       highlightAllPre('.article-content')
+      changeDocTitle(this.props.articleDetail.title)
     }
     // 获取内容 h1 元素结束
     if (this.state.headerTextArr !== prevProps.headerTextArr) {
