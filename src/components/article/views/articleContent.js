@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOMServer from 'react-dom/server'
 import {connect} from 'react-redux'
 import {
   getQueryObj,
@@ -9,6 +10,7 @@ import {
   getFingerprint,
   showAdminOnlyElements,
   changeDocTitle,
+  TransitionWrap,
 } from '../../../utils'
 import {
   getArticleDetail,
@@ -67,10 +69,6 @@ class ArticleContent extends React.Component {
       highlightAllPre('.article-content')
       changeDocTitle(this.props.articleDetail.title)
     }
-    // 获取内容 h1 元素结束
-    if (this.state.headerTextArr !== prevProps.headerTextArr) {
-      getNavClickHandler()
-    }
     // 点赞结束
     if (this.props.likeRequestStatus !== prevProps.likeRequestStatus) {
       if (prevProps.likeRequestStatus === 'completed') {
@@ -86,11 +84,12 @@ class ArticleContent extends React.Component {
     window.removeEventListener('scroll', handleScroll)
   }
   getHeaderTextArr = () => {
-    const contentHeaderElements = document.querySelectorAll('.article-content > h1')
+    const contentHeaderElements = document.querySelectorAll('.mb-article > h1')
     const arr = ['索引']
     Array.prototype.forEach.call(contentHeaderElements, (elem, index) => {
       elem.setAttribute('id', `header-anchor-${index}`)
       arr.push(elem.innerHTML)
+      elem.innerHTML = ReactDOMServer.renderToString(<SplitToSpans>{elem.innerHTML}</SplitToSpans>)
     })
     this.setState({
       headerTextArr: arr,
@@ -136,105 +135,107 @@ class ArticleContent extends React.Component {
           )
         }
         return (
-          <div className="article-wrap">
+          <TransitionWrap>
+            <div className="article-wrap">
 
-            {/* 标题 */}
-            <h1 className="article-title">
-              <SplitToSpans>{articleDetail.title}</SplitToSpans>
-            </h1>
+              {/* 标题 */}
+              <h1 className="article-title">
+                <SplitToSpans>{articleDetail.title}</SplitToSpans>
+              </h1>
 
-            {/* 创建时间 */}
-            <div className="row-1">
-              <Typography component="i" type="body2" className="created-date">
-                创建于 {formatDate(new Date(articleDetail.createdDate))}
-              </Typography>
-              <Button className="edit-button admin-only"
-                raised
-                color="secondary"
-                href={`/admin/editor?articleId=${articleDetail._id}`}
-              >
-                编辑
-              </Button>
-            </div>
-
-            {/* 内容 */}
-            <article
-              className="article-content mb-article"
-              dangerouslySetInnerHTML={{__html: parsedHTMLContent}}
-            />
-
-            {/* 点赞评论按钮 类别标签 */}
-            <div className="article-info">
-              <div className="article-actions">
-                <CardActions>
-                  <IconButton className="like-button"
-                    aria-label="Like"
-                    onClick={this.handleLikeArticle}
-                    disabled={['failed', 'completed'].includes(likeRequestStatus)}
-                  >
-                    <FavoriteIcon />
-                  </IconButton>
-                  <Typography className="like-count" type="caption">
-                    {articleDetail.liked.length}
-                  </Typography>
-                  <IconButton className="comment-button"
-                    aria-label="Comment"
-                    onClick={scrollToCommentEditor}
-                  >
-                    <CommentIcon />
-                  </IconButton>
-                  <Typography className="comment-count" type="caption">
-                    {articleDetail.comments.length}
-                  </Typography>
-                </CardActions>
+              {/* 创建时间 */}
+              <div className="row-1">
+                <Typography component="i" type="body2" className="created-date">
+                  创建于 {formatDate(new Date(articleDetail.createdDate))}
+                </Typography>
+                <Button className="edit-button admin-only"
+                  raised
+                  color="secondary"
+                  href={`/admin/editor?articleId=${articleDetail._id}`}
+                >
+                  编辑
+                </Button>
               </div>
-              <div className="article-tags">
+
+              {/* 内容 */}
+              <article
+                className="article-content mb-article"
+                dangerouslySetInnerHTML={{__html: parsedHTMLContent}}
+              />
+
+              {/* 点赞评论按钮 类别标签 */}
+              <div className="article-info">
+                <div className="article-actions">
+                  <CardActions>
+                    <IconButton className="like-button"
+                      aria-label="Like"
+                      onClick={this.handleLikeArticle}
+                      disabled={['failed', 'completed'].includes(likeRequestStatus)}
+                    >
+                      <FavoriteIcon />
+                    </IconButton>
+                    <Typography className="like-count" type="caption">
+                      {articleDetail.liked.length}
+                    </Typography>
+                    <IconButton className="comment-button"
+                      aria-label="Comment"
+                      onClick={scrollToCommentEditor}
+                    >
+                      <CommentIcon />
+                    </IconButton>
+                    <Typography className="comment-count" type="caption">
+                      {articleDetail.comments.length}
+                    </Typography>
+                  </CardActions>
+                </div>
+                <div className="article-tags">
+                  {
+                    articleDetail.tags.map((tag, index) => {
+                      const taggedLink = `/articles?tag=${tag}`
+                      return (
+                        <Button className="tag"
+                          key={index}
+                          color="default"
+                          dense
+                          raised
+                          href={taggedLink}
+                        >
+                          {tag}
+                        </Button>
+                      )
+                    })
+                  }
+                </div>
+              </div>
+
+              {/* 索引 */}
+              <ul className="article-nav">
                 {
-                  articleDetail.tags.map((tag, index) => {
-                    const taggedLink = `/articles?tag=${tag}`
-                    return (
-                      <Button className="tag"
-                        key={index}
-                        color="default"
-                        dense
-                        raised
-                        href={taggedLink}
-                      >
-                        {tag}
-                      </Button>
-                    )
-                  })
+                  this.state.headerTextArr.map((headerText, index) => (
+                    <Typography type="body2" component="li"
+                      key={index}
+                      data-header-anchor={index}
+                      className="article-nav-anchor"
+                      onClick={getNavClickHandler(index)}
+                    >
+                      {headerText}
+                    </Typography>
+                  ))
                 }
-              </div>
+              </ul>
+
+              {/* 点赞结果 toast */}
+              <Snackbar
+                open={['failed', 'completed'].includes(likeRequestStatus)}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'center',
+                }}
+                message={likeResultMessage}
+              />
+
             </div>
-
-            {/* 索引 */}
-            <ul className="article-nav">
-              {
-                this.state.headerTextArr.map((headerText, index) => (
-                  <Typography type="body2" component="li"
-                    key={index}
-                    data-header-anchor={index}
-                    className="article-nav-anchor"
-                    onClick={getNavClickHandler(index)}
-                  >
-                    {headerText}
-                  </Typography>
-                ))
-              }
-            </ul>
-
-            {/* 点赞结果 toast */}
-            <Snackbar
-              open={['failed', 'completed'].includes(likeRequestStatus)}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'center',
-              }}
-              message={likeResultMessage}
-            />
-
-          </div>
+          </TransitionWrap>
         )
       default:
         throw new Error('unexpected status ' + getArticleDetailRequestStatus)

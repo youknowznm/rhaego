@@ -19,6 +19,16 @@ $mb-theme-dark-sidebar-background: #424242;
 // 重置
 html {
   min-height: 500px;
+  // 使用 elementui 建议的字体方案
+  font-family: "Roboto",
+               "Helvetica Neue",
+               Helvetica,
+               "PingFang SC",
+               "Hiragino Sans GB",
+               "Microsoft YaHei",
+               "微软雅黑",
+               Arial,
+               sans-serif;
 }
 ul {
   margin: 0;

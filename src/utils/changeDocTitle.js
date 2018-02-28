@@ -1,5 +1,5 @@
 const changeDocTitle = (str) => {
-  document.title = `${str} | Material Blog`
+  document.title = `${str} · YouKnowznM`
 }
 
 export default changeDocTitle

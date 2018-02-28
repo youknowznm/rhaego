@@ -1,6 +1,7 @@
 import SplitToSpans from './splitToSpans'
 import LoadingArea from './loadingArea'
 import AsyncButton from './asyncButton'
+import TransitionWrap from './transitionWrap'
 
 import formatDate from './formatDate'
 import toReadableDateString from './toReadableDateString'
@@ -19,6 +20,7 @@ export {
   SplitToSpans,
   LoadingArea,
   AsyncButton,
+  TransitionWrap,
 
   formatDate,
   toReadableDateString,

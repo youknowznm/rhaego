@@ -49,7 +49,7 @@ const DrawerBody = ({classes, firstPathname}) => (
       </Link>
     </List>
 
-    <Divider />
+    <Divider className="drawer-hr" />
 
     <List className="drawer-nav-item">
       <Link to="/about">

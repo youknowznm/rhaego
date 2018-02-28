@@ -36,9 +36,6 @@ $mb-article-quote-dark: #fff;
     color: #212121;
     line-height: 22px;
   }
-  br {
-    margin-bottom: 6px;
-  }
   b {
     font-weight: 500;
   }
@@ -120,7 +117,7 @@ $mb-article-quote-dark: #fff;
     margin: 0;
     padding-left: 40px;
     li {
-      margin-bottom: 6px;
+      margin: 6px 0;
       padding: 0;
       list-style-position: outside;
     }

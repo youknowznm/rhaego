@@ -70,8 +70,8 @@ class CommentList extends React.Component {
           comments.map((comment, index) => {
             return (
               <Card className="comment-list-item"
-                key={comment._id}
                 id={comment._id}
+                key={comment._id}
               >
                 <CardHeader
                   className="comment-header"

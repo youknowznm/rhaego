@@ -5,9 +5,11 @@ import IconButton from 'material-ui/IconButton'
 import Typography from 'material-ui/Typography'
 import FavoriteIcon from 'material-ui-icons/Favorite'
 import CommentIcon from 'material-ui-icons/Comment'
+
 import {
   SplitToSpans,
   formatDate,
+  TransitionWrap,
 } from '../../../utils'
 
 import './articleCard.css'
@@ -19,63 +21,65 @@ const ArticleCard = ({classes, articleData}) => {
   const likedCount = articleData.liked.length
   const link = `/article?id=${_id}`
   return (
-    <a className="card-wrap" href={link}>
-      <Card className="card z-index-2">
-        <CardHeader
-          className="light-font content-card-header"
-          avatar={
-            <Avatar className="avatar">{title.trim().slice(0, 1)}</Avatar>
-          }
-          title={
-            <SplitToSpans className="mono">{title}</SplitToSpans>
-          }
-          subheader={createdDate}
-        >
-        </CardHeader>
+    <TransitionWrap>
+      <a className="card-wrap" href={link}>
+        <Card className="card z-index-2">
+          <CardHeader
+            className="light-font content-card-header"
+            avatar={
+              <Avatar className="avatar">{title.trim().slice(0, 1)}</Avatar>
+            }
+            title={
+              <SplitToSpans className="mono">{title}</SplitToSpans>
+            }
+            subheader={createdDate}
+          >
+          </CardHeader>
 
-        <CardContent className="card-content-holder"></CardContent>
+          <CardContent className="card-content-holder"></CardContent>
 
-        <p className="custom-card-content light-font z-index-2">
-          {summary}
-        </p>
+          <p className="custom-card-content light-font z-index-2">
+            {summary}
+          </p>
 
-        <CardActions className="light-font" disableActionSpacing>
-          <IconButton color="inherit" aria-label="Like" disabled>
-            <FavoriteIcon />
-          </IconButton>
-          <Typography className="count " type="caption">
-            {likedCount}
-          </Typography>
-          <IconButton color="inherit" aria-label="Comment" disabled>
-            <CommentIcon />
-          </IconButton>
-          <Typography className="count " type="caption">
-            {commentCount}
-          </Typography>
-        </CardActions>
+          <CardActions className="light-font" disableActionSpacing>
+            <IconButton color="inherit" aria-label="Like" disabled>
+              <FavoriteIcon />
+            </IconButton>
+            <Typography className="count " type="caption">
+              {likedCount}
+            </Typography>
+            <IconButton color="inherit" aria-label="Comment" disabled>
+              <CommentIcon />
+            </IconButton>
+            <Typography className="count " type="caption">
+              {commentCount}
+            </Typography>
+          </CardActions>
 
-        <div className="tags">
-          {
-            tags.map((tag, index) => {
-              const taggedLink = `/articles?tag=${tag}`
-              return (
-                <Button className="tag"
-                  key={index}
-                  dense
-                  raised
-                  color="default"
-                  href={taggedLink}
-                >
-                  {tag}
-                </Button>
-              )
-            })
-          }
-        </div>
+          <div className="tags">
+            {
+              tags.map((tag, index) => {
+                const taggedLink = `/articles?tag=${tag}`
+                return (
+                  <Button className="tag"
+                    key={index}
+                    dense
+                    raised
+                    color="default"
+                    href={taggedLink}
+                  >
+                    {tag}
+                  </Button>
+                )
+              })
+            }
+          </div>
 
-      </Card>
+        </Card>
 
-    </a>
+      </a>
+    </TransitionWrap>
   )
 }
 

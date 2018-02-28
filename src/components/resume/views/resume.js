@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOMServer from 'react-dom/server'
 import {connect} from 'react-redux'
 import {Typography} from 'material-ui'
 import {
@@ -6,6 +7,7 @@ import {
   SplitToSpans,
   getOffsetToPage,
   changeDocTitle,
+  TransitionWrap,
 } from '../../../utils'
 import {fetchResume} from '../actions'
 
@@ -43,10 +45,6 @@ class Resume extends React.Component {
     if (this.props.getResumeRequestStatus !== prevProps.getResumeRequestStatus) {
       this.getHeaderTextArr()
     }
-    // 获取内容 h1 元素结束
-    if (this.state.headerTextArr !== prevProps.headerTextArr) {
-      getNavClickHandler()
-    }
   }
   getHeaderTextArr = () => {
     const contentHeaderElements = document.querySelectorAll('.resume-content > h1')
@@ -54,6 +52,7 @@ class Resume extends React.Component {
     Array.prototype.forEach.call(contentHeaderElements, (elem, index) => {
       elem.setAttribute('id', `header-anchor-${index}`)
       arr.push(elem.innerHTML)
+      elem.innerHTML = ReactDOMServer.renderToString(<SplitToSpans>{elem.innerHTML}</SplitToSpans>)
     })
     this.setState({
       headerTextArr: arr,
@@ -75,29 +74,31 @@ class Resume extends React.Component {
       >
         {
           () => (
-            <div className="article-wrap">
-              <h1 className="article-title">
-                <SplitToSpans>{'张 恩 铭'}</SplitToSpans>
-              </h1>
-              <article
-                className="resume-content mb-article"
-                dangerouslySetInnerHTML={{__html: resumeHTML}}
-              />
-              <ul className="article-nav">
-                {
-                  this.state.headerTextArr.map((headerText, index) => (
-                    <Typography type="body2" component="li"
-                      key={index}
-                      data-header-anchor={index}
-                      className="article-nav-anchor"
-                      onClick={getNavClickHandler(index)}
-                    >
-                      {headerText}
-                    </Typography>
-                  ))
-                }
-              </ul>
-            </div>
+            <TransitionWrap>
+              <div className="article-wrap">
+                <h1 className="article-title">
+                  <SplitToSpans>{'张 恩 铭'}</SplitToSpans>
+                </h1>
+                <article
+                  className="resume-content mb-article"
+                  dangerouslySetInnerHTML={{__html: resumeHTML}}
+                />
+                <ul className="article-nav">
+                  {
+                    this.state.headerTextArr.map((headerText, index) => (
+                      <Typography type="body2" component="li"
+                        key={index}
+                        data-header-anchor={index}
+                        className="article-nav-anchor"
+                        onClick={getNavClickHandler(index)}
+                      >
+                        {headerText}
+                      </Typography>
+                    ))
+                  }
+                </ul>
+              </div>
+            </TransitionWrap>
           )
         }
       </LoadingArea>
