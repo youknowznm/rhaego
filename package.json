@@ -1,13 +1,13 @@
 {
-  "name": "react-material-blog",
-  "version": "1.0.0",
+  "name": "material-blog",
+  "version": "0.1.0",
   "private": true,
   "dependencies": {
     "axios": "0.17.1",
     "fingerprintjs2": "1.6.1",
     "js-cookie": "2.2.0",
     "marked": "0.3.12",
-    "material-ui": "1.0.0-beta.35",
+    "material-ui": "1.0.0-beta.30",
     "material-ui-icons": "1.0.0-beta.17",
     "node-sass-chokidar": "0.0.3",
     "prop-types": "15.6.0",
@@ -30,5 +30,6 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:5000"
+  "proxy": "http://localhost:5000",
+  "homepage": "http://www.youknowznm.com"
 }
