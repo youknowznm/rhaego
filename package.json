@@ -1,6 +1,6 @@
 {
-  "name": "material-blog",
-  "version": "0.1.0",
+  "name": "react-material-blog",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "axios": "0.17.1",
@@ -31,5 +31,5 @@
     "eject": "react-scripts eject"
   },
   "proxy": "http://localhost:5000",
-  "homepage": "http://140.143.188.149:4000"
+  "homepage": "http://api.youknowznm.com"
 }
