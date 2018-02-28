@@ -1,4 +1,4 @@
 /node_modules/
 .DS_Store
-**/*.css
+src/**/*.css
 **/.DS_Store
