@@ -8,7 +8,7 @@ class Messages extends React.Component {
   }
   render() {
     return (
-      <Typography className="mb-center" type="subheading">
+      <Typography className="mb-center" variant="subheading">
         留言功能正在开发中。
       </Typography>
     )

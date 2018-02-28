@@ -145,11 +145,11 @@ class ArticleContent extends React.Component {
 
               {/* 创建时间 */}
               <div className="row-1">
-                <Typography component="i" type="body2" className="created-date">
+                <Typography component="i" variant="body2" className="created-date">
                   创建于 {formatDate(new Date(articleDetail.createdDate))}
                 </Typography>
                 <Button className="edit-button admin-only"
-                  raised
+                  variant="raised"
                   color="secondary"
                   href={`/admin/editor?articleId=${articleDetail._id}`}
                 >
@@ -174,7 +174,7 @@ class ArticleContent extends React.Component {
                     >
                       <FavoriteIcon />
                     </IconButton>
-                    <Typography className="like-count" type="caption">
+                    <Typography className="like-count" variant="caption">
                       {articleDetail.liked.length}
                     </Typography>
                     <IconButton className="comment-button"
@@ -183,7 +183,7 @@ class ArticleContent extends React.Component {
                     >
                       <CommentIcon />
                     </IconButton>
-                    <Typography className="comment-count" type="caption">
+                    <Typography className="comment-count" variant="caption">
                       {articleDetail.comments.length}
                     </Typography>
                   </CardActions>
@@ -196,8 +196,8 @@ class ArticleContent extends React.Component {
                         <Button className="tag"
                           key={index}
                           color="default"
-                          dense
-                          raised
+                          size="small"
+                          variant="raised"
                           href={taggedLink}
                         >
                           {tag}
@@ -212,7 +212,7 @@ class ArticleContent extends React.Component {
               <ul className="article-nav">
                 {
                   this.state.headerTextArr.map((headerText, index) => (
-                    <Typography type="body2" component="li"
+                    <Typography variant="body2" component="li"
                       key={index}
                       data-header-anchor={index}
                       className="article-nav-anchor"

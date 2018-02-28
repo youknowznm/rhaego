@@ -40,12 +40,12 @@ const Footer = ({classes}) => (
       <div className="content">
         <ul className="about">
           <li className="about-item project-name">
-            <Typography type="title">
+            <Typography variant="title">
               <SplitToSpans className="mono"></SplitToSpans>
             </Typography>
           </li>
           <li className="about-item about-author">
-            <Typography className="mono" type="caption">
+            <Typography className="mono" variant="caption">
               Made with&nbsp;
               <span className="heart-wrap">
                 <svg className="heart" width="14px" height="14px" viewBox="0 0 24 24">
@@ -56,7 +56,7 @@ const Footer = ({classes}) => (
             </Typography>
           </li>
           <li className="about-item view-source">
-            <Button color="default" raised target="_blank" href="https://github.com/youknowznm/material-blog">
+            <Button color="default" variant="raised" target="_blank" href="https://github.com/youknowznm/material-blog">
               查看站点源码
             </Button>
           </li>

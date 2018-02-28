@@ -86,7 +86,7 @@ class Resume extends React.Component {
                 <ul className="article-nav">
                   {
                     this.state.headerTextArr.map((headerText, index) => (
-                      <Typography type="body2" component="li"
+                      <Typography variant="body2" component="li"
                         key={index}
                         data-header-anchor={index}
                         className="article-nav-anchor"

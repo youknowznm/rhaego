@@ -1,7 +1,7 @@
 @charset "UTF-8";
 @import "../../../assets/styles/common.scss";
 
-.row {
+.editor-wrap .row {
   position: relative;
   width: 100%;
   min-height: 72px;
@@ -111,6 +111,9 @@
     }
   }
 
+  .async-button-wrap {
+    width: 100% !important;
+  }
 
   .button-cancel {
     height: 36px;
@@ -146,9 +149,6 @@
     }
     .upload-help-text {
       display: none;
-    }
-    .async-button-wrap {
-      width: 100%;
     }
   }
 }

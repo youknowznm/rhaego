@@ -273,10 +273,10 @@ class Editor extends React.Component {
           <Upload />
         </div>
 
-        <div className="row button-row">
+        <div className="row button-row fw">
           {/* 保存按钮 */}
           <AsyncButton
-            raised
+            variant="raised"
             className="button-save"
             asyncStatus={saveArticleRequestStatus}
             asyncResultMessage={saveArticleResultMessage}
@@ -291,7 +291,7 @@ class Editor extends React.Component {
         <div className="row button-row">
           {/* 取消按钮 */}
           <Button className="button-cancel"
-            raised
+            variant="raised"
             fullWidth
             onClick={this.goToArticles}
           >
@@ -306,7 +306,7 @@ class Editor extends React.Component {
               {/* 删除文章按钮 */}
               <div className="button-wrap full-width delete-wrap">
                 <AsyncButton
-                  raised
+                  variant="raised"
                   asyncStatus={deleteArticleRequestStatus}
                   asyncResultMessage={deleteArticleResultMessage}
                   onClick={this.handleRequestDeleteArticle}

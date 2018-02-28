@@ -9,7 +9,7 @@ class LoadingArea extends React.Component {
     failedMsg =
       typeof failedMsg === 'string'
       ? failedMsg
-      : <Typography type="subheading">
+      : <Typography variant="subheading">
         Please try again later.
       </Typography>
     switch (status) {

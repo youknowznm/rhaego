@@ -61,6 +61,9 @@ class Login extends React.Component {
       window.history.go(-1)
     }
   }
+  goToArticles = () => {
+    window.location.assign('/articles')
+  }
   render() {
     const {
       emailError,
@@ -74,7 +77,7 @@ class Login extends React.Component {
     return (
       <div className="login-wrap">
         <Card className="login">
-          <Typography className="info" component="i" type="caption">
+          <Typography className="info" component="i" variant="caption">
             以管理员身份登录，管理文章和评论。
           </Typography>
           <form className="form">
@@ -132,15 +135,15 @@ class Login extends React.Component {
               asyncResultMessage={loginRequestResultMessage}
               color="primary"
               fullWidth
-              raised
+              variant="raised"
             >
               登录
             </AsyncButton>
             <Button className="action-button"
-              raised
+              variant="raised"
               fullWidth
               color="default"
-              onClick={this.backToReferer}
+              onClick={this.goToArticles}
             >
               取消
             </Button>

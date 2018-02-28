@@ -25,7 +25,7 @@ const Drawer = ({classes, drawerIsOpen, thisToggleDrawer}) => {
     <div>
       <Hidden lgUp>
         <MuiDrawer
-          type="temporary"
+          variant="temporary"
           open={drawerIsOpen}
           onClose={thisToggleDrawer}
           classes={{
@@ -40,7 +40,7 @@ const Drawer = ({classes, drawerIsOpen, thisToggleDrawer}) => {
       </Hidden>
       <Hidden mdDown>
         <MuiDrawer
-          type="permanent"
+          variant="permanent"
           open
           classes={{
             paper: classes['drawer-content'],
