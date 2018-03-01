@@ -1,4 +1,4 @@
-export const siteName = 'You Know znM'
+export const siteName = 'Material Blog'
 
 export const socialInfo = {
   wechatQr: 'https://raw.githubusercontent.com/youknowznm/youknowznm.github.io/master/_site/demos/jquery-material/images/footer/wechat-qr.png',

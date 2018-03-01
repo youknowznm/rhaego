@@ -104,6 +104,12 @@
           }
         }
         &.about-author {
+          display: block;
+          position: absolute;
+          line-height: 144px;
+          left: 0;
+          width: 100%;
+          text-align: center;
           transition: all .2s ease-out;
           .heart-wrap {
             position: relative;
@@ -176,7 +182,7 @@
     }
   }
 }
-@media (min-width: 630px) {
+@media (min-width: 700px) {
   .mb-footer {
     .social {
       justify-content: flex-end;
@@ -187,8 +193,6 @@
       .view-source {
         display: block !important;
       }
-
     }
-
   }
 }

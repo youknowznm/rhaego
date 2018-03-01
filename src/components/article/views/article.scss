@@ -86,7 +86,7 @@ $mb-theme-dark-row-background: #424242;
       cursor: pointer;
       font-family: "Roboto";
       margin-top: 8px;
-      transition: all .2s ease;
+      transition: all .2s ease-out;
       &:first-child {
         color: #757575;
         font-weight: 500;
@@ -158,7 +158,7 @@ $mb-theme-dark-row-background: #424242;
   .comment-list-item {
     position: relative;
     margin-bottom: 12px;
-    transition: all .2s ease;
+    transition: all .2s ease-out;
     &:last-of-type {
       margin-bottom: 0;
     }
