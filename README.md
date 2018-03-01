@@ -1,6 +1,6 @@
 # React Material BLog
 
-##### **完全原创、独立完成** 的[个人站点](https://www.youknowznm.com/)的前端。
+##### **完全原创、独立完成**的[个人站点](https://www.youknowznm.com/)的前端。后端代码在[这里](https://github.com/youknowznm/react-material-blog-server)。
 
 ### 特点：
 
