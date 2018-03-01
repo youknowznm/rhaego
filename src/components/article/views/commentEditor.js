@@ -135,7 +135,10 @@ class CommentEditor extends React.Component {
               }}
               error={contentError}
             />
+          </div>
+          <div className="row submit-button-row">
             <AsyncButton
+              fullWidth
               variant="raised"
               className="submit-button"
               asyncStatus={commentRequestStatus}
