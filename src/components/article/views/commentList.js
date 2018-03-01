@@ -87,7 +87,7 @@ class CommentList extends React.Component {
 
                 <CardContent className="comment-content">
                   <Typography component="p">
-                    {comment.content}s
+                    {comment.content}
                   </Typography>
                 </CardContent>
 
