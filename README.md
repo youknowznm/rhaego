@@ -1,4 +1,4 @@
-# React Material BLog
+# React Material Blog
 
 ##### **完全原创、独立完成**的[个人站点](https://www.youknowznm.com/)的前端。后端代码在[这里](https://github.com/youknowznm/react-material-blog-server)。
 
@@ -33,3 +33,27 @@
   - 使用 [mongodb](https://www.mongodb.com/) 存取数据
   - 使用 [mongoose](http://mongoosejs.com/) 简化对 MongoDB 的操作
   - 使用 [shortid](https://github.com/dylang/shortid) 生成文档的 _id
+
+
+### 调试：
+
+  1. 克隆 [react-material-blog](https://github.com/youknowznm/react-material-blog) 和 [react-material-blog-server](https://github.com/youknowznm/react-material-blog-server)
+
+  2. 安装 mongodb
+
+  3. 进入 react-material-blog 项目
+
+  ```bash
+  npm i
+  npm run scss
+  npm run dev
+  ```
+
+  4. 进入 react-material-blog-server 项目
+
+  ```bash
+  npm i
+  npm run dev
+  ```
+
+  5. 在 `localhost:3000` 查看。
