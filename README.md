@@ -1,8 +1,8 @@
 # React Material Blog
 
-##### **完全原创、独立完成**的[个人站点](https://www.youknowznm.com/)的前端。后端代码在[这里](https://github.com/youknowznm/react-material-blog-server)。
+### **完全原创、独立完成**的[个人站点](https://www.youknowznm.com/)的前端。
 
-### 特点：
+#### 特点：
 
   - Material Design 风格，自适应于不同设备的浏览器
   - 可编辑和展示文章标题、摘要、Markdown 内容、标签和创建日期
@@ -14,7 +14,7 @@
   - 支持按指定的标签类别展示文章，阅读时展示文章的索引
   - 根据配置展示 GitHub 作品、社交资料和个人简历
 
-### 技术栈：
+#### 技术栈：
 
 前端：
 
@@ -35,7 +35,7 @@
   - 使用 [shortid](https://github.com/dylang/shortid) 生成文档的 _id
 
 
-### 调试：
+#### 调试：
 
   1. 克隆 [react-material-blog](https://github.com/youknowznm/react-material-blog) 和 [react-material-blog-server](https://github.com/youknowznm/react-material-blog-server)
 
@@ -57,3 +57,26 @@
   ```
 
   5. 在 `localhost:3000` 查看。
+
+
+#### 预览：
+
+桌面端：
+
+  ![桌面端1](http://wx3.sinaimg.cn/large/005Pjl1Cly1foxhftlmunj313c0jtafo.jpg)
+
+  ![桌面端2](http://wx1.sinaimg.cn/large/005Pjl1Cly1foxhfti40rj313k0k2dki.jpg)
+
+  ![桌面端3](https://wx4.sinaimg.cn/mw1024/005Pjl1Cly1foxhfses1dj313j0k2775.jpg)
+
+  ![桌面端4](https://wx3.sinaimg.cn/mw1024/005Pjl1Cly1foxhfs6k55j313k0k0myi.jpg)
+
+移动端：
+
+  ![移动端1](https://wx1.sinaimg.cn/mw1024/005Pjl1Cly1foxhft517cj30bk0kjq4x.jpg)
+
+  ![移动端2](https://wx1.sinaimg.cn/mw1024/005Pjl1Cly1foxhfswjfhj30bh0ki76a.jpg)
+
+  ![移动端3](https://wx1.sinaimg.cn/mw1024/005Pjl1Cly1foxhfsjuz8j30bj0kitam.jpg)
+
+  ![移动端4](https://wx1.sinaimg.cn/mw1024/005Pjl1Cly1foxhfs2s8fj30bg0kgaap.jpg)
