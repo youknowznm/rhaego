@@ -1,4 +1,5 @@
 import React from 'react'
+import Fade from 'material-ui/transitions/Fade';
 import ReactDOMServer from 'react-dom/server'
 import {connect} from 'react-redux'
 import {
@@ -10,7 +11,6 @@ import {
   getFingerprint,
   showAdminOnlyElements,
   changeDocTitle,
-  TransitionWrap,
 } from '../../../utils'
 import {
   getArticleDetail,
@@ -135,7 +135,7 @@ class ArticleContent extends React.Component {
           )
         }
         return (
-          <TransitionWrap>
+          <Fade timeout={800} in={true}>
             <div className="article-wrap">
 
               {/* 标题 */}
@@ -235,7 +235,7 @@ class ArticleContent extends React.Component {
               />
 
             </div>
-          </TransitionWrap>
+          </Fade>
         )
       default:
         throw new Error('unexpected status ' + getArticleDetailRequestStatus)
