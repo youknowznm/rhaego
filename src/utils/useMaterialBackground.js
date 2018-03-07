@@ -9,7 +9,7 @@ import {
   deepPurple, indigo,
   lightBlue, cyan, teal,
   green, lightGreen, lime,
-  orange,
+  orange, blue,
   deepOrange, brown, grey,
 } from 'material-ui/colors'
 
@@ -29,7 +29,7 @@ const useMaterialBackground = (selector) => {
     [purple[400], purple[600]],
     [deepPurple[400], deepPurple[600]],
     [indigo[400], indigo[600]],
-    // [blue[500], blue[700]],
+    [blue[500], blue[700]],
     [lightBlue[600], lightBlue[800]],
     [cyan[700], cyan[900]],
     [teal[500], teal[700]],
@@ -40,7 +40,6 @@ const useMaterialBackground = (selector) => {
     [deepOrange[400], deepOrange[600]],
     [brown[400], brown[600]],
     [grey[600], grey[800]],
-    // [blueGrey[400], blueGrey[600]],
   ]
 
   // 打乱数组顺序

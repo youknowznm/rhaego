@@ -1,11 +1,11 @@
 import React from 'react'
-import {Fade} from 'material-ui/transitions'
+import {Grow} from 'material-ui/transitions'
 import PropTypes from 'prop-types'
 
 const TransitionWrap = ({children}) => (
-  <Fade in={true}>
+  <Grow in={true} style={{ transformOrigin: '50% 0 0' }}>
     {children}
-  </Fade>
+  </Grow>
 )
 
 TransitionWrap.propTypes = {

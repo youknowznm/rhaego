@@ -37,7 +37,7 @@ $mb-article-quote-dark: #fff;
     line-height: 22px;
   }
   b {
-    font-weight: 500;
+
   }
   i {
 
@@ -161,6 +161,9 @@ $mb-article-quote-dark: #fff;
     h1,
     hr {
       border-color: $mb-article-border-dark;
+    }
+    u {
+      border-bottom: 2px solid $mb-article-font-dark;
     }
     a {
       color: $mb-article-link;

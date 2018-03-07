@@ -10,12 +10,15 @@
   position: relative;
   content: '·';
   opacity: .4;
+  margin: 0 .05em;
 }
 
 .splited-span:last-of-type:after {
   content: '¬';
 }
 
-.card .splited-span:after {
-  margin: 0 .05em;
+.article-wrap {
+  .splited-span:after {
+    margin: 0;
+  }
 }

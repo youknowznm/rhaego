@@ -48,9 +48,6 @@ const DrawerBody = ({classes, firstPathname}) => (
         </ListItem>
       </Link>
     </List>
-
-    <Divider className="drawer-hr" />
-
     <List className="drawer-nav-item">
       <Link to="/about">
         <ListItem button className={firstPathname === '/about' ? classes.active : ''}>
@@ -62,7 +59,9 @@ const DrawerBody = ({classes, firstPathname}) => (
       </Link>
     </List>
 
-    <List className="drawer-stick-bottom drawer-nav-item">
+    <Divider className="drawer-hr" />
+
+    <List className="drawer-nav-item">
       <Link to="/admin">
         <ListItem button className={firstPathname === '/admin' ? classes.active : ''}>
           <ListItemIcon>
