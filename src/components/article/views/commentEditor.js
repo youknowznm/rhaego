@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import Cookie from 'js-cookie'
-import {Card, Typography, TextField} from 'material-ui'
+import {Card, Typography} from 'material-ui'
 import {FormControl, FormHelperText} from 'material-ui/Form'
 import Input, {InputLabel} from 'material-ui/Input'
 import {getArticleDetail} from '../actions'
@@ -123,18 +123,24 @@ class CommentEditor extends React.Component {
             </FormControl>
           </div>
           <div className="row">
-            <TextField
-              className="comment-input-content"
-              label="内容"
-              value={contentValue}
-              onChange={this.onChangeValue('content')}
-              helperText="输入4至120个字作为评论内容。"
-              margin="normal"
-              inputProps={{
-                'maxLength': '120',
-              }}
-              error={contentError}
-            />
+            <FormControl className="comment-input-content" margin="normal">
+              <InputLabel htmlFor="comment-input-content">
+                内容
+              </InputLabel>
+              <Input
+                id="comment-input-content"
+                type="text"
+                value={contentValue}
+                onChange={this.onChangeValue('content')}
+                error={contentError}
+                inputProps={{
+                  'maxLength': '120',
+                }}
+              />
+              <FormHelperText className={emailError ? 'error' : ''}>
+                输入4至120个字作为评论内容。
+              </FormHelperText>
+            </FormControl>
           </div>
           <div className="row submit-button-row">
             <AsyncButton

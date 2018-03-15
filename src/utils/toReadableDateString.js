@@ -2,7 +2,7 @@
 const toReadableDateString = (dateObj) => {
   const _sec = Math.floor((new Date().valueOf() - dateObj.valueOf()) / 1000)
   if (_sec < 10) {
-    return ('just now')
+    return ('刚刚')
   }
   if (_sec < 60) {
     return (_sec + ' 秒前')

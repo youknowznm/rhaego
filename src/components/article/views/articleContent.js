@@ -135,7 +135,7 @@ class ArticleContent extends React.Component {
           )
         }
         return (
-          <Fade timeout={800} in={true}>
+          <Fade timeout={600} in={true}>
             <div className="article-wrap">
 
               {/* 标题 */}
