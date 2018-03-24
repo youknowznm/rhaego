@@ -20,7 +20,7 @@
 
   - 使用 [react-redux](https://github.com/reactjs/react-redux) 处理数据的渲染和单向流动
   - 使用 [redux-thunk](https://github.com/troch/react-thunk) 和 [redux-action-tools](https://github.com/kpaxqin/redux-action-tools) 处理异步 action
-  - 使用 [material-ui](https://github.com/mui-org/material-ui) 组件库和 [material-ui-icons](https://github.com/MODX-Club/material-ui-icons) 图标库实现全站的 Material Design 风格
+  - 使用 [material-ui-next](https://github.com/mui-org/material-ui) 组件库和 [material-ui-icons](https://github.com/MODX-Club/material-ui-icons) 图标库实现全站的 Material Design 风格
   - 使用 [fingerprint.js](https://github.com/Valve/fingerprintjs2) 作为客户端的访客身份标识
   - 使用 [react-syntax-highlighter](https://github.com/conorhastings/react-syntax-highlighter) 实现展示文章时的代码高亮
   - 使用 [marked](https://github.com/markedjs/marked) 渲染文章的 Markdown 内容为 HTML
@@ -34,6 +34,7 @@
   - 使用 [mongoose](http://mongoosejs.com/) 简化对 MongoDB 的操作
   - 使用 [shortid](https://github.com/dylang/shortid) 生成文档的 _id
 
+> 请注意 [material-ui-next](https://github.com/mui-org/material-ui) 组件库的 api 尚不稳定，建议不要安装高于当前 package.json 中的版本。
 
 #### 调试：
 
