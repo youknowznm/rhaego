@@ -8,7 +8,7 @@ class NotFound extends React.Component {
   }
   render() {
     return (
-      <Typography className="mb-center" variant="subheading">
+      <Typography className="mb-center" type="subheading">
         未找到请求的 URL。
       </Typography>
     )

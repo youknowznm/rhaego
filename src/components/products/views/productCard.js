@@ -42,22 +42,25 @@ const ProductCard = ({classes, eachProductData}) => {
             {description}
           </p>
 
-          <Typography variant="body2" className="language light-font">{language}</Typography>
-          {
-            homepage === '' ? '' : <Button size="small" variant="raised" className="demo-link" target="_blank" href={homepage}>demo</Button>
-          }
+          <Typography type="body2" className="language light-font">{language}</Typography>
 
+          {
+            homepage === ''
+              ? ''
+              : <Button size="small" raised dense className="demo-link" target="_blank" href={homepage}>demo</Button>
+          }
+          
           <CardActions className="light-font" disableActionSpacing>
             <IconButton color="inherit" aria-label="Stared" href={html_url + '/stargazers'} target="_blank">
               <StarIcon />
             </IconButton>
-            <Typography className="count " variant="caption">
+            <Typography className="count " type="caption">
               {stargazers_count}
             </Typography>
             <IconButton aria-label="Forked" color="inherit" className="rotated" href={html_url + '/network'} target="_blank">
               <DeviceHubIcon />
             </IconButton>
-            <Typography className="count" variant="caption">
+            <Typography className="count" type="caption">
               {forks_count}
             </Typography>
           </CardActions>

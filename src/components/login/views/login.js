@@ -77,7 +77,7 @@ class Login extends React.Component {
     return (
       <div className="login-wrap">
         <Card className="login">
-          <Typography className="info" component="i" variant="caption">
+          <Typography className="info" component="i" type="caption">
             以管理员身份登录，管理文章和评论。
           </Typography>
           <form className="form">
@@ -135,12 +135,12 @@ class Login extends React.Component {
               asyncResultMessage={loginRequestResultMessage}
               color="primary"
               fullWidth
-              variant="raised"
+              raised
             >
               登录
             </AsyncButton>
             <Button className="action-button"
-              variant="raised"
+              raised
               fullWidth
               color="default"
               onClick={this.goToArticles}

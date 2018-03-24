@@ -46,13 +46,13 @@ const ArticleCard = ({classes, articleData}) => {
             <IconButton color="inherit" aria-label="Like" disabled>
               <FavoriteIcon />
             </IconButton>
-            <Typography className="count " variant="caption">
+            <Typography className="count " type="caption">
               {likedCount}
             </Typography>
             <IconButton color="inherit" aria-label="Comment" disabled>
               <CommentIcon />
             </IconButton>
-            <Typography className="count " variant="caption">
+            <Typography className="count " type="caption">
               {commentCount}
             </Typography>
           </CardActions>
@@ -65,7 +65,8 @@ const ArticleCard = ({classes, articleData}) => {
                   <Button className="tag"
                     key={index}
                     size="small"
-                    variant="raised"
+                    raised
+                    dense
                     color="default"
                     href={taggedLink}
                   >

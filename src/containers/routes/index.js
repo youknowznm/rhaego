@@ -40,9 +40,10 @@ const Routes = ({onRouteUpdate, willEnterAdminRoute}) => (
 )
 const mapState = (state) => ({})
 const mapDispatch = (dispatch) => ({
-  // 普通路由更新时关闭抽屉
+  // 普通路由更新时关闭抽屉，滚动页面至顶部
   onRouteUpdate: (n) => {
     dispatch(headerActions.toggleDrawer(false))
+    document.scrollingElement.scrollTop = 0
   },
   // 针对 /admin 下的路由做权限判定，否决则跳至登录页
   willEnterAdminRoute: (nextState, replace) => {

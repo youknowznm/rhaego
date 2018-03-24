@@ -31,7 +31,7 @@ const Header = ({classes, thisToggleDrawer, thisToggleThemeType}) => (
       <IconButton color="inherit" className={classes['nav-icon-button']} onClick={thisToggleDrawer}>
         <MenuIcon />
       </IconButton>
-      <Typography className="header-title mono" color="inherit" variant="title">
+      <Typography className="header-title mono" color="inherit" type="title">
         <SplitToSpans />
       </Typography>
       <IconButton onClick={thisToggleThemeType}>

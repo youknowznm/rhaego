@@ -80,7 +80,7 @@ class CommentEditor extends React.Component {
       <div>
 
         <Card className="comment-editor">
-          <Typography variant="caption" component="i">
+          <Typography type="caption" component="i">
             欢迎留下您的评论。
           </Typography>
           <div className="row comment-wrap-1">
@@ -145,7 +145,7 @@ class CommentEditor extends React.Component {
           <div className="row submit-button-row">
             <AsyncButton
               fullWidth
-              variant="raised"
+              raised
               className="submit-button"
               asyncStatus={commentRequestStatus}
               asyncResultMessage={commentResultMessage}

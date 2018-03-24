@@ -7,7 +7,7 @@ const DrawerHeader = () => (
   <List className="drawer-list">
     <ListItem>
       <Avatar className="drawer-logo" src="/favicon.ico" alt="Site Logo" />
-      <Typography variant="subheading" className="drawer-title mono">
+      <Typography type="subheading" className="drawer-title mono">
         {/* MATERIAL BLOG */}
         <SplitToSpans>You Know znM</SplitToSpans>
       </Typography>

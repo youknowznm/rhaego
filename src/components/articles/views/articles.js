@@ -38,14 +38,14 @@ class Articles extends React.Component {
         )
       case 'failed':
         return (
-          <Typography className="mb-center" variant="subheading">
+          <Typography className="mb-center" type="subheading">
             {getArticlesStatusMessage}
           </Typography>
         )
       case 'completed':
         if (articlesArr.length === 0) {
           return (
-            <Typography className="mb-center" variant="subheading">
+            <Typography className="mb-center" type="subheading">
               {getArticlesStatusMessage}
             </Typography>
           )

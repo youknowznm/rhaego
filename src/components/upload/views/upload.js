@@ -41,7 +41,7 @@ class Upload extends React.Component {
         <label htmlFor="upload-picture-input">
           <Button
             component="span"
-            variant="raised"
+            raised
             color="secondary"
             disabled={requestUploadStatus === 'loading'}
             className="upload-button"
@@ -58,7 +58,7 @@ class Upload extends React.Component {
           }}
           message={uploadResultMessage}
         />
-        <Typography variant="caption" className="upload-help-text">
+        <Typography type="caption" className="upload-help-text">
           上传成功后以 "youknowznm.com/pictures/[PICTURE_NAME]" 的形式引用。
         </Typography>
       </div>

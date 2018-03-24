@@ -63,7 +63,7 @@ class CommentList extends React.Component {
     const noCommentClassName = `no-comment ${comments.length > 0 ? 'hidden' : ''}`
     return (
       <div className="comment-list">
-        <Typography className={noCommentClassName} variant="body2">
+        <Typography className={noCommentClassName} type="body2">
           还没有人发表评论。
         </Typography>
         {
@@ -101,7 +101,7 @@ class CommentList extends React.Component {
                     <DeleteIcon />
                   </IconButton>
                   <Typography className="comment-index"
-                    variant="body2"
+                    type="body2"
                     color="secondary"
                   >
                     #{index}
