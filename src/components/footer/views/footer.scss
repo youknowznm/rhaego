@@ -10,9 +10,6 @@
     height: 160px;
   }
 
-  > .content {
-  }
-
   .social {
     height: 72px;
     position: relative;
@@ -97,11 +94,8 @@
       height: 144px;
       .about-item {
         list-style: none;
-        &.project-name {
+        &.file-id {
           margin-left: 24px;
-          span {
-            color: $mb-theme-primary;
-          }
         }
         &.about-author {
           display: block;
@@ -146,9 +140,6 @@
   .mb-footer {
     background: $mb-theme-dark-sidebar-background;
   }
-  .project-name span {
-    color: $mb-theme-secondary;
-  }
   .about-author .info-link:hover {
     border-bottom-color: $mb-theme-dark-font;
   }
@@ -175,9 +166,12 @@
     }
     .about {
       justify-content: center !important;
-      .project-name,
+      .file-id {
+        margin-left: 0 !important;
+      }
+      .about-author,
       .view-source {
-        display: none;
+        display: none !important;
       }
     }
   }
@@ -189,7 +183,10 @@
     }
     .about {
       justify-content: space-between !important;
-      .project-name,
+      .file-id {
+        margin-left: 24px !important;
+      }
+      .about-author,
       .view-source {
         display: block !important;
       }

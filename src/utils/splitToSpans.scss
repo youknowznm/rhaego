@@ -13,6 +13,10 @@
   margin: 0 .05em;
 }
 
+.split-dense .splited-span:after {
+  margin: 0 !important;
+}
+
 .splited-span:last-of-type:after {
   content: '¬';
 }

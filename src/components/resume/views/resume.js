@@ -77,7 +77,7 @@ class Resume extends React.Component {
             <TransitionWrap>
               <div className="article-wrap">
                 <h1 className="article-title">
-                  <SplitToSpans>{'张 恩 铭'}</SplitToSpans>
+                  <SplitToSpans>{'▇ ▇ 铭'}</SplitToSpans>
                 </h1>
                 <article
                   className="resume-content mb-article"

@@ -39,9 +39,9 @@ const Footer = ({classes}) => (
     <div className="mb-footer _about">
       <div className="content">
         <ul className="about">
-          <li className="about-item project-name">
-            <Typography type="title">
-              <SplitToSpans className="mono"></SplitToSpans>
+          <li className="about-item file-id">
+            <Typography className="mono" type="body2">
+              <SplitToSpans className="split-dense">京 ICP 备 17065562 号</SplitToSpans>
             </Typography>
           </li>
           <li className="about-item about-author">

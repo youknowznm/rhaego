@@ -16,8 +16,7 @@ $mb-article-pre-background: rgb(40, 44, 52);
 
 $mb-article-pre-color: #abb2bf;
 
-$mb-article-quote-light: rgba(0, 0, 0, .54);
-$mb-article-quote-dark: #fff;
+$mb-article-quote: #757575;
 
 // 全局文章样式
 // 用于编辑页的预览区和文章详情页
@@ -80,7 +79,9 @@ $mb-article-quote-dark: #fff;
     margin: 0;
     margin-bottom: 4px;
     border-left: 4px solid rgb(207, 216, 230);
-    color: $mb-article-quote-light;
+    * {
+      color: $mb-article-quote !important;
+    }
   }
   code {
     padding: 3px 6px;
@@ -148,7 +149,7 @@ $mb-article-quote-dark: #fff;
   hr {
     border: 0;
     width: 60%;
-    margin: 18px auto;
+    margin: 63px auto;
     border-bottom: 1px solid $mb-article-border-light;
   }
 }
@@ -176,9 +177,6 @@ $mb-article-quote-dark: #fff;
     }
     pre code {
       background: $mb-article-pre-background;
-    }
-    blockquote {
-      color: $mb-article-quote-dark;
     }
   }
 }
