@@ -1,0 +1,41 @@
+$COMP_CLASSNAME_PREFIX: 'rhaego-';
+@import "./reset";
+
+$materialCubicBezier: cubic-bezier(0.25, 0.8, 0.25, 1);
+
+body {
+  position: relative;
+  // 字体库参考 http://element.eleme.io/#/zh-CN/component/typography 建议的集合
+  font-family: "Roboto Mono", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background: #fafafa;
+  height: 3000px;
+}
+
+.rhaego-responsive-wrap {
+  width: 900px;
+  min-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  @media (min-width: 1280px) {
+    width: 1200px;
+  }
+  // @media (min-width: 1900px) {
+  //     width: 1440px;
+  // }
+}
+
+.rhaego-single-word {
+  display: inline-block;
+  transition: opacity .4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  &::after {
+    content: '·';
+    opacity: .4;
+  }
+  &:last-of-type:after {
+    content: '¬';
+  }
+  &.hidden {
+    opacity: 0;
+  }
+}

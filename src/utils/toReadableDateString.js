@@ -5,24 +5,24 @@ const toReadableDateString = (dateObj) => {
     return ('刚刚')
   }
   if (_sec < 60) {
-    return (_sec + ' 秒前')
+    return (`${_sec} 秒前`)
   }
   if (_sec < 60 * 60) {
     const _min = Math.floor(_sec / 60)
-    return (_min + ' 分钟前')
+    return (`${_min} 分钟前`)
   }
   if (_sec < 60 * 60 * 24) {
     const _hou = Math.floor(_sec / (60 * 60))
     const restSeconds = Math.floor(_sec % (60 * 60))
     const _min = Math.floor(restSeconds / 60)
-    return (_hou + ' 小时 ' + _min + ' 分钟前')
+    return (`${_hou} 小时 ${_min} 分钟前`)
   }
   if (_sec < 60 * 60 * 24 * 30) {
     const _day = Math.floor(_sec / (60 * 60 * 24))
-    return (_day + ' 天前')
+    return (`${_day} 天前`)
   }
   const _mon = Math.floor(_sec / (60 * 60 * 24 * 30))
-  return (_mon + ' 月前')
+  return (`${_mon} 月前`)
 }
 
 export default toReadableDateString

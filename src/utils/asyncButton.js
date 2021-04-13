@@ -26,8 +26,6 @@ const AsyncButton = ({asyncStatus, asyncResultMessage, children, ...otherProps})
           message={asyncResultMessage}
         />
       </div>
-
-
   )
 }
 

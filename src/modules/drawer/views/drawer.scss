@@ -1,0 +1,24 @@
+@charset "UTF-8";
+@import "../../../assets/styles/common.scss";
+
+.drawer-logo {
+  border-radius: 0 !important;
+}
+.drawer-title {
+  margin-left: 24px !important;
+}
+.drawer-header-hr {
+  margin-bottom: 6px !important;
+}
+.drawer-hr {
+  margin: 6px 0 !important;
+}
+.drawer-list {
+  padding: 0 !important;
+}
+.drawer-nav-item {
+  padding: 0 !important;
+  .drawer-nav-text {
+    padding: 0 16px;
+  }
+}

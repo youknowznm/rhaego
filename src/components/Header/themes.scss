@@ -1,0 +1,84 @@
+
+
+/*
+配色
+*/
+$rhaego-header-colors: (
+  rgb(60, 90, 100), //gray
+  rgb(241, 243, 244), //silver
+  rgb(66, 133, 244), //blue
+  rgb(251, 188, 5), //yellow
+  rgb(234, 67, 53), //red
+  rgb(52, 168, 83), //green
+);
+$gen-colors: (
+  translucent-black: rgba(#000, .3),
+  translucent-white: rgba(#fff, .5),
+  black: rgba(#000, .7),
+  white: #fff,
+  light-silver: #99A9BF,
+);
+.rhaego-header {
+  &[data-theme=gray] nav,
+  &[data-theme=gray] {
+    background-color: nth($rhaego-header-colors, 1);
+  }
+  &[data-theme=silver] nav,
+  &[data-theme=silver] {
+    background-color: nth($rhaego-header-colors, 2);
+  }
+  &[data-theme=blue] nav,
+  &[data-theme=blue] {
+    background-color: nth($rhaego-header-colors, 3);
+  }
+  &[data-theme=yellow] nav,
+  &[data-theme=yellow] {
+    background-color: nth($rhaego-header-colors, 4);
+  }
+  &[data-theme=red] nav,
+  &[data-theme=red] {
+    background-color: nth($rhaego-header-colors, 5);
+  }
+  &[data-theme=green] nav,
+  &[data-theme=green] {
+    background-color: nth($rhaego-header-colors, 6);
+  }
+  &[data-theme=red],
+  &[data-theme=blue],
+  &[data-theme=green],
+  &[data-theme=gray] {
+    h1, li, a {
+      color: map-get($gen-colors, white);
+    }
+    .nav-button {
+      &.active {
+        border-color: map-get($gen-colors, white);
+      }
+      &.clicking,
+      &:not(.active):hover {
+        border-color: map-get($gen-colors, translucent-white);
+      }
+    }
+    .nav-indicator {
+      background-color: map-get($gen-colors, white);
+    }
+  }
+  &[data-theme=silver],
+  &[data-theme=yellow] {
+    h1, li, a {
+      color: map-get($gen-colors, black) !important;
+    }
+    .nav-button {
+      &.active {
+        border-color: map-get($gen-colors, black) !important;
+      }
+      &.clicking,
+      &:not(.active):hover {
+        border-color: map-get($gen-colors, translucent-black) !important;
+      }
+    }
+    .nav-indicator {
+      background-color: map-get($gen-colors, black) !important;
+    }
+  }
+}

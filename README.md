@@ -6,7 +6,7 @@
 
 > 以下为旧版本的描述, 有兴趣可检出`archive`分支查看
 
-# React Material Blog
+# React Rhaego
 
 ### **完全原创、独立完成**的[个人站点](https://www.youknowznm.com/)的前端。
 

@@ -1,0 +1,34 @@
+.ripple {
+  position: absolute;
+  display: none;
+  width: 100px;
+  height: 100px;
+  top: 0;
+  left: 0;
+  background-color: map-get($gen-colors, translucent-white);
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 102;
+  &.noneToCircle {
+    display: block;
+    animation: noneToCircle .55s $materialCubicBezier;
+    @keyframes noneToCircle {
+      from {
+        transform: scale(0);
+      }
+      to {
+        transform: scale(1);
+      }
+    }
+  }
+  &.toFullscreen {
+    display: block;
+    animation: toFullscreen .7s ease-out !important;
+    @keyframes toFullscreen {
+      to {
+        transform: scale(18);
+        opacity: 0;
+      }
+    }
+  }
+}

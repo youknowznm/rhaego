@@ -1,4 +1,4 @@
-export const siteName = 'Material Blog'
+export const siteName = 'Rhaego'
 
 export const socialInfo = {
   wechatQr: 'https://wx3.sinaimg.cn/mw1024/005Pjl1Cly1fp42gno68tj30g90g90ul.jpg',
@@ -8,3 +8,7 @@ export const socialInfo = {
 }
 
 export const githubUsername = 'youknowznm'
+
+export const compConfig = {
+  classPrefix: 'rhaego'
+}

@@ -1,0 +1,136 @@
+@import "../main";
+@import "./themes";
+@import "./ripple";
+
+/*
+z-index 计数
+102 .ripple
+101 .rhaego-header .rhaego-nav
+100 .banner
+99 .rhaego-main-wrap
+*/
+
+.rhaego-header {
+  position: fixed;
+  overflow: hidden;
+  width: 100%;
+  top: 0;
+  background-color: nth($rhaego-header-colors, 1);
+  user-select: none;
+  z-index: 101;
+  transition: all .3s $materialCubicBezier;
+  box-shadow: 0 6px 12px 0 rgba(#000, .4);
+  ul, li {
+    list-style: none;
+  }
+  li, a {
+    color: map-get($gen-colors, white);
+  }
+  .header-content {
+    margin: 0 auto;
+    .nav {
+      position: relative;
+      width: 100%;
+      height: 64px;
+      line-height: 64px;
+      background-color: nth($rhaego-header-colors, 1);
+      transition: all .3s $materialCubicBezier;
+      z-index: 101;
+      .site-title {
+        display: inline-block;
+        font-size: 20px;
+        line-height: 64px;
+        height: 64px;
+        padding-left: 20px;
+        cursor: pointer;
+        transition: opacity .3s $materialCubicBezier;
+        &.transparent {
+          opacity: 0;
+        }
+      }
+    }
+    .nav-buttons {
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-size: 14px;
+      white-space: nowrap;
+      letter-spacing: .25px;
+      font-weight: 500;
+      max-width: 500px;
+      animation: fadeIn 1s $materialCubicBezier;
+      .nav-button {
+        position: relative;
+        display: inline-block;
+        box-sizing: border-box;
+        height: 64px;
+        line-height: 64px;
+        padding: 0 10px;
+        border-bottom: 2px solid transparent;
+        transition: all .4s $materialCubicBezier;
+        cursor: pointer;
+        text-transform: uppercase;
+        &.active {
+          border-color: map-get($gen-colors, white);
+        }
+        &.clicking,
+        &:not(.active):hover {
+          border-color: map-get($gen-colors, translucent-white);
+        }
+      }
+    }
+    .nav-indicator {
+      position: absolute;
+      height: 2px;
+      bottom: 0;
+      transition: color .3s $materialCubicBezier;
+      &.hidden {
+        display: none;
+      }
+    }
+    .banner {
+      width: 100%;
+      height: 192px;
+      z-index: 100;
+      .title {
+        position: absolute;
+        display: block;
+        bottom: 80px;
+        color: map-get($gen-colors, white);
+        height: 56px;
+        padding-left: 20px;
+        font-size: 56px;
+        font-weight: 300;
+        line-height: 56px;
+        text-transform: capitalize;
+        animation: popIn .8s $materialCubicBezier;
+        cursor: default;
+        transition: opacity .3s $materialCubicBezier;
+        &.transparent {
+          opacity: 0;
+        }
+
+      }
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

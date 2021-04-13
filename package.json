@@ -1,34 +1,63 @@
 {
-  "name": "react-material-blog",
+  "name": "rhaego",
   "version": "1.0.0",
-  "private": true,
-  "dependencies": {
-    "axios": "0.17.1",
-    "fingerprintjs2": "1.6.1",
-    "js-cookie": "2.2.0",
-    "marked": "0.3.12",
-    "material-ui": "1.0.0-beta.30",
-    "material-ui-icons": "1.0.0-beta.17",
-    "node-sass-chokidar": "0.0.3",
-    "prop-types": "15.6.0",
-    "react": "15.4.1",
-    "react-dom": "15.4.1",
-    "react-redux": "5.0.6",
-    "react-router": "3.0.5",
-    "react-router-redux": "4.0.8",
-    "react-scripts": "1.1.0",
-    "react-syntax-highlighter": "7.0.0",
-    "redux": "3.6.0",
-    "redux-action-tools": "1.2.2",
-    "redux-thunk": "2.2.0"
-  },
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "build-css": "node-sass-chokidar src/ -o src/",
-    "scss": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
-    "dev": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack serve",
+    "dev": "webpack --watch"
   },
-  "proxy": "http://localhost:4000"
+  "repository": {
+    "type": "git",
+    "url": "ssh://zhangenming@icode.baidu.com:8235/baidu/erp/erp-ui-previewer"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@material-ui/core": "4.9.0",
+    "@material-ui/icons": "4.5.1",
+    "babel-loader": "8.2.2",
+    "babel-preset-react-app": "10.0.0",
+    "classnames": "^2.2.6",
+    "css-loader": "5.2.0",
+    "file-loader": "6.2.0",
+    "html-webpack-plugin": "5.3.1",
+    "material-table": "1.69.2",
+    "mobx": "4.15.7",
+    "mobx-react": "5.4.4",
+    "prop-types": "^15.7.2",
+    "react": "16.14.0",
+    "react-dom": "16.14.0",
+    "react-draggable": "4.4.3",
+    "resolve-url-loader": "3.1.2",
+    "sass": "1.32.8",
+    "sass-loader": "10.0.5",
+    "style-loader": "2.0.0",
+    "svg-url-loader": "7.1.1",
+    "ts-loader": "8.1.0",
+    "typescript": "4.2.3",
+    "url-loader": "^4.1.1",
+    "webpack": "5.28.0",
+    "webpack-cli": "4.6.0",
+    "webpack-dev-server": "3.11.2"
+  },
+  "babel": {
+    "presets": [
+      "@babel/react",
+      "@babel/preset-env",
+      "@babel/preset-typescript"
+    ],
+    "plugins": [
+      [
+        "@babel/plugin-proposal-decorators",
+        {
+          "legacy": true
+        }
+      ],
+      "@babel/plugin-proposal-class-properties",
+      "@babel/plugin-proposal-object-rest-spread"
+    ]
+  }
 }
