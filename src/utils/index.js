@@ -18,6 +18,36 @@
 
 export {default as decorateStyle} from './decorateStyle'
 
+export function callIfCallable(fn) {
+  typeof fn === 'function' && fn()
+}
+
+export function animateToTop(onDone) {
+  function step() {
+    const {scrollTop} = document.documentElement
+    const id = window.requestAnimationFrame(step)
+    if (document.documentElement.scrollTop <= 0) {
+      cancelAnimationFrame(id)
+      callIfCallable(onDone)
+    } else {
+      document.documentElement.scrollTop = scrollTop - Math.max(scrollTop / 5, 1)
+    }
+  }
+  step()
+}
+
+export const debounce = function(fn, time = 400)  {
+  var timerId = null
+  return function(args) {
+    if (timerId) {
+      timerId = setTimeout(fn, time)
+    } else {
+      clearTimeout(timerId)
+      // fn.apply(fn, ...args)
+    }
+  }
+}
+
 // export {
 //   SplitToSpans,
 //   LoadingArea,

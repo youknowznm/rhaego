@@ -8,8 +8,14 @@ import Header from './components/Header'
 
 window.IS_DEV = process.env.NODE_ENV !== 'production'
 
+const links = [
+  {name: 'about'},
+  {name: 'articles'},
+  {name: 'works'},
+]
+
 ReactDOM.render(
-  <Header />,
+  <Header links={links} />,
 //
 // <Provider store={store}>
 //     {/*<Routes />*/}
