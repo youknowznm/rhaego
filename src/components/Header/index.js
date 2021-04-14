@@ -5,6 +5,7 @@ import {compConfig} from '../../config'
 import {
   decorateStyle,
   debounce,
+  formatToMaterialSpans,
   getStyleInt,
   animateToTop
 } from '../../utils'
@@ -56,15 +57,6 @@ export default class RhaegoHeader extends React.Component {
   componentDidMount() {
     this.addListeners()
     this.setDefaultNavSize()
-  }
-
-  formatToMaterialSpans = string => {
-    const separated = string.split(/\s+/)
-    return (
-      <span className={''}>
-        {separated.map(item => (<span className={`${classPrefix}-single-word`}>{item}</span>))}
-      </span>
-    )
   }
 
   navListDOM
@@ -214,7 +206,7 @@ export default class RhaegoHeader extends React.Component {
         <div className={'header-content rhaego-responsive'}>
           <nav className={'nav-bar'}>
             <a className={c('site-title', !bannerTitleHidden && 'transparent')} href="/">
-              {this.formatToMaterialSpans(this.props.siteName)}
+              {formatToMaterialSpans(this.props.siteName)}
             </a>
             <ul className="nav-buttons" ref={this.setNavListRef} >
               {
@@ -234,7 +226,7 @@ export default class RhaegoHeader extends React.Component {
           </nav>
           <div className={c('banner')} style={bannerStyle}>
             <h1 className={c('title', bannerTitleHidden && 'transparent')}>
-              {this.formatToMaterialSpans(this.props.siteName)}
+              {formatToMaterialSpans(this.props.siteName)}
             </h1>
           </div>
         </div>

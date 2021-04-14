@@ -38,9 +38,9 @@ export default class Main extends React.Component {
       'orange',
       'brown',
       'grey',
-      'blue',
       'bluegrey',
-    ].sort(() => Math.random() - .5);
+    ]
+    palette.sort(() => Math.random() - .5);
     const randomIndex = Math.floor(Math.random() * palette.length);
     this.palette = palette
   }

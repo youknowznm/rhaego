@@ -6,7 +6,9 @@ import {
   decorateStyle,
   debounce,
   getStyleInt,
-  animateToTop, formatDate
+  animateToTop,
+  formatToMaterialSpans,
+  formatDate,
 } from '../../utils'
 const {classPrefix} = compConfig
 
@@ -50,9 +52,12 @@ export default class RhaegoCard extends React.Component {
     const likedCount = 123
     const link = `/article?id=${_id}`
 
+    var s = 'No Such Thing as Offline';
+    var sb = '这些调色板最初由 Material Design 于 2014 年创建，由一些旨在和谐搭配的颜色组成，您可以用它们来开发品牌调色板。要生成您专属的颜色协调的调色板，请使用调色板生成工具。'
     return (
       <div {...this.props} className={`${classPrefix}-card`} style={style} >
-
+        <h1 className={'title'}>{formatToMaterialSpans(s)}</h1>
+        <p className={'summary'}>{sb}</p>
       </div>
     )
   }

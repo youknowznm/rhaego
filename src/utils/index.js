@@ -1,3 +1,5 @@
+import React from 'react'
+
 // import SplitToSpans from './splitToSpans'
 // import LoadingArea from './loadingArea'
 // import AsyncButton from './asyncButton'
@@ -43,6 +45,16 @@ export function getStyle(target, key) {
 
 export function getStyleInt(target, key) {
   return parseInt(getStyle(target, key), 10)
+}
+
+
+export function formatToMaterialSpans(string) {
+  const separated = string.split(/\s+/)
+  return (
+    <span className={''}>
+        {separated.map(item => (<span className={`rhaego-single-word`}>{item}</span>))}
+    </span>
+  )
 }
 
 export const debounce = function(fn, time = 400)  {
