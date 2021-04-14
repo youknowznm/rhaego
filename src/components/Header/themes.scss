@@ -1,25 +1,18 @@
 $rhaego-header-colors: (
   rgb(241, 243, 244), //silver
-  rgb(60, 90, 100), //gray
+  rgb(60, 90, 100), //grey
   rgb(251, 188, 5), //yellow
   rgb(66, 133, 244), //blue
   rgb(234, 67, 53), //red
   rgb(52, 168, 83), //green
-);
-$gen-colors: (
-  translucent-black: rgba(#000, .3),
-  translucent-white: rgba(#fff, .5),
-  black: rgba(#000, .7),
-  white: #fff,
-  light-silver: #99A9BF,
 );
 .rhaego-header {
   &[data-theme=silver] .nav-bar,
   &[data-theme=silver] {
     background-color: nth($rhaego-header-colors, 1);
   }
-  &[data-theme=gray] .nav-bar,
-  &[data-theme=gray] {
+  &[data-theme=grey] .nav-bar,
+  &[data-theme=grey] {
     background-color: nth($rhaego-header-colors, 2);
   }
   &[data-theme=yellow] .nav-bar,
@@ -41,39 +34,39 @@ $gen-colors: (
   &[data-theme=red],
   &[data-theme=blue],
   &[data-theme=green],
-  &[data-theme=gray] {
+  &[data-theme=grey] {
     * {
-      color: map-get($gen-colors, white);
+      color: $white;
     }
     .nav-button {
       &.active {
-        border-color: map-get($gen-colors, white);
+        border-color: $white;
       }
       &.clicking,
       &:not(.active):hover {
-        border-color: map-get($gen-colors, translucent-white);
+        border-color: $translucent-white;
       }
     }
     .nav-border {
-      background-color: map-get($gen-colors, white);
+      background-color: $white;
     }
   }
   &[data-theme=silver],
   &[data-theme=yellow] {
     * {
-      color: map-get($gen-colors, black) !important;
+      color: $black !important;
     }
     .nav-button {
       &.active {
-        border-color: map-get($gen-colors, black) !important;
+        border-color: $black !important;
       }
       &.clicking,
       &:not(.active):hover {
-        border-color: map-get($gen-colors, translucent-black) !important;
+        border-color: $translucent-black !important;
       }
     }
     .nav-border {
-      background-color: map-get($gen-colors, black) !important;
+      background-color: $black !important;
     }
   }
 }

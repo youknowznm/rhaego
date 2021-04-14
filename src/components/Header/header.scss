@@ -1,6 +1,5 @@
-@import "../main";
+@import "../../style/main";
 @import "./themes";
-@import "./ripple";
 
 /*
 z-index 计数
@@ -22,7 +21,7 @@ $duration: .4s;
   transition: all $duration $materialCubicBezier;
   box-shadow: 0 6px 12px 0 rgba(#000, .4);
   * {
-    color: map-get($gen-colors, white);
+    color: $white;
   }
   .header-content {
     margin: 0 auto;
@@ -69,11 +68,11 @@ $duration: .4s;
         cursor: pointer;
         text-transform: uppercase;
         &.active {
-          border-color: map-get($gen-colors, white);
+          border-color: $white;
         }
         &.clicking,
         &:not(.active):hover {
-          border-color: map-get($gen-colors, translucent-white);
+          border-color: $translucent-white;
         }
       }
     }
@@ -111,7 +110,7 @@ $duration: .4s;
         position: absolute;
         display: block;
         bottom: 80px;
-        color: map-get($gen-colors, white);
+        color: $white;
         height: 56px;
         padding-left: 20px;
         font-size: 56px;
@@ -127,6 +126,41 @@ $duration: .4s;
       }
     }
   }
+  .ripple {
+    position: absolute;
+    pointer-events: none;
+    display: none;
+    width: 100px;
+    height: 100px;
+    top: 0;
+    left: 0;
+    background-color: $translucent-white;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 102;
+    &.appear {
+      display: block;
+      animation: appear .55s $materialCubicBezier;
+      @keyframes appear {
+        from {
+          transform: scale(0);
+        }
+        to {
+          transform: scale(1);
+        }
+      }
+    }
+    &.explode {
+      display: block;
+      animation: explode .7s ease-out;
+      @keyframes explode {
+        to {
+          transform: scale(20);
+          opacity: 0;
+        }
+      }
+    }
+  }
 }
 
 @keyframes fadeIn {
@@ -137,6 +171,7 @@ $duration: .4s;
     opacity: 1;
   }
 }
+
 @keyframes popIn {
   from {
     opacity: 0;

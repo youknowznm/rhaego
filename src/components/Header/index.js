@@ -12,14 +12,14 @@ const {classPrefix} = compConfig
 
 const colors = [
   'silver',
-  'gray',
+  'grey',
   'yellow',
   'blue',
   'red',
   'green',
 ]
 
-import style from './style.scss'
+import style from './header.scss'
 
 // @decorateStyle(style)
 export default class RhaegoHeader extends React.Component {
@@ -120,6 +120,7 @@ export default class RhaegoHeader extends React.Component {
     this.rippleRef = ref
   }
 
+  rippling = false
   onNavMouseDown = evt => {
     const nativeEvt = evt.nativeEvent
     const rippleLeft = nativeEvt.pageX - this.RIPPLE_RADIUS
@@ -129,11 +130,17 @@ export default class RhaegoHeader extends React.Component {
       rippleTop,
     })
     this.rippleRef.classList.add('appear')
+    this.rippling = true
   }
 
+  // 对波纹已设置了 pointer-events: none
+  // 这样 mouseup 时, 仍可触发期望的 nav click 事件
   onNavMouseUp = evt => {
-    this.rippleRef.classList.remove('appear')
-    this.rippleRef.classList.add('explode')
+    if (this.rippling) {
+      this.rippleRef.classList.remove('appear')
+      this.rippleRef.classList.add('explode')
+      this.rippling = false
+    }
   }
 
   navBorderRef = null
@@ -196,8 +203,7 @@ export default class RhaegoHeader extends React.Component {
     }
     const rippleStyle = {
       left: this.state.rippleLeft,
-      right: this.state.rippleRight,
-      // width: this.state.navBorderRight - this.state.navBorderLeft,
+      top: this.state.rippleTop,
     }
     const bannerStyle = {
       height: this.state.bannerHeight
@@ -214,10 +220,10 @@ export default class RhaegoHeader extends React.Component {
               {
                 this.props.links.map((item, index) => (
                   <li
+                    key={index}
                     className={c('nav-button', index === activeNavIndex && 'active')}
                     onClick={this.getClickNavHandler(item, index)}
                     onMouseDown={this.onNavMouseDown}
-                    // onMouseUp={this.onNavMouseUp}
                   >
                     {item.name}
                   </li>

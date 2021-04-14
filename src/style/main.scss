@@ -1,7 +1,27 @@
-$COMP_CLASSNAME_PREFIX: 'rhaego-';
 @import "./reset";
 
 $materialCubicBezier: cubic-bezier(0.25, 0.8, 0.25, 1);
+
+$translucent-black: rgba(#000, .3);
+$translucent-white: rgba(#fff, .5);
+$black: rgba(#000, .7);
+$white: #fff;
+
+$red: #f44336;
+$pink: #e91e63;
+$purple: #9c27b0;
+$indigo: #3f51b5;
+$blue: #2196f3;
+$cyan: #00bcd4;
+$teal: #009688;
+$green: #4caf50;
+$lime: #cddc39;
+$yellow: #ffeb3b;
+$amber: #ffc107;
+$orange: #ff9800;
+$brown: #795548;
+$grey: #9e9e9e;
+$bluegrey: #607d8b;
 
 body {
   position: relative;

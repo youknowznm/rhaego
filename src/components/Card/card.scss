@@ -1,0 +1,18 @@
+@import "../../style/main";
+
+$golden-ratio: 0.618;
+
+.rhaego-card {
+  position: relative;
+  background: $white;
+  z-index: 90;
+  float: left;
+  width: 50%;
+  height: 300px;
+  &:hover {
+    z-index: 91;
+    transition: all .3s $materialCubicBezier;
+    filter: brightness(103%);
+    box-shadow: 0 0 20px 0 rgb(0 0 0 / 20%), 0 5px 5px 0 rgb(0 0 0 / 24%);
+  }
+}

@@ -2,10 +2,10 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Reboot} from 'material-ui'
 import {view as Theme} from '../../containers/theme'
-import {view as Header} from '../../modules/header'
-import {view as Drawer} from '../../modules/drawer'
-import {view as Main} from '../../modules/main'
-import {view as Footer} from '../../modules/footer'
+import {view as Header} from '../../_modules/header'
+import {view as Drawer} from '../../_modules/drawer'
+import {view as Main} from '../../_modules/main'
+import {view as Footer} from '../../_modules/footer'
 
 const App = ({children, isDarkTheme}) => (
   <Theme>
