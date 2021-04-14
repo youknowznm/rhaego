@@ -9,13 +9,20 @@ import Header from './components/Header'
 window.IS_DEV = process.env.NODE_ENV !== 'production'
 
 const links = [
-  {name: 'about'},
-  {name: 'articles'},
-  {name: 'works'},
+  {name: '文章'},
+  {name: '作品啊啊'},
+  {name: '留言'},
+  {name: '关于关'},
+  {name: 'hfh'},
+  {name: '123'},
+  {name: '关于关'},
 ]
 
 ReactDOM.render(
-  <Header links={links} />,
+  <Header
+    links={links}
+    siteName={'you know znm'}
+  />,
 //
 // <Provider store={store}>
 //     {/*<Routes />*/}

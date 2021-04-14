@@ -101,7 +101,7 @@ export default (state = defaultState, action) => {
         tags: tagsToRemove,
       }
     case ADJUST_TAG_INPUT_INDENT:
-      let tagsWidth = getComputedStyle(document.querySelector('.tags-container')).width
+      let tagsWidth = getStyleInPx(document.querySelector('.tags-container')).width
       document.querySelector('.editor-tags-input > input').style['text-indent'] = tagsWidth
       return {
         ...state,

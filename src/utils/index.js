@@ -23,17 +23,26 @@ export function callIfCallable(fn) {
 }
 
 export function animateToTop(onDone) {
+  const doc = document.documentElement
   function step() {
-    const {scrollTop} = document.documentElement
+    const {scrollTop} = doc
     const id = window.requestAnimationFrame(step)
-    if (document.documentElement.scrollTop <= 0) {
+    if (scrollTop === 0) {
       cancelAnimationFrame(id)
       callIfCallable(onDone)
     } else {
-      document.documentElement.scrollTop = scrollTop - Math.max(scrollTop / 5, 1)
+      doc.scrollTop = scrollTop - Math.max(scrollTop / 5, 1)
     }
   }
   step()
+}
+
+export function getStyle(target, key) {
+  return document.defaultView.getComputedStyle(target)[key]
+}
+
+export function getStyleInt(target, key) {
+  return parseInt(getStyle(target, key), 10)
 }
 
 export const debounce = function(fn, time = 400)  {

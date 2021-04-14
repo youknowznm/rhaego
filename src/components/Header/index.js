@@ -5,23 +5,24 @@ import {compConfig} from '../../config'
 import {
   decorateStyle,
   debounce,
+  getStyleInt,
   animateToTop
 } from '../../utils'
 const {classPrefix} = compConfig
 
 const colors = [
-  'gray',
   'silver',
-  'blue',
+  'gray',
   'yellow',
+  'blue',
   'red',
   'green',
 ]
 
 import style from './style.scss'
 
-@decorateStyle(style)
-export default class extends React.Component {
+// @decorateStyle(style)
+export default class RhaegoHeader extends React.Component {
 
   static propTypes = {
     siteName: PropTypes.string.isRequired,
@@ -31,7 +32,7 @@ export default class extends React.Component {
   }
 
   static defaultProps = {
-    siteName: 'Example Header',
+    siteName: 'Rhaego Example Header',
     // siteName: '[ˈvæŋkwɪʃ]',
     links: [],
   }
@@ -45,14 +46,16 @@ export default class extends React.Component {
     bannerHeight: this.BANNER_HEIGHT,
     bannerTitleHidden: this.BANNER_TITLE_HIDDEN,
     currNavLeft: 0,
-    currNavRight: 0,
-    currNavWidth: 0,
-    activeNavIndex: -1
+    currNavWidth: -1,
+    activeNavIndex: 0,
+    indicatorLeft: -1,
+    indicatorRight: -1,
   }
   
   componentDidMount() {
     this.handleScroll()
-
+    this.setDefaultNavSize()
+    this.listenNavIndicatorAnimationEnd()
   }
 
   formatToMaterialSpans = string => {
@@ -62,6 +65,21 @@ export default class extends React.Component {
         {separated.map(item => (<span className={`${classPrefix}-single-word`}>{item}</span>))}
       </span>
     )
+  }
+  
+  navListDOM
+  setNavListRef = ref => {
+    this.navListDOM = ref
+  }
+
+  setDefaultNavSize = () => {
+    const defaultActiveDOM = this.navListDOM.children[this.state.activeNavIndex]
+    const currNavLeft = getStyleInt(defaultActiveDOM, 'left')
+    const currNavWidth = getStyleInt(defaultActiveDOM, 'width')
+    this.setState({
+      currNavLeft,
+      currNavWidth,
+    })
   }
 
   handleScroll = () => {
@@ -92,64 +110,95 @@ export default class extends React.Component {
     }
   }
 
-  navWrapRef = null
+  navIndicatorRef = null
   setNavWrapRef = ref => {
-    this.navWrapRef = ref
+    this.navIndicatorRef = ref
   }
 
-  getClickNavHandler = (item, index) => (evt) => {
-    const target = {evt}
-    const wrapWidth = this.navWrapRef.getBoundingClientRect().width
-    const {
-      width: currNavWidth,
-      left: currNavLeft,
-      right: currNavRight,
-    } = evt.nativeEvent.target.getBoundingClientRect()
-    console.log(1, wrapWidth)
-    console.log(2, currNavWidth, currNavLeft, currNavRight)
-    animateToTop(() => {
-      this.setState({
-        activeIndex: index,
-      })
+  listenNavIndicatorAnimationEnd = () => {
+    const ref = this.navIndicatorRef
+    ref.addEventListener('animationend', () => {
+      ref.classList.remove('flow-to-right', 'flow-to-left')
+      ref.classList.add('hidden')
     })
   }
 
-  compodidm
+  getClickNavHandler = (item, index) => (evt) => {
+    const {
+      currNavLeft: prevNavLeft,
+      currNavWidth: prevNavWidth,
+      activeNavIndex: prevActiveNavIndex
+    } = this.state
+    
+    if (prevActiveNavIndex === index) {
+      return
+    }
+
+    const target = evt.nativeEvent.target
+    const currNavLeft = target.offsetLeft
+    const currNavWidth = getStyleInt(target, 'width')
+
+    let targetAtCurrRight = currNavLeft > prevNavLeft
+    let indicatorLeft
+    let indicatorRight
+    if (targetAtCurrRight) {
+      // 新目标在旧的右侧
+      indicatorLeft = prevNavLeft
+      indicatorRight = currNavLeft + currNavWidth
+    } else {
+      // 左侧
+      indicatorLeft = currNavLeft
+      indicatorRight = prevNavLeft + prevNavWidth
+    }
+
+    this.setState({
+      activeNavIndex: index,
+      currNavLeft,
+      currNavWidth,
+      indicatorLeft,
+      indicatorRight
+    })
+    
+    const ref = this.navIndicatorRef
+    ref.classList.remove('hidden')
+    ref.classList.add(targetAtCurrRight ? 'flow-to-right' : 'flow-to-left')
+    
+    animateToTop()
+  }
 
   render() {
     const {
       bannerTitleHidden,
-      activeIndex,
+      activeNavIndex,
     } = this.state
     const indicatorStyle = {
-      left: this.state.currNavLeft,
-      right: this.state.currNavRight,
+      left: this.state.indicatorLeft,
+      right: this.state.indicatorRight,
+      width: this.state.indicatorRight - this.state.indicatorLeft,
     }
     const bannerStyle = {
       height: this.state.bannerHeight
     }
+    const themeColorName = colors[this.state.activeNavIndex % colors.length]
     return (
-      <header className={`${classPrefix}-header`}>
+      <header className={`${classPrefix}-header`} style={style} data-theme={themeColorName}>
         <div className={'header-content rhaego-responsive'}>
-          <nav className={'nav'}>
+          <nav className={'nav-bar'}>
             <a className={c('site-title', !bannerTitleHidden && 'transparent')} href="/">
               {this.formatToMaterialSpans(this.props.siteName)}
             </a>
-            <ul className="nav-buttons" ref={this.setNavWrapRef}>
+            <ul className="nav-buttons" ref={this.setNavListRef} >
               {
                 this.props.links.map((item, index) => (
                   <li
-                    className={c('nav-button', index === activeIndex && 'active')}
+                    className={c('nav-button', index === activeNavIndex && 'active')}
                     onClick={this.getClickNavHandler(item, index)}
                   >
                     {item.name}
                   </li>
                 ))
               }
-              {/*<li className="nav-button active" onClick={() => {animateToTop()}}>发斯蒂芬</li>*/}
-              {/*<li className="nav-button">阿里疯狂</li>*/}
-              {/*<li className="nav-button">asdf</li>*/}
-              <li className="nav-indicator" style={indicatorStyle} />
+              <li className="nav-indicator" style={indicatorStyle} ref={this.setNavWrapRef} />
             </ul>
           </nav>
           <div className={c('banner')} style={bannerStyle}>

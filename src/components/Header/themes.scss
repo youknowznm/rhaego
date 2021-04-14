@@ -1,13 +1,8 @@
-
-
-/*
-配色
-*/
 $rhaego-header-colors: (
-  rgb(60, 90, 100), //gray
   rgb(241, 243, 244), //silver
-  rgb(66, 133, 244), //blue
+  rgb(60, 90, 100), //gray
   rgb(251, 188, 5), //yellow
+  rgb(66, 133, 244), //blue
   rgb(234, 67, 53), //red
   rgb(52, 168, 83), //green
 );
@@ -19,27 +14,27 @@ $gen-colors: (
   light-silver: #99A9BF,
 );
 .rhaego-header {
-  &[data-theme=gray] nav,
-  &[data-theme=gray] {
+  &[data-theme=silver] .nav-bar,
+  &[data-theme=silver] {
     background-color: nth($rhaego-header-colors, 1);
   }
-  &[data-theme=silver] nav,
-  &[data-theme=silver] {
+  &[data-theme=gray] .nav-bar,
+  &[data-theme=gray] {
     background-color: nth($rhaego-header-colors, 2);
   }
-  &[data-theme=blue] nav,
-  &[data-theme=blue] {
+  &[data-theme=yellow] .nav-bar,
+  &[data-theme=yellow] {
     background-color: nth($rhaego-header-colors, 3);
   }
-  &[data-theme=yellow] nav,
-  &[data-theme=yellow] {
+  &[data-theme=blue] .nav-bar,
+  &[data-theme=blue] {
     background-color: nth($rhaego-header-colors, 4);
   }
-  &[data-theme=red] nav,
+  &[data-theme=red] .nav-bar,
   &[data-theme=red] {
     background-color: nth($rhaego-header-colors, 5);
   }
-  &[data-theme=green] nav,
+  &[data-theme=green] .nav-bar,
   &[data-theme=green] {
     background-color: nth($rhaego-header-colors, 6);
   }
@@ -47,7 +42,7 @@ $gen-colors: (
   &[data-theme=blue],
   &[data-theme=green],
   &[data-theme=gray] {
-    h1, li, a {
+    * {
       color: map-get($gen-colors, white);
     }
     .nav-button {
@@ -65,7 +60,7 @@ $gen-colors: (
   }
   &[data-theme=silver],
   &[data-theme=yellow] {
-    h1, li, a {
+    * {
       color: map-get($gen-colors, black) !important;
     }
     .nav-button {
