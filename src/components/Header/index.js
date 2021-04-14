@@ -38,24 +38,24 @@ export default class RhaegoHeader extends React.Component {
   }
 
   BANNER_HEIGHT = 192
-  BANNER_TITLE_HIDDEN = false
-
-  rippling = false
+  TITLE_HIDDEN_THRESHOLD = 30
+  RIPPLE_RADIUS = 50
 
   state = {
     bannerHeight: this.BANNER_HEIGHT,
-    bannerTitleHidden: this.BANNER_TITLE_HIDDEN,
+    bannerTitleHidden: false,
     currNavLeft: 0,
     currNavWidth: -1,
     activeNavIndex: 0,
-    indicatorLeft: -1,
-    indicatorRight: -1,
+    navBorderLeft: -1,
+    navBorderRight: -1,
+    rippleLeft: 0,
+    rippleTop: 0
   }
-  
+
   componentDidMount() {
-    this.handleScroll()
+    this.addListeners()
     this.setDefaultNavSize()
-    this.listenNavIndicatorAnimationEnd()
   }
 
   formatToMaterialSpans = string => {
@@ -66,7 +66,7 @@ export default class RhaegoHeader extends React.Component {
       </span>
     )
   }
-  
+
   navListDOM
   setNavListRef = ref => {
     this.navListDOM = ref
@@ -82,45 +82,63 @@ export default class RhaegoHeader extends React.Component {
     })
   }
 
-  handleScroll = () => {
+  
+  docScrollTop = 0
+
+  addListeners = () => {
+    // 全局 mouseup
+    document.body.addEventListener('mouseup', this.onNavMouseUp)
+
+    // 全局滚动
     window.addEventListener('scroll', () => {
       const {scrollTop} = document.documentElement
       this.setState({
         bannerHeight: (this.BANNER_HEIGHT - scrollTop) < 0
           ? 0
           : (this.BANNER_HEIGHT - scrollTop),
-        bannerTitleHidden: scrollTop > 30
+        bannerTitleHidden: scrollTop > this.TITLE_HIDDEN_THRESHOLD
       })
+      this.docScrollTop = scrollTop
+    })
+
+    // 下划线和波纹的动画结束
+    const {
+      navBorderRef,
+      rippleRef
+    } = this
+    navBorderRef.addEventListener('animationend', () => {
+      navBorderRef.classList.remove('flow-to-right', 'flow-to-left')
+      navBorderRef.classList.add('hidden')
+    })
+    rippleRef.addEventListener('animationend', () => {
+      rippleRef.classList.remove('explode')
     })
   }
 
-  handleNavMouseDown = evt => {
-    if (this.rippling === false) {
-      // this.rippling = true
-      // let $targetBtn = $(this)
-      // $buttonClicked = $targetBtn.addClass('clicking')
-      // $ripple
-      //   .css({
-      //     // 直接从鼠标系事件中取得相对于页面的坐标
-      //     left: evt.pageX - 50,
-      //     // top 值要减掉窗口的垂直滚动偏移
-      //     top: evt.pageY - 50 - $window.scrollTop(),
-      //   })
-      //   .addClass('noneToCircle')
-    }
+  rippleRef = null
+  setRippleRef = ref => {
+    this.rippleRef = ref
   }
 
-  navIndicatorRef = null
-  setNavWrapRef = ref => {
-    this.navIndicatorRef = ref
-  }
-
-  listenNavIndicatorAnimationEnd = () => {
-    const ref = this.navIndicatorRef
-    ref.addEventListener('animationend', () => {
-      ref.classList.remove('flow-to-right', 'flow-to-left')
-      ref.classList.add('hidden')
+  onNavMouseDown = evt => {
+    const nativeEvt = evt.nativeEvent
+    const rippleLeft = nativeEvt.pageX - this.RIPPLE_RADIUS
+    const rippleTop = nativeEvt.pageY - this.RIPPLE_RADIUS - this.docScrollTop
+    this.setState({
+      rippleLeft,
+      rippleTop,
     })
+    this.rippleRef.classList.add('appear')
+  }
+
+  onNavMouseUp = evt => {
+    this.rippleRef.classList.remove('appear')
+    this.rippleRef.classList.add('explode')
+  }
+
+  navBorderRef = null
+  setNavBorderRef = ref => {
+    this.navBorderRef = ref
   }
 
   getClickNavHandler = (item, index) => (evt) => {
@@ -129,7 +147,7 @@ export default class RhaegoHeader extends React.Component {
       currNavWidth: prevNavWidth,
       activeNavIndex: prevActiveNavIndex
     } = this.state
-    
+
     if (prevActiveNavIndex === index) {
       return
     }
@@ -139,30 +157,30 @@ export default class RhaegoHeader extends React.Component {
     const currNavWidth = getStyleInt(target, 'width')
 
     let targetAtCurrRight = currNavLeft > prevNavLeft
-    let indicatorLeft
-    let indicatorRight
+    let navBorderLeft
+    let navBorderRight
     if (targetAtCurrRight) {
       // 新目标在旧的右侧
-      indicatorLeft = prevNavLeft
-      indicatorRight = currNavLeft + currNavWidth
+      navBorderLeft = prevNavLeft
+      navBorderRight = currNavLeft + currNavWidth
     } else {
       // 左侧
-      indicatorLeft = currNavLeft
-      indicatorRight = prevNavLeft + prevNavWidth
+      navBorderLeft = currNavLeft
+      navBorderRight = prevNavLeft + prevNavWidth
     }
 
     this.setState({
       activeNavIndex: index,
       currNavLeft,
       currNavWidth,
-      indicatorLeft,
-      indicatorRight
+      navBorderLeft,
+      navBorderRight
     })
-    
-    const ref = this.navIndicatorRef
+
+    const ref = this.navBorderRef
     ref.classList.remove('hidden')
     ref.classList.add(targetAtCurrRight ? 'flow-to-right' : 'flow-to-left')
-    
+
     animateToTop()
   }
 
@@ -171,10 +189,15 @@ export default class RhaegoHeader extends React.Component {
       bannerTitleHidden,
       activeNavIndex,
     } = this.state
-    const indicatorStyle = {
-      left: this.state.indicatorLeft,
-      right: this.state.indicatorRight,
-      width: this.state.indicatorRight - this.state.indicatorLeft,
+    const navBorderStyle = {
+      left: this.state.navBorderLeft,
+      right: this.state.navBorderRight,
+      width: this.state.navBorderRight - this.state.navBorderLeft,
+    }
+    const rippleStyle = {
+      left: this.state.rippleLeft,
+      right: this.state.rippleRight,
+      // width: this.state.navBorderRight - this.state.navBorderLeft,
     }
     const bannerStyle = {
       height: this.state.bannerHeight
@@ -193,12 +216,14 @@ export default class RhaegoHeader extends React.Component {
                   <li
                     className={c('nav-button', index === activeNavIndex && 'active')}
                     onClick={this.getClickNavHandler(item, index)}
+                    onMouseDown={this.onNavMouseDown}
+                    // onMouseUp={this.onNavMouseUp}
                   >
                     {item.name}
                   </li>
                 ))
               }
-              <li className="nav-indicator" style={indicatorStyle} ref={this.setNavWrapRef} />
+              <li className="nav-border" style={navBorderStyle} ref={this.setNavBorderRef} />
             </ul>
           </nav>
           <div className={c('banner')} style={bannerStyle}>
@@ -207,7 +232,11 @@ export default class RhaegoHeader extends React.Component {
             </h1>
           </div>
         </div>
-        <span className={'ripple'} />
+        <span
+          className={'ripple'}
+          style={rippleStyle}
+          ref={this.setRippleRef}
+        />
       </header>
     )
   }

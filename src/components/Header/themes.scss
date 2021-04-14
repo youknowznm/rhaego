@@ -54,7 +54,7 @@ $gen-colors: (
         border-color: map-get($gen-colors, translucent-white);
       }
     }
-    .nav-indicator {
+    .nav-border {
       background-color: map-get($gen-colors, white);
     }
   }
@@ -72,7 +72,7 @@ $gen-colors: (
         border-color: map-get($gen-colors, translucent-black) !important;
       }
     }
-    .nav-indicator {
+    .nav-border {
       background-color: map-get($gen-colors, black) !important;
     }
   }

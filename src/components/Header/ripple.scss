@@ -1,5 +1,6 @@
 .ripple {
   position: absolute;
+  pointer-events: none;
   display: none;
   width: 100px;
   height: 100px;
@@ -9,10 +10,10 @@
   border-radius: 50%;
   cursor: pointer;
   z-index: 102;
-  &.noneToCircle {
+  &.appear {
     display: block;
-    animation: noneToCircle .55s $materialCubicBezier;
-    @keyframes noneToCircle {
+    animation: appear .55s $materialCubicBezier;
+    @keyframes appear {
       from {
         transform: scale(0);
       }
@@ -21,12 +22,12 @@
       }
     }
   }
-  &.toFullscreen {
+  &.explode {
     display: block;
-    animation: toFullscreen .7s ease-out !important;
-    @keyframes toFullscreen {
+    animation: explode .7s ease-out;
+    @keyframes explode {
       to {
-        transform: scale(18);
+        transform: scale(20);
         opacity: 0;
       }
     }

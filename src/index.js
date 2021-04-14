@@ -10,12 +10,9 @@ window.IS_DEV = process.env.NODE_ENV !== 'production'
 
 const links = [
   {name: '文章'},
-  {name: '作品啊啊'},
+  {name: '作品'},
   {name: '留言'},
-  {name: '关于关'},
-  {name: 'hfh'},
-  {name: '123'},
-  {name: '关于关'},
+  {name: '关于'},
 ]
 
 ReactDOM.render(
