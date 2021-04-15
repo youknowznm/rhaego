@@ -6,3 +6,7 @@ src/**/*.css
 __old
 /build
 /dist
+
+/backend/data/
+/backend/files/
+/backend/static/

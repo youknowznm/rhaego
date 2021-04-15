@@ -14,9 +14,9 @@ $card-shadow: 0 0 20px 0 rgb(0 0 0 / 20%), 0 5px 5px 0 rgb(0 0 0 / 24%);
   box-sizing: border-box;
   padding: 32px;
   filter: brightness(100%);
+  transition: all .3s $materialCubicBezier;
   &:hover {
     z-index: 91;
-    transition: all .3s $materialCubicBezier;
     filter: brightness(110%);
     box-shadow: $card-shadow;
   }

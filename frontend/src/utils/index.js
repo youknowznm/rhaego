@@ -52,7 +52,13 @@ export function formatToMaterialSpans(string) {
   const separated = string.split(/\s+/)
   return (
     <span className={''}>
-        {separated.map(item => (<span className={`rhaego-single-word`}>{item}</span>))}
+        {separated.map((item, index) => {
+          return (
+            <span className={`rhaego-single-word`} key={index}>
+              {item}
+            </span>
+          )
+        })}
     </span>
   )
 }
@@ -68,6 +74,37 @@ export const debounce = function(fn, time = 400)  {
     }
   }
 }
+
+export function ajax(method, url, data = {}) {
+  return new Promise(function(resolve, reject) {
+    const xhr = new XMLHttpRequest()
+    xhr.open(url, method)
+    xhr.send(data)
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          resolve(xhr.response)
+        } else {
+          reject(xhr)
+        }
+      }
+    }
+  })
+}
+
+//
+// - 原理和底层
+// - XMLHttpRequest 的实例
+// - onreadystatechange 监听 readystate 变化 01234
+// - 4 时完成, 根据状态码, 回调
+// - 成功触发 onload, 否则 onerror
+// - `open(method, url)` 后, 初始化, 可设置请求头
+// - 监听事件后, `send(body)`
+// - progress 事件监听获取的内容长度, 结合 content-length 实现百分比
+// - ? 上传怎么监听
+//   - content-type; 不同 type 作用
+// - restful
+
 
 // export {
 //   SplitToSpans,

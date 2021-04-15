@@ -3,11 +3,13 @@ import PropTypes from 'prop-types'
 import c from 'classnames'
 import {
   decorateStyle,
-  debounce,
+  // throttle,
   formatToMaterialSpans,
   getStyleInt,
   animateToTop
 } from '../../utils'
+
+import {throttle} from 'lodash'
 
 const colors = [
   'silver',
@@ -72,12 +74,12 @@ export default class RhaegoHeader extends React.Component {
     })
   }
 
-  
+
   docScrollTop = 0
 
   addListeners = () => {
     // 全局 mouseup
-    document.body.addEventListener('mouseup', this.onNavMouseUp)
+    document.body.addEventListener('mouseup', throttle(this.onNavMouseUp))
 
     // 全局滚动
     window.addEventListener('scroll', () => {
@@ -219,7 +221,7 @@ export default class RhaegoHeader extends React.Component {
                   </li>
                 ))
               }
-              <li className="nav-border" style={navBorderStyle} ref={this.setNavBorderRef} />
+              <li className="nav-border" key={-1} style={navBorderStyle} ref={this.setNavBorderRef} />
             </ul>
           </nav>
           <div className={c('banner')} style={bannerStyle}>

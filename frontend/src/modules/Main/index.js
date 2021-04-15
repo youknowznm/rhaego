@@ -4,12 +4,13 @@ import Header from "~/modules/Header";
 import Footer from "~/modules/Footer";
 import Card from "~/components/Card";
 import Button from "~/components/Button";
+import Article from "~/modules/Article";
 
 const links = [
-  {name: '文章'},
-  {name: '作品'},
-  {name: '留言'},
-  {name: '关于'},
+  {name: '笔记'},
+  {name: '代码'},
+  {name: '关于我'},
+  {name: 'login as god'},
 ]
 
 import style from './main.scss'
@@ -46,22 +47,13 @@ export default class Main extends React.Component {
 
   palette = []
 
+  renderDocs = () => {
+    return <Article />
+  }
 
   renderMain = () => {
-    function mapColor(length) {
-
-    }
     return (
-      <div
-        className={c(`rhaego-main`, 'rhaego-responsive')}
-        style={style}
-      >
-        {
-          this.palette.map(c => {
-            return <Card data-card-color={c}>{c}</Card>
-          })
-        }
-      </div>
+      <Article/>
     )
   }
 
@@ -87,8 +79,14 @@ export default class Main extends React.Component {
           links={links}
           siteName={'you know znm'}
         />
-        {this.renderMain()}
-        {this.renderButton()}
+        <div
+          className={c(`rhaego-main`, 'rhaego-responsive')}
+          style={style}
+        >
+          {this.renderMain()}
+        </div>
+        {/*{this.renderDocs()}*/}
+        {/*{this.renderButton()}*/}
         <Footer />
       </>
     )

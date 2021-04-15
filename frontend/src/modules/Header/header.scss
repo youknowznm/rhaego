@@ -29,7 +29,6 @@ $duration: .4s;
         font-size: 20px;
         line-height: 64px;
         height: 64px;
-        padding-left: 20px;
         cursor: pointer;
         transition: opacity $duration $materialCubicBezier;
         &.transparent {
@@ -144,7 +143,7 @@ $duration: .4s;
     }
     &.fade {
       display: block;
-      animation: header-ripple-fade .7s ease-out;
+      animation: header-ripple-fade .7s $materialCubicBezier;
       @keyframes header-ripple-fade {
         to {
           transform: scale(20);

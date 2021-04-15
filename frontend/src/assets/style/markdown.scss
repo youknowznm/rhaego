@@ -1,32 +1,32 @@
 @charset "UTF-8";
 @import "./highlight.scss";
 
-$mb-article-font-light: #212121;
-$mb-article-font-dark: #fff;
+$rhaego-markdown-font-light: #212121;
+$rhaego-markdown-font-dark: #fff;
 
-$mb-article-border-light: rgba(0, 0, 0, 0.12);
-$mb-article-border-dark: rgba(255, 255, 255, .12);
+$rhaego-markdown-border-light: rgba(0, 0, 0, 0.12);
+$rhaego-markdown-border-dark: rgba(255, 255, 255, .12);
 
-$mb-article-link: #039be5;
+$rhaego-markdown-link: #039be5;
 
-$mb-article-code-background-light: #fff;
-$mb-article-code-background-dark: rgb(66, 66, 66);
+$rhaego-markdown-code-background-light: #fff;
+$rhaego-markdown-code-background-dark: rgb(66, 66, 66);
 
-$mb-article-pre-background: rgb(40, 44, 52);
+$rhaego-markdown-pre-background: rgb(40, 44, 52);
 
-$mb-article-pre-color: #abb2bf;
+$rhaego-markdown-pre-color: #abb2bf;
 
-$mb-article-quote: #757575;
+$rhaego-markdown-quote: #757575;
 
 // 全局文章样式
 // 用于编辑页的预览区和文章详情页
 // 参考 material-ui 的 typography 部分
 // https://material-ui-next.com/style/typography/#typography
 
-.mb-article {
+.rhaego-markdown {
   text-align: left;
   padding: 0 6px;
-  color: $mb-article-font-light;
+  color: $rhaego-markdown-font-light;
   p {
     font-family: "Roboto";
     margin: 16px 0;
@@ -43,27 +43,27 @@ $mb-article-quote: #757575;
   }
   u {
     text-decoration: none;
-    border-bottom: 2px solid $mb-article-font-light;
+    border-bottom: 2px solid $rhaego-markdown-font-light;
     padding-bottom: 0;
   }
   strike {
     text-decorations: strike-through;
   }
   h1 {
-    border-bottom: 1px solid $mb-article-border-light;
+    border-bottom: 1px solid $rhaego-markdown-border-light;
     font-size: 24px;
     line-height: 32px;
     font-family: "Roboto Mono";
     letter-spacing: -.01em;
     margin: 40px 0 20px;
     padding-bottom: 3px;
-    color: $mb-article-font-light;
+    color: $rhaego-markdown-font-light;
     font-weight: 300;
     word-break: normal;
     word-wrap: break-word;
   }
   h2, h3, h4, h5, h6 {
-    color: $mb-article-font-light;
+    color: $rhaego-markdown-font-light;
     font-size: 20px;
     margin: 32px 0 16px;
     line-height: 32px;
@@ -80,7 +80,7 @@ $mb-article-quote: #757575;
     margin-bottom: 4px;
     border-left: 4px solid rgb(207, 216, 230);
     * {
-      color: $mb-article-quote !important;
+      color: $rhaego-markdown-quote !important;
     }
   }
   code {
@@ -89,7 +89,7 @@ $mb-article-quote: #757575;
     line-height: 1.6;
     word-break: normal;
     font-family: "Roboto Mono";
-    background-color: $mb-article-code-background-light;
+    background-color: $rhaego-markdown-code-background-light;
   }
   pre {
     font-family: "monospace";
@@ -99,11 +99,11 @@ $mb-article-quote: #757575;
     overflow-y: hidden;
     padding: 0 18px 18px;
     position: relative;
-    background-color: $mb-article-pre-background;
+    background-color: $rhaego-markdown-pre-background;
     line-height: 1.4;
     code {
-      color: $mb-article-pre-color;
-      background-color: $mb-article-pre-background;
+      color: $rhaego-markdown-pre-color;
+      background-color: $rhaego-markdown-pre-background;
       font-size: 12px;
       line-height: 1.4;
     }
@@ -129,14 +129,14 @@ $mb-article-quote: #757575;
     list-style-type: decimal;
   }
   a {
-    color: $mb-article-link;
+    color: $rhaego-markdown-link;
     box-sizing: border-box;
     border-bottom: 2px solid transparent;
     padding: 0 .2em 4px;
     transition: all .2s $materialCubicBezier;
     outline: 0;
     &:hover {
-      border-bottom-color: $mb-article-link;
+      border-bottom-color: $rhaego-markdown-link;
       padding-bottom: 2px;
     }
   }
@@ -150,39 +150,39 @@ $mb-article-quote: #757575;
     border: 0;
     width: 60%;
     margin: 63px auto;
-    border-bottom: 1px solid $mb-article-border-light;
+    border-bottom: 1px solid $rhaego-markdown-border-light;
   }
 }
 
-#mb-dark-theme {
-  .mb-article {
+#rhaego-dark-theme {
+  .rhaego-markdown {
     * {
-      color: $mb-article-font-dark;
+      color: $rhaego-markdown-font-dark;
     }
     h1,
     hr {
-      border-color: $mb-article-border-dark;
+      border-color: $rhaego-markdown-border-dark;
     }
     u {
-      border-bottom: 2px solid $mb-article-font-dark;
+      border-bottom: 2px solid $rhaego-markdown-font-dark;
     }
     a {
-      color: $mb-article-link;
+      color: $rhaego-markdown-link;
       &:hover {
-        border-color: $mb-article-link;
+        border-color: $rhaego-markdown-link;
       }
     }
     code {
-      background: $mb-article-code-background-dark;
+      background: $rhaego-markdown-code-background-dark;
     }
     pre code {
-      background: $mb-article-pre-background;
+      background: $rhaego-markdown-pre-background;
     }
   }
 }
 
 @media (min-width: 0) {
-  .mb-article {
+  .rhaego-markdown {
     padding: 0;
     ul, ol {
       padding-left: 24px !important;
@@ -190,7 +190,7 @@ $mb-article-quote: #757575;
   }
 }
 @media (min-width: 450px) {
-  .mb-article {
+  .rhaego-markdown {
     padding: 0 6px;
     ul, ol {
       padding-left: 40px !important;
