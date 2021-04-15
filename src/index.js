@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 // import Routes from './containers/routes'
 // import store from './Store'
 
-import Main from './modules/Main'
+import Main from '~/modules/Main'
 
 window.IS_DEV = process.env.NODE_ENV !== 'production'
 

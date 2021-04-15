@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import c from 'classnames'
-import {compConfig} from '../../config'
 import {
   decorateStyle,
   debounce,
@@ -9,7 +8,6 @@ import {
   getStyleInt,
   animateToTop
 } from '../../utils'
-const {classPrefix} = compConfig
 
 const colors = [
   'silver',
@@ -202,7 +200,7 @@ export default class RhaegoHeader extends React.Component {
     }
     const themeColorName = colors[this.state.activeNavIndex % colors.length]
     return (
-      <header className={`${classPrefix}-header`} style={style} data-header-theme={themeColorName}>
+      <header className={`rhaego-header`} style={style} data-header-theme={themeColorName}>
         <div className={'header-content rhaego-responsive'}>
           <nav className={'nav-bar'}>
             <a className={c('site-title', !bannerTitleHidden && 'transparent')} href="/">

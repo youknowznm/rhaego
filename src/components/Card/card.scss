@@ -1,12 +1,13 @@
-@import "../../assets/style/main";
+@import "~style/main";
 
 $golden-ratio: 0.618;
+$card-shadow: 0 0 20px 0 rgb(0 0 0 / 20%), 0 5px 5px 0 rgb(0 0 0 / 24%);
 
 .rhaego-card {
   position: relative;
   background: $white;
   z-index: 90;
-  float: left;
+  display: inline-block;
   width: 50%;
   height: 300px;
   cursor: pointer;
@@ -17,7 +18,7 @@ $golden-ratio: 0.618;
     z-index: 91;
     transition: all .3s $materialCubicBezier;
     filter: brightness(110%);
-    box-shadow: 0 0 20px 0 rgb(0 0 0 / 20%), 0 5px 5px 0 rgb(0 0 0 / 24%);
+    box-shadow: $card-shadow;
   }
   .title {
     font-size: 24px;

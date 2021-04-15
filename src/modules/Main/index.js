@@ -1,11 +1,8 @@
 import React from 'react';
 import c from 'classnames'
-import Header from "../Header";
-import Footer from "../Footer";
-import Card from "../../components/Card";
-
-import {compConfig} from '../../config'
-const {classPrefix} = compConfig
+import Header from "~/modules/Header";
+import Footer from "~/modules/Footer";
+import Card from "~/components/Card";
 
 const links = [
   {name: '文章'},
@@ -55,12 +52,12 @@ export default class Main extends React.Component {
     }
     return (
       <div
-        className={c(`${classPrefix}-main`, 'rhaego-responsive')}
+        className={c(`rhaego-main`, 'rhaego-responsive')}
         style={style}
       >
         {
           this.palette.map(c => {
-            return <Card data-color={c}>{c}</Card>
+            return <Card data-card-color={c}>{c}</Card>
           })
         }
       </div>

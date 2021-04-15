@@ -2,66 +2,67 @@
 
 .rhaego-main {
   position: relative;
+  height: 100%;
   margin-top: 256px;
 }
 
-[data-color=red] {
+[data-card-color=red] {
   background: $red;
 }
-[data-color=pink] {
+[data-card-color=pink] {
   background: $pink;
 }
-[data-color=purple] {
+[data-card-color=purple] {
   background: $purple;
 }
-[data-color=indigo] {
+[data-card-color=indigo] {
   background: $indigo;
 }
-[data-color=blue] {
+[data-card-color=blue] {
   background: $blue;
 }
-[data-color=cyan] {
+[data-card-color=cyan] {
   background: $cyan;
 }
-[data-color=teal] {
+[data-card-color=teal] {
   background: $teal;
 }
-[data-color=green] {
+[data-card-color=green] {
   background: $green;
 }
-[data-color=lime] {
+[data-card-color=lime] {
   background: $lime;
 }
-[data-color=yellow] {
+[data-card-color=yellow] {
   background: $yellow;
 }
-[data-color=amber] {
+[data-card-color=amber] {
   background: $amber;
 }
-[data-color=orange] {
+[data-card-color=orange] {
   background: $orange;
 }
-[data-color=brown] {
+[data-card-color=brown] {
   background: $brown;
 }
-[data-color=grey] {
+[data-card-color=grey] {
   background: $grey;
 }
-[data-color=bluegrey] {
+[data-card-color=bluegrey] {
   background: $bluegrey;
 }
 
 
-[data-color] {
+[data-card-color] {
   color: $white;
 }
-[data-color=cyan],
-[data-color=green],
-[data-color=lime],
-[data-color=yellow],
-[data-color=amber],
-[data-color=orange],
-[data-color=grey] {
+[data-card-color=cyan],
+[data-card-color=green],
+[data-card-color=lime],
+[data-card-color=yellow],
+[data-card-color=amber],
+[data-card-color=orange],
+[data-card-color=grey] {
   color: $black;
 }
 

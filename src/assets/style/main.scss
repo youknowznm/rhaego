@@ -1,4 +1,16 @@
 @import "reset";
+@import "keyframes";
+
+/*
+z-index 计数
+102 .ripple
+101 .rhaego-header .rhaego-nav
+100 .banner
+99 .rhaego-main-wrap
+
+91 .rhaego-card:hover
+90 .rhaego-card
+*/
 
 $materialCubicBezier: cubic-bezier(0.25, 0.8, 0.25, 1);
 
@@ -25,6 +37,7 @@ $bluegrey: #607d8b;
 
 body {
   position: relative;
+  height: 100%;
   // 字体库参考 http://element.eleme.io/#/zh-CN/component/typography 建议的集合
   font-family: "Roboto Mono", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -36,7 +49,8 @@ body {
   min-width: 900px;
   margin-left: auto;
   margin-right: auto;
-  @media (min-width: 1280px) {
+  //@media (min-width: 1280px) {
+  @media (min-width: 1270px) {
     width: 1200px;
   }
   // @media (min-width: 1900px) {

@@ -1,13 +1,5 @@
-@import "~@style/main";
+@import "~style/main";
 @import "themes";
-
-/*
-z-index 计数
-102 .ripple
-101 .rhaego-header .rhaego-nav
-100 .banner
-99 .rhaego-main-wrap
-*/
 
 $duration: .4s;
 
@@ -160,25 +152,5 @@ $duration: .4s;
         }
       }
     }
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes popIn {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
   }
 }

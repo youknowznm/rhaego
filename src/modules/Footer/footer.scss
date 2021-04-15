@@ -1,103 +1,88 @@
+@import "~style/main";
+
 .rhaego-footer {
   position: relative;
-  width: 100%;
-  background-color: #fff;
-  user-select: none;
-  clear: left;
-  margin-top: 6px;
-  z-index: 102;
-
-  .top-wrap {
+  margin-top: 160px;
+  .social-wrap {
     position: relative;
-    height: 230px;
-    line-height: 230px;
-    background-color: #fafafa;
-    .top {
+    .social {
       position: relative;
-      height: 100%;
-      .social {
-        position: absolute;
-        width: 100%;
-        bottom: 0;
-        right: 0;
-        height: 72px;
-        line-height: 72px;
-
-        .link-container {
-          position: relative;
-          text-align: right;
-          top: 50%;
-          transform: translateY(-50%);
+      height: 72px;
+      line-height: 72px;
+      .links {
+        //position: absolute;
+        float: right;
+        //margin-top: 24px;
+      }
+      .link {
+        position: relative;
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        margin: 0 15px;
+        background-repeat: no-repeat;
+        background-position: 0 0;
+        background-size: 24px 24px;
+        vertical-align: middle;
+        cursor: pointer;
+        transition: all .2s ease-out;
+        opacity: .8;
+        .anchor {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
         }
-
-        .link  {
-          position: relative;
-          display: inline-block;
-          width: 24px;
-          height: 24px;
-          margin: 0 10px;
-          background-repeat: no-repeat;
-          background-position: 0 0;
-          background-size: 24px 24px;
-          opacity: .5;
-          vertical-align: middle;
-          transition: opacity .4s ease;
-          cursor: pointer;
-          > a {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-          }
-          &.github {
-            //background-image: url("../images/footer/icgithub.svg");
-          }
-          &.zhihu {
-            //background-image: url("../images/footer/iczhihu.svg");
-          }
-          &.wechat {
-            //background-image: url("../images/footer/icwechat.svg");
-            .hover-content {
-              position: absolute;
-              width: 160px;
-              height: 160px;
-              left: -68px;
-              top: -170px;
-              box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-              transform: scale(0);
-              opacity: 0;
-              transform-origin: bottom;
-              transition: all .2s ease;
-            }
-          }
-          &.mail {
-            // opacity: .5;
-            //background-image: url("../images/footer/icemail24px.svg");
-            .hover-content {
-              position: absolute;
-              background: #fff;
-              white-space: nowrap;
-              height: 24px;
-              line-height: 24px;
-              padding: 0 12px;
-              left: 50%;
-              margin-left: -44px;
-              top: -36px;
-              font-size: 12px;
-              box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-              transform: scale(0);
-              opacity: 0;
-              transform-origin: bottom;
-              transition: all .2s ease;
-            }
-          }
-          &:hover {
+        &:hover {
+          opacity: 1;
+          .hover-content {
             opacity: 1 !important;
-            .hover-content {
-              opacity: 1;
-              transform: scale(1);
-            }
+            transform: scale(1) !important;
+          }
+        }
+        &.github {
+          background-image: url("~images/footer/icon-github.svg");
+        }
+        &.zhihu {
+          background-image: url("~images/footer/icon-zhihu.svg");
+        }
+        &.wechat {
+          background-image: url("~images/footer/icon-wechat.svg");
+          .hover-content {
+            position: absolute;
+            width: 160px;
+            height: 160px;
+            left: -68px;
+            top: -170px;
+            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+            transform: scale(0);
+            opacity: 0;
+            transform-origin: bottom;
+            transition: all .2s ease-out;
+            background-image: url("~images/footer/wechat.jpeg");
+            background-size: 160px 160px;
+          }
+        }
+        &.email {
+          background-image: url("~images/footer/icon-email.svg");
+          .hover-content {
+            position: absolute;
+            background: #fff;
+            white-space: nowrap;
+            height: 24px;
+            line-height: 24px;
+            padding: 0 12px;
+            left: 50%;
+            width: 7.2em;
+            margin-left: -3.8em;
+            top: -36px;
+            font-size: 12px;
+            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+            transform: scale(0);
+            opacity: 0;
+            transform-origin: bottom;
+            transition: all .2s ease-out;
           }
         }
 
@@ -105,30 +90,54 @@
     }
   }
 
-  .bottom-wrap {
+
+  .info-wrap {
     position: relative;
-    height: 144px;
-    line-height: 144px;
-    .bottom {
+    background: $white;
+    .info {
       position: relative;
-      .logo {
-        font-family: 'Roboto Mono';
-        font-size: 22px;
-        height: 144px;
-        line-height: 144px;
-        color: rgb(16, 108, 200);
-        cursor: pointer;
+      height: 144px;
+      line-height: 144px;
+      color: #999;
+      .site {
+        font-size: 16px;
         float: left;
+        .link {
+          color: #999;
+          text-decoration: underline;
+          transition: all .2s ease-out;
+          &:hover {
+            color: $black;
+          }
+        }
       }
-      .info {
-        position: absolute;
-        width: 100%;
-        height: 144px;
-        line-height: 144px;
-        text-align: center;
+      .author {
+        float: right;
         font-size: 12px;
-        color: #000;
-        cursor: default;
+        color: #999;
+        .heart {
+          margin: 0 .5em;
+          transform: translateY(2px);
+        }
+      }
+    }
+  }
+
+
+      .about {
+    height: 144px;
+    .about-item {
+      &.file-id {
+        margin-left: 24px;
+      }
+      &.about-author {
+        display: block;
+        position: absolute;
+        line-height: 144px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        transition: all .2s ease-out;
         .heart-wrap {
           position: relative;
           display: inline-block;
@@ -143,26 +152,53 @@
           }
         }
         .info-link {
-          cursor: pointer;
           padding: 8px 0;
           border-bottom: 2px solid transparent;
           transition: all .2s ease-out;
           &:hover {
-            border-bottom-color: #000;
             padding: 4px 0;
+            //border-bottom-color: $rhaego-theme-light-font;
           }
         }
       }
-
-      .source {
-        float: right;
-        height: 36px;
-        line-height: 36px;
-        margin: 0;
-        top: 54px;
+      &.view-source {
+        margin-right: 24px;
       }
     }
-
   }
-
 }
+//
+//@media (min-width: 0) {
+//  .rhaego-footer {
+//    .social {
+//      justify-content: center;
+//    }
+//    .about {
+//      justify-content: center !important;
+//      .file-id {
+//        margin-left: 0 !important;
+//      }
+//      .about-author,
+//      .view-source {
+//        display: none !important;
+//      }
+//    }
+//  }
+//}
+//@media (min-width: 700px) {
+//  .rhaego-footer {
+//    .social {
+//      justify-content: flex-end;
+//    }
+//    .about {
+//      justify-content: space-between !important;
+//      .file-id {
+//        margin-left: 24px !important;
+//      }
+//      .about-author,
+//      .view-source {
+//        display: block !important;
+//      }
+//    }
+//  }
+//}
