@@ -36,7 +36,7 @@ module.exports = {
                 use: [
                     'style-loader',
                     'css-loader',
-                    'resolve-url-loader',
+                    // 'resolve-url-loader',
                     {
                         loader: 'sass-loader',
                         options: {

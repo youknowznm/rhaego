@@ -71,12 +71,11 @@ export default class Main extends React.Component {
         className={c(`rhaego-main`, 'rhaego-responsive')}
         style={style}
       >
-        <Button></Button>
-        {/*{*/}
-        {/*  this.palette.map(c => {*/}
-        {/*    return <Card data-card-color={c}>{c}</Card>*/}
-        {/*  })*/}
-        {/*}*/}
+        {
+          this.palette.map(c => {
+            return <Card data-card-color={c}>{c}</Card>
+          })
+        }
       </div>
     )
   }
