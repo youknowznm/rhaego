@@ -101,7 +101,7 @@ export default class RhaegoHeader extends React.Component {
       navBorderRef.classList.add('hidden')
     })
     rippleRef.addEventListener('animationend', () => {
-      rippleRef.classList.remove('explode')
+      rippleRef.classList.remove('fade')
     })
   }
 
@@ -128,7 +128,7 @@ export default class RhaegoHeader extends React.Component {
   onNavMouseUp = evt => {
     if (this.rippling) {
       this.rippleRef.classList.remove('appear')
-      this.rippleRef.classList.add('explode')
+      this.rippleRef.classList.add('fade')
       this.rippling = false
     }
   }

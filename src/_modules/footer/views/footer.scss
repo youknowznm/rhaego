@@ -52,7 +52,7 @@
           transform: scale(0);
           opacity: 0;
           transform-origin: bottom;
-          transition: all .2s ease-out;
+          transition: all .2s $materialCubicBezier;
         }
       }
       &.email {
@@ -73,7 +73,7 @@
           transform: scale(0);
           opacity: 0;
           transform-origin: bottom;
-          transition: all .2s ease-out;
+          transition: all .2s $materialCubicBezier;
         }
       }
       &:hover {
@@ -104,7 +104,7 @@
           left: 0;
           width: 100%;
           text-align: center;
-          transition: all .2s ease-out;
+          transition: all .2s $materialCubicBezier;
           .heart-wrap {
             position: relative;
             display: inline-block;
@@ -121,7 +121,7 @@
           .info-link {
             padding: 8px 0;
             border-bottom: 2px solid transparent;
-            transition: all .2s ease-out;
+            transition: all .2s $materialCubicBezier;
             &:hover {
               padding: 4px 0;
               border-bottom-color: $mb-theme-light-font;

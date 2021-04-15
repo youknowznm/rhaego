@@ -3,17 +3,21 @@
 .rhaego-footer {
   position: relative;
   margin-top: 160px;
+
   .social-wrap {
     position: relative;
+
     .social {
       position: relative;
       height: 72px;
       line-height: 72px;
+
       .links {
         //position: absolute;
         float: right;
         //margin-top: 24px;
       }
+
       .link {
         position: relative;
         display: inline-block;
@@ -25,8 +29,9 @@
         background-size: 24px 24px;
         vertical-align: middle;
         cursor: pointer;
-        transition: all .2s ease-out;
+        transition: all .2s $materialCubicBezier;
         opacity: .8;
+
         .anchor {
           position: absolute;
           left: 0;
@@ -34,21 +39,27 @@
           width: 100%;
           height: 100%;
         }
+
         &:hover {
           opacity: 1;
+
           .hover-content {
             opacity: 1 !important;
             transform: scale(1) !important;
           }
         }
+
         &.github {
           background-image: url("~images/footer/icon-github.svg");
         }
+
         &.zhihu {
           background-image: url("~images/footer/icon-zhihu.svg");
         }
+
         &.wechat {
           background-image: url("~images/footer/icon-wechat.svg");
+
           .hover-content {
             position: absolute;
             width: 160px;
@@ -59,13 +70,15 @@
             transform: scale(0);
             opacity: 0;
             transform-origin: bottom;
-            transition: all .2s ease-out;
+            transition: all .2s $materialCubicBezier;
             background-image: url("~images/footer/wechat.jpeg");
             background-size: 160px 160px;
           }
         }
+
         &.email {
           background-image: url("~images/footer/icon-email.svg");
+
           .hover-content {
             position: absolute;
             background: #fff;
@@ -82,7 +95,7 @@
             transform: scale(0);
             opacity: 0;
             transform-origin: bottom;
-            transition: all .2s ease-out;
+            transition: all .2s $materialCubicBezier;
           }
         }
 
@@ -90,10 +103,10 @@
     }
   }
 
-
   .info-wrap {
     position: relative;
     background: $white;
+    user-select: none;
     .info {
       position: relative;
       height: 144px;
@@ -102,10 +115,12 @@
       .site {
         font-size: 16px;
         float: left;
+
         .link {
           color: #999;
           text-decoration: underline;
-          transition: all .2s ease-out;
+          transition: all .2s $materialCubicBezier;
+
           &:hover {
             color: $black;
           }
@@ -115,6 +130,7 @@
         float: right;
         font-size: 12px;
         color: #999;
+
         .heart {
           margin: 0 .5em;
           transform: translateY(2px);
@@ -123,49 +139,6 @@
     }
   }
 
-
-      .about {
-    height: 144px;
-    .about-item {
-      &.file-id {
-        margin-left: 24px;
-      }
-      &.about-author {
-        display: block;
-        position: absolute;
-        line-height: 144px;
-        left: 0;
-        width: 100%;
-        text-align: center;
-        transition: all .2s ease-out;
-        .heart-wrap {
-          position: relative;
-          display: inline-block;
-          width: 14px;
-          height: 24px;
-          line-height: 24px;
-          vertical-align: middle;
-          .heart {
-            position: absolute;
-            left: 0;
-            top: 4px;
-          }
-        }
-        .info-link {
-          padding: 8px 0;
-          border-bottom: 2px solid transparent;
-          transition: all .2s ease-out;
-          &:hover {
-            padding: 4px 0;
-            //border-bottom-color: $rhaego-theme-light-font;
-          }
-        }
-      }
-      &.view-source {
-        margin-right: 24px;
-      }
-    }
-  }
 }
 //
 //@media (min-width: 0) {

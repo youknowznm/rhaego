@@ -3,6 +3,7 @@ import c from 'classnames'
 import Header from "~/modules/Header";
 import Footer from "~/modules/Footer";
 import Card from "~/components/Card";
+import Button from "~/components/Button";
 
 const links = [
   {name: '文章'},
@@ -64,6 +65,22 @@ export default class Main extends React.Component {
     )
   }
 
+  renderButton = () => {
+    return (
+      <div
+        className={c(`rhaego-main`, 'rhaego-responsive')}
+        style={style}
+      >
+        <Button></Button>
+        {/*{*/}
+        {/*  this.palette.map(c => {*/}
+        {/*    return <Card data-card-color={c}>{c}</Card>*/}
+        {/*  })*/}
+        {/*}*/}
+      </div>
+    )
+  }
+
   render() {
     return (
       <>
@@ -71,7 +88,8 @@ export default class Main extends React.Component {
           links={links}
           siteName={'you know znm'}
         />
-        {this.renderMain()}
+        {/*{this.renderMain()}*/}
+        {this.renderButton()}
         <Footer />
       </>
     )

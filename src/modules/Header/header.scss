@@ -142,10 +142,10 @@ $duration: .4s;
         }
       }
     }
-    &.explode {
+    &.fade {
       display: block;
-      animation: explode .7s ease-out;
-      @keyframes explode {
+      animation: fade .7s $materialCubicBezier;
+      @keyframes fade {
         to {
           transform: scale(20);
           opacity: 0;

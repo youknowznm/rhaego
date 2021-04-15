@@ -8,7 +8,7 @@
   padding: 9px;
   .card {
     position: relative;
-    transition: box-shadow .2s ease-out;
+    transition: box-shadow .2s $materialCubicBezier;
     &:hover {
       box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
                   0px 8px 10px 1px rgba(0, 0, 0, 0.14),
