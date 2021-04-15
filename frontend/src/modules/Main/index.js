@@ -73,7 +73,7 @@ export default class Main extends React.Component {
       >
         {
           this.palette.map(c => {
-            return <Card data-card-color={c}>{c}</Card>
+            return <Button />
           })
         }
       </div>
@@ -87,7 +87,7 @@ export default class Main extends React.Component {
           links={links}
           siteName={'you know znm'}
         />
-        {/*{this.renderMain()}*/}
+        {this.renderMain()}
         {this.renderButton()}
         <Footer />
       </>

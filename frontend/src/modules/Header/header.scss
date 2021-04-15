@@ -144,8 +144,8 @@ $duration: .4s;
     }
     &.fade {
       display: block;
-      animation: fade .7s $materialCubicBezier;
-      @keyframes fade {
+      animation: header-ripple-fade .7s ease-out;
+      @keyframes header-ripple-fade {
         to {
           transform: scale(20);
           opacity: 0;

@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     mode: 'development',
-    entry: './src/index.js',
+    entry: './frontend/src/index.js',
     output: {
         filename: 'main.js',
         path: path.resolve(__dirname, 'dist'),
@@ -62,16 +62,16 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             // filename: 'index.html',
-            template: 'src/index.html'
+            template: './frontend/src/index.html'
         })
 
     ],
     resolve: {
         extensions: ['.js', '.jsx'],
         alias: {
-            '~': path.resolve(__dirname, 'src'),
-            '~style': path.resolve(__dirname, 'src/assets/style'),
-            '~images': path.resolve(__dirname, 'src/assets/images'),
+            '~': path.resolve(__dirname, 'frontend/src'),
+            '~style': path.resolve(__dirname, 'frontend/src/assets/style'),
+            '~images': path.resolve(__dirname, 'frontend/src/assets/images'),
         }
     },
 };
