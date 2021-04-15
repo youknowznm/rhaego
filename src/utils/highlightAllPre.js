@@ -1,6 +1,6 @@
 import React from 'react'
 import SyntaxHighlighter from 'react-syntax-highlighter'
-import {atomOneDark} from 'react-syntax-highlighter/styles/hljs'
+import {atomOneDark} from 'react-syntax-highlighter/style/hljs'
 import ReactDOMServer from 'react-dom/server'
 
 // 处理 ReactDOMServer.renderToString 得到的 html

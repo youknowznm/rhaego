@@ -1,4 +1,4 @@
-@import "../../style/main";
+@import "../../assets/style/main";
 
 $golden-ratio: 0.618;
 
@@ -12,10 +12,11 @@ $golden-ratio: 0.618;
   cursor: pointer;
   box-sizing: border-box;
   padding: 32px;
+  filter: brightness(100%);
   &:hover {
     z-index: 91;
     transition: all .3s $materialCubicBezier;
-    filter: brightness(103%);
+    filter: brightness(110%);
     box-shadow: 0 0 20px 0 rgb(0 0 0 / 20%), 0 5px 5px 0 rgb(0 0 0 / 24%);
   }
   .title {

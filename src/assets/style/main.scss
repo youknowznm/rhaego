@@ -1,4 +1,4 @@
-@import "./reset";
+@import "reset";
 
 $materialCubicBezier: cubic-bezier(0.25, 0.8, 0.25, 1);
 
@@ -29,7 +29,6 @@ body {
   font-family: "Roboto Mono", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   background: #fafafa;
-  height: 3000px;
 }
 
 .rhaego-responsive {

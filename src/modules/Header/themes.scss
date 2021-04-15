@@ -1,0 +1,70 @@
+$rhaego-header-grey: rgb(60, 90, 100);
+$rhaego-header-silver: rgb(241, 243, 244);
+$rhaego-header-blue: rgb(66, 133, 244);
+$rhaego-header-yellow: rgb(251, 188, 5);
+$rhaego-header-red: rgb(234, 67, 53);
+$rhaego-header-green: rgb(52, 168, 83);
+
+[data-header-theme=grey] {
+  background-color: $rhaego-header-grey;
+}
+
+[data-header-theme=silver] {
+  background-color: $rhaego-header-silver;
+}
+
+[data-header-theme=blue] {
+  background-color: $rhaego-header-blue;
+}
+
+[data-header-theme=yellow] {
+  background-color: $rhaego-header-yellow;
+}
+
+[data-header-theme=red] {
+  background-color: $rhaego-header-red;
+}
+
+[data-header-theme=green] {
+  background-color: $rhaego-header-green;
+}
+
+[data-header-theme=red],
+[data-header-theme=blue],
+[data-header-theme=green],
+[data-header-theme=grey] {
+  * {
+    color: $white;
+  }
+  .nav-button {
+    &.active {
+      border-color: $white;
+    }
+    &.clicking,
+    &:not(.active):hover {
+      border-color: $translucent-white;
+    }
+  }
+  .nav-border {
+    background-color: $white;
+  }
+}
+
+[data-header-theme=silver],
+[data-header-theme=yellow] {
+  * {
+    color: $black !important;
+  }
+  .nav-button {
+    &.active {
+      border-color: $black !important;
+    }
+    &.clicking,
+    &:not(.active):hover {
+      border-color: $translucent-black !important;
+    }
+  }
+  .nav-border {
+    background-color: $black !important;
+  }
+}

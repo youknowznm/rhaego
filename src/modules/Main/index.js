@@ -1,6 +1,7 @@
 import React from 'react';
 import c from 'classnames'
-import Header from "../../components/Header";
+import Header from "../Header";
+import Footer from "../Footer";
 import Card from "../../components/Card";
 
 import {compConfig} from '../../config'
@@ -48,7 +49,6 @@ export default class Main extends React.Component {
   palette = []
 
 
-
   renderMain = () => {
     function mapColor(length) {
 
@@ -75,6 +75,7 @@ export default class Main extends React.Component {
           siteName={'you know znm'}
         />
         {this.renderMain()}
+        <Footer />
       </>
     )
   }

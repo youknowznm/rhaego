@@ -202,7 +202,7 @@ export default class RhaegoHeader extends React.Component {
     }
     const themeColorName = colors[this.state.activeNavIndex % colors.length]
     return (
-      <header className={`${classPrefix}-header`} style={style} data-theme={themeColorName}>
+      <header className={`${classPrefix}-header`} style={style} data-header-theme={themeColorName}>
         <div className={'header-content rhaego-responsive'}>
           <nav className={'nav-bar'}>
             <a className={c('site-title', !bannerTitleHidden && 'transparent')} href="/">
