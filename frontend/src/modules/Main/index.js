@@ -5,6 +5,7 @@ import Footer from "~/modules/Footer";
 import Card from "~/components/Card";
 import Button from "~/components/Button";
 import Article from "~/modules/Article";
+import Articles from "~/modules/Articles";
 
 const links = [
   {name: '笔记'},
@@ -48,7 +49,18 @@ export default class Main extends React.Component {
   palette = []
 
   renderDocs = () => {
-    return <Article />
+    return (
+      <div
+        className={c(`rhaego-main`)}
+        style={style}
+      >
+        {
+          this.palette.map(c => {
+            return <Card />
+          })
+        }
+      </div>
+    )
   }
 
   renderMain = () => {
@@ -60,7 +72,7 @@ export default class Main extends React.Component {
   renderButton = () => {
     return (
       <div
-        className={c(`rhaego-main`, 'rhaego-responsive')}
+        className={c(`rhaego-main`)}
         style={style}
       >
         {
@@ -83,10 +95,8 @@ export default class Main extends React.Component {
           className={c(`rhaego-main`, 'rhaego-responsive')}
           style={style}
         >
-          {this.renderMain()}
+          <Articles />
         </div>
-        {/*{this.renderDocs()}*/}
-        {/*{this.renderButton()}*/}
         <Footer />
       </>
     )

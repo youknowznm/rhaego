@@ -6,66 +6,6 @@
   margin-top: 256px;
 }
 
-[data-card-color=red] {
-  background: $red;
-}
-[data-card-color=pink] {
-  background: $pink;
-}
-[data-card-color=purple] {
-  background: $purple;
-}
-[data-card-color=indigo] {
-  background: $indigo;
-}
-[data-card-color=blue] {
-  background: $blue;
-}
-[data-card-color=cyan] {
-  background: $cyan;
-}
-[data-card-color=teal] {
-  background: $teal;
-}
-[data-card-color=green] {
-  background: $green;
-}
-[data-card-color=lime] {
-  background: $lime;
-}
-[data-card-color=yellow] {
-  background: $yellow;
-}
-[data-card-color=amber] {
-  background: $amber;
-}
-[data-card-color=orange] {
-  background: $orange;
-}
-[data-card-color=brown] {
-  background: $brown;
-}
-[data-card-color=grey] {
-  background: $grey;
-}
-[data-card-color=bluegrey] {
-  background: $bluegrey;
-}
-
-
-[data-card-color] {
-  color: $white;
-}
-[data-card-color=cyan],
-[data-card-color=green],
-[data-card-color=lime],
-[data-card-color=yellow],
-[data-card-color=amber],
-[data-card-color=orange],
-[data-card-color=grey] {
-  color: $black;
-}
-
 
 
 

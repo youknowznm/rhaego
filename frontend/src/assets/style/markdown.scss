@@ -45,6 +45,10 @@ $rhaego-markdown-quote: #757575;
     margin: 0 .2em;
   }
 
+  i, {
+    margin: 0 .2em;
+  }
+
   a {
     color: $rhaego-markdown-link;
     box-sizing: border-box;
@@ -105,7 +109,7 @@ $rhaego-markdown-quote: #757575;
   }
 
   ul, ol {
-    padding-left: 2.3em;
+    padding-left: 1.5em;
     li {
       font-size: 14px;
       line-height: 22px;

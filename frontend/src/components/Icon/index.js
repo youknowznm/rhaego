@@ -10,25 +10,16 @@ import {
 } from '../../utils'
 
 
-import style from './button.scss'
+import style from './icon.scss'
 
-// import {Card, Button, Avatar} from '@material-ui/core';
-// import {CardHeader, CardContent, CardActions} from '@material-ui/core/Card';
-// import IconButton from '@material-ui/core/IconButton'
-// import { Typography } from '@material-ui/core';
-// import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
-
-
-export default class RhaegoButton extends React.Component {
+export default class RhaegoIcon extends React.Component {
 
   static propTypes = {
-    label: PropTypes.string,
-    disabled: PropTypes.bool
   }
 
   static defaultProps = {
-    label: 'Button',
-    disabled: false
+    label: 'Contained Buttons 实心按钮',
+    // disabled: true
   }
 
   state = {
@@ -102,13 +93,13 @@ export default class RhaegoButton extends React.Component {
       this.props.disabled && 'disabled',
       this.props.warn && 'warn',
       this.props.primary && 'primary',
-      this.props.className
     )
     return (
       <button className={className} style={style} ref={this.setButtonRef}
         onMouseDown={this.startRipple}
         onMouseUp={this.endRipple}
         onMouseOut={this.endRipple}
+        {...this.props}
       >
         <span className={'button-content'}>
           {this.props.children}

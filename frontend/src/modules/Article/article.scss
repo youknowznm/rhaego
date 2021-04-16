@@ -2,7 +2,9 @@
 @import "~style/markdown";
 @import "~style/highlight.scss";
 
-.rhaego-markdown {
-  position: relative;
-  min-height: 600px;
+.rhaego-article {
+  .rhaego-markdown {
+    position: relative;
+    min-height: 600px;
+  }
 }

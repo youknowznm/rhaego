@@ -3,7 +3,7 @@ import c from 'classnames'
 import marked from 'marked'
 import hljs from "highlight.js";
 
-import {ajax} from "~/utils";
+import {ajax, get} from "~/utils";
 
 import style from './article.scss'
 
@@ -13,26 +13,27 @@ export default class Article extends React.Component {
   }
 
   state = {
-    markdownContent: ''
+    markdownContent: '',
+    headers: []
   }
 
   docRef = null
   setDocRef = ref => {
     this.docRef = ref
+    // const headers = this.docRef.querySelectorAll('h1')
+    // console.log({headers})
   }
 
   setHTML = () => {
+    const renderer = new marked.Renderer()
+    renderer.link = (href, title, text) => {
+      return `<a target="_blank" href="${href}" title="'${title}">${text}</a>`;
+    }
     marked.setOptions({
-      renderer: new marked.Renderer(),
-      gfm: true,
-      pedantic: false,
-      sanitize: false,
-      tables: true,
+      renderer,
       breaks: true,
-      smartLists: true,
-      smartypants: true,
       highlight: code => {
-        return hljs.highlightAuto(code).value;
+        return hljs.highlightAuto(code).value
       }
     })
     return {
@@ -42,22 +43,35 @@ export default class Article extends React.Component {
 
   componentDidMount() {
     this.setDocRef()
-    ajax('http://localhost:3000', 'GET')
+    get('http://localhost:3000')
       .then(res => {
         this.setState({
-          markdownContent: JSON.parse(res).text
+          markdownContent: res.text
         })
       })
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate() {
+  }
+
+  componentWillUnmount() {
+    // this.docRef = null
   }
 
   render() {
 
     return (
-      <div className={'rhaego-markdown'} style={style} ref={ref => this.setDocRef(ref)}>
-        <div dangerouslySetInnerHTML={this.setHTML()}></div>
+      <div className={'rhaego-article'} style={style}>
+        <ul className={'nav'}>
+          {
+            this.state.headers.map(item => (
+              <li className={''}>item</li>
+            ))
+          }
+        </ul>
+        <div className={'rhaego-markdown'} ref={ref => this.setDocRef(ref)}>
+          <div dangerouslySetInnerHTML={this.setHTML()} />
+        </div>
       </div>
     )
   }

@@ -18,7 +18,7 @@ import React from 'react'
 //
 // import regexps from './regexps'
 
-export {default as decorateStyle} from './decorateStyle'
+// export {default as decorateStyle} from './decorateStyle'
 
 export function callIfCallable(fn) {
   typeof fn === 'function' && fn()
@@ -75,35 +75,49 @@ export const debounce = function(fn, time = 400)  {
   }
 }
 
-export function ajax(method, url, data = {}) {
+export function ajax(
+  method,
+  url,
+  data = {},
+  headers = {}
+) {
   return new Promise(function(resolve, reject) {
     const xhr = new XMLHttpRequest()
-    xhr.open(url, method)
-    xhr.send(data)
+    xhr.open(method, url)
+    // xhr.setRequestHeader('Content-Type', 'application-json')
+    for (let key in headers) {
+      xhr.setRequestHeader(key, headers[key])
+    }
     xhr.onreadystatechange = () => {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
-          resolve(xhr.response)
+          let res
+          try {
+            res = JSON.parse(xhr.response)
+          } catch (e) {
+            resolve(xhr.response)
+          }
+          resolve(res)
         } else {
           reject(xhr)
         }
       }
     }
+    xhr.onerror = err => {
+      console.log({err})
+      reject(err)
+    }
+    xhr.send(data)
   })
 }
 
-//
-// - 原理和底层
-// - XMLHttpRequest 的实例
-// - onreadystatechange 监听 readystate 变化 01234
-// - 4 时完成, 根据状态码, 回调
-// - 成功触发 onload, 否则 onerror
-// - `open(method, url)` 后, 初始化, 可设置请求头
-// - 监听事件后, `send(body)`
-// - progress 事件监听获取的内容长度, 结合 content-length 实现百分比
-// - ? 上传怎么监听
-//   - content-type; 不同 type 作用
-// - restful
+export function get(url, data, headers) {
+  return ajax('GET', url, data, headers)
+}
+
+export function post(url, data, headers) {
+  return ajax('POST', url, data, headers)
+}
 
 
 // export {

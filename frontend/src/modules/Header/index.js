@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import c from 'classnames'
 import {
-  decorateStyle,
   // throttle,
   formatToMaterialSpans,
   getStyleInt,
@@ -22,7 +21,6 @@ const colors = [
 
 import style from './header.scss'
 
-// @decorateStyle(style)
 export default class RhaegoHeader extends React.Component {
 
   static propTypes = {
