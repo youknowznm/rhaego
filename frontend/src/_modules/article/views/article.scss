@@ -10,7 +10,6 @@ $mb-theme-dark-row-background: #424242;
 
   .article-title {
     width: 100%;
-    font-family: "Roboto Mono";
     font-size: 34px;
     color: #757575;
     font-weight: 400 !important;
@@ -84,7 +83,6 @@ $mb-theme-dark-row-background: #424242;
       word-wrap: break-word;
       word-break: normal;
       cursor: pointer;
-      font-family: "Roboto";
       margin-top: 8px;
       transition: all .2s $materialCubicBezier;
       &:first-child {

@@ -28,7 +28,6 @@ $rhaego-markdown-quote: #757575;
   padding: 0 6px;
   color: $rhaego-markdown-font-light;
   p {
-    font-family: "Roboto";
     margin: 16px 0;
     padding: 0;
     font-size: 14px;
@@ -53,7 +52,6 @@ $rhaego-markdown-quote: #757575;
     border-bottom: 1px solid $rhaego-markdown-border-light;
     font-size: 24px;
     line-height: 32px;
-    font-family: "Roboto Mono";
     letter-spacing: -.01em;
     margin: 40px 0 20px;
     padding-bottom: 3px;
@@ -71,7 +69,6 @@ $rhaego-markdown-quote: #757575;
   blockquote {
     padding-left: 12px;
     box-sizing: border-box;
-    font-family: "Roboto";
     p {
       font-size: 14px;
     }
@@ -84,11 +81,10 @@ $rhaego-markdown-quote: #757575;
     }
   }
   code {
-    padding: 3px 6px;
+    padding: 3px;
     font-size: 14px;
     line-height: 1.6;
     word-break: normal;
-    font-family: "Roboto Mono";
     background-color: $rhaego-markdown-code-background-light;
   }
   pre {
@@ -111,7 +107,6 @@ $rhaego-markdown-quote: #757575;
   li {
     font-size: 14px;
     line-height: 22px;
-    font-family: "Roboto";
   }
   ul, ol {
     margin: 0;

@@ -20,7 +20,7 @@ $mb-theme-dark-sidebar-background: #424242;
 html {
   min-height: 500px;
   // 使用 elementui 建议的字体方案
-  font-family: "Roboto",
+  font-family: "JetBrains Mono",
                "Helvetica Neue",
                Helvetica,
                "PingFang SC",
@@ -41,7 +41,6 @@ a {
 
 // 通用
 .mono {
-  font-family: "Roboto Mono" !important;
 }
 .full-width {
   width: 100%;
@@ -118,7 +117,6 @@ a {
   height: 72px;
 }
 .custom-card-content {
-  font-family: "Roboto";
   font-size: 14px;
   position: absolute;
   line-height: 20px;
