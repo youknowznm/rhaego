@@ -1,20 +1,6 @@
 /*
 
-Atom One Dark by Daniel Gamage
-Original One Dark Syntax theme from https://github.com/atom/one-dark-syntax
-
-base:    #282c34
-mono-1:  #abb2bf
-mono-2:  #818896
-mono-3:  #5c6370
-hue-1:   #56b6c2
-hue-2:   #61aeee
-hue-3:   #c678dd
-hue-4:   #98c379
-hue-5:   #e06c75
-hue-5-2: #be5046
-hue-6:   #d19a66
-hue-6-2: #e6c07b
+Intellij Idea-like styling (c) Vasily Polovnyov <vast@whiteants.net>
 
 */
 
@@ -22,65 +8,84 @@ hue-6-2: #e6c07b
   display: block;
   overflow-x: auto;
   padding: 0.5em;
-  color: #abb2bf;
-  background: #282c34;
+  color: #000;
+  background: #fff;
+}
+
+.hljs-subst,
+.hljs-title {
+  font-weight: normal;
+  color: #000;
 }
 
 .hljs-comment,
 .hljs-quote {
-  color: #5c6370;
+  color: #808080;
   font-style: italic;
 }
 
-.hljs-doctag,
-.hljs-keyword,
-.hljs-formula {
-  color: #c678dd;
+.hljs-meta {
+  color: #808000;
+}
+
+.hljs-tag {
+  background: #efefef;
 }
 
 .hljs-section,
 .hljs-name,
+.hljs-literal,
+.hljs-keyword,
 .hljs-selector-tag,
-.hljs-deletion,
-.hljs-subst {
-  color: #e06c75;
-}
-
-.hljs-literal {
-  color: #56b6c2;
-}
-
-.hljs-string,
-.hljs-regexp,
-.hljs-addition,
-.hljs-attribute,
-.hljs-meta-string {
-  color: #98c379;
-}
-
-.hljs-built_in,
-.hljs-class .hljs-title {
-  color: #e6c07b;
-}
-
-.hljs-attr,
-.hljs-variable,
-.hljs-template-variable,
 .hljs-type,
-.hljs-selector-class,
-.hljs-selector-attr,
-.hljs-selector-pseudo,
-.hljs-number {
-  color: #d19a66;
+.hljs-selector-id,
+.hljs-selector-class {
+  font-weight: bold;
+  color: #000080;
+}
+
+.hljs-attribute,
+.hljs-number,
+.hljs-regexp,
+.hljs-link {
+  font-weight: bold;
+  color: #0000ff;
+}
+
+.hljs-number,
+.hljs-regexp,
+.hljs-link {
+  font-weight: normal;
+}
+
+.hljs-string {
+  color: #008000;
+  font-weight: bold;
 }
 
 .hljs-symbol,
 .hljs-bullet,
-.hljs-link,
-.hljs-meta,
-.hljs-selector-id,
-.hljs-title {
-  color: #61aeee;
+.hljs-formula {
+  color: #000;
+  background: #d0eded;
+  font-style: italic;
+}
+
+.hljs-doctag {
+  text-decoration: underline;
+}
+
+.hljs-variable,
+.hljs-template-variable {
+  color: #660e7a;
+}
+
+.hljs-addition {
+  background: #baeeba;
+}
+
+.hljs-deletion {
+  background: #ffc8bd;
 }
 
 .hljs-emphasis {
@@ -89,8 +94,4 @@ hue-6-2: #e6c07b
 
 .hljs-strong {
   font-weight: bold;
-}
-
-.hljs-link {
-  text-decoration: underline;
 }
