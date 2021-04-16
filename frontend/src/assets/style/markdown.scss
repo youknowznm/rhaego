@@ -1,21 +1,11 @@
 @charset "UTF-8";
 @import "./highlight.scss";
 
-$rhaego-markdown-font-light: #212121;
-$rhaego-markdown-font-dark: #fff;
-
+$rhaego-markdown-font-light: #3c4043;
 $rhaego-markdown-border-light: rgba(0, 0, 0, 0.12);
-$rhaego-markdown-border-dark: rgba(255, 255, 255, .12);
-
-$rhaego-markdown-link: #039be5;
-
-$rhaego-markdown-code-background-light: #fff;
-$rhaego-markdown-code-background-dark: rgb(66, 66, 66);
-
+$rhaego-markdown-link: rgb(74,135,240);
 $rhaego-markdown-pre-background: rgb(40, 44, 52);
-
 $rhaego-markdown-pre-color: #abb2bf;
-
 $rhaego-markdown-quote: #757575;
 
 // 全局文章样式
@@ -27,27 +17,8 @@ $rhaego-markdown-quote: #757575;
   text-align: left;
   padding: 0 6px;
   color: $rhaego-markdown-font-light;
-  p {
-    margin: 16px 0;
-    padding: 0;
-    font-size: 14px;
-    color: #212121;
-    line-height: 22px;
-  }
-  b {
+  background: $white;
 
-  }
-  i {
-
-  }
-  u {
-    text-decoration: none;
-    border-bottom: 2px solid $rhaego-markdown-font-light;
-    padding-bottom: 0;
-  }
-  strike {
-    text-decorations: strike-through;
-  }
   h1 {
     border-bottom: 1px solid $rhaego-markdown-border-light;
     font-size: 24px;
@@ -60,35 +31,63 @@ $rhaego-markdown-quote: #757575;
     word-break: normal;
     word-wrap: break-word;
   }
+
+  p {
+    line-height: 24px;
+    font-size: 14px;
+    margin: 16px 0;
+    padding: 0;
+  }
+
+  strong {
+    font-weight: bold;
+    margin: 0 .2em;
+  }
+
+  a {
+    color: $rhaego-markdown-link;
+    box-sizing: border-box;
+    border-bottom: 1px solid $rhaego-markdown-link;
+    padding: 0 .2em;
+    margin: 0 .2em;
+    line-height: 24px;
+    transition: all .2s $materialCubicBezier;
+    &:hover {
+      border-bottom-color: $white;
+      background: $rhaego-markdown-link;
+      color: $white;
+    }
+  }
+
   h2, h3, h4, h5, h6 {
     color: $rhaego-markdown-font-light;
     font-size: 20px;
     margin: 32px 0 16px;
     line-height: 32px;
   }
+
   blockquote {
     padding-left: 12px;
     box-sizing: border-box;
-    p {
-      font-size: 14px;
-    }
-    line-height: 1.375;
-    margin: 0;
-    margin-bottom: 4px;
+    margin: 0 0 4px 0;
     border-left: 4px solid rgb(207, 216, 230);
     * {
       color: $rhaego-markdown-quote !important;
     }
   }
+
   code {
-    padding: 3px;
-    font-size: 14px;
-    line-height: 1.6;
+    padding: 0 .2em;
+    margin: 0 .2em;
+    border: 1px solid #dadce0;
+    border-radius: 3px;
+    font-size: 13px;
+    line-height: 24px;
     word-break: normal;
-    background-color: $rhaego-markdown-code-background-light;
+    background-color: #f8f9fa;
   }
+
   pre {
-    font-family: "monospace";
     border-radius: 3px;
     margin: 24px 0;
     overflow-x: auto;
@@ -104,75 +103,43 @@ $rhaego-markdown-quote: #757575;
       line-height: 1.4;
     }
   }
-  li {
-    font-size: 14px;
-    line-height: 22px;
-  }
+
   ul, ol {
-    margin: 0;
-    padding-left: 40px;
     li {
-      margin: 6px 0;
+      font-size: 14px;
+      line-height: 22px;
       padding: 0;
-      list-style-position: outside;
+      position: relative;
+      margin: .3em 0;
+      p {
+        margin: .3em 0;
+      }
     }
   }
   ul > li {
-    list-style-type: disc;
+    list-style: square;
+
   }
   ol > li {
-    list-style-type: decimal;
-  }
-  a {
-    color: $rhaego-markdown-link;
-    box-sizing: border-box;
-    border-bottom: 2px solid transparent;
-    padding: 0 .2em 4px;
-    transition: all .2s $materialCubicBezier;
-    outline: 0;
-    &:hover {
-      border-bottom-color: $rhaego-markdown-link;
-      padding-bottom: 2px;
+    list-style: decimal;
+    ::marker {
+      background: red;
+      display: none;
     }
   }
+
   img {
     display: block;
     margin: 30px auto;
     width: 100%;
     max-width: 600px;
   }
+
   hr {
     border: 0;
-    width: 60%;
-    margin: 63px auto;
+    //width: 60%;
+    //margin: 63px auto;
     border-bottom: 1px solid $rhaego-markdown-border-light;
-  }
-}
-
-#rhaego-dark-theme {
-  .rhaego-markdown {
-    * {
-      color: $rhaego-markdown-font-dark;
-    }
-    h1,
-    hr {
-      border-color: $rhaego-markdown-border-dark;
-    }
-    u {
-      border-bottom: 2px solid $rhaego-markdown-font-dark;
-    }
-    a {
-      color: $rhaego-markdown-link;
-      &:hover {
-        border-color: $rhaego-markdown-link;
-      }
-    }
-    code {
-      background: $rhaego-markdown-code-background-dark;
-    }
-    pre code {
-      background: $rhaego-markdown-pre-background;
-    }
   }
 }
 
