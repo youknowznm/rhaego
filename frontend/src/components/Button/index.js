@@ -4,7 +4,7 @@ import c from 'classnames'
 import {
   debounce,
   getStyleInt,
-  animateToTop,
+  animateToScrollHeight,
   formatToMaterialSpans,
   formatDate,
 } from '../../utils'

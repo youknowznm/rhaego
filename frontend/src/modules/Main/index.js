@@ -18,6 +18,8 @@ const links = [
 
 import style from './main.scss'
 
+document.documentElement.scrollTop = 0
+
 export default class Main extends React.Component {
 
 
@@ -87,7 +89,8 @@ export default class Main extends React.Component {
           className={c('rhaego-main', 'rhaego-responsive')}
           style={style}
         >
-          <Articles />
+          <Article />
+          {/*<Articles />*/}
           {/*{this.renderButton()}*/}
           {/*{this.renderModal()}*/}
         </div>

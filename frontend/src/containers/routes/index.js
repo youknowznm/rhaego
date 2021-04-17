@@ -6,17 +6,17 @@ import store from '../../Store'
 import Cookies from 'js-cookie'
 
 import App from '../app'
-import {view as Articles} from '../../_modules/articles'
-import {view as Products} from '../../_modules/products'
-import {view as Login} from '../../_modules/login'
-import {view as Admin} from '../../_modules/admin'
-import {view as Editor} from '../../_modules/editor'
-import {view as Article} from '../../_modules/article'
-import {view as NotFound} from '../../_modules/notFound'
-import {view as Resume} from '../../_modules/resume'
-import {view as Messages} from '../../_modules/messages'
+import {view as Articles} from '../../../_modules/articles'
+import {view as Products} from '../../../_modules/products'
+import {view as Login} from '../../../_modules/login'
+import {view as Admin} from '../../../_modules/admin'
+import {view as Editor} from '../../../_modules/editor'
+import {view as Article} from '../../../_modules/article'
+import {view as NotFound} from '../../../_modules/notFound'
+import {view as Resume} from '../../../_modules/resume'
+import {view as Messages} from '../../../_modules/messages'
 
-import {actions as headerActions} from '../../_modules/header'
+import {actions as headerActions} from '../../../_modules/header'
 
 const history = syncHistoryWithStore(browserHistory, store)
 

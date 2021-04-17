@@ -24,16 +24,19 @@ export function callIfCallable(fn) {
   typeof fn === 'function' && fn()
 }
 
-export function animateToTop(onDone) {
+export function animateToScrollHeight(height = 0, onDone) {
   const doc = document.documentElement
   function step() {
     const {scrollTop} = doc
     const id = window.requestAnimationFrame(step)
-    if (scrollTop === 0) {
+    const reachedBottom = scrollTop + doc.clientHeight === doc.scrollHeight
+    if (scrollTop === height || reachedBottom) {
       cancelAnimationFrame(id)
       callIfCallable(onDone)
+    } else if (scrollTop > height) {
+      doc.scrollTop = scrollTop - Math.max((scrollTop - height) / 5, 1)
     } else {
-      doc.scrollTop = scrollTop - Math.max(scrollTop / 5, 1)
+      doc.scrollTop = scrollTop + Math.max((height - scrollTop) / 5, 1)
     }
   }
   step()

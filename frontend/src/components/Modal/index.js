@@ -6,7 +6,7 @@ import {findDOMNode} from 'react-dom'
 import {
   debounce,
   getStyleInt,
-  animateToTop,
+  animateToScrollHeight,
   formatToMaterialSpans,
   formatDate,
   noop,

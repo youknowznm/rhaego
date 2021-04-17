@@ -5,10 +5,11 @@ import {
   // throttle,
   formatToMaterialSpans,
   getStyleInt,
-  animateToTop
+  animateToScrollHeight
 } from '../../utils'
 
-import {throttle} from 'lodash'
+import {throttle, debounce} from 'lodash'
+
 
 const colors = [
   'silver',
@@ -26,8 +27,6 @@ export default class RhaegoHeader extends React.Component {
   static propTypes = {
     siteName: PropTypes.string.isRequired,
     links: PropTypes.array.isRequired,
-    // asyncStatus: PropTypes.string.isRequired,
-    // asyncResultMessage: PropTypes.string.isRequired,
   }
 
   static defaultProps = {
@@ -77,10 +76,10 @@ export default class RhaegoHeader extends React.Component {
 
   addListeners = () => {
     // 全局 mouseup
-    document.body.addEventListener('mouseup', throttle(this.onNavMouseUp))
+    document.body.addEventListener('mouseup', this.onNavMouseUp)
 
     // 全局滚动
-    window.addEventListener('scroll', () => {
+    window.addEventListener('scroll', throttle(() => {
       const {scrollTop} = document.documentElement
       this.setState({
         bannerHeight: (this.BANNER_HEIGHT - scrollTop) < 0
@@ -89,7 +88,7 @@ export default class RhaegoHeader extends React.Component {
         bannerTitleHidden: scrollTop > this.TITLE_HIDDEN_THRESHOLD
       })
       this.docScrollTop = scrollTop
-    })
+    }), 200)
 
     // 下划线和波纹的动画结束
     const {
@@ -178,7 +177,7 @@ export default class RhaegoHeader extends React.Component {
     ref.classList.remove('hidden')
     ref.classList.add(targetAtCurrRight ? 'flow-to-right' : 'flow-to-left')
 
-    animateToTop()
+    animateToScrollHeight(0)
   }
 
   render() {

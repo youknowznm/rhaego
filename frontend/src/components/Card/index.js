@@ -5,7 +5,7 @@ import Button from '~/components/Button'
 import {
   debounce,
   getStyleInt,
-  animateToTop,
+  animateToScrollHeight,
   formatToMaterialSpans,
   formatDate,
 } from '../../utils'

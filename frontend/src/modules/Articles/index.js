@@ -45,7 +45,6 @@ export default class Articles extends React.Component {
     this.setState({
       articleList: data
     })
-    this.setRef()
   }
 
   renderList = () => {

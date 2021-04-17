@@ -7,6 +7,8 @@ __old
 /build
 /dist
 
+/frontend/_modules
+
 /backend/data/
 /backend/files/
 /backend/static/
