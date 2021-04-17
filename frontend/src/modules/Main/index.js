@@ -112,9 +112,9 @@ export default class Main extends React.Component {
           style={style}
           ref={this.setMainRef}
         >
-          {/*<Article />*/}
+          <Article />
           {/*<Login />*/}
-          <Articles />
+          {/*<Articles />*/}
           {/*{this.renderButton()}*/}
           {/*{this.renderModal()}*/}
         </div>

@@ -134,6 +134,7 @@ $indent: 1em;
           font-size: 12px;
           font-style: italic;
           color: $font-secondary;
+          margin-bottom: 12px;
         }
         .comment-author {
           margin-right: 12px;
@@ -145,7 +146,7 @@ $indent: 1em;
           //margin-right: 12px;
         }
         .submit {
-          margin: 24px 0 12px;
+          margin: 12px 0 6px;
           width: 496px;
         }
       }

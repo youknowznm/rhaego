@@ -9,7 +9,7 @@
 
   .login-area {
     position: relative;
-    width: 750px;
+    width: 480px;
     padding: 24px;
     margin: 24px auto;
     box-shadow: $paper-elevation-low;
@@ -23,6 +23,7 @@
       font-size: 12px;
       font-style: italic;
       color: $font-secondary;
+      margin-bottom: 12px;
     }
     .submit {
       width: 100%;

@@ -23,6 +23,7 @@ export default class TextField extends React.Component {
     widths: PropTypes.number,
     validatorRegExp: PropTypes.instanceOf(RegExp),
     disabled: PropTypes.bool,
+    hasValidated: PropTypes.bool,
     hint: PropTypes.string,
     onChange: PropTypes.func.isRequired,
     placeholder: PropTypes.string,
@@ -35,6 +36,7 @@ export default class TextField extends React.Component {
     width: 180,
     maxLength: 20,
     validatorRegExp: /^.*$/,
+    hasValidated: false,
     disabled: false,
     hint: '',
     onChange: noop,
@@ -43,7 +45,6 @@ export default class TextField extends React.Component {
 
   state = {
     focused: false,
-    hasFocusedOnce: false,
   }
 
   get notEmpty() {
@@ -68,13 +69,12 @@ export default class TextField extends React.Component {
   this.ref.addEventListener('blur', () => {
       this.setState({
         focused: false,
-        hasFocusedOnce: true,
       })
     })
   }
 
   render() {
-    const isInvalid = this.state.hasFocusedOnce
+    const isInvalid = this.props.hasValidated
       && !this.props.validatorRegExp.test(this.props.value)
     const className = c(
       'rhaego-text-field',
