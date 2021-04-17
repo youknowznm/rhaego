@@ -19,7 +19,7 @@ import style from './button.scss'
 // import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
 
 
-export default class RhaegoButton extends React.Component {
+export default class Button extends React.Component {
 
   static propTypes = {
     label: PropTypes.string,

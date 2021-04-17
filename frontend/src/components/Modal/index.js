@@ -16,7 +16,7 @@ import {
 import style from './modal.scss'
 import * as ReactDOM from "react-dom";
 
-export default class RhaegoModal extends React.Component {
+export default class Modal extends React.Component {
 
   static propTypes = {
     title: PropTypes.string,
@@ -27,6 +27,7 @@ export default class RhaegoModal extends React.Component {
     onCancel: PropTypes.func,
     isOpen: PropTypes.bool,
     confirmOnly: PropTypes.bool,
+    customContent: PropTypes.object,
   }
 
   static defaultProps = {
@@ -38,6 +39,7 @@ export default class RhaegoModal extends React.Component {
     onCancel: noop,
     isOpen: false,
     confirmOnly: false,
+    customContent: null,
   }
 
   state = {
@@ -66,19 +68,27 @@ export default class RhaegoModal extends React.Component {
   
   componentDidUpdate(prevProps) {
     const body = document.body
+    const rhaegoHeaderContent = body.querySelector('.rhaego-header .header-content')
+    const paddingRightInPx = `${getScrollBarWidth()}px`
     if (prevProps.isOpen === false && this.props.isOpen === true) {
       if (this.modalRef) {
         findDOMNode(this.modalRef).querySelector('.modal-confirm').focus()
       }
 
       body.classList.add('has-visible-modal')
-      body.style.paddingRight = `${getScrollBarWidth()}px`
-      body.querySelector('.header-content').style.paddingRight = `${getScrollBarWidth()}px`
+      body.style.paddingRight = paddingRightInPx
+      body.style.overflow = 'hidden'
+      if (rhaegoHeaderContent) {
+        rhaegoHeaderContent.style.paddingRight = paddingRightInPx
+      }
     }
     if (prevProps.isOpen === true && this.props.isOpen === false) {
       body.classList.remove('has-visible-modal')
-      body.style.paddingRight = `0px`
-      body.querySelector('.header-content').style.paddingRight = `0px`
+      body.style.paddingRight = '0px'
+      body.style.overflow = 'auto'
+      if (rhaegoHeaderContent) {
+        rhaegoHeaderContent.style.paddingRight = '0px'
+      }
     }
   }
 
@@ -94,6 +104,7 @@ export default class RhaegoModal extends React.Component {
       confirmButtonText,
       cancelButtonText,
       confirmOnly,
+      customContent,
     } = this.props
 
     const className = c(
@@ -111,7 +122,11 @@ export default class RhaegoModal extends React.Component {
       >
         <div className={'modal-innner'}>
           <h1 className="modal-title">{title}</h1>
-          <p className="modal-content">{content}</p>
+          {
+            customContent !== null
+              ? customContent
+              : <p className="modal-content">{content}</p>
+          }
           <div className="modal-action-buttons">
             <Button
               className="modal-confirm"

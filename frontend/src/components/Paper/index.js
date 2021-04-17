@@ -10,9 +10,9 @@ import {
   formatDate,
 } from '../../utils'
 
-import style from './card.scss'
+import style from './paper.scss'
 
-export default class Card extends React.Component {
+export default class Paper extends React.Component {
 
   static propTypes = {
     // asyncStatus: PropTypes.string.isRequired,
@@ -32,7 +32,7 @@ export default class Card extends React.Component {
   render() {
     return (
       <div
-        className={c(`rhaego-card`, this.props.className)}
+        className={c(`rhaego-paper`, this.props.className)}
         style={style}
         data-card-theme={this.props.theme}
         data-card-font-theme={this.props.fontTheme}

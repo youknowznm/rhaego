@@ -13,7 +13,7 @@ import {
 
 import style from './text-field.scss'
 
-export default class RhaegoTextField extends React.Component {
+export default class TextField extends React.Component {
 
   static propTypes = {
     type: PropTypes.oneOf(['text', 'password', 'number']),

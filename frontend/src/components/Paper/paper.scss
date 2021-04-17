@@ -1,0 +1,115 @@
+@import "~style/main";
+
+$golden-ratio: 0.618;
+$card-shadow: 0 0 20px 0 rgb(0 0 0 / 20%), 0 5px 5px 0 rgb(0 0 0 / 24%);
+
+.rhaego-paper {
+  position: relative;
+  background: $white;
+  z-index: 90;
+  display: inline-block;
+  width: 50%;
+  height: 300px;
+  cursor: pointer;
+  box-sizing: border-box;
+  padding: 24px;
+  //filter: brightness(100%);
+  transition: all .3s $materialCubicBezier;
+  &:hover {
+    z-index: 91;
+    //filter: brightness(110%);
+    box-shadow: $card-shadow;
+  }
+  .title {
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .content {
+    position: relative;
+    font-size: 14px;
+    line-height: 1.8em;
+    margin: 10px 0 14px;
+    max-height: calc(5 * 1.8em);
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+  }
+  .actions {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    height: 30px;
+    line-height: 30px;
+    > span ,
+    > svg {
+      display: inline-block;
+      margin-right: .5em;
+      font-size: 12px;
+      height: 30px;
+      line-height: 30px;
+      vertical-align: middle;
+    }
+  }
+  .tags {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    .tag {
+      margin-left: 10px;
+    }
+  }
+}
+
+[data-card-theme=red] {
+  background: $red;
+}
+[data-card-theme=pink] {
+  background: $pink;
+}
+[data-card-theme=purple] {
+  background: $purple;
+}
+[data-card-theme=indigo] {
+  background: $indigo;
+}
+[data-card-theme=blue] {
+  background: $blue;
+}
+[data-card-theme=cyan] {
+  background: $cyan;
+}
+[data-card-theme=teal] {
+  background: $teal;
+}
+[data-card-theme=green] {
+  background: $green;
+}
+[data-card-theme=lime] {
+  background: $lime;
+}
+[data-card-theme=yellow] {
+  background: $yellow;
+}
+[data-card-theme=amber] {
+  background: $amber;
+}
+[data-card-theme=orange] {
+  background: $orange;
+}
+[data-card-theme=brown] {
+  background: $brown;
+}
+[data-card-theme=grey] {
+  background: $grey;
+}
+[data-card-theme=bluegrey] {
+  background: $bluegrey;
+}
+
+[data-card-font-theme=light] {
+  color: $white;
+}
+[data-card-font-theme=dark] {
+  color: $black;
+}

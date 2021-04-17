@@ -67,12 +67,14 @@ export default class Main extends React.Component {
             console.log(123)
           }}
           onCancel={() => this.setState({sm: false})}
+          customContent={
+            <div>shit</div>
+          }
         />
       </div>
 
     )
   }
-
 
   render() {
     return (
