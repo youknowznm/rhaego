@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Card, IconButton, Button, Typography} from 'material-ui'
 import {FormControl, FormHelperText} from 'material-ui/Form'
-import Input, {InputLabel, InputAdornment} from 'material-ui/Input'
+import Input, {InputLabel, InputAdornment} from 'material-ui/TextField'
 import {Visibility, VisibilityOff} from 'material-ui-icons'
 import {
   getQueryObj,

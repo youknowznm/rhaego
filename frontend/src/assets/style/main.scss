@@ -58,7 +58,7 @@ body {
 
 .rhaego-single-word {
   display: inline-block;
-  transition: opacity .4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: opacity .4s $materialCubicBezier;
   &::after {
     content: '·';
     opacity: .4;

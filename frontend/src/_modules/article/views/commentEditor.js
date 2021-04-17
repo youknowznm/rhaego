@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import Cookie from 'js-cookie'
 import {Card, Typography} from 'material-ui'
 import {FormControl, FormHelperText} from 'material-ui/Form'
-import Input, {InputLabel} from 'material-ui/Input'
+import Input, {InputLabel} from 'material-ui/TextField'
 import {getArticleDetail} from '../actions'
 import {
   getQueryObj,

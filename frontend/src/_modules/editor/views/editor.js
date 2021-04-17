@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {TextField, Button} from 'material-ui'
 import {FormControl, FormHelperText} from 'material-ui/Form'
-import Input, {InputLabel} from 'material-ui/Input'
+import Input, {InputLabel} from 'material-ui/TextField'
 import Chip from 'material-ui/Chip'
 import {
   highlightAllPre,

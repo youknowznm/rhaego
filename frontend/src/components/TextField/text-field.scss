@@ -1,11 +1,14 @@
-$input-blue: rgb(16, 108, 200);
-$input-red: rgb(221, 44, 0);
+@import "~style/main";
 
-.rhaego-input {
+$input-blue: rgb(0, 95, 204);
+$input-red: rgb(221, 44, 0);
+$font-secondary: rgba(#000, .54);
+
+.rhaego-text-field {
   position: relative;
   display: inline-block;
   box-sizing: border-box;
-  min-width: 172px;
+  min-width: 122px;
   min-height: 94px;
   height: auto;
   margin: 0 12px;
@@ -21,21 +24,21 @@ $input-red: rgb(221, 44, 0);
       height: 26px;
       line-height: 26px;
       background: transparent;
-      color: rgba(#000, .87);
+      color: $black;
       padding: 2px 2px 1px 2px;
       border: 0;
       border-radius: 0;
-      border-bottom: 1px solid rgba(#000, .12);
+      border-bottom: 1px solid $black;
       font-size: 16px;
     }
     &:after,
     &:before {
       content: '';
-      position: absolute;
+      //position: absolute;
       width: 0;
       height: 2px;
       bottom: -4px;
-      transition: all .4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      transition: all .3s $materialCubicBezier;
       background-color: $input-blue;
       z-index: 2;
     }
@@ -45,13 +48,13 @@ $input-red: rgb(221, 44, 0);
     &:before {
       left: 50%;
     }
-    .placeholder {
+    label {
       position: absolute;
       cursor: text;
-      color: rgba(#000, .54);
+      color: $font-secondary;
       top: 5px;
       left: 3px;
-      transition: all .4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      transition: all .3s $materialCubicBezier;
       // 如果不显式设置 transform-origin 从左侧开始，
       // 就需要针对每个元素再进行 transform: translateX() 的改变
       transform-origin: left;
@@ -65,41 +68,43 @@ $input-red: rgb(221, 44, 0);
       color: $input-red;
       opacity: 0;
       transform: translateY(-10px);
-      transition: all .4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      transition: all .3s $materialCubicBezier;
     }
     // 字数统计
     .char-counter {
       position: absolute;
       font-size: 12px;
       line-height: 14px;
-      color: rgba(#000, .54);
+      color: $font-secondary;
       bottom: -24px;
       right: 3px;
-      transition: all .4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      transition: all .3s $materialCubicBezier;
       user-select: none;
       cursor: default;
-      .current {
-        margin-right: .5em;
-      }
-      .maximum {
-        margin-left: .5em;
+      .separator {
+        margin: 0 .2em;
       }
     }
   }
   // 获得焦点时
   &.focused {
+    label {
+      color: $input-blue;
+    }
     .input-content:before {
+      position: absolute;
       width: calc(50% + 4px);
     }
     .input-content:after {
+      position: absolute;
       width: 50%;
     }
   }
   &.focused,
   &.not-empty {
-    .placeholder {
-      transform: scale(0.8) translateY(-30px);
-      color: $input-blue;
+    label {
+      transform: scale(0.8) translateY(-30px) translateX(-2px);
+
       cursor: default;
     }
   }
@@ -110,15 +115,17 @@ $input-red: rgb(221, 44, 0);
       opacity: 1;
     }
     .char-counter,
-    .placeholder {
+    label {
       color: $input-red !important;
     }
     input {
       border-bottom-color: $input-red !important;
     }
-    &:after,
-    &:before {
-      background-color: $input-red !important;
+    .input-content {
+      &:after,
+      &:before {
+        background-color: $input-red !important;
+      }
     }
   }
 }

@@ -41,14 +41,13 @@ export default class Footer extends React.Component {
         <div className={'info-wrap'}>
           <div className="info rhaego-responsive">
             <p className={'site'}>
-              <span>Presented by </span>
+              <span>Presented by</span>
               <span>
-                <a className={'link'} target={'_blank'} href={siteData.repoSource}>Rhaego</a>
+                <a className={'link'} target={'_blank'} href={siteData.repoSource}>
+                  Rhaego
+                </a>
               </span>
-            </p>
-              <p className={'site'}>
-              <span>. </span>
-              <span>Made with</span>
+              <span>. Made with</span>
               {heartSvg}
               <span>by znm.</span>
             </p>

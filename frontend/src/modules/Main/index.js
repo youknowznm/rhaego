@@ -6,7 +6,7 @@ import Card from "~/components/Card";
 import Button from "~/components/Button";
 import Article from "~/modules/Article";
 import Articles from "~/modules/Articles";
-import Input from "~/components/Input";
+import TextField from "~/components/TextField";
 
 const links = [
   {name: '笔记'},
@@ -58,16 +58,18 @@ export default class Main extends React.Component {
           className={c(`rhaego-main`, 'rhaego-responsive')}
           style={style}
         >
-          <Articles />
-          {/*<Input*/}
-          {/*  type={'text'}*/}
-          {/*  label={'还把对方'}*/}
-          {/*  value={this.state.value}*/}
-          {/*  maxLength={10}*/}
-          {/*  disabled={false}*/}
-          {/*  width={'100%'}*/}
-          {/*  onChange={evt => {this.setState({value: evt.target.value})}}*/}
-          {/*/>*/}
+          {/*<Articles />*/}
+          <TextField
+            type={'text'}
+            label={'还把对方'}
+            value={this.state.value}
+            validatorRegExp={/^\d$/}
+            maxLength={10}
+            disabled={false}
+            placeholder={'placeholder'}
+            // width={'100%'}
+            onChange={evt => {this.setState({value: evt.target.value})}}
+          />
         </div>
         <Footer />
       </>

@@ -10,32 +10,34 @@ import {
   formatDate,
 } from '../../utils'
 
-import style from './input.scss'
+import style from './text-field.scss'
 
-export default class RhaegoInput extends React.Component {
+export default class RhaegoTextField extends React.Component {
 
   static propTypes = {
     type: PropTypes.oneOf(['text', 'password', 'number']),
-    label: PropTypes.string,
+    label: PropTypes.string.isRequired,
     value: PropTypes.string,
     maxLength: PropTypes.number,
     widths: PropTypes.number,
-    validatorRegExp: PropTypes.object,
+    validatorRegExp: PropTypes.instanceOf(RegExp),
     disabled: PropTypes.bool,
     errorMsg: PropTypes.string,
     onChange: PropTypes.func.isRequired,
+    placeholder: PropTypes.string,
   }
 
   static defaultProps = {
     type: 'text',
-    label: 'Text Input',
+    label: 'Text TextField',
     value: '',
-    width: 120,
+    width: 180,
     maxLength: 20,
-    validatorRegExp: /^\d+$/,
+    validatorRegExp: /^.*$/,
     disabled: false,
     errorMsg: '请检查输入',
-    onChange: () => {}
+    onChange: () => {},
+    placeholder: '',
   }
 
   state = {
@@ -45,6 +47,10 @@ export default class RhaegoInput extends React.Component {
 
   get notEmpty() {
     return this.props.value !== ''
+  }
+
+  get currentCharCount() {
+    return this.props.value.length
   }
 
   componentDidMount() {
@@ -67,29 +73,29 @@ export default class RhaegoInput extends React.Component {
   }
 
   render() {
-    const invalid = this.state.hasFocusedOnce
+    const isInvalid = this.state.hasFocusedOnce
       && !this.props.validatorRegExp.test(this.props.value)
     const className = c(
-      `rhaego-input`,
+      `rhaego-text-field`,
       this.props.className,
       this.state.focused && 'focused',
       this.notEmpty && 'not-empty',
-      invalid && 'invalid',
+      isInvalid && 'invalid',
     )
+    const style = {
+      ...style,
+      width: this.props.width
+    }
+    const placeholder = this.state.focused ? this.props.placeholder : ''
     return (
-      <div
-        className={className}
-        style={{
-          ...style,
-          width: this.props.width
-        }}
-      >
+      <div className={className} style={style}>
         <div className="input-content">
-          <label className="placeholder">{this.props.label}</label>
+          <label>{this.props.label}</label>
           <input
             ref={this.setRef}
             type={this.props.type}
             maxLength={this.props.maxLength}
+            placeholder={placeholder}
             value={this.props.value}
             onChange={this.props.onChange}
             disabled={this.props.disabled}
@@ -97,8 +103,9 @@ export default class RhaegoInput extends React.Component {
           />
           <p className="error">{this.props.errorMsg}</p>
           <p className="char-counter">
-            <span className="current" />
-            <span className="maximum" />
+            <span className="current">{this.currentCharCount}</span>
+            <span className='separator'>/</span>
+            <span className="maximum">{this.props.maxLength}</span>
           </p>
         </div>
       </div>
