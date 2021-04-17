@@ -3,17 +3,47 @@ import c from 'classnames'
 import marked from 'marked'
 import hljs from "highlight.js";
 
-import {ajax, animateToScrollHeight, get, getStyleInt} from "~/utils";
+import {ajax, animateToScrollHeight, get, getStyleInt, noop} from "~/utils";
 
 import {throttle, debounce} from 'lodash'
 
 import style from './article.scss'
+import TextField from "~/components/TextField";
+import {svgCommentDark, svgComment, svgHeartDark, svgHeart} from "~/assets/svg";
+import Button from "~/components/Button";
+
+
+
+const re = {
+
+  login: {
+    // (zhngnmng)(@sina)(.com)(.cn)
+    emailReg: /^([a-zA-Z0-9]+[\w-]*)(@[\w]{2,})(\.[\w]{2,4})(\.[\w]{2,4})?$/,
+    // 12345678
+    passwordReg: /^.{6,20}$/,
+  },
+
+  editor: {
+    titleReg: /^.{10,40}$/,
+    summaryReg: /^.{10,100}$/,
+    createdDateReg: /^\d{4}-\d{2}-\d{2}$/,
+    contentReg: /\S/,
+  },
+
+  comment: {
+    authorReg: /^.{4,16}$/,
+    emailReg: /^([a-zA-Z0-9]+[\w-]*)(@[\w]{2,})(\.[\w]{2,4})(\.[\w]{2,4})?$/,
+    contentReg: /^.{4,120}$/,
+  },
+
+}
 
 export default class Article extends React.Component {
 
   state = {
     markdownContent: '',
     headers: [],
+    tags: [112,315],
     scrollIng: false,
   }
 
@@ -50,6 +80,8 @@ export default class Article extends React.Component {
       })
     window.addEventListener('scroll', this.scrollListener)
   }
+
+  // 请原谅这里的 magic numbers...
 
   scrollListener = throttle(() => {
     const {scrollTop} = document.documentElement
@@ -91,6 +123,11 @@ export default class Article extends React.Component {
         })
         minLevel = Math.min(...(headers.map(item => item.level)))
       }
+      headers.unshift({
+        level: 1,
+        label: '索引',
+        offsetTop: this.SCROLL_OFFSET_MARGIN - 64 - 24
+      })
       this.setState({
         headers
       })
@@ -104,6 +141,8 @@ export default class Article extends React.Component {
     }
   }
 
+  SCROLL_OFFSET_MARGIN = 160
+
   getScrollToHeaderFunc = targetScrollTop => evt => {
     if (this.state.scrollIng) {
       return
@@ -111,16 +150,86 @@ export default class Article extends React.Component {
     this.setState({
       scrollIng: true
     })
-    animateToScrollHeight(targetScrollTop + 160, () => {
-      this.setState({
-        scrollIng: false
-      })
-    })
+    animateToScrollHeight(
+      targetScrollTop + this.SCROLL_OFFSET_MARGIN,
+      () => {
+        this.setState({
+          scrollIng: false
+        })
+      }
+    )
+  }
+
+  handleClick =(evt) => {
+    const src = evt.nativeEvent.target.getAttribute('src')
+    if (src !== null) {
+      window.open(src)
+    }
   }
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.scrollListener)
   }
+
+  renderInfo = () => {
+    return <div className={'info'}>
+      <div className={'actions'}>
+        {svgHeart}
+        <span className={'like count'}>3</span>
+        {svgComment}
+        <span className={'comment count'}>7</span>
+      </div>
+      <div className={'tags'}>
+        {
+          this.state.tags.map((item, index) => (
+            <Button  className={'tag'} key={index}>
+              {item}
+            </Button>
+          ))
+        }
+      </div>
+    </div>
+  }
+
+  rendeitComment = () => {
+    return <div className={'edit-comment'}>
+      <p className={'title'}>欢迎留下您的评论。</p>
+      <TextField
+        className={'comment-author'}
+        label={'称呼'}
+        value={this.state.commentAuthor}
+        width={240}
+        maxLength={16}
+        validatorRegExp={/^\d{2,16}$/}
+        hint={'称呼由2至16个字符组成。'}
+      />
+      <TextField
+        className={'comment-email'}
+        label={'邮箱'}
+        value={this.state.commentAuthor}
+        width={240}
+        maxLength={30}
+        validatorRegExp={/^\d{2,16}$/}
+        hint={'输入常见的邮箱格式。'}
+      />
+      <TextField
+        className={'comment-content'}
+        label={'内容'}
+        value={this.state.commentAuthor}
+        width={492}
+        maxLength={120}
+        validatorRegExp={/^.{4,120}$/}
+        hint={'输入4至120个字作为评论内容。'}
+      />
+      <Button
+        className={'submit'}
+        type={'primary'}
+      >
+        提交
+      </Button>
+    </div>
+  }
+
 
   render() {
     return (
@@ -141,8 +250,13 @@ export default class Article extends React.Component {
             ))
           }
         </ul>
-        <div className={'rhaego-markdown'}>
-          <div dangerouslySetInnerHTML={this.setHTML()} />
+        <div className={'article-content'} onClick={this.handleClick} ref={this.setRef}>
+          <div className={'rhaego-markdown'} dangerouslySetInnerHTML={this.setHTML()} />
+        </div>
+        <div className={'article-bottom'}>
+          {this.renderInfo()}
+          {this.rendeitComment()}
+
         </div>
       </div>
     )

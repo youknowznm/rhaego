@@ -30,12 +30,16 @@ export function animateToScrollHeight(height = 0, onDone) {
     const {scrollTop} = doc
     const id = window.requestAnimationFrame(step)
     const reachedBottom = scrollTop + doc.clientHeight === doc.scrollHeight
-    if (scrollTop === height || reachedBottom) {
+    if (scrollTop === height) {
       cancelAnimationFrame(id)
       callIfCallable(onDone)
     } else if (scrollTop > height) {
       doc.scrollTop = scrollTop - Math.max((scrollTop - height) / 5, 1)
     } else {
+      if (reachedBottom) {
+        cancelAnimationFrame(id)
+        callIfCallable(onDone)
+      }
       doc.scrollTop = scrollTop + Math.max((height - scrollTop) / 5, 1)
     }
   }

@@ -23,7 +23,7 @@ export default class TextField extends React.Component {
     widths: PropTypes.number,
     validatorRegExp: PropTypes.instanceOf(RegExp),
     disabled: PropTypes.bool,
-    errorMsg: PropTypes.string,
+    hint: PropTypes.string,
     onChange: PropTypes.func.isRequired,
     placeholder: PropTypes.string,
   }
@@ -36,7 +36,7 @@ export default class TextField extends React.Component {
     maxLength: 20,
     validatorRegExp: /^.*$/,
     disabled: false,
-    errorMsg: '请检查输入',
+    hint: '',
     onChange: noop,
     placeholder: '',
   }
@@ -63,12 +63,12 @@ export default class TextField extends React.Component {
     this.ref.addEventListener('focus', () => {
       this.setState({
         focused: true,
-        hasFocusedOnce: true,
       })
     })
   this.ref.addEventListener('blur', () => {
       this.setState({
-        focused: false
+        focused: false,
+        hasFocusedOnce: true,
       })
     })
   }
@@ -102,7 +102,7 @@ export default class TextField extends React.Component {
             disabled={this.props.disabled}
             spellCheck="false"
           />
-          <p className="error">{this.props.errorMsg}</p>
+          <p className="hint">{this.props.hint}</p>
           <p className="char-counter">
             <span className="current">{this.currentCharCount}</span>
             <span className='separator'>/</span>

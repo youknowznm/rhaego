@@ -18,7 +18,6 @@ $rhaego-markdown-quote: #757575;
   text-align: left;
   padding: 0 6px;
   color: $rhaego-markdown-font-light;
-  background: $white;
 
   h1 {
     border-bottom: 1px solid $rhaego-markdown-border-light;
@@ -98,6 +97,7 @@ $rhaego-markdown-quote: #757575;
     overflow-y: hidden;
     padding: 8px 16px;
     position: relative;
+    background: $white;
     border: 1px solid $rhaego-markdown-border-light;
     code {
       color: unset;
@@ -136,7 +136,12 @@ $rhaego-markdown-quote: #757575;
     display: block;
     margin: 30px auto;
     width: 100%;
-    max-width: 600px;
+    cursor: pointer;
+    box-shadow: $paper-elevation-low;
+    transition: all .2s $materialCubicBezier;
+    &:hover {
+      box-shadow: $paper-elevation-high;
+    }
   }
 
   hr {
