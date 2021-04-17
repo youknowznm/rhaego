@@ -55,7 +55,7 @@ export default class Article extends React.Component {
     }
   }
 
-  setHTML = () => {
+  setParsedHTML = () => {
     const renderer = new marked.Renderer()
     renderer.link = (href, title, text) => {
       return `<a target="_blank" href="${href}" title="'${title}">${text}</a>`;
@@ -284,7 +284,7 @@ export default class Article extends React.Component {
             <h1 className={'title'}>{formatToMaterialSpans(title)}</h1>
             {this.renderInfo()}
           </div>
-          <div className={'rhaego-markdown'} dangerouslySetInnerHTML={this.setHTML()} />
+          <div className={'rhaego-markdown'} dangerouslySetInnerHTML={this.setParsedHTML()} />
         </div>
         <div className={'article-bottom'}>
           {this.renderComments()}

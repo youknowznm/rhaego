@@ -18,6 +18,7 @@ const links = [
 
 import style from './main.scss'
 import Login from "~/modules/Login";
+import Editor from "~/modules/Editor";
 
 document.documentElement.scrollTop = 0
 
@@ -112,7 +113,8 @@ export default class Main extends React.Component {
           style={style}
           ref={this.setMainRef}
         >
-          <Article />
+          <Editor />
+          {/*<Article />*/}
           {/*<Login />*/}
           {/*<Articles />*/}
           {/*{this.renderButton()}*/}

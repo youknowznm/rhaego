@@ -55,6 +55,12 @@ body {
   font-family: $font-family;
   -webkit-font-smoothing: antialiased;
   background: #fafafa;
+  &.editor-layout {
+    .rhaego-header,
+    .rhaego-footer, {
+      display: none;
+    }
+  }
 }
 
 .rhaego-responsive {

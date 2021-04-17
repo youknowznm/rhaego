@@ -1,0 +1,26 @@
+@import "~style/main";
+@import "~style/markdown";
+@import "~style/highlight.scss";
+
+$indent: 1em;
+
+.rhaego-editor {
+  position: relative;
+  overflow: scroll;
+  .compare-wrap {
+    position: relative;
+    .raw,
+    .parsed {
+      display: inline-block;
+      width: 50%;
+      padding: 12px;
+      height: 100%;
+      overflow: scroll;
+      box-sizing: border-box;
+    }
+    .parsed {
+      border: 1px solid $black;
+      background: $white;
+    }
+  }
+}
