@@ -7,6 +7,7 @@ import Button from "~/components/Button";
 import Article from "~/modules/Article";
 import Articles from "~/modules/Articles";
 import TextField from "~/components/TextField";
+import Modal from "~/components/Modal";
 
 const links = [
   {name: '笔记'},
@@ -21,7 +22,8 @@ export default class Main extends React.Component {
 
 
   state = {
-    value: '123'
+    value: '',
+    sm: false
   }
 
   renderMain = () => {
@@ -29,22 +31,41 @@ export default class Main extends React.Component {
       <Article/>
     )
   }
-
-  renderButton = () => {
+  renderInput = () => {
     return (
-      <div
-        className={c(`rhaego-main`)}
-        style={style}
-      >
-        {
-          this.palette.map(c => {
-            return <Button />
-          })
-        }
-      </div>
+      <TextField
+        type={'text'}
+        label={'还把对方'}
+        value={this.state.value}
+        validatorRegExp={/^\d$/}
+        maxLength={10}
+        disabled={false}
+        placeholder={'placeholder'}
+        // width={'100%'}
+        onChange={evt => {this.setState({value: evt.target.value})}}
+      />
     )
   }
 
+  renderButton = () => {
+    return (
+      <Button >asfasdf</Button>
+    )
+  }
+
+  renderModal = () => {
+
+    return (
+      <div>
+        <Button onClick={() => {
+          this.setState({sm: true})
+        }}>展示吧</Button>
+        <Modal visible={this.state.sm}
+        />
+      </div>
+
+    )
+  }
 
 
   render() {
@@ -59,17 +80,8 @@ export default class Main extends React.Component {
           style={style}
         >
           {/*<Articles />*/}
-          <TextField
-            type={'text'}
-            label={'还把对方'}
-            value={this.state.value}
-            validatorRegExp={/^\d$/}
-            maxLength={10}
-            disabled={false}
-            placeholder={'placeholder'}
-            // width={'100%'}
-            onChange={evt => {this.setState({value: evt.target.value})}}
-          />
+          {/*{this.renderButton()}*/}
+          {this.renderModal()}
         </div>
         <Footer />
       </>

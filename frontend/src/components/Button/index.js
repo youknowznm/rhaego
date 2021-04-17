@@ -23,38 +23,41 @@ export default class RhaegoButton extends React.Component {
 
   static propTypes = {
     label: PropTypes.string,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    type: PropTypes.oneOf(['normal', 'primary', 'secondary']),
+    size: PropTypes.oneOf(['normal', 'small']),
   }
 
   static defaultProps = {
     label: 'Button',
-    disabled: false
+    disabled: false,
+    type: 'normal',
+    size: 'normal',
   }
 
   state = {
     rippleLeft: 0,
     rippleTop: 0,
-    rippleRadius: 0,
   }
 
-  buttonRef
+  rippleRadius = 0
+
+  buttonRef = null
   setButtonRef = ref => {
-    this.buttonRef = ref
-    const rippleRadius = Math.max(
-      getStyleInt(ref, 'width'),
-      getStyleInt(ref, 'height')
-    )
-    this.setState({
-      rippleRadius
-    })
+    if (this.buttonRef === null) {
+      this.buttonRef = ref
+      this.setRippleRadius()
+    }
   }
 
   rippleRef = null
   setRippleRef = ref => {
-    this.rippleRef = ref
-    this.rippleRef.addEventListener('animationend', () => {
-      this.rippleRef.classList.remove('fade')
-    })
+    if (this.rippleRef === null) {
+      this.rippleRef = ref
+      this.rippleRef.addEventListener('animationend', () => {
+        this.rippleRef.classList.remove('fade')
+      })
+    }
   }
 
   startRipple = evt => {
@@ -65,8 +68,8 @@ export default class RhaegoButton extends React.Component {
     if (!this.rippling) {
       this.rippling = true
       const nativeEvt = evt.nativeEvent
-      const rippleLeft = nativeEvt.offsetX - this.state.rippleRadius
-      const rippleTop = nativeEvt.offsetY - this.state.rippleRadius
+      const rippleLeft = nativeEvt.offsetX - this.rippleRadius
+      const rippleTop = nativeEvt.offsetY - this.rippleRadius
       this.setState({
         rippleLeft,
         rippleTop,
@@ -74,7 +77,7 @@ export default class RhaegoButton extends React.Component {
       this.rippleRef.classList.add('appear')
     }
   }
-  
+
   endRipple = evt => {
     this.buttonRef.classList.remove('mousedown')
     this.buttonRef.classList.remove('mouseup')
@@ -82,33 +85,45 @@ export default class RhaegoButton extends React.Component {
       this.rippleRef.classList.remove('appear')
       this.rippleRef.classList.add('fade')
       this.rippling = false
-      }
+    }
   }
 
-  componentDidMount() {
+  setRippleRadius = () => {
+    this.rippleRadius = Math.max(
+      getStyleInt(this.buttonRef, 'width'),
+      getStyleInt(this.buttonRef, 'height'),
+    )
+  }
 
+  componentDidUpdate() {
+    this.setRippleRadius()
   }
 
   render() {
+    const rippleSize = isNaN(this.rippleRadius) ? 0 : this.rippleRadius * 2
     const rippleStyle = {
       left: this.state.rippleLeft,
       top: this.state.rippleTop,
-      width: this.state.rippleRadius * 2,
-      height: this.state.rippleRadius * 2,
+      width: rippleSize,
+      height: rippleSize,
     }
     const className = c(
       'rhaego-button',
       this.props.flat && 'flat',
       this.props.disabled && 'disabled',
-      this.props.warn && 'warn',
-      this.props.primary && 'primary',
+      `type-${this.props.type}`,
+      `size-${this.props.size}`,
       this.props.className
     )
     return (
-      <button className={className} style={style} ref={this.setButtonRef}
+      <button
+        className={className}
+        style={style}
+        ref={this.setButtonRef}
         onMouseDown={this.startRipple}
         onMouseUp={this.endRipple}
         onMouseOut={this.endRipple}
+        onClick={this.props.onClick}
       >
         <span className={'button-content'}>
           {this.props.children}

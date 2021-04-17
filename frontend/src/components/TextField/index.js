@@ -8,6 +8,7 @@ import {
   animateToTop,
   formatToMaterialSpans,
   formatDate,
+  noop,
 } from '../../utils'
 
 import style from './text-field.scss'
@@ -36,7 +37,7 @@ export default class RhaegoTextField extends React.Component {
     validatorRegExp: /^.*$/,
     disabled: false,
     errorMsg: '请检查输入',
-    onChange: () => {},
+    onChange: noop,
     placeholder: '',
   }
 

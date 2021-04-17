@@ -1,8 +1,7 @@
 @import "~style/main";
 
-//$rhaego-button-primary: rgb(16, 108, 200);
-$rhaego-button-primary: $blue;
-$rhaego-button-warn: rgb(255, 82, 82);
+$rhaego-button-primary: #1976d2;
+$rhaego-button-secondary: rgb(220, 0, 78);
 
 /*
 ***** 常规 ****
@@ -19,25 +18,23 @@ $rhaego-button-warn: rgb(255, 82, 82);
   border-radius: 2px;
   border: 0 solid rgb(33, 33, 33);
   color: rgb(33, 33, 33);
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
-  background-color: #fff;
-  letter-spacing: .01em;
+  box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%),
+  0px 2px 2px 0px rgb(0 0 0 / 14%),
+  0px 1px 5px 0px rgb(0 0 0 / 12%);
+  background-color: rgb(224, 224, 224);
   user-select: none;
   overflow: hidden;
   transition: all .4s $materialCubicBezier;
   z-index: 90;
-
   .button-content {
     display: block;
     overflow: hidden;
-    font-family: "JetBrains Mono";
     text-overflow: ellipsis;
     white-space: nowrap;
     font-weight: 500;
     font-size: 14px;
     z-index: 89;
   }
-
   .ripple {
     position: absolute;
     pointer-events: none;
@@ -70,132 +67,48 @@ $rhaego-button-warn: rgb(255, 82, 82);
       }
     }
   }
-
   &:hover {
-    background-color: #eee;
+    background-color: #d5d5d5;
+    box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%),
+    0px 4px 5px 0px rgb(0 0 0 / 14%),
+    0px 1px 10px 0px rgb(0 0 0 / 12%);
   }
+
   &.mousedown {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .4);
+    box-shadow: 0px 5px 5px -3px rgb(0 0 0 / 20%),
+    0px 8px 10px 1px rgb(0 0 0 / 14%),
+    0px 3px 14px 2px rgb(0 0 0 / 12%);
   }
+
   &.mouseup {
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+    //box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
   }
-  //.ripple-container {
-  //  position: absolute;
-  //  width: 100%;
-  //  height: 100%;
-  //  top: 0;
-  //  left: 0;
-  //  background-color: transparent;
-  //  transition: all .3s $materialCubicBezier;
-  //  overflow: hidden;
-  //
-  //  .ripple {
-  //    display: none;
-  //    position: absolute;
-  //    // IDEA: safari内宽高均为0的元素初始化时有问题
-  //    // width: 0;
-  //    // height: 0;
-  //    width: 1px;
-  //    height: 1px;
-  //    top: 0;
-  //    left: 0;
-  //    background-color: rgba(0, 0, 0, .15);
-  //    border-radius: 50%;
-  //    transition: all .3s $materialCubicBezier;
-  //    transform: scale(1.2);
-  //  }
-  //}
-  //
-  //&.mousedown {
-  //  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .4);
-  //  .ripple-container {
-  //    background-color: rgba(33, 33, 33, .05);
-  //  }
-  //  .ripple {
-  //    display: block;
-  //    animation: rippling .3s $materialCubicBezier;
-  //    transform: scale(1.2);
-  //  }
-  //  @keyframes rippling {
-  //    0% {
-  //      transform: scale(.5);
-  //      opacity: 0;
-  //    }
-  //    100% {
-  //      transform: scale(1.2);
-  //      opacity: 1;
-  //    }
-  //  }
-  //}
-  //
-  //&.mouseup {
-  //  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
-  //  .ripple-container {
-  //    animation: container .3s $materialCubicBezier;
-  //  }
-  //  .ripple {
-  //    display: none;
-  //    animation: ripple .3s $materialCubicBezier;
-  //  }
-  //  @keyframes container {
-  //    0% {
-  //      background-color: rgba(33, 33, 33, .05);
-  //    }
-  //    100% {
-  //      background-color: transparent;
-  //    }
-  //  }
-  //  @keyframes ripple {
-  //    0% {
-  //      display: block;
-  //      opacity: 1;
-  //    }
-  //    100% {
-  //      display: none;
-  //      opacity: 0;
-  //    }
-  //  }
-  //}
-  //
-  //&:hover {
-  //  background-color: #eee;
-  //}
-  //
-  //&:not(.round).small {
-  //  height: 30px !important;
-  //  line-height: 30px !important;
-  //  .content {
-  //    font-size: 12px !important;
-  //  }
-  //}
-  //
 
   // 小
-  &.small {
+  &.size-small {
     height: 30px !important;
     line-height: 30px !important;
     .button-content {
-      font-size: 12px !important;
+      font-size: 13px !important;
     }
   }
 
   // 主要、禁用、警告三种状态
-  &.primary {
+  &.type-primary {
     background-color: $rhaego-button-primary;
     color: #fff;
     &:hover {
-      background-color: rgb(7, 96, 176);
-    }
-  }
-  &.warn {
-    background-color: $rhaego-button-warn;
-    color: #fff;
-    &:hover {
-      background-color: rgb(213, 0, 0);
+      background-color: rgb(17, 82, 147);
     }
   }
 
+  &.type-secondary {
+    background-color: $rhaego-button-secondary;
+    color: #fff;
+    &:hover {
+      background-color: rgb(154, 0, 54);
+    }
+  }
   &.disabled {
     background-color: rgb(217, 217, 217) !important;
     color: rgba(0, 0, 0, .38) !important;
@@ -214,18 +127,11 @@ $rhaego-button-warn: rgb(255, 82, 82);
     &:hover {
       background-color: rgba(158, 158, 158, .2);
     }
-    &.primary {
+    &.type-primary {
       color: $rhaego-button-primary;
-      .ripple {
-        background-color: rgba(16, 108, 200, .1);
-      }
     }
-
-    &.warn {
-      color: $rhaego-button-warn;
-      .ripple {
-        background-color: rgba(255, 82, 82, .1);
-      }
+    &.type-secondary {
+      color: $rhaego-button-secondary;
     }
     &.disabled {
       background-color: transparent !important;
@@ -235,77 +141,7 @@ $rhaego-button-warn: rgb(255, 82, 82);
     }
   }
 }
-//
-///*
-//***** 圆形 ****
-//*/
-//
-//.rhaego-button.round {
-//  width: 56px;
-//  min-width: 0;
-//  height: 56px;
-//  line-height: 56px;
-//  padding: 0;
-//  border-radius: 50%;
-//
-//  .icon-wrap {
-//    display: block;
-//    position: absolute;
-//    width: 24px;
-//    height: 24px;
-//    top: 50%;
-//    left: 50%;
-//    transform: translateX(-50%) translateY(-50%);
-//    overflow: hidden;
-//    .icon {
-//      display: block;
-//      position: absolute;
-//      width: 24px;
-//      height: 24px;
-//      top: -24px;
-//      left: 0;
-//      border-bottom: 24px solid transparent;
-//      //  http://www.zhangxinxu.com/wordpress/2016/06/png-icon-change-color-by-css/
-//      //  Chrome下如果元素的主体部分【完全】不可见，则其drop-shadow不可见；
-//      //  只要元素有【任何】部分可见，则其drop-shadow完全可见。
-//      filter: drop-shadow(rgba(#000, .87) 0 24px);
-//      // 在单独的样式表内设置背景图片
-//      // background: url("...") no-repeat 0 0;
-//    }
-//  }
-//
-//  .ripple-container {
-//    border-radius: 50%;
-//  }
-//
 
-//
-//  &.primary {
-//    .icon {
-//      filter: drop-shadow(rgba(#fff, .87) 0 24px) !important;
-//    }
-//  }
-//
-//  &.warn {
-//    .icon {
-//      filter: drop-shadow(#fff 0 24px) !important;
-//    }
-//  }
-//
-//  &.disabled {
-//    .icon {
-//      filter: drop-shadow(rgba(0, 0, 0, .38) 0 24px) !important;
-//    }
-//    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26) !important;
-//  }
-//
-//  // 禁止round和flat同时存在
-//  &.flat {
-//    display: none !important;
-//  }
-//}
-//
-//
 ///*
 //***** 提示条 ****
 //*/

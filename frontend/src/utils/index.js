@@ -48,6 +48,8 @@ export function getStyleInt(target, key) {
 }
 
 
+export function noop() {}
+
 export function formatToMaterialSpans(string) {
   const separated = string.split(/\s+/)
   return (

@@ -103,8 +103,7 @@ $font-secondary: rgba(#000, .54);
   &.focused,
   &.not-empty {
     label {
-      transform: scale(0.8) translateY(-30px) translateX(-2px);
-
+      transform: scale(0.8) translateY(-30px);
       cursor: default;
     }
   }
