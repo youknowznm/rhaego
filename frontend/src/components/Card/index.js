@@ -15,11 +15,21 @@ import style from './card.scss'
 export default class Card extends React.Component {
 
   static propTypes = {
-    // asyncStatus: PropTypes.string.isRequired,
-    // asyncResultMessage: PropTypes.string.isRequired,
+    title: PropTypes.string,
+    content: PropTypes.string,
+    theme: PropTypes.string,
+    fontTheme: PropTypes.string,
+    className: PropTypes.string,
+    tags: PropTypes.array,
   }
 
   static defaultProps = {
+    theme: 'blue',
+    fontTheme: 'light',
+    tags: [],
+    title: '',
+    content: '',
+    className: '',
   }
 
   state = {
@@ -32,7 +42,7 @@ export default class Card extends React.Component {
   render() {
     return (
       <div
-        className={c(`rhaego-card`, this.props.className)}
+        className={c('rhaego-card', this.props.className)}
         style={style}
         data-card-theme={this.props.theme}
         data-card-font-theme={this.props.fontTheme}
@@ -42,7 +52,9 @@ export default class Card extends React.Component {
         <div className={'tags'}>
           {
             this.props.tags.map((item, index) => (
-              <Button className={'small tag'} key={index}>{item}</Button>
+              <Button size={'small'} className={'tag'} key={index}>
+                {item}
+              </Button>
             ))
           }
         </div>

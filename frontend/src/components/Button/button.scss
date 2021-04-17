@@ -27,6 +27,7 @@ $rhaego-button-secondary: rgb(220, 0, 78);
   transition: all .4s $materialCubicBezier;
   z-index: 90;
   .button-content {
+    font-family: $font-family;
     display: block;
     overflow: hidden;
     text-overflow: ellipsis;

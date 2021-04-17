@@ -77,7 +77,7 @@ export default class TextField extends React.Component {
     const isInvalid = this.state.hasFocusedOnce
       && !this.props.validatorRegExp.test(this.props.value)
     const className = c(
-      `rhaego-text-field`,
+      'rhaego-text-field',
       this.props.className,
       this.state.focused && 'focused',
       this.notEmpty && 'not-empty',

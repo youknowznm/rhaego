@@ -84,12 +84,12 @@ export default class Main extends React.Component {
           siteName={'you know znm'}
         />
         <div
-          className={c(`rhaego-main`, 'rhaego-responsive')}
+          className={c('rhaego-main', 'rhaego-responsive')}
           style={style}
         >
-          {/*<Articles />*/}
+          <Articles />
           {/*{this.renderButton()}*/}
-          {this.renderModal()}
+          {/*{this.renderModal()}*/}
         </div>
         <Footer />
       </>

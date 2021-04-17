@@ -12,17 +12,11 @@ import {
 
 import style from './button.scss'
 
-// import {Card, Button, Avatar} from '@material-ui/core';
-// import {CardHeader, CardContent, CardActions} from '@material-ui/core/Card';
-// import IconButton from '@material-ui/core/IconButton'
-// import { Typography } from '@material-ui/core';
-// import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
-
-
 export default class Button extends React.Component {
 
   static propTypes = {
     label: PropTypes.string,
+    className: PropTypes.string,
     disabled: PropTypes.bool,
     isFlat: PropTypes.bool,
     type: PropTypes.oneOf(['normal', 'primary', 'secondary']),
@@ -31,6 +25,7 @@ export default class Button extends React.Component {
 
   static defaultProps = {
     label: 'Button',
+    className: '',
     disabled: false,
     type: 'normal',
     isFlat: false,

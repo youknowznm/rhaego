@@ -56,7 +56,7 @@ export function formatToMaterialSpans(string) {
     <span className={''}>
         {separated.map((item, index) => {
           return (
-            <span className={`rhaego-single-word`} key={index}>
+            <span className={'rhaego-single-word'} key={index}>
               {item}
             </span>
           )

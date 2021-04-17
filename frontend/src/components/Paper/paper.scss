@@ -1,63 +1,19 @@
 @import "~style/main";
 
-$golden-ratio: 0.618;
-$card-shadow: 0 0 20px 0 rgb(0 0 0 / 20%), 0 5px 5px 0 rgb(0 0 0 / 24%);
-
 .rhaego-paper {
   position: relative;
   background: $white;
-  z-index: 90;
-  display: inline-block;
-  width: 50%;
-  height: 300px;
-  cursor: pointer;
-  box-sizing: border-box;
-  padding: 24px;
-  //filter: brightness(100%);
-  transition: all .3s $materialCubicBezier;
-  &:hover {
-    z-index: 91;
-    //filter: brightness(110%);
-    box-shadow: $card-shadow;
+  &.has-radius {
+    border-radius: 4px;
   }
-  .title {
-    font-size: 24px;
-    line-height: 32px;
+  &.elevation-none {
+    box-shadow: $paper-elevation-none;
   }
-  .content {
-    position: relative;
-    font-size: 14px;
-    line-height: 1.8em;
-    margin: 10px 0 14px;
-    max-height: calc(5 * 1.8em);
-    display: -webkit-box;
-    overflow: hidden;
-    -webkit-line-clamp: 5;
-    -webkit-box-orient: vertical;
+  &.elevation-low {
+    box-shadow: $paper-elevation-low;
   }
-  .actions {
-    position: absolute;
-    bottom: 24px;
-    left: 24px;
-    height: 30px;
-    line-height: 30px;
-    > span ,
-    > svg {
-      display: inline-block;
-      margin-right: .5em;
-      font-size: 12px;
-      height: 30px;
-      line-height: 30px;
-      vertical-align: middle;
-    }
-  }
-  .tags {
-    position: absolute;
-    bottom: 24px;
-    right: 24px;
-    .tag {
-      margin-left: 10px;
-    }
+  &.elevation-none {
+    box-shadow: $paper-elevation-high;
   }
 }
 

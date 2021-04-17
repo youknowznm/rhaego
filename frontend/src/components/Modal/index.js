@@ -27,7 +27,6 @@ export default class Modal extends React.Component {
     onCancel: PropTypes.func,
     isOpen: PropTypes.bool,
     confirmOnly: PropTypes.bool,
-    customContent: PropTypes.object,
   }
 
   static defaultProps = {
@@ -39,7 +38,6 @@ export default class Modal extends React.Component {
     onCancel: noop,
     isOpen: false,
     confirmOnly: false,
-    customContent: null,
   }
 
   state = {
@@ -104,7 +102,6 @@ export default class Modal extends React.Component {
       confirmButtonText,
       cancelButtonText,
       confirmOnly,
-      customContent,
     } = this.props
 
     const className = c(
@@ -122,11 +119,7 @@ export default class Modal extends React.Component {
       >
         <div className={'modal-innner'}>
           <h1 className="modal-title">{title}</h1>
-          {
-            customContent !== null
-              ? customContent
-              : <p className="modal-content">{content}</p>
-          }
+          <p className="modal-content">{content}</p>
           <div className="modal-action-buttons">
             <Button
               className="modal-confirm"
