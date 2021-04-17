@@ -11,7 +11,7 @@ $rhaego-button-warn: rgb(255, 82, 82);
   display: inline-block;
   position: relative;
   padding: 0 10px;
-  min-width: 80px;
+  min-width: 36px;
   height: 36px;
   line-height: 36px;
   cursor: pointer;
@@ -29,7 +29,6 @@ $rhaego-button-warn: rgb(255, 82, 82);
 
   .button-content {
     display: block;
-    min-width: 60px;
     overflow: hidden;
     font-family: "JetBrains Mono";
     text-overflow: ellipsis;
@@ -172,6 +171,15 @@ $rhaego-button-warn: rgb(255, 82, 82);
   //}
   //
 
+  // 小
+  &.small {
+    height: 30px !important;
+    line-height: 30px !important;
+    .button-content {
+      font-size: 12px !important;
+    }
+  }
+
   // 主要、禁用、警告三种状态
   &.primary {
     background-color: $rhaego-button-primary;
@@ -194,7 +202,6 @@ $rhaego-button-warn: rgb(255, 82, 82);
     box-shadow: none !important;
     cursor: default !important;
   }
-
 
   /*
   ***** 扁平 ****
@@ -271,11 +278,7 @@ $rhaego-button-warn: rgb(255, 82, 82);
 //    border-radius: 50%;
 //  }
 //
-//  &.small {
-//    width: 40px;
-//    height: 40px;
-//    line-height: 40px;
-//  }
+
 //
 //  &.primary {
 //    .icon {

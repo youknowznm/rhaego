@@ -113,17 +113,27 @@
       line-height: 144px;
       color: #999;
       .site {
-        font-size: 16px;
-        float: left;
-
+        font-size: 14px;
+        text-align: center;
+        span {
+          display: inline-block;
+          vertical-align: middle;
+        }
         .link {
+          display: inline-block;
+          vertical-align: middle;
           color: #999;
           text-decoration: underline;
           transition: all .2s $materialCubicBezier;
-
           &:hover {
             color: $black;
           }
+        }
+        .heart {
+          display: inline-block;
+          vertical-align: middle;
+          margin: 0 .5em;
+          //transform: translateY(2px);
         }
       }
       .author {
@@ -131,10 +141,7 @@
         font-size: 12px;
         color: #999;
 
-        .heart {
-          margin: 0 .5em;
-          transform: translateY(2px);
-        }
+
       }
     }
   }

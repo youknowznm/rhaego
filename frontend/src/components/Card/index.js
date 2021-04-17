@@ -32,8 +32,7 @@ export default class RhaegoCard extends React.Component {
   render() {
     return (
       <div
-        {...this.props}
-        className={c(`rhaego-card`, this.props.classname)}
+        className={c(`rhaego-card`, this.props.className)}
         style={style}
         data-card-theme={this.props.theme}
         data-card-font-theme={this.props.fontTheme}
@@ -43,7 +42,7 @@ export default class RhaegoCard extends React.Component {
         <div className={'tags'}>
           {
             this.props.tags.map((item, index) => (
-              <Button className={'tag'} key={index}>{item}</Button>
+              <Button className={'small tag'} key={index}>{item}</Button>
             ))
           }
         </div>

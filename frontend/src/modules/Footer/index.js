@@ -43,11 +43,11 @@ export default class Footer extends React.Component {
             <p className={'site'}>
               <span>Presented by </span>
               <span>
-                <a className={'link'} href={siteData.repoSource}>Rhaego</a>
+                <a className={'link'} target={'_blank'} href={siteData.repoSource}>Rhaego</a>
               </span>
-              <span>.</span>
             </p>
-            <p className={'author'}>
+              <p className={'site'}>
+              <span>. </span>
               <span>Made with</span>
               {heartSvg}
               <span>by znm.</span>

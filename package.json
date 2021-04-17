@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack serve",
-    "backend": "nodemon backend/server"
+    "fe-dev": "webpack serve",
+    "be": "nodemon backend/server"
   },
   "repository": {
     "type": "git",

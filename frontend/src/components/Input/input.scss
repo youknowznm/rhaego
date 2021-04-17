@@ -1,0 +1,124 @@
+$input-blue: rgb(16, 108, 200);
+$input-red: rgb(221, 44, 0);
+
+.rhaego-input {
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  min-width: 172px;
+  min-height: 94px;
+  height: auto;
+  margin: 0 12px;
+  padding: 26px 0 30px;
+  .input-content {
+    position: relative;
+    height: 26px;
+    z-index: 1;
+    input {
+      display: block;
+      position: relative;
+      width: 100%;
+      height: 26px;
+      line-height: 26px;
+      background: transparent;
+      color: rgba(#000, .87);
+      padding: 2px 2px 1px 2px;
+      border: 0;
+      border-radius: 0;
+      border-bottom: 1px solid rgba(#000, .12);
+      font-size: 16px;
+    }
+    &:after,
+    &:before {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      transition: all .4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      background-color: $input-blue;
+      z-index: 2;
+    }
+    &:after {
+      right: 50%;
+    }
+    &:before {
+      left: 50%;
+    }
+    .placeholder {
+      position: absolute;
+      cursor: text;
+      color: rgba(#000, .54);
+      top: 5px;
+      left: 3px;
+      transition: all .4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      // 如果不显式设置 transform-origin 从左侧开始，
+      // 就需要针对每个元素再进行 transform: translateX() 的改变
+      transform-origin: left;
+    }
+    .error {
+      position: absolute;
+      left: 3px;
+      bottom: -24px;
+      line-height: 14px;
+      font-size: 12px;
+      color: $input-red;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: all .4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+    // 字数统计
+    .char-counter {
+      position: absolute;
+      font-size: 12px;
+      line-height: 14px;
+      color: rgba(#000, .54);
+      bottom: -24px;
+      right: 3px;
+      transition: all .4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      user-select: none;
+      cursor: default;
+      .current {
+        margin-right: .5em;
+      }
+      .maximum {
+        margin-left: .5em;
+      }
+    }
+  }
+  // 获得焦点时
+  &.focused {
+    .input-content:before {
+      width: calc(50% + 4px);
+    }
+    .input-content:after {
+      width: 50%;
+    }
+  }
+  &.focused,
+  &.not-empty {
+    .placeholder {
+      transform: scale(0.8) translateY(-30px);
+      color: $input-blue;
+      cursor: default;
+    }
+  }
+  // 输入内容未通过验证时
+  &.invalid {
+    .error {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .char-counter,
+    .placeholder {
+      color: $input-red !important;
+    }
+    input {
+      border-bottom-color: $input-red !important;
+    }
+    &:after,
+    &:before {
+      background-color: $input-red !important;
+    }
+  }
+}

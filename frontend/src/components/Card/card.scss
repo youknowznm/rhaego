@@ -13,7 +13,7 @@ $card-shadow: 0 0 20px 0 rgb(0 0 0 / 20%), 0 5px 5px 0 rgb(0 0 0 / 24%);
   cursor: pointer;
   box-sizing: border-box;
   padding: 24px;
-  filter: brightness(100%);
+  //filter: brightness(100%);
   transition: all .3s $materialCubicBezier;
   &:hover {
     z-index: 91;
@@ -39,15 +39,15 @@ $card-shadow: 0 0 20px 0 rgb(0 0 0 / 20%), 0 5px 5px 0 rgb(0 0 0 / 24%);
     position: absolute;
     bottom: 24px;
     left: 24px;
-    height: 36px;
-    line-height: 36px;
+    height: 30px;
+    line-height: 30px;
     > span ,
     > svg {
       display: inline-block;
       margin-right: .5em;
-      font-size: 14px;
-      height: 36px;
-      line-height: 36px;
+      font-size: 12px;
+      height: 30px;
+      line-height: 30px;
       vertical-align: middle;
     }
   }

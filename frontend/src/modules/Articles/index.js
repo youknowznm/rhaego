@@ -18,7 +18,7 @@ let data = [
     title: 'No Such Thing as Offline',
     // title: 'No Such Thing as Offline No Such Thing as Offline',
     content: '这些调色板最初由 Material Design 于 2014 年创建，由一些旨在和谐搭配的颜色组成，您可以用它们来开发品牌调色板。要生成您专属的颜色协调的调色板，请使用调色板生成工具。这些调色板最初由 Material Design 于 2014 年创建，由一些旨在和谐搭配的颜色组成，您可以用它们来开发品牌调色板。要生成您专属的颜色协调的调色板，请使用调色板生成工具。这些调色板最初由 Material Design 于 2014 年创建，由一些旨在和谐搭配的颜色组成，您可以用它们来开发品牌调色板。要生成您专属的颜色协调的调色板，请使用调色板生成工具。',
-    tags: ['React', 'JavaScript'],
+    tags: ['React', '调色板', 'A'],
     liked: 3,
     comments: 32,
   },
@@ -36,44 +36,12 @@ export default class Articles extends React.Component {
     headers: []
   }
 
-  setRandomColor = () => {
-    let palette = [
-      'red',
-      'pink',
-      'purple',
-      'indigo',
-      'blue',
-      'cyan',
-      'teal',
-      'green',
-      'lime',
-      'yellow',
-      'amber',
-      'orange',
-      'brown',
-      'grey',
-      'bluegrey',
-    ]
-    palette.sort(() => Math.random() - .5);
-    const randomIndex = Math.floor(Math.random() * palette.length);
-    this.palette = palette
-    console.log(this.ref)
-    const cards = this.ref.querySelectorAll('.rhaego-card')
-    for (let i = 0; i < cards.length; i++) {
-      cards[i].setAttribute(
-        'data-theme',
-        'palette[palette.length % i]'
-      )
-    }
-  }
-
   ref
   setRef = ref => {
     this.ref = ref
   }
 
   componentDidMount() {
-    this.setRandomColor()
     this.setState({
       articleList: data
     })
@@ -114,10 +82,10 @@ export default class Articles extends React.Component {
       <div ref={this.setRef} >
         {
           this.state.articleList.map((item, index) => {
-            const theme = palette[index % this.palette.length]
+            const theme = palette[index % palette.length]
             const fontTheme = getFontTheme(theme)
             return <Card
-              classname={'article-card'}
+              className={'article-card'}
               key={index}
               theme={theme}
               fontTheme={fontTheme}

@@ -6,6 +6,7 @@ import Card from "~/components/Card";
 import Button from "~/components/Button";
 import Article from "~/modules/Article";
 import Articles from "~/modules/Articles";
+import Input from "~/components/Input";
 
 const links = [
   {name: '笔记'},
@@ -18,49 +19,9 @@ import style from './main.scss'
 
 export default class Main extends React.Component {
 
-  constructor() {
-    super()
-    this.setRandomColor()
-  }
 
-  setRandomColor = () => {
-    let palette = [
-      'red',
-      'pink',
-      'purple',
-      'indigo',
-      'blue',
-      'cyan',
-      'teal',
-      'green',
-      'lime',
-      'yellow',
-      'amber',
-      'orange',
-      'brown',
-      'grey',
-      'bluegrey',
-    ]
-    palette.sort(() => Math.random() - .5);
-    const randomIndex = Math.floor(Math.random() * palette.length);
-    this.palette = palette
-  }
-
-  palette = []
-
-  renderDocs = () => {
-    return (
-      <div
-        className={c(`rhaego-main`)}
-        style={style}
-      >
-        {
-          this.palette.map(c => {
-            return <Card />
-          })
-        }
-      </div>
-    )
+  state = {
+    value: '123'
   }
 
   renderMain = () => {
@@ -84,6 +45,8 @@ export default class Main extends React.Component {
     )
   }
 
+
+
   render() {
     return (
       <>
@@ -96,6 +59,15 @@ export default class Main extends React.Component {
           style={style}
         >
           <Articles />
+          {/*<Input*/}
+          {/*  type={'text'}*/}
+          {/*  label={'还把对方'}*/}
+          {/*  value={this.state.value}*/}
+          {/*  maxLength={10}*/}
+          {/*  disabled={false}*/}
+          {/*  width={'100%'}*/}
+          {/*  onChange={evt => {this.setState({value: evt.target.value})}}*/}
+          {/*/>*/}
         </div>
         <Footer />
       </>

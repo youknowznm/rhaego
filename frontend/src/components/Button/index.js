@@ -93,8 +93,8 @@ export default class RhaegoButton extends React.Component {
     const rippleStyle = {
       left: this.state.rippleLeft,
       top: this.state.rippleTop,
-      width: this.state.rippleRadius * 2.1,
-      height: this.state.rippleRadius * 2.1,
+      width: this.state.rippleRadius * 2,
+      height: this.state.rippleRadius * 2,
     }
     const className = c(
       'rhaego-button',
