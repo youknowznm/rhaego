@@ -10,6 +10,7 @@ import {
   formatToMaterialSpans,
   formatDate,
   noop,
+  getScrollBarWidth,
 } from '../../utils'
 
 import style from './modal.scss'
@@ -25,6 +26,7 @@ export default class RhaegoModal extends React.Component {
     onConfirm: PropTypes.func,
     onCancel: PropTypes.func,
     isOpen: PropTypes.bool,
+    confirmOnly: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -35,6 +37,7 @@ export default class RhaegoModal extends React.Component {
     onConfirm: noop,
     onCancel: noop,
     isOpen: false,
+    confirmOnly: false,
   }
 
   state = {
@@ -56,23 +59,32 @@ export default class RhaegoModal extends React.Component {
   }
 
   onClickCover = evt => {
-    console.log(evt.target)
     if (Array.from(evt.target.classList).includes('rhaego-modal')) {
       this.props.onCancel()
     }
   }
   
   componentDidUpdate(prevProps) {
+    const body = document.body
     if (prevProps.isOpen === false && this.props.isOpen === true) {
-      if (this.confirmButtonRef) {
-        findDOMNode(this.confirmButtonRef).focus()
+      if (this.modalRef) {
+        findDOMNode(this.modalRef).querySelector('.modal-confirm').focus()
       }
+
+      body.classList.add('has-visible-modal')
+      body.style.paddingRight = `${getScrollBarWidth()}px`
+      body.querySelector('.header-content').style.paddingRight = `${getScrollBarWidth()}px`
+    }
+    if (prevProps.isOpen === true && this.props.isOpen === false) {
+      body.classList.remove('has-visible-modal')
+      body.style.paddingRight = `0px`
+      body.querySelector('.header-content').style.paddingRight = `0px`
     }
   }
 
-  confirmButtonRef = null
-  setConfirmButtonRef = ref => {
-    this.confirmButtonRef = ref
+  modalRef = null
+  setModalRef = ref => {
+    this.modalRef = ref
   }
 
   render() {
@@ -81,6 +93,7 @@ export default class RhaegoModal extends React.Component {
       content,
       confirmButtonText,
       cancelButtonText,
+      confirmOnly,
     } = this.props
 
     const className = c(
@@ -94,28 +107,30 @@ export default class RhaegoModal extends React.Component {
         className={className}
         style={style}
         onClick={this.onClickCover}
+        ref={this.setModalRef}
       >
         <div className={'modal-innner'}>
-            <h1 className="modal-title">{title}</h1>
-            <p className="modal-content">{content}</p>
-            <div className="modal-action-buttons">
-              <Button
-                className="modal-confirm"
-                onClick={this.props.onConfirm}
-                type={'primary'}
-                size={'small'}
-                ref={this.setConfirmButtonRef}
-              >
-                {confirmButtonText}
-              </Button>
-              <Button
+          <h1 className="modal-title">{title}</h1>
+          <p className="modal-content">{content}</p>
+          <div className="modal-action-buttons">
+            <Button
+              className="modal-confirm"
+              onClick={this.props.onConfirm}
+              type={'primary'}
+              size={'small'}
+            >
+              {confirmButtonText}
+            </Button>
+            {
+              !confirmOnly && <Button
                 className="modal-cancel"
                 onClick={this.props.onCancel}
                 size={'small'}
               >
                 {cancelButtonText}
               </Button>
-            </div>
+            }
+          </div>
         </div>
       </div>,
       document.body

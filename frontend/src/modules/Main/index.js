@@ -62,7 +62,10 @@ export default class Main extends React.Component {
         }}>展示吧</Button>
         <Modal
           isOpen={this.state.sm}
-          onConfirm={() => this.setState({sm: false})}
+          onConfirm={() => {
+            this.setState({sm: false})
+            console.log(123)
+          }}
           onCancel={() => this.setState({sm: false})}
         />
       </div>

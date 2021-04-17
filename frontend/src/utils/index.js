@@ -77,6 +77,20 @@ export const debounce = function(fn, time = 400)  {
   }
 }
 
+export const getScrollBarWidth = () => {
+  const node = document.createElement('div')
+  node.style.overflow = 'scroll'
+  node.style.width = '100px'
+  node.style.height = '100px'
+  node.style.position = 'absolute'
+  node.style.left = '-1000px'
+  node.style.top = '-1000px'
+  document.body.appendChild(node)
+  const result = node.offsetWidth - node.clientWidth
+  document.body.removeChild(node)
+  return result
+}
+
 export function ajax(
   method,
   url,
