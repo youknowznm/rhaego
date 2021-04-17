@@ -1,0 +1,36 @@
+@import "~style/main";
+@import "~style/markdown";
+@import "~style/highlight.scss";
+
+.rhaego-login {
+  position: relative;
+  padding: 24px;
+  width: 100%;
+
+  .login-area {
+    position: relative;
+    width: 750px;
+    padding: 24px;
+    margin: 24px auto;
+    box-shadow: $paper-elevation-low;
+    border-radius: 3px;
+    background: $white;
+    transition: all .6s $materialCubicBezier;
+    &:hover {
+      box-shadow: $paper-elevation-medium;
+    }
+    .title {
+      font-size: 12px;
+      font-style: italic;
+      color: $font-secondary;
+    }
+    .submit {
+      width: 100%;
+      margin: 24px 0 6px;
+    }
+    .cancel {
+      width: 100%;
+      margin: 6px 0;
+    }
+  }
+}

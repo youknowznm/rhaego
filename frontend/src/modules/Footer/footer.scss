@@ -11,13 +11,9 @@
       position: relative;
       height: 72px;
       line-height: 72px;
-
       .links {
-        //position: absolute;
         float: right;
-        //margin-top: 24px;
       }
-
       .link {
         position: relative;
         display: inline-block;
@@ -31,7 +27,6 @@
         cursor: pointer;
         transition: all .2s $materialCubicBezier;
         opacity: .8;
-
         .anchor {
           position: absolute;
           left: 0;
@@ -39,27 +34,21 @@
           width: 100%;
           height: 100%;
         }
-
         &:hover {
           opacity: 1;
-
           .hover-content {
             opacity: 1 !important;
             transform: scale(1) !important;
           }
         }
-
         &.github {
           background-image: url("~images/footer/icon-github.svg");
         }
-
         &.zhihu {
           background-image: url("~images/footer/icon-zhihu.svg");
         }
-
         &.wechat {
           background-image: url("~images/footer/icon-wechat.svg");
-
           .hover-content {
             position: absolute;
             width: 160px;
@@ -75,30 +64,9 @@
             background-size: 160px 160px;
           }
         }
-
         &.email {
           background-image: url("~images/footer/icon-email.svg");
-
-          .hover-content {
-            position: absolute;
-            background: #fff;
-            white-space: nowrap;
-            height: 24px;
-            line-height: 24px;
-            padding: 0 12px;
-            left: 50%;
-            width: 7.2em;
-            margin-left: -3.8em;
-            top: -36px;
-            font-size: 12px;
-            box-shadow: $paper-elevation-medium;
-            transform: scale(0);
-            opacity: 0;
-            transform-origin: bottom;
-            transition: all .2s $materialCubicBezier;
-          }
         }
-
       }
     }
   }

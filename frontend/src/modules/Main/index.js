@@ -17,15 +17,39 @@ const links = [
 ]
 
 import style from './main.scss'
+import Login from "~/modules/Login";
 
 document.documentElement.scrollTop = 0
 
 export default class Main extends React.Component {
 
-
   state = {
     value: '',
     sm: false
+  }
+
+  mainRef = null
+  setMainRef = mainRef => {
+    if (this.mainRef === null) {
+      this.mainRef = mainRef
+    }
+  }
+
+  componentDidMount() {
+    this.setMainContentHeight()
+    window.addEventListener('resize', this.setMainContentHeight)
+  }
+
+  setMainContentHeight = () => {
+    const minHeight = window.innerHeight
+      - 256 // header
+      - 216 // footer
+      - 160 // footer marginTop
+    this.mainRef.style.minHeight = `${minHeight}px`
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.setMainContentHeight)
   }
 
   renderMain = () => {
@@ -66,7 +90,6 @@ export default class Main extends React.Component {
           isOpen={this.state.sm}
           onConfirm={() => {
             this.setState({sm: false})
-            console.log(123)
           }}
           onCancel={() => this.setState({sm: false})}
           customContent={
@@ -87,9 +110,11 @@ export default class Main extends React.Component {
         <div
           className={c('rhaego-main', 'rhaego-responsive')}
           style={style}
+          ref={this.setMainRef}
         >
-          <Article />
-          {/*<Articles />*/}
+          {/*<Article />*/}
+          {/*<Login />*/}
+          <Articles />
           {/*{this.renderButton()}*/}
           {/*{this.renderModal()}*/}
         </div>

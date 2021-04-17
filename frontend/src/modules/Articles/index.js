@@ -24,7 +24,7 @@ let data = [
   },
 ]
 
-for (let i = 0; i < 16; i++) {
+for (let i = 0; i < 15; i++) {
   data.push(data[0])
 }
 

@@ -65,9 +65,12 @@ body {
   @media (min-width: 1200px) {
     width: 1200px;
   }
-  // @media (min-width: 1900px) {
-  //     width: 1440px;
-  // }
+  @media (min-width: 1600px) {
+    width: 1440px;
+  }
+  //@media (min-width: 2000px) {
+  //  width: 1680px;
+  //}
 }
 
 .rhaego-single-word {
