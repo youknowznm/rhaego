@@ -60,7 +60,10 @@ export default class Main extends React.Component {
         <Button onClick={() => {
           this.setState({sm: true})
         }}>展示吧</Button>
-        <Modal visible={this.state.sm}
+        <Modal
+          isOpen={this.state.sm}
+          onConfirm={() => this.setState({sm: false})}
+          onCancel={() => this.setState({sm: false})}
         />
       </div>
 

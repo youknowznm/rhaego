@@ -24,6 +24,7 @@ export default class RhaegoButton extends React.Component {
   static propTypes = {
     label: PropTypes.string,
     disabled: PropTypes.bool,
+    isFlat: PropTypes.bool,
     type: PropTypes.oneOf(['normal', 'primary', 'secondary']),
     size: PropTypes.oneOf(['normal', 'small']),
   }
@@ -32,6 +33,7 @@ export default class RhaegoButton extends React.Component {
     label: 'Button',
     disabled: false,
     type: 'normal',
+    isFlat: false,
     size: 'normal',
   }
 
@@ -109,7 +111,7 @@ export default class RhaegoButton extends React.Component {
     }
     const className = c(
       'rhaego-button',
-      this.props.flat && 'flat',
+      this.props.isFlat && 'flat',
       this.props.disabled && 'disabled',
       `type-${this.props.type}`,
       `size-${this.props.size}`,
