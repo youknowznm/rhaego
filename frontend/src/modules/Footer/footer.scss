@@ -66,7 +66,7 @@
             height: 160px;
             left: -68px;
             top: -170px;
-            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+            box-shadow: $paper-elevation-medium;
             transform: scale(0);
             opacity: 0;
             transform-origin: bottom;
@@ -91,7 +91,7 @@
             margin-left: -3.8em;
             top: -36px;
             font-size: 12px;
-            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+            box-shadow: $paper-elevation-medium;
             transform: scale(0);
             opacity: 0;
             transform-origin: bottom;

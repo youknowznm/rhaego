@@ -3,7 +3,7 @@ import c from 'classnames'
 import marked from 'marked'
 import hljs from "highlight.js";
 
-import {ajax, animateToScrollHeight, get, getStyleInt, noop} from "~/utils";
+import {ajax, animateToScrollHeight, formatToMaterialSpans, get, getStyleInt, noop} from "~/utils";
 
 import {throttle, debounce} from 'lodash'
 
@@ -11,6 +11,7 @@ import style from './article.scss'
 import TextField from "~/components/TextField";
 import {svgCommentDark, svgComment, svgHeartDark, svgHeart} from "~/assets/svg";
 import Button from "~/components/Button";
+import toReadableDateString from "~/utils/toReadableDateString";
 
 
 
@@ -188,11 +189,12 @@ export default class Article extends React.Component {
           ))
         }
       </div>
+      <span className={'date'}>发布于 2020-01-32</span>
     </div>
   }
 
-  rendeitComment = () => {
-    return <div className={'edit-comment'}>
+  renderComments = () => {
+    return <div className={'comment edit'}>
       <p className={'title'}>欢迎留下您的评论。</p>
       <TextField
         className={'comment-author'}
@@ -201,7 +203,7 @@ export default class Article extends React.Component {
         width={240}
         maxLength={16}
         validatorRegExp={/^\d{2,16}$/}
-        hint={'称呼由2至16个字符组成。'}
+        hint={'输入2至16个字符的称呼。'}
       />
       <TextField
         className={'comment-email'}
@@ -219,7 +221,7 @@ export default class Article extends React.Component {
         width={492}
         maxLength={120}
         validatorRegExp={/^.{4,120}$/}
-        hint={'输入4至120个字作为评论内容。'}
+        hint={'输入4至120字符的评论。'}
       />
       <Button
         className={'submit'}
@@ -230,8 +232,35 @@ export default class Article extends React.Component {
     </div>
   }
 
+  renderComments2 = () => {
+    const cms = [
+      {
+        author: 'adf',
+        content: 'adfafsdfafd',
+        date: new Date('2020-01-01'),
+      },
+    ]
+    for (let i = 0; i < 3; i++) {
+      cms.push(cms[0])
+    }
+    return <ul className={'comments'}>
+      {
+        cms.map(item => (
+          <li className={'comment existed'}>
+            <p className={'author'}>
+              {item.author}
+              <span> 发表于 </span>
+              {toReadableDateString(item.date)}
+            </p>
+            <p className={'content'}>{item.content}</p>
+          </li>
+        ))
+      }
+    </ul>
+  }
 
-  render() {
+    render() {
+    const title = 'Progress 进度条组件 Progress 进度条组件 Progress 进度条组件 Progress 进度条组件 '
     return (
       <div className={'rhaego-article'} style={style} ref={this.setRef}>
         <ul className={'article-navs'} ref={this.setNavRef}>
@@ -251,12 +280,15 @@ export default class Article extends React.Component {
           }
         </ul>
         <div className={'article-content'} onClick={this.handleClick} ref={this.setRef}>
+          <div className={'article-top'}>
+            <h1 className={'title'}>{formatToMaterialSpans(title)}</h1>
+            {this.renderInfo()}
+          </div>
           <div className={'rhaego-markdown'} dangerouslySetInnerHTML={this.setHTML()} />
         </div>
         <div className={'article-bottom'}>
-          {this.renderInfo()}
-          {this.rendeitComment()}
-
+          {this.renderComments()}
+          {this.renderComments2()}
         </div>
       </div>
     )

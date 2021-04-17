@@ -12,7 +12,8 @@ $golden-ratio: 0.618;
   cursor: pointer;
   box-sizing: border-box;
   padding: 24px;
-  transition: all .3s $materialCubicBezier;
+  transition: all .6s $materialCubicBezier;
+  box-shadow: $paper-elevation-none;
   &:hover {
     z-index: 91;
     box-shadow: $paper-elevation-high;
