@@ -82,8 +82,8 @@ export default class Article extends React.Component {
     window.addEventListener('scroll', this.scrollListener)
   }
 
+  // TODO 注释
   // 请原谅这里的 magic numbers...
-
   scrollListener = throttle(() => {
     const {scrollTop} = document.documentElement
     var doc = this.docRef

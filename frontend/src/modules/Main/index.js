@@ -37,20 +37,9 @@ export default class Main extends React.Component {
   }
 
   componentDidMount() {
-    this.setMainContentHeight()
-    window.addEventListener('resize', this.setMainContentHeight)
-  }
-
-  setMainContentHeight = () => {
-    const minHeight = window.innerHeight
-      - 256 // header
-      - 216 // footer
-      - 160 // footer marginTop
-    this.mainRef.style.minHeight = `${minHeight}px`
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.setMainContentHeight)
   }
 
   renderMain = () => {
@@ -113,9 +102,9 @@ export default class Main extends React.Component {
           style={style}
           ref={this.setMainRef}
         >
-          <Editor />
+          {/*<Editor />*/}
           {/*<Article />*/}
-          {/*<Login />*/}
+          <Login />
           {/*<Articles />*/}
           {/*{this.renderButton()}*/}
           {/*{this.renderModal()}*/}

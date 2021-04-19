@@ -4,6 +4,8 @@
   position: relative;
   height: 100%;
   margin-top: 256px;
+  // 设置最小高度为 视口height - header height - footer height - footer marginTop
+  min-height: calc(100vh - 256px - 216px - 160px);
 }
 
 
