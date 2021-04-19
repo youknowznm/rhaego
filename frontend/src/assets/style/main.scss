@@ -55,10 +55,16 @@ body {
   font-family: $font-family;
   -webkit-font-smoothing: antialiased;
   background: #fafafa;
-  &.editor-layout {
+  &.full-vh-content {
     .rhaego-header,
     .rhaego-footer, {
       display: none;
+    }
+    .rhaego-main-container {
+      margin-top: 0;
+    }
+    .rhaego-editor {
+      height: 100vh;
     }
   }
 }

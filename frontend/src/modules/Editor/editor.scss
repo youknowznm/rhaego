@@ -7,8 +7,33 @@ $indent: 1em;
 .rhaego-editor {
   position: relative;
   overflow: scroll;
-  .compare-wrap {
+  min-width: 1200px;
+  .editor-fields {
     position: relative;
+    margin: 12px 0 0;
+    .title,
+    .tags,
+    .date {
+      margin-right: 12px;
+    }
+    .actions {
+      position: absolute;
+      top: 50px;
+      transform: translateY(-50%);
+      right: 0;
+      .submit,
+      .cancel {
+        width: 80px;
+        margin-left: 12px;
+      }
+    }
+  }
+  .compare-wrap {
+    position: absolute;
+    width: 100%;
+    top: 120px;
+    bottom: 12px;
+    background: $white;
     .raw,
     .parsed {
       display: inline-block;
@@ -17,10 +42,10 @@ $indent: 1em;
       height: 100%;
       overflow: scroll;
       box-sizing: border-box;
+      border: 1px solid $font-secondary;
     }
     .parsed {
-      border: 1px solid $black;
-      background: $white;
+      border-left: 0;
     }
   }
 }

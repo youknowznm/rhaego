@@ -1,19 +1,15 @@
 import React from 'react';
 import c from 'classnames'
-import marked from 'marked'
-import hljs from "highlight.js";
-
-import {ajax, animateToScrollHeight, formatToMaterialSpans, get, getStyleInt, noop} from "~/utils";
 
 import {throttle, debounce} from 'lodash'
-
-import style from './login.scss'
 
 import TextField from "~/components/TextField";
 import {svgCommentDark, svgComment, svgHeartDark, svgHeart} from "~/assets/svg";
 import Button from "~/components/Button";
 import toReadableDateString from "~/utils/toReadableDateString";
 
+
+import  './login.scss'
 
 export default class Login extends React.Component {
 

@@ -109,7 +109,7 @@ export default class Main extends React.Component {
           siteName={'you know znm'}
         />
         <div
-          className={c('rhaego-main', 'rhaego-responsive')}
+          className={c('rhaego-main-container', 'rhaego-responsive')}
           style={style}
           ref={this.setMainRef}
         >

@@ -34,7 +34,7 @@ export default class Editor extends React.Component {
   setParsedHTML = () => {
     const renderer = new marked.Renderer()
     renderer.link = (href, title, text) => {
-      return `<a target="_blank" href="${href}" title="'${title}">${text}</a>`;
+      return `<a target="_blank" href="${href}" title="${title}">${text}</a>`;
     }
     marked.setOptions({
       renderer,
@@ -55,13 +55,7 @@ export default class Editor extends React.Component {
           markdownContent: res.text
         })
       })
-    this.setEditorLayout()
-    window.addEventListener('resize', this.setEditorLayout)
-  }
-
-  setEditorLayout = () => {
-    document.querySelector('.rhaego-editor').style.height = `${window.innerHeight}px`
-    document.body.classList.add('editor-layout')
+    document.body.classList.add('full-vh-content')
   }
 
   componentDidUpdate() {
@@ -75,10 +69,8 @@ export default class Editor extends React.Component {
     }
   }
 
-
   componentWillUnmount() {
-    document.body.classList.remove('editor-layout')
-    window.removeEventListener('resize', this.setEditorLayout)
+    document.body.classList.remove('full-vh-content')
   }
 
   renderInfo = () => {
@@ -144,35 +136,49 @@ export default class Editor extends React.Component {
   render() {
     return (
       <div className={'rhaego-editor'} style={style} ref={this.setRef}>
-        {/*<div className={'fields'}>*/}
-        {/*  <TextField*/}
-        {/*    className={'comment-author'}*/}
-        {/*    label={'标题'}*/}
-        {/*    value={this.state.commentAuthor}*/}
-        {/*    width={240}*/}
-        {/*    maxLength={16}*/}
-        {/*    validatorRegExp={/^\d{2,16}$/}*/}
-        {/*    hint={'输入2至16个字符的称呼。'}*/}
-        {/*  />*/}
-        {/*  <TextField*/}
-        {/*    className={'comment-author'}*/}
-        {/*    label={'标签'}*/}
-        {/*    value={this.state.commentAuthor}*/}
-        {/*    width={240}*/}
-        {/*    maxLength={16}*/}
-        {/*    validatorRegExp={/^\d{2,16}$/}*/}
-        {/*    hint={'输入以#分隔的标签。'}*/}
-        {/*  />*/}
-        {/*  <TextField*/}
-        {/*    className={'comment-author'}*/}
-        {/*    label={'发布时间'}*/}
-        {/*    value={this.state.commentAuthor}*/}
-        {/*    width={240}*/}
-        {/*    maxLength={16}*/}
-        {/*    validatorRegExp={/^\d{2,16}$/}*/}
-        {/*    hint={'输入AAAA/BB时间。'}*/}
-        {/*  />*/}
-        {/*</div>*/}
+        <div className={'editor-fields'}>
+          <TextField
+            className={'title'}
+            label={'标题'}
+            value={this.state.title}
+            width={480}
+            maxLength={16}
+            validatorRegExp={/^\d{2,16}$/}
+            hint={'输入2至16个字符的标题。'}
+          />
+          <TextField
+            className={'tags'}
+            label={'标签'}
+            value={this.state.tagsText}
+            width={240}
+            maxLength={16}
+            validatorRegExp={/^\d{2,16}$/}
+            hint={'输入以#分隔的标签。'}
+          />
+          <TextField
+            className={'date'}
+            label={'发布时间'}
+            value={this.state.date}
+            width={240}
+            maxLength={16}
+            validatorRegExp={/^\d{2,16}$/}
+            hint={'输入YYYY/MM/DD格式的时间。'}
+          />
+          <div className={'actions'}>
+            <Button
+              className={'submit'}
+            >
+              保存
+            </Button>
+            <Button
+              className={'cancel'}
+              type={'secondary'}
+            >
+              取消
+            </Button>
+          </div>
+
+        </div>
         <div className={'compare-wrap'}>
             <textarea className={'raw'} value={this.state.markdownContent}/>
           <div
