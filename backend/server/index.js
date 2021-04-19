@@ -2,47 +2,51 @@ const Koa = require('koa')
 const path = require('path')
 const fs = require('fs')
 
+const db = require('../data')
+
 const app = new Koa()
 
-// app.use(async ctx => {
-//   ctx.body = 'Hello World'
-// })
-
-// c.Header("Access-Control-Allow-Origin", "*")
-// c.Header("Access-Control-Allow-Methods", "GET, POST")
-
-const main = ctx => {
-  ctx.response.type = 'json'
-  ctx.response.body = {
-    text: fs.readFileSync(path.resolve(__dirname, '../files/test.md'), 'utf-8')
-  }
-
+const main = (ctx,next) => {
   ctx.response.set("Access-Control-Allow-Origin", "*")
   ctx.response.set("Access-Control-Allow-Methods", "GET, POST")
-};
+  ctx.response.type = 'html';
+  next()
+}
 
-app.use(main);
+const one = (ctx, next) => {
+  ctx.response.type = 'json'
+  ctx.response.body = {
+    text: fs.readFileSync(path.resolve(__dirname, '../files/test.md'), () => {}, 'utf8')
+  }
+}
+
+app.use(main)
+app.use(one);
+
 
 app.listen(3000)
 
+
 //
 
-const NeDB = require('nedb')
 
-const db = new NeDB({
-  filename: path.resolve(__dirname, '../data/rhaego.db'),
-  autoload: true,
-})
+// const commentDataBase = new Datastore({
+//   filename: path.resolve(__dirname, '../data/comment.DataBase'),
+//   autoload: true,
+// })
 
-// db.insert({
+// DataBase.insert({
 //   name: 'Alice',
 //   age: 20
 // }, function (err, doc) {
 //   console.log(':', doc)
 // })
 
-db.find({
-  name: 'Alice',
-}, function(err, docs) {
-  console.log('Alice found:', docs)
-})
+// db.articles.find({
+//   name: 'Alice',
+// }, function(err, docs) {
+//   console.log('Alice found:', docs)
+// })
+
+
+db.getArticles()

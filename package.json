@@ -29,6 +29,8 @@
     "highlight.js": "^10.7.2",
     "html-webpack-plugin": "^5.3.1",
     "koa": "^2.13.1",
+    "koa-route": "^3.2.0",
+    "koa-static": "^5.0.0",
     "marked": "^2.0.3",
     "nedb": "^1.8.0",
     "prop-types": "^15.7.2",

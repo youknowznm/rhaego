@@ -245,8 +245,8 @@ export default class Article extends React.Component {
     }
     return <ul className={'comments'}>
       {
-        cms.map(item => (
-          <li className={'comment existed'}>
+        cms.map((item, index) => (
+          <li className={'comment existed'} key={index}>
             <p className={'author'}>
               {item.author}
               <span> 发表于 </span>

@@ -7,7 +7,7 @@ import Button from "~/components/Button";
 import Article from "~/modules/Article";
 import Articles from "~/modules/Articles";
 import TextField from "~/components/TextField";
-import Modal from "~/components/Modal";
+import Dialog from "~/components/Dialog";
 
 const links = [
   {name: '笔记'},
@@ -69,14 +69,13 @@ export default class Main extends React.Component {
     )
   }
 
-  renderModal = () => {
-
+  renderDialog = () => {
     return (
       <div>
         <Button onClick={() => {
           this.setState({sm: true})
         }}>展示吧</Button>
-        <Modal
+        <Dialog
           isOpen={this.state.sm}
           onConfirm={() => {
             this.setState({sm: false})
@@ -103,11 +102,11 @@ export default class Main extends React.Component {
           ref={this.setMainRef}
         >
           {/*<Editor />*/}
-          {/*<Article />*/}
-          <Login />
+          <Article />
+          {/*<Login />*/}
           {/*<Articles />*/}
           {/*{this.renderButton()}*/}
-          {/*{this.renderModal()}*/}
+          {/*{this.renderDialog()}*/}
         </div>
         <Footer />
       </>

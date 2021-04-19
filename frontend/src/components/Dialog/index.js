@@ -13,10 +13,10 @@ import {
   getScrollBarWidth,
 } from '../../utils'
 
-import style from './modal.scss'
+import style from './dialog.scss'
 import * as ReactDOM from "react-dom";
 
-export default class Modal extends React.Component {
+export default class Dialog extends React.Component {
 
   static propTypes = {
     title: PropTypes.string,
@@ -30,8 +30,8 @@ export default class Modal extends React.Component {
   }
 
   static defaultProps = {
-    title: '模态框',
-    content: '模态框内容模',
+    title: '对话框',
+    content: '对话框内容对话框内容对话框内容对话框内容对话框内容',
     confirmButtonText: '确认',
     cancelButtonText: '取消',
     onConfirm: noop,
@@ -91,7 +91,7 @@ export default class Modal extends React.Component {
   }
 
   modalRef = null
-  setModalRef = ref => {
+  setDialogRef = ref => {
     this.modalRef = ref
   }
 
@@ -102,11 +102,18 @@ export default class Modal extends React.Component {
       confirmButtonText,
       cancelButtonText,
       confirmOnly,
+      isOpen,
     } = this.props
+
+    if (!this.props.isOpen) {
+      return null
+    }
 
     const className = c(
       'rhaego-modal',
-      this.props.isOpen && 'visible',
+      // TODO 比较 不渲染节点 和 渲染但不展示 的效果
+      // this.props.isOpen && 'visible',
+      'visible',
       this.props.className
     )
 
@@ -115,7 +122,7 @@ export default class Modal extends React.Component {
         className={className}
         style={style}
         onClick={this.onClickCover}
-        ref={this.setModalRef}
+        ref={this.setDialogRef}
       >
         <div className={'modal-innner'}>
           <h1 className="modal-title">{title}</h1>
