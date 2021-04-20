@@ -1,6 +1,6 @@
-import {githubUsername} from '~/config'
+import {githubUser} from '~/config'
 
-export const fetchGithub = `https://api.github.com/users/${githubUsername}/repos?visibility=public`
+export const fetchGithub = `https://api.github.com/users/${githubUser}/repos?visibility=public`
 export const login = '/api/login'
 export const logout = '/api/logout'
 export const uploadPicture = '/api/picture'

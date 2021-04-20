@@ -9,6 +9,6 @@ __old
 
 /frontend/_modules
 
-/backend/data/
+/backend/data/*.db
 /backend/files/
 /backend/static/

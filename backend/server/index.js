@@ -4,6 +4,62 @@ const fs = require('fs')
 
 const db = require('../data')
 
+//
+// setTimeout(() => {
+//   db.getGithubRepos().then(r => {
+//     console.log(r)}
+//   )
+//
+  db.getGithubRepos().then(r => {
+    console.log({r})
+  })
+//
+// })
+
+
+
+// db.saveArticle({
+//   _id: 'pUlgHg3q3geS2Jhz',
+//   title: 'sbasdf',
+//   tags: ['af'],
+//   content: '### 哈哈哈',
+//   dateString: '2020-11-11'
+// }).then(doc => {
+//   console.log(111, doc)
+// }).catch(e => {
+//   console.log({e})
+// })
+//
+// db.getArticles().then(r => {
+//   console.log(r.length)
+// })
+//
+//
+// db.getComments('pUlgHg3q3geS2Jhz').then(cmt => {
+//   console.log({cmt})
+// }).catch(e => {
+//   console.log(e)
+// })
+//
+// db.saveComment({
+//   articleId: 'pUlgHg3q3geS2Jhz',
+//   clientId: 'pUlgHg3q3geS2Jhz',
+//   author: '123f',
+//   email: '123f@asdf.com',
+//   dateInMs: new Date().valueOf().toString(),
+//   content: 'sfd',
+// }).catch(e => {
+//   console.log(e)
+// })
+//
+// // setTimeout(() => {
+//   db.getComments('pUlgHg3q3geS2Jhz').then(cmt => {
+//     console.log({cmt})
+//   }).catch(e => {
+//     console.log(e)
+//   })
+// // }, 100)
+
 const app = new Koa()
 
 const main = (ctx,next) => {

@@ -221,7 +221,7 @@ export default class Article extends React.Component {
         width={492}
         maxLength={120}
         validatorRegExp={/^.{4,120}$/}
-        hint={'输入4至120字符的评论。'}
+        hint={'输入4至120字符的评论`。`'}
       />
       <Button
         className={'submit'}
