@@ -40,7 +40,7 @@ const validateCommentDoc = fields => {
     author,
     email,
     content,
-    createDate
+    // createDate
   } = fields
   let errMsg = ''
   switch (true) {
@@ -62,6 +62,31 @@ const validateCommentDoc = fields => {
     // case (!(/^\d+$/.test(createDate))):
     //   errMsg = ('缺少合法的评论时间')
     //   break
+    default:
+  }
+  if (errMsg !== '') {
+    return new Error(errMsg)
+  }
+  return null
+}
+
+const validateClientDoc = fields => {
+  const {
+    clientId,
+    dailyAttempts,
+    restricted,
+  } = fields
+  let errMsg = ''
+  switch (true) {
+    case (!(/\S/.test(clientId))):
+      errMsg = ('缺少客户端 id')
+      break
+    case (!(/^\d+$/.test(dailyAttempts))):
+      errMsg = ('缺少有效的每日请求次数')
+      break
+    case (typeof restricted !== 'boolean'):
+      errMsg = ('缺少有效的禁用标识')
+      break
     default:
   }
   if (errMsg !== '') {

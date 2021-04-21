@@ -2,41 +2,134 @@ const path = require('path')
 const Datastore = require('nedb')
 const request = require('request')
 
-const {GET_GITHUB_REPOS} = require("../api");
+const {GET_GITHUB_REPOS} = require("../api")
 
 const {
   validateArticleDoc,
   validateCommentDoc,
+  validateClientDoc,
 } = require('./validators')
-
 
 const isValidString = target => typeof target === 'string' && target !== ''
 
 class RhaegoDb {
 
   constructor() {
-    this.authDb = new Datastore({
-      filename: path.resolve(__dirname, './auth.db'),
+
+    this.generalDb = new Datastore({
+      filename: path.resolve(__dirname, './general.db'),
       autoload: true,
     })
+    this.initGeneralDb()
+
     this.articleDb = new Datastore({
       filename: path.resolve(__dirname, './articles.db'),
       autoload: true,
     })
+
     this.commentDb = new Datastore({
       filename: path.resolve(__dirname, './comments.db'),
       autoload: true,
     })
+
     this.clientDb = new Datastore({
       filename: path.resolve(__dirname, './clients.db'),
       autoload: true,
     })
-    this.githubRepoDb = new Datastore({
-      filename: path.resolve(__dirname, './githubRepos.db'),
-      autoload: true,
-    })
-    this.initGithubRepos()
   }
+
+  // ===== 通用 =====
+
+  initGeneralDb = () => {
+    this.generalDb.findOne({label: 'githubRepos'}, (err, generalDoc) => {
+      if (generalDoc !== null) {
+        return
+      }
+      this.generalDb.insert({
+        label: 'githubRepos',
+        repoDetail: null,
+        updated: new Date().valueOf(),
+      })
+    })
+  this.generalDb.findOne({label: 'visitCount'}, (err, generalDoc) => {
+      if (generalDoc !== null) {
+        return
+      }
+      this.generalDb.insert({
+        label: 'visitCount',
+        count: 0,
+      })
+    })
+  }
+
+  // 10 分钟过期
+  REPO_DATA_EXPIRE_TIME = 10 * 60 * 1000
+
+  // 获取指定文章的评论, 从库中或 github api
+  getGithubRepos = () => new Promise((resolve, reject) => {
+    const nowDate = new Date().valueOf()
+    this.generalDb.findOne(
+      {label: 'githubRepos'},
+      (err, generalDoc) => {
+        err && reject(err)
+        if (
+          generalDoc.repoDetail === null
+          || (nowDate - generalDoc.updated >= this.REPO_DATA_EXPIRE_TIME)
+        ) {
+          // 未初始化或已过期, 请求
+          request(
+            {
+              url: GET_GITHUB_REPOS,
+              headers: {
+                'User-Agent': 'rhaego-server'
+              }
+            },
+            (error, response, body) => {
+              if (!error) {
+                this.generalDb.update(
+                  {label: 'githubRepos'},
+                  {
+                    $set: {
+                      repoDetail: body,
+                      updated: nowDate,
+                    }
+                  },
+                  (err, generalDoc) => {
+                    resolve(generalDoc)
+                  }
+                )
+              }
+            }
+          )
+        } else {
+          // 否则使用库中的
+          resolve(generalDoc)
+        }
+      }
+    )
+  })
+
+  // 递增访问数量
+  increaseVisitCount = () => new Promise((resolve, reject) => {
+    this.generalDb.findOne(
+      {label: 'visitCount'},
+      (err, generalDoc) => {
+        err && reject(err)
+        this.generalDb.update(
+          {label: 'visitCount'},
+          {
+            $set: {
+              count: generalDoc.visitCount += 1,
+            }
+          },
+          (err, generalDoc) => {
+            err && reject(err)
+            resolve(generalDoc)
+          }
+        )
+      }
+    )
+  })
 
   // ===== 文章 =====
 
@@ -115,6 +208,58 @@ class RhaegoDb {
   // ===== 文件服务 =====
 
   // upload =
+
+  // ===== 用户 =====
+
+  // 获取指定设备号的用户
+  getClient = (clientId = '') => new Promise((resolve, reject) => {
+    this.clientDb.find(
+      isValidString(clientId) ? {clientId} : {},
+      (err, clientDoc) => {
+        err && reject(err)
+        resolve(clientDoc)
+      }
+    )
+  })
+  // 新建或更新用户
+  saveClient = params => new Promise((resolve, reject) => {
+    const {
+      clientId,
+      dailyAttempts,
+      restricted,
+    } = params
+    const validationError = validateClientDoc(params)
+    if (validationError !== null) {
+      reject(validationError)
+      return
+    }
+    this.getClient(clientId)
+      .then(clientDoc => {
+        if (clientDoc === null) {
+          this.clientDb.insert(
+            {...params},
+            (err, articleDoc) => {
+              err && reject(err)
+              resolve(articleDoc)
+            }
+          )
+        } else {
+          this.clientDb.update(
+            clientDoc,
+            {$set: {...params}},
+            {},
+            (err, numAffected, articleDoc) => {
+              // console.log('?', err, numAffected, articleDoc)
+              err && reject(err)
+              resolve(numAffected)
+            }
+          )
+        }
+      })
+      .catch(err => {
+        reject(err)
+      })
+  })
 
   // ===== 赞 =====
 
@@ -222,7 +367,7 @@ class RhaegoDb {
   // 删除评论
   deleteComment = _id => new Promise((resolve, reject) => {
     this.commentDb.remove(
-      {id},
+      {_id},
       (err, commentDoc) => {
         err && reject(err)
         resolve(true)
@@ -230,69 +375,6 @@ class RhaegoDb {
     )
   })
 
-  // ===== 仓库 =====
-
-  initGithubRepos = () => {
-    this.githubRepoDb.findOne({type: 'main'}, (err, repoDoc) => {
-      if (repoDoc !== null) {
-        return
-      }
-      this.githubRepoDb.insert({
-        type: 'main',
-        repoDetail: null,
-        updated: new Date().valueOf(),
-      })
-    })
-  }
-
-  // 10 分钟过期
-  REPO_DATA_EXPIRE_TIME = 10 * 60 * 1000
-
-  // 获取指定文章的评论, 从库中或 github api
-  getGithubRepos = () => new Promise((resolve, reject) => {
-    const nowDate = new Date().valueOf()
-    this.githubRepoDb.findOne(
-      {type: 'main'},
-      (err, repoDoc) => {
-        err && reject(err)
-        if (
-          repoDoc.repoDetail === null
-          || (nowDate - repoDoc.updated >= this.REPO_DATA_EXPIRE_TIME)
-        ) {
-          // 未初始化或已过期, 请求
-          request(
-            {
-              url: GET_GITHUB_REPOS,
-              headers: {
-                'User-Agent': 'rhaego-server'
-              }
-            },
-            (error, response, body) => {
-              if (!error) {
-                this.githubRepoDb.update(
-                  {type: 'main'},
-                  {
-                    $set: {
-                      repoDetail: body,
-                      updated: nowDate,
-                    }
-                  },
-                  (err, repoDoc) => {
-                    resolve(repoDoc)
-                  }
-                )
-              }
-            }
-          )
-        } else {
-          // 否则使用库中的
-          resolve(repoDoc)
-        }
-      }
-    )
-  })
-
 }
-
 
 module.exports = new RhaegoDb()

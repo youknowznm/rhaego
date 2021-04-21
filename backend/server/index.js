@@ -11,7 +11,7 @@ const db = require('../data')
 //   )
 //
   db.getGithubRepos().then(r => {
-    console.log({r})
+    // console.log({r})
   })
 //
 // })
