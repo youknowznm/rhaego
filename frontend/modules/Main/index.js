@@ -9,6 +9,8 @@ import Articles from "~/modules/Articles";
 import TextField from "~/components/TextField";
 import Dialog from "~/components/Dialog";
 
+import {GET_ARTICLE_DETAIL, GET_ARTICLES} from '~api'
+
 const links = [
   {name: '笔记'},
   {name: '代码'},
@@ -19,6 +21,7 @@ const links = [
 import style from './main.scss'
 import Login from "~/modules/Login";
 import Editor from "~/modules/Editor";
+import {get} from "~/utils";
 
 document.documentElement.scrollTop = 0
 
@@ -37,6 +40,13 @@ export default class Main extends React.Component {
   }
 
   componentDidMount() {
+    get(GET_ARTICLES)
+      .then(res => {
+        console.log({res})
+        this.setState({
+          markdownContent: res.text
+        })
+      })
   }
 
   componentWillUnmount() {
@@ -102,9 +112,9 @@ export default class Main extends React.Component {
           ref={this.setMainRef}
         >
           {/*<Editor />*/}
-          <Article />
+          {/*<Article />*/}
           {/*<Login />*/}
-          {/*<Articles />*/}
+          <Articles />
           {/*{this.renderButton()}*/}
           {/*{this.renderDialog()}*/}
         </div>

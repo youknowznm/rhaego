@@ -1,7 +1,7 @@
 import React from 'react';
 import c from 'classnames'
 
-import siteData from '~/config'
+import siteData from '~config'
 
 import style from './footer.scss'
 

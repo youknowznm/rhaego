@@ -6,9 +6,10 @@ export function ajax(
 ) {
   return new Promise(function(resolve, reject) {
     const xhr = new XMLHttpRequest()
-    xhr.open(method, url)
-    // xhr.setRequestHeader('Content-Type', 'application-json')
-    xhr.setRequestHeader('Accept', 'application-json')
+    xhr.open(method, `${window.API_CONTEXT || ''}${url}`)
+    // xhr.withCredentials = true
+    xhr.setRequestHeader('Content-Type', 'application-json')
+    // xhr.setRequestHeader('Content-Type', 'text/plain')
     for (let key in headers) {
       xhr.setRequestHeader(key, headers[key])
     }

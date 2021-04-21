@@ -88,7 +88,9 @@
           vertical-align: middle;
         }
         .link {
+          cursor: pointer;
           margin: 0 0 0 .5em;
+          font-weight: 500;
           color: #999;
           text-decoration: underline;
           transition: all .2s $materialCubicBezier;

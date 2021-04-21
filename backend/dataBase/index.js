@@ -14,8 +14,7 @@ const isValidString = target => typeof target === 'string' && target !== ''
 
 class RhaegoDb {
 
-  constructor() {
-
+  init = () => {
     this.generalDb = new Datastore({
       filename: path.resolve(__dirname, './general.db'),
       autoload: true,

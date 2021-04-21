@@ -2,17 +2,14 @@ import React from 'react';
 import c from 'classnames'
 import marked from 'marked'
 import hljs from "highlight.js";
-
 import {ajax, animateToScrollHeight, formatToMaterialSpans, get, getStyleInt, noop} from "~/utils";
-
 import {throttle, debounce} from 'lodash'
-
-import style from './article.scss'
 import TextField from "~/components/TextField";
 import {svgCommentDark, svgComment, svgHeartDark, svgHeart} from "~/assets/svg";
 import Button from "~/components/Button";
-import toReadableDateString from "~/utils/toReadableDateString";
-
+import toReadableDateString from "~/utils/toReadableDateString"
+import style from './article.scss'
+import {GET_ARTICLE_DETAIL} from '~api'
 
 
 const re = {
@@ -73,7 +70,7 @@ export default class Article extends React.Component {
   }
 
   componentDidMount() {
-    get('http://localhost:3000')
+    get(GET_ARTICLE_DETAIL)
       .then(res => {
         this.setState({
           markdownContent: res.text

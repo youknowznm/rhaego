@@ -98,4 +98,5 @@ const validateClientDoc = fields => {
 module.exports = {
   validateArticleDoc,
   validateCommentDoc,
+  validateClientDoc,
 }

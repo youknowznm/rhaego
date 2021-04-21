@@ -1,30 +1,32 @@
+const API_CONTEXT = '/api'
+
 // 文章
 const {githubUser} = require('../../config')
 
-const GET_ARTICLES = '/getArticles'
-const GET_ARTICLE_DETAIL = '/getArticle'
-const SAVE_ARTICLE = '/saveArticle'
-const DELETE_ARTICLE = '/deleteArticle'
+const GET_ARTICLES = `${API_CONTEXT}/getArticles`
+const GET_ARTICLE_DETAIL = `${API_CONTEXT}/getArticle`
+const SAVE_ARTICLE = `${API_CONTEXT}/saveArticle`
+const DELETE_ARTICLE = `${API_CONTEXT}/deleteArticle`
 
-const LIKE_ARTICLE = '/like'
-const CANCEL_LIKE_ARTICLE = '/cancelLike'
+const LIKE_ARTICLE = `${API_CONTEXT}/like`
+const CANCEL_LIKE_ARTICLE = `${API_CONTEXT}/cancelLike`
 
-const GET_COMMENTS = '/getComments'
-const ADD_COMMENT = '/comment'
-const DELETE_COMMENT = '/deleteComment'
+const GET_COMMENTS = `${API_CONTEXT}/getComments`
+const ADD_COMMENT = `${API_CONTEXT}/comment`
+const DELETE_COMMENT = `${API_CONTEXT}/deleteComment`
 
 // 文件服务
-const UPLOAD_PIC = '/upload'
+const UPLOAD_PIC = `${API_CONTEXT}/upload`
 
 // 作品
-const GET_REPOS = '/getRepos'
+const GET_REPOS = `${API_CONTEXT}/getRepos`
 
 // 简历
-const GET_RESUME = '/getResume'
+const GET_RESUME = `${API_CONTEXT}/getResume`
 
 // 管理
-const LOGIN = '/login'
-const LOGOUT = '/logout'
+const LOGIN = `${API_CONTEXT}/login`
+const LOGOUT = `${API_CONTEXT}/logout`
 
 // github 仓库
 const GET_GITHUB_REPOS = `https://api.github.com/users/${githubUser}/repos?visibility=public`
