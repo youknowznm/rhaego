@@ -4,7 +4,6 @@ import c from 'classnames'
 import {throttle, debounce} from 'lodash'
 
 import TextField from "~/components/TextField";
-import {svgCommentDark, svgComment, svgHeartDark, svgHeart} from "~/assets/svg";
 import Button from "~/components/Button";
 import toReadableDateString from "~/utils/toReadableDateString";
 

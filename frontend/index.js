@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom'
 import Main from '~/modules/Main'
 
 window.IS_DEV = process.env.NODE_ENV !== 'production'
-window.API_CONTEXT = 'http://localhost:4000'
+// window.API_CONTEXT = 'http://localhost:4000'
 // window.API_CONTEXT = 'http://localhost:4000/api'
 
 ReactDOM.render(

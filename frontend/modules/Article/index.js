@@ -5,11 +5,11 @@ import hljs from "highlight.js";
 import {ajax, animateToScrollHeight, formatToMaterialSpans, get, getStyleInt, noop} from "~/utils";
 import {throttle, debounce} from 'lodash'
 import TextField from "~/components/TextField";
-import {svgCommentDark, svgComment, svgHeartDark, svgHeart} from "~/assets/svg";
 import Button from "~/components/Button";
 import toReadableDateString from "~/utils/toReadableDateString"
 import style from './article.scss'
 import {GET_ARTICLE_DETAIL} from '~api'
+import {SvgComment, SvgHeart} from "~/assets/svg";
 
 
 const re = {
@@ -172,9 +172,9 @@ export default class Article extends React.Component {
   renderInfo = () => {
     return <div className={'info'}>
       <div className={'actions'}>
-        {svgHeart}
+        <SvgHeart fillType={'light'} />
         <span className={'like count'}>3</span>
-        {svgComment}
+        <SvgComment fillType={'light'} />
         <span className={'comment count'}>7</span>
       </div>
       <div className={'tags'}>

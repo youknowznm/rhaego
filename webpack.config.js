@@ -9,6 +9,13 @@ module.exports = {
     path: path.resolve(__dirname, './backend/static'),
     clean: true
   },
+  devServer: {
+    contentBase: '.backend/static',
+    port: 3000,
+    proxy: {
+      '/api': 'http://localhost:4000',
+    }
+  },
   devtool: 'eval-cheap-module-source-map',
   module: {
     rules: [

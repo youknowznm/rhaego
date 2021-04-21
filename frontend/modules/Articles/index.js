@@ -2,10 +2,9 @@ import React from 'react';
 import c from 'classnames'
 import Card from "~/components/Card";
 import {
-  svgHeartDark,
-  svgCommentLight,
-  svgCommentDark,
-  svgHeartLight
+  SvgComment,
+  svgComment, SvgHeart,
+  svgHeart
 } from "~/assets/svg";
 
 import {ajax, get} from "~/utils";
@@ -91,9 +90,9 @@ export default class Articles extends React.Component {
               {...item}
             >
               <div className={'actions'}>
-                {fontTheme === 'dark' ? svgHeartDark : svgHeartLight}
+                <SvgHeart fillType={fontTheme} />
                 <span className={'like count'}>3</span>
-                {fontTheme === 'dark' ? svgCommentDark : svgCommentLight}
+                <SvgComment fillType={fontTheme} />
                 <span className={'like count'}>7</span>
               </div>
             </Card>

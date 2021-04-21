@@ -9,7 +9,6 @@ import {throttle, debounce} from 'lodash'
 
 import style from './editor.scss'
 import TextField from "~/components/TextField";
-import {svgCommentDark, svgComment, svgHeartDark, svgHeart} from "~/assets/svg";
 import Button from "~/components/Button";
 import toReadableDateString from "~/utils/toReadableDateString";
 
@@ -71,27 +70,6 @@ export default class Editor extends React.Component {
 
   componentWillUnmount() {
     document.body.classList.remove('full-vh-content')
-  }
-
-  renderInfo = () => {
-    return <div className={'info'}>
-      <div className={'actions'}>
-        {svgHeart}
-        <span className={'like count'}>3</span>
-        {svgComment}
-        <span className={'comment count'}>7</span>
-      </div>
-      <div className={'tags'}>
-        {
-          this.state.tags.map((item, index) => (
-            <Button className={'tag'} key={index}>
-              {item}
-            </Button>
-          ))
-        }
-      </div>
-      <span className={'date'}>发布于 2020-01-32</span>
-    </div>
   }
 
   renderComments = () => {

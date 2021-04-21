@@ -1,5 +1,6 @@
 import React from 'react';
 import c from 'classnames'
+import {SvgHeart} from '~/assets/svg'
 
 import siteData from '~config'
 
@@ -11,13 +12,6 @@ export default class Footer extends React.Component {
   }
 
   render() {
-
-    const heartSvg = <svg className="heart" width="14px" height="14px" viewBox="0 0 24 24">
-      <path
-        fill="#ff5252"
-        d="M12 21.35l-1.45-1.32c-5.15-4.67-8.55-7.75-8.55-11.53 0-3.08 2.42-5.5 5.5-5.5 1.74 0 3.41.81 4.5 2.09 1.09-1.28 2.76-2.09 4.5-2.09 3.08 0 5.5 2.42 5.5 5.5 0 3.78-3.4 6.86-8.55 11.54l-1.45 1.31z" />
-    </svg>
-
     return (
       <div className={'rhaego-footer'} style={style}>
         <div className={'social-wrap'}>
@@ -48,7 +42,7 @@ export default class Footer extends React.Component {
                 </a>
               </span>
               <span>. Made with</span>
-              {heartSvg}
+              <SvgHeart className={'heart'} width={14} height={14} />
               <span>by znm.</span>
             </p>
           </div>
