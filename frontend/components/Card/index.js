@@ -33,7 +33,7 @@ export default class Card extends React.Component {
     content: '',
     className: '',
     link: '',
-    targetIsBlank: true,
+    targetIsBlank: false,
   }
 
   toLinkIfAny = () => {

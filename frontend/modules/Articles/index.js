@@ -3,7 +3,8 @@ import c from 'classnames'
 import Card from "~/components/Card";
 import {
   SvgComment,
-  svgComment, SvgHeart,
+  svgComment,
+  SvgHeart,
   svgHeart
 } from "~/assets/svg";
 
@@ -11,6 +12,7 @@ import {ajax, get} from "~/utils";
 
 import style from './articles.scss'
 import Button from "~/components/Button";
+import {GET_ARTICLES} from "~api";
 
 let data = [
   {
@@ -42,8 +44,11 @@ export default class Articles extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({
-      articleList: data
+    get(GET_ARTICLES).then(res => {
+      const {articleList} = res.data
+      this.setState({
+        articleList,
+      })
     })
   }
 
@@ -78,7 +83,7 @@ export default class Articles extends React.Component {
     }
     palette.sort(() => Math.random() - .5);
     return (
-      <>
+      <div className={'article-list'}>
         {
           this.state.articleList.map((item, index) => {
             const theme = palette[index % palette.length]
@@ -88,7 +93,8 @@ export default class Articles extends React.Component {
               key={index}
               theme={theme}
               fontTheme={fontTheme}
-              {...item}
+              title={item.title}
+              content={item.content}
             >
               <div className={'tags'}>
                 {
@@ -108,7 +114,21 @@ export default class Articles extends React.Component {
             </Card>
           })
         }
-      </>
+      </div>
+    )
+  }
+
+  renderActions = () => {
+    return (
+      <div className={'actions-row'}>
+        <Button
+          className={'new-article'}
+          type={'primary'}
+          link={'/editor'}
+        >
+          新笔记
+        </Button>
+      </div>
     )
   }
 
@@ -116,6 +136,7 @@ export default class Articles extends React.Component {
     return (
       <div className={'rhaego-articles'}>
         {this.renderList()}
+        {this.renderActions()}
       </div>
     )
   }

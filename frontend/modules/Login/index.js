@@ -7,7 +7,6 @@ import TextField from "~/components/TextField";
 import Button from "~/components/Button";
 import toReadableDateString from "~/utils/toReadableDateString";
 
-
 import  './login.scss'
 
 export default class Login extends React.Component {
@@ -46,7 +45,7 @@ export default class Login extends React.Component {
         hint={'输入常见的邮箱格式。'}
       />
       <TextField
-        className={'comment-email'}
+        className={'email'}
         type={'password'}
         label={'密码'}
         value={this.state.password}

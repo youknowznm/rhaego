@@ -3,12 +3,29 @@
 .rhaego-repos {
   position: relative;
   min-height: 600px;
-  .repo-card {
-    .counts {
-      .forked.icon {
-        transform: rotate(180deg);
+  .repo-list {
+    position: relative;
+    .repo-card {
+      .counts {
+        .forked.icon {
+          transform: rotate(180deg);
+        }
       }
     }
-
+    &:after {
+      content: "不显示哦, 哇哈哈哈哈";
+      display: block;
+      height: 0;
+      clear: both;
+      visibility: hidden;
+    }
   }
+  //.actions-row {
+  //  display: block;
+  //  margin: 24px 0;
+  //  .new-article {
+  //    width: 90px;
+  //  }
+  //}
+
 }

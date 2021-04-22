@@ -158,7 +158,12 @@ export default class Editor extends React.Component {
 
         </div>
         <div className={'compare-wrap'}>
-            <textarea className={'raw'} value={this.state.markdownContent}/>
+            <textarea
+              className={'raw'}
+              value={this.state.markdownContent}
+
+              // onChange={}
+            />
           <div
             className={'parsed rhaego-markdown'}
             dangerouslySetInnerHTML={this.setParsedHTML()}

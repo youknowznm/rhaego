@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "fe-build": "webpack",
-    "fe-dev": "webpack watch",
+    "fe-dev": "webpack serve",
     "be": "nodemon backend/server"
   },
   "repository": {

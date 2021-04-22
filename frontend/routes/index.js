@@ -9,10 +9,13 @@ import {
 } from "react-router-dom"
 import Main from "~/modules/Main"
 import Header from "~/modules/Header"
-import Editor from "~/modules/Editor"
 import Footer from "~/modules/Footer"
+import Editor from "~/modules/Editor"
 import Articles from "~/modules/Articles"
+import Article from "~/modules/Article"
 import Repos from "~/modules/Repos"
+import Resume from "~/modules/Resume"
+import Login from "~/modules/Login"
 
 export default function Routes() {
   return (
@@ -23,18 +26,21 @@ export default function Routes() {
           <Route exact path="/articles">
             <Articles />
           </Route>
+          <Route exact path="/article/:id">
+            <Article />
+          </Route>
           <Route exact path="/repos">
             <Repos />
           </Route>
           <Route exact path="/editor">
             <Editor />
           </Route>
-          {/*<Route exact path="/resume">*/}
-          {/*  <Resume />*/}
-          {/*</Route>*/}
-          {/*<Route exact path="/login">*/}
-          {/*  <Login />*/}
-          {/*</Route>*/}
+          <Route exact path="/resume">
+            <Resume />
+          </Route>
+          <Route exact path="/login">
+            <Login />
+          </Route>
           <Route path="/">
             <p>404</p>
           </Route>

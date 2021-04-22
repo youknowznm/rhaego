@@ -1,7 +1,7 @@
 const path = require('path')
 const Koa = require('koa')
 const fs = require('fs')
-const db = require('../dataBase')
+const db = require('../data')
 const {
   GET_ARTICLES,
   GET_ARTICLE_DETAIL,
@@ -23,7 +23,7 @@ const {
 const logger = require('koa-logger')
 const router = require('@koa/router')()
 const koaBody = require('koa-body')
-const serve = require('koa-static');
+const serve = require('koa-static')
 
 const app = new Koa()
 
@@ -38,22 +38,35 @@ app.use(serve(
   path.resolve( __dirname,  '../static')
 ))
 
-// route definitions
-// app.use(
-
+// 路由
 router
   .get(GET_ARTICLES, async function getArticles(ctx) {
     const articles = await db.getArticles()
     ctx.body = {
-      data: articles
+      data: {
+        articleList: articles
+      }
+    }
+  })
+  .get(GET_ARTICLE_DETAIL, async function getArticles(ctx) {
+    ctx.body = {
+      data: {
+        resume: fs.readFileSync(path.resolve(__dirname,  '../files/test.md'), 'utf8')
+      }
     }
   })
   .get(GET_REPOS, async function getRepos(ctx) {
-    const repoDetail = await db.getGithubRepos()
-    ctx.type = 'json'
+    const repoList = await db.getGithubRepos()
     ctx.body = {
       data: {
-        repoDetail: JSON.parse(repoDetail)
+        repoList: JSON.parse(repoList)
+      }
+    }
+  })
+  .get(GET_RESUME, async function getResume(ctx) {
+    ctx.body = {
+      data: {
+        resume: fs.readFileSync(path.resolve(__dirname,  '../data/resume.md'), 'utf8')
       }
     }
   })
@@ -62,14 +75,14 @@ router
   // .get('/post/:id', show)
   // .post('/post', create)
 
+app.use(router.routes())
 
+// 未匹配任何路由时, 返回 index.html, 以适配 browserHistory
 app.use(async (ctx,next) => {
   console.log('未匹配', ctx.request.url)
   ctx.type = 'html'
   ctx.response.body = fs.readFileSync(path.resolve(__dirname,  '../static/index.html'), 'utf8')
   await next()
 })
-
-app.use(router.routes())
 
 app.listen(4000)

@@ -84,13 +84,12 @@ export default class TextField extends React.Component {
       isInvalid && 'invalid',
     )
     const style = {
-      ...style,
       width: this.props.width
     }
     const placeholder = this.state.focused ? this.props.placeholder : ''
     return (
       <div className={className}>
-        <div className="input-content">
+        <div className="input-content" style={style}>
           <label>{this.props.label}</label>
           <input
             ref={this.setRef}

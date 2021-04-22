@@ -46,7 +46,7 @@ class RhaegoDb {
       }
       this.generalDb.insert({
         label: 'githubRepos',
-        repoDetail: null,
+        repoList: null,
         updated: new Date().valueOf(),
       })
     })
@@ -72,7 +72,7 @@ class RhaegoDb {
       (err, generalDoc) => {
         err && reject(err)
         if (
-          generalDoc.repoDetail === null
+          generalDoc.repoList === null
           || (nowDate - generalDoc.updated >= this.REPO_DATA_EXPIRE_TIME)
         ) {
           // 未初始化或已过期, 请求
@@ -89,7 +89,7 @@ class RhaegoDb {
                   {label: 'githubRepos'},
                   {
                     $set: {
-                      repoDetail: body,
+                      repoList: body,
                       updated: nowDate,
                     }
                   },
@@ -102,7 +102,7 @@ class RhaegoDb {
           )
         } else {
           // 否则使用库中的
-          resolve(generalDoc.repoDetail)
+          resolve(generalDoc.repoList)
         }
       }
     )

@@ -24,18 +24,15 @@ export default class Repos extends React.Component {
 
   componentDidMount() {
     get(GET_REPOS).then(res => {
-      const repoList = res.data.repoDetail.sort((prev, curr) => {
-        return -(prev.stargazers_count - curr.stargazers_count)
-      })
+      const repoList = res.data.repoList
+        .sort((prev, curr) => {
+          return -(prev.stargazers_count - curr.stargazers_count)
+        })
+        // .filter(item => item.stargazers_count > 0)
       this.setState({
         repoList,
       })
     })
-  }
-
-  getClickHandler = item => evt => {
-    console.log(123)
-    window.open(item.html_url)
   }
 
   renderList = () => {
@@ -69,7 +66,7 @@ export default class Repos extends React.Component {
     }
     palette.sort(() => Math.random() - .5)
     return (
-      <>
+      <div className={'repo-list'}>
         {
           this.state.repoList.map((item, index) => {
             const theme = palette[index % palette.length]
@@ -94,6 +91,7 @@ export default class Repos extends React.Component {
               title={name}
               content={description}
               link={html_url}
+              targetIsBlank
             >
               <div className={'tags'}>
                 {
@@ -102,6 +100,7 @@ export default class Repos extends React.Component {
                       size={'small'}
                       className={'tag'}
                       link={homepage}
+                      targetIsBlank
                     >
                       演示
                     </Button>
@@ -117,7 +116,7 @@ export default class Repos extends React.Component {
             </Card>;
           })
         }
-      </>
+      </div>
     )
   }
 

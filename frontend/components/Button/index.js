@@ -33,7 +33,7 @@ export default class Button extends React.Component {
     isFlat: false,
     size: 'normal',
     link: '',
-    targetIsBlank: true,
+    targetIsBlank: false,
   }
 
   state = {

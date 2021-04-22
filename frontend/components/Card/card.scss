@@ -7,6 +7,7 @@ $golden-ratio: 0.618;
   background: $white;
   z-index: 90;
   display: inline-block;
+  float: left;
   width: 50%;
   height: 300px;
   cursor: pointer;
@@ -21,6 +22,7 @@ $golden-ratio: 0.618;
   .title {
     font-size: 24px;
     line-height: 32px;
+    min-height: 32px;
     display: -webkit-box;
     max-height: calc(2 * 32px);
     overflow: hidden;

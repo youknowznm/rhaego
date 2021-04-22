@@ -5,17 +5,17 @@ module.exports = {
   mode: 'development',
   entry: './frontend/index.js',
   output: {
-    filename: 'main.js',
     path: path.resolve(__dirname, './backend/static'),
+    filename: 'main.js',
   },
-  // devServer: {
-  //   contentBase: '.backend/static',
-  //   port: 3000,
-  //   proxy: {
-  //     'api': 'http://localhost:4000',
-  //   },
-  //   historyApiFallback: true
-  // },
+  devServer: {
+    contentBase: '.backend/static',
+    port: 3000,
+    proxy: {
+      '/api': 'http://localhost:4000',
+    },
+    historyApiFallback: true,
+  },
   devtool: 'eval-cheap-module-source-map',
   module: {
     rules: [
