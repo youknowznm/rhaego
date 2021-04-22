@@ -10,11 +10,12 @@ import {
 import {ajax, get} from "~/utils";
 
 import style from './articles.scss'
+import Button from "~/components/Button";
 
 let data = [
   {
     id: 'afd',
-    title: 'No Such Thing as Offline',
+    title: 'No Such Thing as Offline No Such Thing as Offline No Such Thing as Offline',
     // title: 'No Such Thing as Offline No Such Thing as Offline',
     content: '这些调色板最初由 Material Design 于 2014 年创建，由一些旨在和谐搭配的颜色组成，您可以用它们来开发品牌调色板。要生成您专属的颜色协调的调色板，请使用调色板生成工具。这些调色板最初由 Material Design 于 2014 年创建，由一些旨在和谐搭配的颜色组成，您可以用它们来开发品牌调色板。要生成您专属的颜色协调的调色板，请使用调色板生成工具。这些调色板最初由 Material Design 于 2014 年创建，由一些旨在和谐搭配的颜色组成，您可以用它们来开发品牌调色板。要生成您专属的颜色协调的调色板，请使用调色板生成工具。',
     tags: ['React', '调色板', 'A'],
@@ -77,7 +78,7 @@ export default class Articles extends React.Component {
     }
     palette.sort(() => Math.random() - .5);
     return (
-      <div ref={this.setRef} >
+      <>
         {
           this.state.articleList.map((item, index) => {
             const theme = palette[index % palette.length]
@@ -89,22 +90,31 @@ export default class Articles extends React.Component {
               fontTheme={fontTheme}
               {...item}
             >
-              <div className={'actions'}>
-                <SvgHeart fillType={fontTheme} />
-                <span className={'like count'}>3</span>
-                <SvgComment fillType={fontTheme} />
-                <span className={'like count'}>7</span>
+              <div className={'tags'}>
+                {
+                  item.tags.map((item, index) => (
+                    <Button size={'small'} className={'tag'} key={index}>
+                      {item}
+                    </Button>
+                  ))
+                }
+              </div>
+              <div className={'counts'}>
+                <SvgHeart lassName={'liked icon'} fill={fontTheme} />
+                <span className={'liked count'}>3</span>
+                <SvgComment lassName={'comment icon'} fill={fontTheme} />
+                <span className={'comment count'}>7</span>
               </div>
             </Card>
           })
         }
-      </div>
+      </>
     )
   }
 
   render() {
     return (
-      <div className={'rhaego-articles'} style={style} ref={this.setRef}>
+      <div className={'rhaego-articles'}>
         {this.renderList()}
       </div>
     )

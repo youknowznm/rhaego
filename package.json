@@ -6,12 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "fe-build": "webpack",
-    "fe-dev": "webpack serve",
+    "fe-dev": "webpack watch",
     "be": "nodemon backend/server"
   },
   "repository": {
     "type": "git",
-    "url": "ssh://zhangenming@icode.baidu.com:8235/baidu/erp/erp-ui-previewer"
+    "url": "git@github.com:youknowznm/rhaego.git"
   },
   "keywords": [],
   "author": "",
@@ -40,6 +40,8 @@
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
     "request": "^2.88.2",
     "sass": "^1.32.8",
     "sass-loader": "^11.0.1",

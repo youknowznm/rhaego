@@ -43,7 +43,3 @@ export function get(url, data, headers) {
 export function post(url, data, headers) {
   return ajax('POST', url, data, headers)
 }
-
-import {GET_ARTICLES} from '~api'
-
-console.log({GET_ARTICLES})

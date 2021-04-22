@@ -94,7 +94,7 @@ class RhaegoDb {
                     }
                   },
                   (err, generalDoc) => {
-                    resolve(generalDoc)
+                    resolve(body)
                   }
                 )
               }
@@ -102,7 +102,7 @@ class RhaegoDb {
           )
         } else {
           // 否则使用库中的
-          resolve(generalDoc)
+          resolve(generalDoc.repoDetail)
         }
       }
     )

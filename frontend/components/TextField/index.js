@@ -89,7 +89,7 @@ export default class TextField extends React.Component {
     }
     const placeholder = this.state.focused ? this.props.placeholder : ''
     return (
-      <div className={className} style={style}>
+      <div className={className}>
         <div className="input-content">
           <label>{this.props.label}</label>
           <input

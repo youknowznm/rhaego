@@ -6,7 +6,7 @@ import {
   getStyleInt,
   animateToScrollHeight,
   formatToMaterialSpans,
-  formatDate,
+  formatDate, callIfCallable,
 } from '../../utils'
 
 
@@ -21,6 +21,8 @@ export default class Button extends React.Component {
     isFlat: PropTypes.bool,
     type: PropTypes.oneOf(['normal', 'primary', 'secondary']),
     size: PropTypes.oneOf(['normal', 'small']),
+    link: PropTypes.string,
+    targetIsBlank: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -30,6 +32,8 @@ export default class Button extends React.Component {
     type: 'normal',
     isFlat: false,
     size: 'normal',
+    link: '',
+    targetIsBlank: true,
   }
 
   state = {
@@ -96,6 +100,22 @@ export default class Button extends React.Component {
     this.setRippleRadius()
   }
 
+  toLinkIfAny = () => {
+    const {
+      link,
+      targetIsBlank,
+      onClick,
+    } = this.props
+    callIfCallable(onClick)
+    if (link !== '') {
+      if (targetIsBlank) {
+        window.open(link)
+      } else {
+        location.href = link
+      }
+    }
+  }
+
   render() {
     const rippleSize = isNaN(this.rippleRadius) ? 0 : this.rippleRadius * 2
     const rippleStyle = {
@@ -120,7 +140,7 @@ export default class Button extends React.Component {
         onMouseDown={this.startRipple}
         onMouseUp={this.endRipple}
         onMouseOut={this.endRipple}
-        onClick={this.props.onClick}
+        onClick={this.toLinkIfAny}
       >
         <span className={'button-content'}>
           {this.props.children}

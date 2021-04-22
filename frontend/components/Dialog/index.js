@@ -120,7 +120,6 @@ export default class Dialog extends React.Component {
     return ReactDOM.createPortal(
       <div
         className={className}
-        style={style}
         onClick={this.onClickCover}
         ref={this.setDialogRef}
       >

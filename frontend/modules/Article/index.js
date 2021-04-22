@@ -172,9 +172,9 @@ export default class Article extends React.Component {
   renderInfo = () => {
     return <div className={'info'}>
       <div className={'actions'}>
-        <SvgHeart fillType={'light'} />
+        <SvgHeart fill={'light'} />
         <span className={'like count'}>3</span>
-        <SvgComment fillType={'light'} />
+        <SvgComment fill={'light'} />
         <span className={'comment count'}>7</span>
       </div>
       <div className={'tags'}>
@@ -259,7 +259,7 @@ export default class Article extends React.Component {
     render() {
     const title = 'Progress 进度条组件 Progress 进度条组件 Progress 进度条组件 Progress 进度条组件 '
     return (
-      <div className={'rhaego-article'} style={style} ref={this.setRef}>
+      <div className={'rhaego-article'} ref={this.setRef}>
         <ul className={'article-navs'} ref={this.setNavRef}>
           {
             this.state.headers.map((item, index) => (

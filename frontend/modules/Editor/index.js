@@ -113,7 +113,7 @@ export default class Editor extends React.Component {
 
   render() {
     return (
-      <div className={'rhaego-editor'} style={style} ref={this.setRef}>
+      <div className={'rhaego-editor'} ref={this.setRef}>
         <div className={'editor-fields'}>
           <TextField
             className={'title'}

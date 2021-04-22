@@ -1,0 +1,14 @@
+@import "~style/main";
+
+.rhaego-repos {
+  position: relative;
+  min-height: 600px;
+  .repo-card {
+    .counts {
+      .forked.icon {
+        transform: rotate(180deg);
+      }
+    }
+
+  }
+}

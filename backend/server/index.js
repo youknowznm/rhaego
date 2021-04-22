@@ -1,5 +1,6 @@
 const path = require('path')
 const Koa = require('koa')
+const fs = require('fs')
 const db = require('../dataBase')
 const {
   GET_ARTICLES,
@@ -26,7 +27,6 @@ const serve = require('koa-static');
 
 const app = new Koa()
 
-
 // 初始化数据库
 db.init()
 
@@ -34,84 +34,42 @@ db.init()
 app.use(logger())
 app.use(koaBody())
 
-// route definitions
 app.use(serve(
   path.resolve( __dirname,  '../static')
 ))
 
+// route definitions
+// app.use(
+
 router
-  .get(GET_ARTICLES, getArticles)
+  .get(GET_ARTICLES, async function getArticles(ctx) {
+    const articles = await db.getArticles()
+    ctx.body = {
+      data: articles
+    }
+  })
+  .get(GET_REPOS, async function getRepos(ctx) {
+    const repoDetail = await db.getGithubRepos()
+    ctx.type = 'json'
+    ctx.body = {
+      data: {
+        repoDetail: JSON.parse(repoDetail)
+      }
+    }
+  })
+
   // .get('/post/new', add)
   // .get('/post/:id', show)
   // .post('/post', create)
 
+
+app.use(async (ctx,next) => {
+  console.log('未匹配', ctx.request.url)
+  ctx.type = 'html'
+  ctx.response.body = fs.readFileSync(path.resolve(__dirname,  '../static/index.html'), 'utf8')
+  await next()
+})
+
 app.use(router.routes())
 
-async function serveStatic(ctx) {
-  // const articles = await db.getArticles()
-  // ctx.body = {
-  //   data: articles
-  // }
-  // // await ctx.render('list', { posts: posts })
-}
-
-/**
- * Post listing.
- */
-
-async function getArticles(ctx) {
-  const articles = await db.getArticles()
-  ctx.body = {
-    data: articles
-  }
-  // await ctx.render('list', { posts: posts })
-}
-
-/**
- * Show creation form.
- */
-
-async function add(ctx) {
-  await ctx.render('new')
-}
-
-/**
- * Show post :id.
- */
-
-async function show(ctx) {
-  const id = ctx.params.id
-  const post = posts[id]
-  if (!post) ctx.throw(404, 'invalid post id')
-  await ctx.render('show', { post: post })
-}
-
-/**
- * Create a post.
- */
-
-async function create(ctx) {
-  const post = ctx.request.body
-  const id = posts.push(post) - 1
-  post.created_at = new Date()
-  post.id = id
-  ctx.redirect('/')
-}
-
 app.listen(4000)
-
-
-// const tmpdir = os.tmpdir();
-// const filePaths = [];
-// const files = ctx.request.body.files || {};
-//
-// for (let key in files) {
-//   const file = files[key];
-//   const filePath = path.join(tmpdir, file.name);
-//   const reader = fs.createReadStream(file.path);
-//   const writer = fs.createWriteStream(filePath);
-//   reader.pipe(writer);
-//   filePaths.push(filePath);
-// }
-//
-// ctx.body = filePaths;
