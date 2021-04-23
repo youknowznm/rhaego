@@ -2,8 +2,7 @@ import React from 'react';
 import c from 'classnames'
 import marked from 'marked'
 import hljs from "highlight.js";
-import {ajax, animateToScrollHeight, formatToMaterialSpans, get, getStyleInt, noop} from "~/utils";
-import {throttle, debounce} from 'lodash'
+import {ajax, throttle, animateToScrollHeight, formatToMaterialSpans, get, getStyleInt, noop} from "~/utils";
 import TextField from "~/components/TextField";
 import Button from "~/components/Button";
 import toReadableDateString from "~/utils/toReadableDateString"
@@ -27,7 +26,7 @@ export default class Resume extends React.Component {
     }
   }
 
-  setParsedHTML = () => {
+  getParsedHTML = () => {
     const renderer = new marked.Renderer()
     renderer.link = (href, title, text) => {
       return `<a target="_blank" href="${href}" title="'${title}">${text}</a>`;
@@ -256,7 +255,7 @@ export default class Resume extends React.Component {
             <h1 className={'title'}>{formatToMaterialSpans(title)}</h1>
             {this.renderInfo()}
           </div>
-          <div className={'rhaego-markdown'} dangerouslySetInnerHTML={this.setParsedHTML()} />
+          <div className={'rhaego-markdown'} dangerouslySetInnerHTML={this.getParsedHTML()} />
         </div>
         <div className={'article-bottom'}>
           {this.renderComments()}

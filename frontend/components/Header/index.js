@@ -5,10 +5,9 @@ import {
   // throttle,
   formatToMaterialSpans,
   getStyleInt,
+  throttle,
   animateToScrollHeight
 } from '../../utils'
-
-import {throttle, debounce} from 'lodash'
 
 import style from './header.scss'
 

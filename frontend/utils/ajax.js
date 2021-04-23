@@ -1,3 +1,5 @@
+import {setSearchParams} from './index'
+
 export function ajax(
   method,
   url,
@@ -5,11 +7,14 @@ export function ajax(
   headers = {}
 ) {
   return new Promise(function(resolve, reject) {
+    const isGetMethod = method === 'GET'
     const xhr = new XMLHttpRequest()
-    xhr.open(method, `${window.API_CONTEXT || ''}${url}`)
-    // xhr.withCredentials = true
+    url = `${window.API_CONTEXT || ''}${url}`
+    if (isGetMethod) {
+      setSearchParams(url, data)
+    }
+    xhr.open(method, url)
     xhr.setRequestHeader('Content-Type', 'application-json')
-    // xhr.setRequestHeader('Content-Type', 'text/plain')
     for (let key in headers) {
       xhr.setRequestHeader(key, headers[key])
     }
@@ -32,7 +37,7 @@ export function ajax(
       console.log({err})
       reject(err)
     }
-    xhr.send(data)
+    xhr.send(isGetMethod ? null : data)
   })
 }
 

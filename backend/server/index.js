@@ -27,6 +27,10 @@ const serve = require('koa-static')
 
 const app = new Koa()
 
+const getFileSync = location => {
+  return fs.readFileSync(path.resolve(__dirname, location), 'utf8')
+}
+
 // 初始化数据库
 db.init()
 
@@ -40,6 +44,14 @@ app.use(serve(
 
 // 路由
 router
+  .post(SAVE_ARTICLE, async function saveArticle(ctx) {
+    console.log(111, ctx.request.body)
+    ctx.body = {
+      data: {
+        resume: getFileSync('../files/test.md')
+      }
+    }
+  })
   .get(GET_ARTICLES, async function getArticles(ctx) {
     const articles = await db.getArticles()
     ctx.body = {
@@ -51,7 +63,7 @@ router
   .get(GET_ARTICLE_DETAIL, async function getArticles(ctx) {
     ctx.body = {
       data: {
-        resume: fs.readFileSync(path.resolve(__dirname,  '../files/test.md'), 'utf8')
+        resume: getFileSync('../files/test.md')
       }
     }
   })
@@ -66,7 +78,7 @@ router
   .get(GET_RESUME, async function getResume(ctx) {
     ctx.body = {
       data: {
-        resume: fs.readFileSync(path.resolve(__dirname,  '../data/resume.md'), 'utf8')
+        resume: getFileSync('../data/resume.md')
       }
     }
   })
@@ -81,7 +93,7 @@ app.use(router.routes())
 app.use(async (ctx,next) => {
   console.log('未匹配', ctx.request.url)
   ctx.type = 'html'
-  ctx.response.body = fs.readFileSync(path.resolve(__dirname,  '../static/index.html'), 'utf8')
+  ctx.response.body = getFileSync('../static/index.html')
   await next()
 })
 

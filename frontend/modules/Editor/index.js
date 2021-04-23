@@ -1,26 +1,39 @@
-import React from 'react';
+import React from 'react'
+import PropTypes from 'prop-types'
 import c from 'classnames'
 import marked from 'marked'
-import hljs from "highlight.js";
-
-import {ajax, animateToScrollHeight, formatToMaterialSpans, get, getStyleInt, noop} from "~/utils";
-
-import {throttle, debounce} from 'lodash'
-
+import hljs from "highlight.js"
+import {
+  ajax,
+  get,
+  omit,
+  getSearchParams,
+  isValidString, post,
+} from "~/utils"
 import style from './editor.scss'
-import TextField from "~/components/TextField";
-import Button from "~/components/Button";
-import toReadableDateString from "~/utils/toReadableDateString";
-
-
+import TextField from "~/components/TextField"
+import Button from "~/components/Button"
+import toReadableDateString from "~/utils/toReadableDateString"
+import {GET_ARTICLE_DETAIL} from '~api'
 
 export default class Editor extends React.Component {
 
+  static propTypes = {
+    // articleId: PropTypes.string,
+  }
+
+  static defaultProps = {
+    // articleId: '',
+  }
+
   state = {
+    articleId: '',
+    title: '',
+    tagsText: '',
     markdownContent: '',
-    headers: [],
-    tags: [112,315],
-    scrollIng: false,
+    date: '',
+    isLoading: false,
+    hasValidated: false,
   }
 
   docRef = null
@@ -30,10 +43,10 @@ export default class Editor extends React.Component {
     }
   }
 
-  setParsedHTML = () => {
+  getParsedHTML = () => {
     const renderer = new marked.Renderer()
     renderer.link = (href, title, text) => {
-      return `<a target="_blank" href="${href}" title="${title}">${text}</a>`;
+      return `<a target="_blank" href="${href}" title="${title}">${text}</a>`
     }
     marked.setOptions({
       renderer,
@@ -48,13 +61,28 @@ export default class Editor extends React.Component {
   }
 
   componentDidMount() {
-    get('http://localhost:3000')
-      .then(res => {
-        this.setState({
-          markdownContent: res.text
-        })
-      })
     document.body.classList.add('full-vh-content')
+    this.tryGetExistedContent()
+  }
+
+  tryGetExistedContent = () => {
+    const {articleId = ''} = getSearchParams()
+    if (isValidString(articleId)) {
+      this.setState({
+        articleId
+      })
+      get(GET_ARTICLE_DETAIL, {
+        id: articleId
+      })
+        .then(res => {
+          this.setState({
+            markdownContent: res.text
+          })
+        })
+        .catch(err => {
+          console.log({err})
+        })
+    }
   }
 
   componentDidUpdate() {
@@ -72,103 +100,101 @@ export default class Editor extends React.Component {
     document.body.classList.remove('full-vh-content')
   }
 
-  renderComments = () => {
-    return <div className={'comment edit'}>
-      <p className={'title'}>欢迎留下您的评论。</p>
-      <TextField
-        className={'comment-author'}
-        label={'称呼'}
-        value={this.state.commentAuthor}
-        width={240}
-        maxLength={16}
-        validatorRegExp={/^\d{2,16}$/}
-        hint={'输入2至16个字符的称呼。'}
-      />
-      <TextField
-        className={'comment-email'}
-        label={'邮箱'}
-        value={this.state.commentAuthor}
-        width={240}
-        maxLength={30}
-        validatorRegExp={/^\d{2,16}$/}
-        hint={'输入常见的邮箱格式。'}
-      />
-      <TextField
-        className={'comment-content'}
-        label={'内容'}
-        value={this.state.commentAuthor}
-        width={492}
-        maxLength={120}
-        validatorRegExp={/^.{4,120}$/}
-        hint={'输入4至120字符的评论。'}
-      />
-      <Button
-        className={'submit'}
-        type={'primary'}
-      >
-        提交
-      </Button>
-    </div>
+  getSetStateMethod = stateKey => evt => {
+    this.setState({
+      [stateKey]: evt.target.value
+    })
+  }
+
+  trySaveArticle = () => {
+    const params = omit(this.state, [
+      'hasValidated',
+      'isLoading',
+    ])
+    console.log({params})
+    // post(SAVE_ARTICLE, params)
+  }
+
+  renderTopFields = () => {
+    return (
+      <div className={'editor-fields'}>
+        <TextField
+          className={'title'}
+          label={'标题'}
+          value={this.state.title}
+          onChange={this.getSetStateMethod('title')}
+          width={480}
+          maxLength={16}
+          validatorRegExp={/^\d{2,40}$/}
+          hint={'输入 2~40 字符的标题。'}
+          disabled={this.state.isLoading}
+          hasValidated={this.state.hasValidated}
+        />
+        <TextField
+          className={'tags'}
+          label={'标签'}
+          value={this.state.tagsText}
+          onChange={this.getSetStateMethod('tagsText')}
+          width={240}
+          maxLength={16}
+          validatorRegExp={/^\d{2,16}$/}
+          hint={'输入以#分隔的标签。'}
+          disabled={this.state.isLoading}
+          hasValidated={this.state.hasValidated}
+        />
+        <TextField
+          className={'date'}
+          label={'发布时间'}
+          value={this.state.date}
+          onChange={this.getSetStateMethod('date')}
+          width={240}
+          maxLength={10}
+          validatorRegExp={/^\d{10}$/}
+          hint={'输入 YYYY/MM/DD 格式的时间。'}
+          disabled={this.state.isLoading}
+          hasValidated={this.state.hasValidated}
+        />
+        <div className={'actions'}>
+          <Button
+            className={'submit'}
+            disabled={this.state.isLoading}
+            onClick={this.trySaveArticle}
+          >
+            保存
+          </Button>
+          <Button
+            className={'cancel'}
+            type={'secondary'}
+            disabled={this.state.isLoading}
+          >
+            取消
+          </Button>
+        </div>
+      </div>
+    )
+  }
+
+  renderCompareArea = () => {
+    return (
+      <div className={'compare-wrap'}>
+        <textarea
+          className={'raw'}
+          value={this.state.markdownContent}
+          onChange={this.getSetStateMethod('markdownContent')}
+        />
+        <div
+          className={'parsed rhaego-markdown'}
+          dangerouslySetInnerHTML={this.getParsedHTML()}
+        />
+      </div>
+    )
   }
 
   render() {
     return (
       <div className={'rhaego-editor'} ref={this.setRef}>
-        <div className={'editor-fields'}>
-          <TextField
-            className={'title'}
-            label={'标题'}
-            value={this.state.title}
-            width={480}
-            maxLength={16}
-            validatorRegExp={/^\d{2,16}$/}
-            hint={'输入2至16个字符的标题。'}
-          />
-          <TextField
-            className={'tags'}
-            label={'标签'}
-            value={this.state.tagsText}
-            width={240}
-            maxLength={16}
-            validatorRegExp={/^\d{2,16}$/}
-            hint={'输入以#分隔的标签。'}
-          />
-          <TextField
-            className={'date'}
-            label={'发布时间'}
-            value={this.state.date}
-            width={240}
-            maxLength={16}
-            validatorRegExp={/^\d{2,16}$/}
-            hint={'输入YYYY/MM/DD格式的时间。'}
-          />
-          <div className={'actions'}>
-            <Button
-              className={'submit'}
-            >
-              保存
-            </Button>
-            <Button
-              className={'cancel'}
-              type={'secondary'}
-            >
-              取消
-            </Button>
-          </div>
-
-        </div>
-        <div className={'compare-wrap'}>
-            <textarea
-              className={'raw'}
-              value={this.state.markdownContent}
-
-              // onChange={}
-            />
-          <div
-            className={'parsed rhaego-markdown'}
-            dangerouslySetInnerHTML={this.setParsedHTML()}
-          />
-        </div>
+        {this.renderTopFields()}
+        {this.renderCompareArea()}
       </div>
     )
   }

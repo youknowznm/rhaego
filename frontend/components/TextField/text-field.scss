@@ -46,9 +46,14 @@ $input-red: rgb(221, 44, 0);
     &:before {
       left: 50%;
     }
-    &:hover {
+    &:not(.disabled):hover {
       input {
         border-bottom-color: $input-blue !important;
+      }
+    }
+    &.disabled {
+      input {
+        border-bottom-style: dotted;
       }
     }
     label {
