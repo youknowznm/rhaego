@@ -14,6 +14,7 @@ import {
 import style from './editor.scss'
 import TextField from "~/components/TextField"
 import Button from "~/components/Button"
+import Toast, {toast} from "~/components/Toast"
 import {toReadableDateString} from "~/utils"
 import {
   GET_ARTICLE_DETAIL,
@@ -115,9 +116,10 @@ export default class Editor extends React.Component {
       'hasValidated',
       'isLoading',
     ])
-    post(SAVE_ARTICLE, {
-      data: params
-    })
+    // post(SAVE_ARTICLE, {
+    //   data: params
+    // })
+    toast('afds', 4000)
   }
 
   renderTopFields = () => {

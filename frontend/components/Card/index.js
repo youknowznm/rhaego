@@ -58,20 +58,23 @@ export default class Card extends React.Component {
       theme,
       fontTheme,
       link,
+      title,
       targetIsBlank,
+      content,
+      children,
       ...otherProps
     } = this.props
     return (
       <div
-        className={c('rhaego-card', this.props.className)}
-        data-card-theme={this.props.theme}
-        data-card-font-theme={this.props.fontTheme}
+        className={c('rhaego-card', className)}
+        data-card-theme={theme}
+        data-card-font-theme={fontTheme}
         onClick={this.toLinkIfAny}
         {...otherProps}
       >
-        <h1 className={'title'}>{formatToMaterialSpans(this.props.title)}</h1>
-        <p className={'content'}>{this.props.content}</p>
-        {this.props.children}
+        <h1 className={'title'}>{formatToMaterialSpans(title)}</h1>
+        <p className={'content'}>{content}</p>
+        {children}
       </div>
     )
   }

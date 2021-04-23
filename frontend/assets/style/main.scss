@@ -3,6 +3,8 @@
 
 /*
 z-index 计数
+200 .rhaego-toast
+
 110 .rhaego-modal
 
 102 .ripple
@@ -80,9 +82,9 @@ body {
   @media (min-width: 1600px) {
     width: 1440px;
   }
-  //@media (min-width: 2000px) {
-  //  width: 1680px;
-  //}
+  @media (min-width: 2000px) {
+    width: 1680px;
+  }
 }
 
 .rhaego-single-word {
