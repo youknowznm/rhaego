@@ -8,13 +8,17 @@ import {
   get,
   omit,
   getSearchParams,
-  isValidString, post,
+  isValidString,
+  post,
 } from "~/utils"
 import style from './editor.scss'
 import TextField from "~/components/TextField"
 import Button from "~/components/Button"
-import toReadableDateString from "~/utils/toReadableDateString"
-import {GET_ARTICLE_DETAIL} from '~api'
+import {toReadableDateString} from "~/utils"
+import {
+  GET_ARTICLE_DETAIL,
+  SAVE_ARTICLE,
+} from '~api'
 
 export default class Editor extends React.Component {
 
@@ -111,8 +115,9 @@ export default class Editor extends React.Component {
       'hasValidated',
       'isLoading',
     ])
-    console.log({params})
-    // post(SAVE_ARTICLE, params)
+    post(SAVE_ARTICLE, {
+      data: params
+    })
   }
 
   renderTopFields = () => {

@@ -1,5 +1,6 @@
 import {setSearchParams} from './index'
 
+// get; 默认 json 类型的 post
 export function ajax(
   method,
   url,
@@ -14,7 +15,7 @@ export function ajax(
       setSearchParams(url, data)
     }
     xhr.open(method, url)
-    xhr.setRequestHeader('Content-Type', 'application-json')
+    xhr.setRequestHeader('Content-Type', 'application/json')
     for (let key in headers) {
       xhr.setRequestHeader(key, headers[key])
     }
@@ -37,7 +38,7 @@ export function ajax(
       console.log({err})
       reject(err)
     }
-    xhr.send(isGetMethod ? null : data)
+    xhr.send(JSON.stringify(data))
   })
 }
 

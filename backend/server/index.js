@@ -21,7 +21,7 @@ const {
 } = require('../api')
 
 const logger = require('koa-logger')
-const router = require('@koa/router')()
+const router = require('koa-router')()
 const koaBody = require('koa-body')
 const serve = require('koa-static')
 
@@ -45,12 +45,15 @@ app.use(serve(
 // 路由
 router
   .post(SAVE_ARTICLE, async function saveArticle(ctx) {
-    console.log(111, ctx.request.body)
-    ctx.body = {
-      data: {
-        resume: getFileSync('../files/test.md')
-      }
+    const {data} = ctx.request.body;
+    console.log(data.articleId)
+    if (data.articleId === '') {
     }
+    // // ctx.body = {
+    // //   data: {
+    // //     resume: getFileSync('../files/test.md')
+    // //   }
+    // // }
   })
   .get(GET_ARTICLES, async function getArticles(ctx) {
     const articles = await db.getArticles()
