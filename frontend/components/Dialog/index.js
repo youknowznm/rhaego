@@ -11,6 +11,7 @@ import {
   formatDate,
   noop,
   getScrollBarWidth,
+  hasClass, addClass, removeClass,
 } from '../../utils'
 
 import style from './dialog.scss'
@@ -59,7 +60,7 @@ export default class Dialog extends React.Component {
   }
 
   onClickCover = evt => {
-    if (Array.from(evt.target.classList).includes('rhaego-modal')) {
+    if (hasClass(evt.target,'rhaego-modal')) {
       this.props.onCancel()
     }
   }
@@ -73,7 +74,7 @@ export default class Dialog extends React.Component {
         findDOMNode(this.modalRef).querySelector('.modal-confirm').focus()
       }
 
-      body.classList.add('has-visible-modal')
+      addClass(body, 'has-visible-modal')
       body.style.paddingRight = paddingRightInPx
       body.style.overflow = 'hidden'
       if (rhaegoHeaderContent) {
@@ -81,7 +82,7 @@ export default class Dialog extends React.Component {
       }
     }
     if (prevProps.isOpen === true && this.props.isOpen === false) {
-      body.classList.remove('has-visible-modal')
+      removeClass(body, 'has-visible-modal')
       body.style.paddingRight = '0px'
       body.style.overflow = 'auto'
       if (rhaegoHeaderContent) {

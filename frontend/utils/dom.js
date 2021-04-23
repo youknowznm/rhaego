@@ -22,6 +22,18 @@ export function animateToScrollHeight(height = 0, onDone) {
   step()
 }
 
+export function hasClass(DOMNode, targetClassName) {
+  return Array.from(DOMNode.classList).includes(targetClassName)
+}
+
+export function addClass(DOMNode, ...classNames) {
+  DOMNode.classList.add(...classNames)
+}
+
+export function removeClass(DOMNode, ...classNames) {
+  DOMNode.classList.remove(...classNames)
+}
+
 export function getStyle(target, key) {
   return document.defaultView.getComputedStyle(target)[key]
 }

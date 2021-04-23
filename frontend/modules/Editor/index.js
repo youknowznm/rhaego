@@ -10,6 +10,7 @@ import {
   getSearchParams,
   isValidString,
   post,
+  addClass, removeClass,
 } from "~/utils"
 import style from './editor.scss'
 import TextField from "~/components/TextField"
@@ -66,7 +67,7 @@ export default class Editor extends React.Component {
   }
 
   componentDidMount() {
-    document.body.classList.add('full-vh-content')
+    addClass(document.body, 'full-vh-content')
     this.tryGetExistedContent()
   }
 
@@ -102,7 +103,7 @@ export default class Editor extends React.Component {
   }
 
   componentWillUnmount() {
-    document.body.classList.remove('full-vh-content')
+    removeClass(document.body, 'full-vh-content')
   }
 
   getSetStateMethod = stateKey => evt => {

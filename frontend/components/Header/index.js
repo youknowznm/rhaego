@@ -6,7 +6,7 @@ import {
   formatToMaterialSpans,
   getStyleInt,
   throttle,
-  animateToScrollHeight
+  animateToScrollHeight, removeClass, addClass
 } from '../../utils'
 
 import style from './header.scss'
@@ -93,11 +93,11 @@ export default class RhaegoHeader extends React.Component {
       rippleRef
     } = this
     navBorderRef.addEventListener('animationend', () => {
-      navBorderRef.classList.remove('flow-to-right', 'flow-to-left')
-      navBorderRef.classList.add('hidden')
+      removeClass(navBorderRef, 'flow-to-right', 'flow-to-left')
+      addClass(navBorderRef, 'hidden')
     })
     rippleRef.addEventListener('animationend', () => {
-      rippleRef.classList.remove('fade')
+      removeClass(rippleRef, 'fade')
     })
   }
 
@@ -115,7 +115,7 @@ export default class RhaegoHeader extends React.Component {
       rippleLeft,
       rippleTop,
     })
-    this.rippleRef.classList.add('appear')
+    addClass(this.rippleRef, 'appear')
     this.rippling = true
   }
 
@@ -123,8 +123,8 @@ export default class RhaegoHeader extends React.Component {
   // 这样 mouseup 时, 仍可触发期望的 nav click 事件
   onNavMouseUp = evt => {
     if (this.rippling) {
-      this.rippleRef.classList.remove('appear')
-      this.rippleRef.classList.add('fade')
+      removeClass(this.rippleRef, 'appear')
+      addClass(this.rippleRef, 'fade')
       this.rippling = false
     }
   }
@@ -171,11 +171,10 @@ export default class RhaegoHeader extends React.Component {
     })
 
     const ref = this.navBorderRef
-    ref.classList.remove('hidden')
-    ref.classList.add(targetAtCurrRight ? 'flow-to-right' : 'flow-to-left')
+    removeClass(ref,'hidden')
+    addClass(ref, targetAtCurrRight ? 'flow-to-right' : 'flow-to-left')
 
     animateToScrollHeight(0)
-    console.log(11, item.path)
   }
 
   render() {

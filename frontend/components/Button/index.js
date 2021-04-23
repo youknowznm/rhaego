@@ -6,7 +6,7 @@ import {
   getStyleInt,
   animateToScrollHeight,
   formatToMaterialSpans,
-  formatDate, callIfCallable,
+  formatDate, callIfCallable, isValidString, removeClass, addClass,
 } from '../../utils'
 
 
@@ -22,7 +22,7 @@ export default class Button extends React.Component {
     type: PropTypes.oneOf(['normal', 'primary', 'secondary']),
     size: PropTypes.oneOf(['normal', 'small']),
     link: PropTypes.string,
-    targetIsBlank: PropTypes.bool,
+    linkTarget: PropTypes.string, // 也可以用 oneOf, 这里不更深控制
   }
 
   static defaultProps = {
@@ -33,7 +33,7 @@ export default class Button extends React.Component {
     isFlat: false,
     size: 'normal',
     link: '',
-    targetIsBlank: false,
+    linkTarget: '_self',
   }
 
   state = {
@@ -56,7 +56,7 @@ export default class Button extends React.Component {
     if (this.rippleRef === null) {
       this.rippleRef = ref
       this.rippleRef.addEventListener('animationend', () => {
-        this.rippleRef.classList.remove('fade')
+        removeClass(this.rippleRef,'fade')
       })
     }
   }
@@ -65,7 +65,7 @@ export default class Button extends React.Component {
     if (this.props.disabled === true) {
       return
     }
-    this.buttonRef.classList.add('mousedown')
+    addClass(this.buttonRef, 'mousedown')
     if (!this.rippling) {
       this.rippling = true
       const nativeEvt = evt.nativeEvent
@@ -75,16 +75,15 @@ export default class Button extends React.Component {
         rippleLeft,
         rippleTop,
       })
-      this.rippleRef.classList.add('appear')
+      addClass(this.rippleRef, 'appear')
     }
   }
 
   endRipple = evt => {
-    this.buttonRef.classList.remove('mousedown')
-    this.buttonRef.classList.remove('mouseup')
+    removeClass(this.buttonRef, 'mousedown', 'mouseup')
     if (this.rippling) {
-      this.rippleRef.classList.remove('appear')
-      this.rippleRef.classList.add('fade')
+      removeClass(this.rippleRef, 'appear')
+      addClass(this.rippleRef, 'fade')
       this.rippling = false
     }
   }
@@ -98,22 +97,6 @@ export default class Button extends React.Component {
 
   componentDidUpdate() {
     this.setRippleRadius()
-  }
-
-  toLinkIfAny = () => {
-    const {
-      link,
-      targetIsBlank,
-      onClick,
-    } = this.props
-    callIfCallable(onClick)
-    if (link !== '') {
-      if (targetIsBlank) {
-        window.open(link)
-      } else {
-        location.href = link
-      }
-    }
   }
 
   render() {
@@ -132,21 +115,27 @@ export default class Button extends React.Component {
       `size-${this.props.size}`,
       this.props.className
     )
+    const isAnchor = isValidString(this.props.link)
+    // idea: 动态控制 dom node type, 不用 createElement
+    // idea: https://stackoverflow.com/questions/30466129/window-open-blocked-by-chrome-with-change-event/35752647
+    // 非点击事件`直接目标`的事件, 所触发的 window.open 会被认为是恶意的, 被拦截
+    const DOMTag = isAnchor ? 'a' : 'button'
     return (
-      <button
+      <DOMTag
         className={className}
         style={style}
         ref={this.setButtonRef}
         onMouseDown={this.startRipple}
         onMouseUp={this.endRipple}
         onMouseOut={this.endRipple}
-        onClick={this.toLinkIfAny}
+        href={isAnchor ? this.props.link : null}
+        target={isAnchor ? this.props.linkTarget : null}
       >
         <span className={'button-content'}>
           {this.props.children}
         </span>
         <div className={'ripple'} ref={this.setRippleRef} style={rippleStyle} />
-      </button>
+      </DOMTag>
     )
   }
 }

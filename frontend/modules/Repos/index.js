@@ -91,7 +91,7 @@ export default class Repos extends React.Component {
               title={name}
               content={description}
               link={html_url}
-              targetIsBlank
+              linkTarget={'_blank'}
             >
               <div className={'tags'}>
                 {
@@ -100,7 +100,7 @@ export default class Repos extends React.Component {
                       size={'small'}
                       className={'tag'}
                       link={homepage}
-                      targetIsBlank
+                      linkTarget={'_blank'}
                     >
                       演示
                     </Button>
