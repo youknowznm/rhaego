@@ -8,9 +8,10 @@ import {
   get,
   omit,
   getSearchParams,
+  goToSearchParams,
   isValidString,
   post,
-  addClass, removeClass,
+  addClass, removeClass, goToPath,
 } from "~/utils"
 import style from './editor.scss'
 import TextField from "~/components/TextField"
@@ -42,27 +43,22 @@ export default class Editor extends React.Component {
     hasValidated: false,
   }
 
-  docRef = null
-  setRef = ref => {
-    if (this.docRef === null) {
-      this.docRef = ref
-    }
-  }
-
   getParsedHTML = () => {
-    const renderer = new marked.Renderer()
-    renderer.link = (href, title, text) => {
-      return `<a target="_blank" href="${href}" title="${title}">${text}</a>`
-    }
-    marked.setOptions({
-      renderer,
-      breaks: true,
-      highlight: code => {
-        return hljs.highlightAuto(code).value
+    if (isValidString(this.state.markdownContent)) {
+      const renderer = new marked.Renderer()
+      renderer.link = (href, title, text) => {
+        return `<a target="_blank" href="${href}" title="${title}">${text}</a>`
       }
-    })
-    return {
-      __html: marked(this.state.markdownContent)
+      marked.setOptions({
+        renderer,
+        breaks: true,
+        highlight: code => {
+          return hljs.highlightAuto(code).value
+        }
+      })
+      return {
+        __html: marked(this.state.markdownContent)
+      }
     }
   }
 
@@ -81,24 +77,8 @@ export default class Editor extends React.Component {
         id: articleId
       })
         .then(res => {
-          this.setState({
-            markdownContent: res.text
-          })
+          this.setState(omit(res.article, '_id'))
         })
-        .catch(err => {
-          console.log({err})
-        })
-    }
-  }
-
-  componentDidUpdate() {
-
-  }
-
-  navRef = null
-  setNavRef = ref => {
-    if (this.navRef === null) {
-      this.navRef = ref
     }
   }
 
@@ -112,7 +92,7 @@ export default class Editor extends React.Component {
     })
   }
 
-  trySaveArticle = () => {
+  onSave = () => {
     const params = omit(this.state, [
       'hasValidated',
       'isLoading',
@@ -120,13 +100,16 @@ export default class Editor extends React.Component {
     this.setState({
       hasValidated: true
     })
-    params.tags = params.tagsText.split(/\s*#/)
-    post(SAVE_ARTICLE, {
-      data: params
-    })
+    post(SAVE_ARTICLE, params)
       .then(res => {
-
+        goToSearchParams({
+          articleId: res.article.articleId
+        })
       })
+  }
+
+  onCancel = () => {
+    goToPath('/articles')
   }
 
   renderTopFields = () => {
@@ -172,13 +155,14 @@ export default class Editor extends React.Component {
           <Button
             className={'submit'}
             disabled={this.state.isLoading}
-            onClick={this.trySaveArticle}
+            onClick={this.onSave}
           >
             保存
           </Button>
           <Button
             className={'cancel'}
             type={'secondary'}
+            onClick={this.onCancel}
             disabled={this.state.isLoading}
           >
             取消
@@ -206,7 +190,7 @@ export default class Editor extends React.Component {
 
   render() {
     return (
-      <div className={'rhaego-editor'} ref={this.setRef}>
+      <div className={'rhaego-editor'}>
         {this.renderTopFields()}
         {this.renderCompareArea()}
       </div>

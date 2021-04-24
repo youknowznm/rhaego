@@ -24,3 +24,35 @@ export function formatToMaterialSpans(string) {
 export function isValidString(target) {
   return typeof target === 'string' && target !== ''
 }
+
+export function getPalette() {
+  return [
+    'red',
+    'pink',
+    'purple',
+    'indigo',
+    'blue',
+    'cyan',
+    'teal',
+    'green',
+    'lime',
+    'yellow',
+    'amber',
+    'orange',
+    'brown',
+    'grey',
+    'bluegrey',
+  ].sort(() => Math.random() - .5);
+}
+
+export function getFontTheme(theme) {
+  return [
+    'cyan',
+    'green',
+    'lime',
+    'yellow',
+    'amber',
+    'orange',
+    'grey',
+  ].includes(theme) ? 'dark' : 'light'
+}

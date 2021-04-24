@@ -1,7 +1,8 @@
-// nedb 好像没有 Schema, 手动验证
+// nedb 没有 schema, 手动验证
 
 const validateArticleDoc = fields => {
   const {
+    articleId,
     title,
     tagsText,
     dateString,
@@ -9,6 +10,9 @@ const validateArticleDoc = fields => {
   } = fields
   let errMsg = ''
   switch (true) {
+    case (!/\S/.test(articleId)):
+      errMsg = ('缺少有效的 articleId。')
+      break
     case (!(/^.{2,40}$/.test(title))):
       errMsg = ('输入 2~40 字符的标题。')
       break

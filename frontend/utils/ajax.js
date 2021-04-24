@@ -1,7 +1,9 @@
 import {setSearchParams} from './index'
 import {toast} from "~/components/Toast";
 
-// get 和 post; 默认请求和响应均为 json
+// get 和 post
+// 默认请求和响应均为 json
+// 只认为 200 为成功
 export function ajax(
   method,
   url,

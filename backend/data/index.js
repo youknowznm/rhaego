@@ -1,6 +1,7 @@
 const path = require('path')
 const Datastore = require('nedb')
 const request = require('request')
+const {customAlphabet} = require('nanoid/non-secure')
 
 const {GET_GITHUB_REPOS} = require("../api")
 
@@ -11,6 +12,11 @@ const {
 } = require('./validators')
 
 const isValidString = target => typeof target === 'string' && target !== ''
+
+// nano-id non-look-alike
+const generateId = (digit = 10) => {
+  return customAlphabet('346789ABCDEFGHJKLMNPQRTUVWXYabcdefghijkmnpqrtwxyz', digit)()
+}
 
 class RhaegoDb {
 
@@ -133,9 +139,13 @@ class RhaegoDb {
   // ===== 文章 =====
 
   // 获取指定标签或全部的文章
-  getArticles = (tags = []) => new Promise((resolve, reject) => {
+  getArticles = (tagsText = '') => new Promise((resolve, reject) => {
+    let query = {}
+    // if (tagsText !== '') {
+    //   tagsText
+    // }
     this.articleDb.find(
-      tags.length === 0 ? {} : {tags},
+      query,
       (err, articleDoc) => {
         err && reject(err)
         resolve(articleDoc)
@@ -143,9 +153,9 @@ class RhaegoDb {
     )
   })
   // 获取指定 _id 的文章
-  getArticle = _id => new Promise((resolve, reject) => {
+  getArticle = articleId => new Promise((resolve, reject) => {
     this.articleDb.findOne(
-      {_id},
+      {articleId},
       (err, articleDoc) => {
         err && reject(err)
         resolve(articleDoc)
@@ -153,14 +163,16 @@ class RhaegoDb {
     )
   })
   // 新建或更新文章
-  saveArticle = params => new Promise((resolve, reject) => {
-    const {_id, ...articleFields} = params
+  saveArticle = articleFields => new Promise((resolve, reject) => {
+    if (articleFields.articleId === '') {
+      articleFields.articleId = generateId()
+    }
     const validateError = validateArticleDoc(articleFields)
     if (validateError) {
       reject(validateError)
       return
     }
-    this.getArticle(_id)
+    this.getArticle(articleFields.articleId)
       .then(articleDoc => {
         if (articleDoc === null) {
           this.articleDb.insert(
@@ -174,11 +186,12 @@ class RhaegoDb {
           this.articleDb.update(
             articleDoc,
             {...articleFields},
-            {},
+            {
+              returnUpdatedDocs: true
+            },
             (err, numAffected, articleDoc) => {
-              // console.log('?', err, numAffected, articleDoc)
               err && reject(err)
-              resolve(numAffected)
+              resolve(articleDoc)
             }
           )
         }

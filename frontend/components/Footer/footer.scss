@@ -43,13 +43,13 @@
           }
         }
         &.github {
-          background-image: url("~images/footer/icon-github.svg");
+          background-image: url("~images/icon-github.svg");
         }
         &.zhihu {
-          background-image: url("~images/footer/icon-zhihu.svg");
+          background-image: url("~images/icon-zhihu.svg");
         }
         &.wechat {
-          background-image: url("~images/footer/icon-wechat.svg");
+          background-image: url("~images/icon-wechat.svg");
           .hover-content {
             position: absolute;
             width: 160px;
@@ -61,12 +61,12 @@
             opacity: 0;
             transform-origin: bottom;
             transition: all .2s $materialCubicBezier;
-            background-image: url("~images/footer/wechat.jpeg");
+            background-image: url("~images/wechat.jpeg");
             background-size: 160px 160px;
           }
         }
         &.email {
-          background-image: url("~images/footer/icon-email.svg");
+          background-image: url("~images/icon-email.svg");
         }
       }
     }

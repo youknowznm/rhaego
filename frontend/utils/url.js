@@ -28,11 +28,19 @@ export const setSearchParams = (url, params) => {
   for (let key in params) {
     fullSearchString += `${encode(key)}=${encode(params[key])}`
   }
-  let result
+  let result = url
   if (/\?/.test(url)) {
-    result = url.replace(/\?.*$/, fullSearchString)
-  } else {
-    result = url += `?${fullSearchString}`
+    result = result.replace(/\?.*$/, fullSearchString)
+  } else if (fullSearchString !== '') {
+    result += `?${fullSearchString}`
   }
   return result
+}
+
+export const goToPath = (pathName) => {
+  location.href = location.origin + pathName
+}
+
+export const goToSearchParams = (params) => {
+  location.href = setSearchParams(location.href, params)
 }

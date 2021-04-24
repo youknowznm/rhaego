@@ -45,12 +45,12 @@ app.use(serve(
 // 路由
 router
   .post(SAVE_ARTICLE, async function saveArticle(ctx, next) {
-    const {data} = ctx.request.body;
+    const params = ctx.request.body;
     try {
-      const result = await db.saveArticle(data)
+      const result = await db.saveArticle(params)
       ctx.response.status = 200
       ctx.response.body = {
-        articleId: result._id
+        article: result
       }
     } catch (err) {
       ctx.response.type = 'json'
@@ -63,9 +63,7 @@ router
   .get(GET_ARTICLES, async function getArticles(ctx) {
     const articles = await db.getArticles()
     ctx.body = {
-      data: {
-        articleList: articles
-      }
+      articles
     }
   })
   .get(GET_ARTICLE_DETAIL, async function getArticles(ctx) {
