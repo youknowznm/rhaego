@@ -1,6 +1,7 @@
 import {setSearchParams} from './index'
+import {toast} from "~/components/Toast";
 
-// get; 默认 json 类型的 post
+// get 和 post; 默认请求和响应均为 json
 export function ajax(
   method,
   url,
@@ -30,12 +31,13 @@ export function ajax(
           }
           resolve(res)
         } else {
-          reject(xhr)
+          const errObj = JSON.parse(xhr.response)
+          toast(errObj.message, 4000)
+          reject(errObj)
         }
       }
     }
     xhr.onerror = err => {
-      console.log({err})
       reject(err)
     }
     xhr.send(JSON.stringify(data))

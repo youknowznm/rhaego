@@ -7,7 +7,7 @@ import {
   animateToScrollHeight,
   formatToMaterialSpans,
   formatDate, callIfCallable, isValidString, removeClass, addClass,
-} from '../../utils'
+} from '~utils'
 
 
 import style from './button.scss'
@@ -128,6 +128,7 @@ export default class Button extends React.Component {
         onMouseDown={this.startRipple}
         onMouseUp={this.endRipple}
         onMouseOut={this.endRipple}
+        onClick={this.props.onClick}
         href={isAnchor ? this.props.link : null}
         target={isAnchor ? this.props.linkTarget : null}
       >

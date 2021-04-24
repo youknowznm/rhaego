@@ -21,7 +21,7 @@ const links = [
 import style from './main.scss'
 import Login from "~/modules/Login";
 import Editor from "~/modules/Editor";
-import {get} from "~/utils";
+import {get} from "~utils";
 
 document.documentElement.scrollTop = 0
 

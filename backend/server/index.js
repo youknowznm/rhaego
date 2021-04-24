@@ -44,16 +44,24 @@ app.use(serve(
 
 // 路由
 router
-  .post(SAVE_ARTICLE, async function saveArticle(ctx) {
+  .post(SAVE_ARTICLE, async function saveArticle(ctx, next) {
     const {data} = ctx.request.body;
-    console.log(data.articleId)
-    if (data.articleId === '') {
+    try {
+      const result = await db.saveArticle(data)
+      ctx.response.status = 200
+      ctx.response.body = {
+        articleId: result._id
+      }
+    } catch (err) {
+      ctx.response.type = 'json'
+      ctx.response.status = 400
+      ctx.response.body = {
+        message: err.message
+      }
     }
-    // // ctx.body = {
-    // //   data: {
-    // //     resume: getFileSync('../files/test.md')
-    // //   }
-    // // }
+    // if (data.articleId === '') {
+    //
+    // }
   })
   .get(GET_ARTICLES, async function getArticles(ctx) {
     const articles = await db.getArticles()
@@ -91,6 +99,10 @@ router
   // .post('/post', create)
 
 app.use(router.routes())
+
+// app.use(async (ctx,next) => {
+//   if ()
+// })
 
 // 未匹配任何路由时, 返回 index.html, 以适配 browserHistory
 app.use(async (ctx,next) => {

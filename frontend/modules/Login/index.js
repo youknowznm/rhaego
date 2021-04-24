@@ -3,7 +3,7 @@ import c from 'classnames'
 
 import TextField from "~/components/TextField";
 import Button from "~/components/Button";
-import {toReadableDateString} from "~/utils";
+import {toReadableDateString} from "~utils";
 
 import  './login.scss'
 
