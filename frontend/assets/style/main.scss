@@ -51,6 +51,12 @@ $paper-elevation-high: 0px 10px 13px -6px rgb(0 0 0 / 20%), 0px 20px 31px 3px rg
 
 $font-family: "JetBrains Mono", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
 
+@mixin top-left-center {
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+}
+
 body {
   position: relative;
   height: 100%;

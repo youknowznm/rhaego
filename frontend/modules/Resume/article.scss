@@ -57,9 +57,7 @@ $indent: 1em;
           font-size: 14px;
           color: $font-secondary;
           font-style: italic;
-          top: 50%;
-          left: 50%;
-          transform: translateY(-50%) translateX(-50%);
+          @include top-left-center;
         }
       }
     }

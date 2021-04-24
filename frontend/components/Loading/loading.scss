@@ -1,0 +1,17 @@
+@import "~style/main";
+
+.rhaego-loading {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  .loading-area {
+    position: absolute;
+    @include top-left-center;
+    width: 80px;
+    height: 80px;
+    background: url("~images/loading-spooky-ghost.svg");
+  }
+  .empty-reason {
+
+  }
+}
