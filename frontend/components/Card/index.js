@@ -11,7 +11,7 @@ import {
   formatDate,
   callIfCallable,
   hasClass,
-} from '~utils'
+} from '~/utils'
 
 import style from './card.scss'
 

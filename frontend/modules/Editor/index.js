@@ -11,12 +11,12 @@ import {
   isValidString,
   post,
   addClass, removeClass,
-} from "~utils"
+} from "~/utils"
 import style from './editor.scss'
 import TextField from "~/components/TextField"
 import Button from "~/components/Button"
 import Toast, {toast} from "~/components/Toast"
-import {toReadableDateString} from "~utils"
+import {formatDateToPast, formatDateToString} from "~/utils"
 import {
   GET_ARTICLE_DETAIL,
   SAVE_ARTICLE,
@@ -37,7 +37,7 @@ export default class Editor extends React.Component {
     title: '',
     tagsText: '',
     markdownContent: '',
-    date: '',
+    dateString: formatDateToString(new Date()),
     isLoading: false,
     hasValidated: false,
   }
@@ -117,6 +117,10 @@ export default class Editor extends React.Component {
       'hasValidated',
       'isLoading',
     ])
+    this.setState({
+      hasValidated: true
+    })
+    params.tags = params.tagsText.split(/\s*#/)
     post(SAVE_ARTICLE, {
       data: params
     })
@@ -147,20 +151,20 @@ export default class Editor extends React.Component {
           onChange={this.getSetStateMethod('tagsText')}
           width={240}
           maxLength={16}
-          validatorRegExp={/^\d{2,16}$/}
-          hint={'输入以#分隔的标签。'}
+          validatorRegExp={/^(\s*#[^#]+){1,3}\s*$/}
+          hint={'输入 1~3 个以#分隔的标签。'}
           disabled={this.state.isLoading}
           hasValidated={this.state.hasValidated}
         />
         <TextField
-          className={'date'}
+          className={'date-string'}
           label={'发布时间'}
-          value={this.state.date}
-          onChange={this.getSetStateMethod('date')}
+          value={this.state.dateString}
+          onChange={this.getSetStateMethod('dateString')}
           width={240}
           maxLength={10}
-          validatorRegExp={/^\d{10}$/}
-          hint={'输入 YYYY/MM/DD 格式的时间。'}
+          validatorRegExp={/^\d{4}-\d{2}-\d{2}$/}
+          hint={'输入 YYYY/MM/DD 格式的日期。'}
           disabled={this.state.isLoading}
           hasValidated={this.state.hasValidated}
         />

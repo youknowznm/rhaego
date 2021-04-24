@@ -7,7 +7,7 @@ import {
   getStyleInt,
   throttle,
   animateToScrollHeight, removeClass, addClass
-} from '~utils'
+} from '~/utils'
 
 import style from './header.scss'
 

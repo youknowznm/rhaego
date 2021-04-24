@@ -64,7 +64,7 @@ class RhaegoDb {
   // 10 分钟过期
   REPO_DATA_EXPIRE_TIME = 10 * 60 * 1000
 
-  // 获取指定文章的评论, 从库中或 github api
+  // 获取 github 仓库信息, 从库中或 github api
   getGithubRepos = () => new Promise((resolve, reject) => {
     const nowDate = new Date().valueOf()
     this.generalDb.findOne(

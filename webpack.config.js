@@ -76,7 +76,7 @@ module.exports = {
       '~images': path.resolve(__dirname, 'frontend/assets/images'),
       '~api': path.resolve(__dirname, 'backend/api'),
       '~config': path.resolve(__dirname, 'config'),
-      '~utils': path.resolve(__dirname, 'shared/utils'),
+      '~utils': path.resolve(__dirname, 'frontend/utils'),
     }
   },
 };

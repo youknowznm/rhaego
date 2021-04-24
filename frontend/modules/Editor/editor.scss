@@ -2,8 +2,6 @@
 @import "~style/markdown";
 @import "~style/highlight.scss";
 
-$indent: 1em;
-
 .rhaego-editor {
   position: relative;
   overflow: scroll;
@@ -13,7 +11,7 @@ $indent: 1em;
     margin: 12px 0 0;
     .title,
     .tags,
-    .date {
+    .date-string {
       margin-right: 12px;
     }
     .actions {

@@ -13,8 +13,9 @@ export function ajax(
     const xhr = new XMLHttpRequest()
     url = `${window.API_CONTEXT || ''}${url}`
     if (isGetMethod) {
-      setSearchParams(url, data)
+      url = setSearchParams(url, data)
     }
+
     xhr.open(method, url)
     xhr.setRequestHeader('Content-Type', 'application/json')
     for (let key in headers) {

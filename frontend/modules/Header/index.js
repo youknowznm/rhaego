@@ -22,8 +22,10 @@ export default () => {
     },
   ]
 
-  return <Header
-    siteName={siteName}
-    links={links}
-  />
+  return (
+    <Header
+      siteName={siteName}
+      links={links}
+    />
+  )
 }

@@ -54,14 +54,11 @@ router
       }
     } catch (err) {
       ctx.response.type = 'json'
-      ctx.response.status = 400
-      ctx.response.body = {
+      ctx.status = 400
+      ctx.body = {
         message: err.message
       }
     }
-    // if (data.articleId === '') {
-    //
-    // }
   })
   .get(GET_ARTICLES, async function getArticles(ctx) {
     const articles = await db.getArticles()
@@ -72,9 +69,18 @@ router
     }
   })
   .get(GET_ARTICLE_DETAIL, async function getArticles(ctx) {
-    ctx.body = {
-      data: {
-        resume: getFileSync('../files/test.md')
+    const {id} = ctx.query;
+    try {
+      const article = await db.getArticle(id)
+      ctx.response.status = 200
+      ctx.response.body = {
+        article
+      }
+    } catch (err) {
+      ctx.response.type = 'json'
+      ctx.status = 400
+      ctx.body = {
+        message: err.message
       }
     }
   })

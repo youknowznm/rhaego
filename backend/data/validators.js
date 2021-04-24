@@ -3,27 +3,23 @@
 const validateArticleDoc = fields => {
   const {
     title,
-    tags,
+    tagsText,
     dateString,
     content
   } = fields
   let errMsg = ''
   switch (true) {
-    case (!(/^.{5,40}$/.test(title))):
-      errMsg = ('输入 20~40 字的标题')
+    case (!(/^.{2,40}$/.test(title))):
+      errMsg = ('输入 2~40 字符的标题。')
       break
-    case (
-      !Array.isArray(tags)
-      || tags.length > 3
-      || tags.length < 1
-    ):
-      errMsg = ('输入 1~3 个#分隔的标签')
+    case (!(/^(\s*#[^#]+){1,3}\s*$/.test(tagsText))):
+      errMsg = ('输入 1~3 个以#分隔的标签。')
       break
     case (!(/^\d{4}-\d{2}-\d{2}$/.test(dateString))):
-      errMsg = ('输入 YYYY-MM-DD 格式的发布日期')
+      errMsg = ('输入 YYYY-MM-DD 格式的日期。')
       break
     case (!(/\S/.test(content))):
-      errMsg = ('输入非空的文章内容')
+      errMsg = ('输入非空的文章内容。')
       break
     default:
   }

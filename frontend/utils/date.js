@@ -1,5 +1,5 @@
 // 转换日期对象为可读的字符串
-export const toReadableDateString = (date) => {
+export const formatDateToPast = (date) => {
   const sec = Math.floor((new Date().valueOf() - date.valueOf()) / 1000)
   if (sec < 10) {
     return ('刚刚')

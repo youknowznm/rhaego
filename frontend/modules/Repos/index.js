@@ -5,7 +5,7 @@ import {
   SvgDeviceHub,
   SvgStar,
 } from "~/assets/svg"
-import {get} from '~utils'
+import {get} from '~/utils'
 import {GET_REPOS} from '~api'
 
 import style from './repos.scss'

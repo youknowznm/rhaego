@@ -8,7 +8,7 @@ import {
   svgHeart
 } from "~/assets/svg";
 
-import {ajax, get} from "~utils";
+import {ajax, get} from "~/utils";
 
 import style from './articles.scss'
 import Button from "~/components/Button";

@@ -24,7 +24,7 @@ export const setSearchParams = (url, params) => {
   for (let key in params) {
     prevParams[key] = params[key]
   }
-  let fullSearchString
+  let fullSearchString = ''
   for (let key in params) {
     fullSearchString += `${encode(key)}=${encode(params[key])}`
   }

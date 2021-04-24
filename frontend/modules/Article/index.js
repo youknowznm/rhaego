@@ -2,10 +2,10 @@ import React from 'react';
 import c from 'classnames'
 import marked from 'marked'
 import hljs from "highlight.js";
-import {ajax, animateToScrollHeight, throttle, formatToMaterialSpans, get, getStyleInt, noop} from "~utils";
+import {ajax, animateToScrollHeight, throttle, formatToMaterialSpans, get, getStyleInt, noop} from "~/utils";
 import TextField from "~/components/TextField";
 import Button from "~/components/Button";
-import {toReadableDateString} from "~utils"
+import {formatDateToPast} from "~/utils"
 import style from './article.scss'
 import {GET_ARTICLE_DETAIL} from '~api'
 import {SvgComment, SvgHeart} from "~/assets/svg";
@@ -246,7 +246,7 @@ export default class Article extends React.Component {
             <p className={'author'}>
               {item.author}
               <span> 发表于 </span>
-              {toReadableDateString(item.date)}
+              {formatDateToPast(item.date)}
             </p>
             <p className={'content'}>{item.content}</p>
           </li>
