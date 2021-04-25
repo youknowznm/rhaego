@@ -19,6 +19,7 @@ import style from './article.scss'
 import {GET_ARTICLE_DETAIL} from '~api'
 import {SvgComment, SvgHeart} from "~/assets/svg";
 import Loading from "~/components/Loading";
+import {debounce} from "~utils/lodash";
 
 export default class Article extends React.Component {
 
@@ -44,7 +45,7 @@ export default class Article extends React.Component {
     }
   }
 
-  setParsedHTML = () => {
+  setParsedHTML = debounce(() => {
     const {markdownContent} = this.state
     if (!isValidString(markdownContent)) {
       return
@@ -67,7 +68,7 @@ export default class Article extends React.Component {
     setTimeout(() => {
       this.setCatalog()
     })
-  }
+  })
 
   setCatalog = () => {
     // 用 qs 因为 marked() 替换了 ref 获取到的 DOM 节点
@@ -96,7 +97,7 @@ export default class Article extends React.Component {
           level: item.level - 1
         }
       })
-      minLevel = Math.min(...(headers.map(item => item.level)))
+      minLevel -= 1
     }
     headers.unshift({
       level: 1,
@@ -132,11 +133,9 @@ export default class Article extends React.Component {
           this.setParsedHTML()
         })
         .finally(() => {
-          // setTimeout(() => {
-            this.setState({
-              isLoading: false
-            })
-          // }, 2000)
+          this.setState({
+            isLoading: false
+          })
         })
     }
   }
@@ -293,7 +292,6 @@ export default class Article extends React.Component {
   }
 
   render() {
-    // return null
     return (
       <Loading isLoading={this.state.isLoading} emptyReason={null}>
         <div className={'rhaego-article'} ref={this.setRef}>

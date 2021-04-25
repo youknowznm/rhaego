@@ -17,15 +17,21 @@ $indent: 1em;
       margin-bottom: 12px;
       .title {
         border-bottom: 1px solid $rhaego-markdown-border-light;
-        font-size: 32px;
-        line-height: 36px;
-        letter-spacing: -.01em;
         margin: 40px 0 20px;
         padding-bottom: 3px;
         color: $rhaego-markdown-font-light;
-        font-weight: normal;
         word-break: normal;
         word-wrap: break-word;
+        //font-size: 60px;
+        //line-height: 72px;
+        //font-weight: 300;
+        //letter-spacing: -0.01em;
+        span {
+          font-size: 60px;
+          line-height: 72px;
+          font-weight: 300;
+          letter-spacing: -0.01em;
+        }
       }
       .info {
         position: relative;
@@ -76,8 +82,8 @@ $indent: 1em;
     .article-nav {
       padding-right: 12px;
       list-style: none;
-      font-size: 12px;
-      line-height: 18px;
+      font-size: 14px;
+      line-height: 20px;
       word-wrap: break-word;
       word-break: normal;
       cursor: pointer;
@@ -127,7 +133,6 @@ $indent: 1em;
       &:hover {
         box-shadow: $paper-elevation-medium;
       }
-
       &.edit {
         .title {
           font-size: 12px;

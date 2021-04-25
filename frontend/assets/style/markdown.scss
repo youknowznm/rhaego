@@ -20,7 +20,7 @@ $rhaego-markdown-quote: #757575;
   color: $rhaego-markdown-font-light;
 
   p {
-    line-height: 24px;
+    line-height: 20px;
     font-size: 14px;
     margin: 16px 0;
     padding: 0;
@@ -52,9 +52,16 @@ $rhaego-markdown-quote: #757575;
 
   h2, h3, h4, h5, h6 {
     color: $rhaego-markdown-font-light;
+    //margin: 32px 0 16px;
+    margin-bottom: 7px;
     font-size: 20px;
-    margin: 32px 0 16px;
     line-height: 32px;
+  }
+
+  h1 {
+    font-size: 34px;
+    line-height: 42px;
+    margin-bottom: 9px;
   }
 
   blockquote {
@@ -73,7 +80,7 @@ $rhaego-markdown-quote: #757575;
     border: 1px solid #dadce0;
     border-radius: 3px;
     font-size: 13px;
-    line-height: 24px;
+    line-height: 20px;
     word-break: normal;
     background-color: #f8f9fa;
   }
@@ -121,8 +128,8 @@ $rhaego-markdown-quote: #757575;
 
   img {
     display: block;
-    margin: 30px auto;
-    width: 100%;
+    margin: 24px auto;
+    max-width: 100%;
     cursor: pointer;
     box-shadow: $paper-elevation-low;
     transition: all .2s $materialCubicBezier;

@@ -8,7 +8,7 @@ import {
   animateToScrollHeight,
   formatToMaterialSpans,
   formatDate,
-  noop,
+  noop, isValidString,
 } from '~/utils'
 
 import style from './text-field.scss'
@@ -19,6 +19,7 @@ export default class TextField extends React.Component {
     type: PropTypes.oneOf(['text', 'password', 'number']),
     label: PropTypes.string.isRequired,
     value: PropTypes.string,
+    defaultValue: PropTypes.string,
     maxLength: PropTypes.number,
     widths: PropTypes.number,
     validatorRegExp: PropTypes.instanceOf(RegExp),
@@ -33,6 +34,7 @@ export default class TextField extends React.Component {
     type: 'text',
     label: 'Text TextField',
     value: '',
+    defaultValue: '',
     width: 180,
     maxLength: 20,
     validatorRegExp: /^.*$/,
@@ -47,6 +49,8 @@ export default class TextField extends React.Component {
     focused: false,
   }
 
+  isUncontrolled = false
+
   get notEmpty() {
     return this.props.value !== ''
   }
@@ -55,7 +59,11 @@ export default class TextField extends React.Component {
     return this.props.value.length
   }
 
-  componentDidMount() {
+  constructor(props) {
+    super(props)
+    if (isValidString(this.props.defaultValue)) {
+      this.isUncontrolled = true
+    }
   }
 
   ref
@@ -87,6 +95,12 @@ export default class TextField extends React.Component {
       width: this.props.width
     }
     const placeholder = this.state.focused ? this.props.placeholder : ''
+    const valueProps = {}
+    if (this.isUncontrolled) {
+      valueProps.defaultValue = this.props.defaultValue
+    } else {
+      valueProps.value = this.props.value
+    }
     return (
       <div className={className}>
         <div
@@ -102,10 +116,10 @@ export default class TextField extends React.Component {
             type={this.props.type}
             maxLength={this.props.maxLength}
             placeholder={placeholder}
-            value={this.props.value}
             onChange={this.props.onChange}
             disabled={this.props.disabled}
             spellCheck="false"
+            {...valueProps}
           />
           <p className="hint">{this.props.hint}</p>
           <p className="char-counter">

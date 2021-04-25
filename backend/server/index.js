@@ -24,6 +24,7 @@ const {
   isValidString,
   generateId,
   set200,
+  set400,
   getExt,
 } = require('../utils')
 
@@ -54,9 +55,9 @@ app.use(serve(
   path.resolve( __dirname,  '../static')
 ))
 
-// 路由
 router
-  .post(SAVE_ARTICLE, async function saveArticle(ctx, next) {
+  // 文章
+  .post(SAVE_ARTICLE, async function(ctx, next) {
     const params = ctx.request.body
     try {
       const result = await db.saveArticle(params)
@@ -64,20 +65,16 @@ router
         article: result
       })
     } catch (err) {
-      ctx.response.type = 'json'
-      ctx.status = 400
-      ctx.body = {
-        message: err.message
-      }
+      set400(err.message)
     }
   })
-  .get(GET_ARTICLES, async function getArticles(ctx) {
+  .get(GET_ARTICLES, async function(ctx) {
     const articles = await db.getArticles()
     ctx.body = {
       articles
     }
   })
-  .get(GET_ARTICLE_DETAIL, async function getArticles(ctx) {
+  .get(GET_ARTICLE_DETAIL, async function(ctx) {
     const {id} = ctx.query
     try {
       const article = await db.getArticle(id)
@@ -85,23 +82,11 @@ router
         article
       })
     } catch (err) {
-      ctx.response.type = 'json'
-      ctx.status = 400
-      ctx.body = {
-        message: err.message
-      }
+      set400(err.message)
     }
   })
-  .get(GET_REPOS, async function getRepos(ctx) {
-    const repoList = await db.getGithubRepos()
-    ctx.body = {
-      data: {
-        repoList: JSON.parse(repoList)
-      }
-    }
-  })
-  // 图片
-  .post(UPLOAD_PIC, async function uploadPic(ctx) {
+  // 文章- 图片
+  .post(UPLOAD_PIC, async function(ctx) {
     let {articleId} = ctx.request.body
     const file = ctx.request.files.file
     if (file) {
@@ -113,25 +98,29 @@ router
         path.resolve(__dirname, '../files/', fileName),
         fs.readFileSync(file.path)
       )
+      console.log({fileName})
       set200(ctx, {
         fileName
       })
     }
   })
-  // .get('\/files', async function getResume(ctx) {
-  //   console.log('...',ctx.request.url)
-  // })
-  .get(GET_RESUME, async function getResume(ctx) {
+  // 仓库
+  .get(GET_REPOS, async function(ctx) {
+    const repoList = await db.getGithubRepos()
+    ctx.body = {
+      data: {
+        repoList: JSON.parse(repoList)
+      }
+    }
+  })
+  // 简历
+  .get(GET_RESUME, async function(ctx) {
     ctx.body = {
       data: {
         resume: getFileSync('../data/resume.md')
       }
     }
   })
-  // .get('/post/new', add)
-  // .get('/post/:id', show)
-  // .post('/post', create)
-
 
 app.use(router.routes())
 

@@ -1,4 +1,6 @@
 import React from 'react'
+import marked from 'marked'
+import hljs from "highlight.js"
 
 export function callIfCallable(fn) {
   typeof fn === 'function' && fn()
@@ -61,3 +63,17 @@ export function getFontTheme(theme) {
 export function getTagsFromText(tagsText) {
   return tagsText.split(/\s*#/).filter(item => item !== '')
 }
+
+const renderer = new marked.Renderer()
+renderer.link = (href, title, text) => {
+  return `<a target="_blank" href="${href}" title="${title}">${text}</a>`
+}
+marked.setOptions({
+  renderer,
+  breaks: true,
+  highlight: code => {
+    return hljs.highlightAuto(code).value
+  }
+})
+
+export const parseMarkdown = raw => marked(raw)

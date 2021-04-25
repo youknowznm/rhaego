@@ -1,8 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import c from 'classnames'
-import marked from 'marked'
-import hljs from "highlight.js"
 import {
   ajax,
   get,
@@ -11,7 +9,7 @@ import {
   goToSearchParams,
   isValidString,
   post,
-  addClass, removeClass, goToPath,
+  addClass, removeClass, goToPath, postForm, parseMarkdown,
 } from "~/utils"
 import style from './editor.scss'
 import TextField from "~/components/TextField"
@@ -23,6 +21,7 @@ import {
   UPLOAD_PIC,
   SAVE_ARTICLE,
 } from '~api'
+import {debounce, throttle} from "~utils/lodash";
 
 export default class Editor extends React.Component {
 
@@ -39,28 +38,10 @@ export default class Editor extends React.Component {
     title: '',
     tagsText: '',
     markdownContent: '',
+    parsedHTML: '',
     dateString: formatDateToString(new Date()),
     isLoading: false,
     hasValidated: false,
-  }
-
-  getParsedHTML = () => {
-    if (isValidString(this.state.markdownContent)) {
-      const renderer = new marked.Renderer()
-      renderer.link = (href, title, text) => {
-        return `<a target="_blank" href="${href}" title="${title}">${text}</a>`
-      }
-      marked.setOptions({
-        renderer,
-        breaks: true,
-        highlight: code => {
-          return hljs.highlightAuto(code).value
-        }
-      })
-      return {
-        __html: marked(this.state.markdownContent)
-      }
-    }
   }
 
   componentDidMount() {
@@ -72,13 +53,22 @@ export default class Editor extends React.Component {
     const {id} = getSearchParams()
     if (isValidString(id)) {
       this.setState({
-        id
+        id,
+        isLoading: true
       })
       get(GET_ARTICLE_DETAIL, {
         id
       })
         .then(res => {
-          this.setState(omit(res.article, '_id'))
+          this.setState({
+            ...omit(res.article, '_id'),
+            parsedHTML: parseMarkdown(res.article.markdownContent),
+          })
+        })
+        .finally(() => {
+          this.setState({
+            isLoading: false
+          })
         })
     }
   }
@@ -120,7 +110,7 @@ export default class Editor extends React.Component {
           value={this.state.title}
           onChange={this.getSetStateMethod('title')}
           width={480}
-          maxLength={16}
+          maxLength={40}
           validatorRegExp={/^\s*.{2,40}\s*$/}
           hint={'输入 2~40 字符的标题。'}
           disabled={this.state.isLoading}
@@ -132,7 +122,7 @@ export default class Editor extends React.Component {
           value={this.state.tagsText}
           onChange={this.getSetStateMethod('tagsText')}
           width={240}
-          maxLength={16}
+          maxLength={30}
           validatorRegExp={/^(\s*#[^#]+){1,3}\s*$/}
           hint={'输入 1~3 个以#分隔的标签。'}
           disabled={this.state.isLoading}
@@ -181,7 +171,7 @@ export default class Editor extends React.Component {
         this.setState({
           isLoading: true
         })
-        post(UPLOAD_PIC, formData)
+        postForm(UPLOAD_PIC, formData)
           .then(res => {
             const text = `\n\n![](/files/${res.fileName})\n\n`
             document.execCommand('insertText', false, text);
@@ -197,18 +187,27 @@ export default class Editor extends React.Component {
     }
   }
 
+  onContentChange = debounce((evt) => {
+    const {value} = evt.target
+    this.setState({
+      markdownContent: value,
+      parsedHTML: parseMarkdown(value),
+    })
+  }, 400)
+
   renderCompareArea = () => {
     return (
       <div className={'compare-wrap'}>
         <textarea
           className={'raw'}
-          value={this.state.markdownContent}
-          onChange={this.getSetStateMethod('markdownContent')}
+          defaultValue={this.state.markdownContent}
+          onChange={this.onContentChange}
           onPaste={this.handlePaste}
+          disabled={this.state.isLoading}
         />
         <div
           className={'parsed rhaego-markdown'}
-          dangerouslySetInnerHTML={this.getParsedHTML()}
+          dangerouslySetInnerHTML={{__html: this.state.parsedHTML}}
         />
       </div>
     )

@@ -8,7 +8,7 @@ export function ajax(
   method,
   url,
   data = {},
-  headers = {}
+  isJson = true
 ) {
   return new Promise(function(resolve, reject) {
     const isGetMethod = method === 'GET'
@@ -18,10 +18,12 @@ export function ajax(
       url = setSearchParams(url, data)
     }
     xhr.open(method, url)
-    xhr.setRequestHeader('Content-Type', 'application/json')
-    for (let key in headers) {
-      xhr.setRequestHeader(key, headers[key])
+    if (isJson) {
+      xhr.setRequestHeader('Content-Type', 'application/json')
     }
+    // for (let key in headers) {
+    //   xhr.setRequestHeader(key, headers[key])
+    // }
     xhr.onreadystatechange = () => {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
@@ -42,14 +44,18 @@ export function ajax(
     xhr.onerror = err => {
       reject(err)
     }
-    xhr.send(data instanceof FormData ? data : JSON.stringify(data))
+    xhr.send(isJson ? JSON.stringify(data) : data)
   })
 }
 
-export function get(url, data, headers) {
-  return ajax('GET', url, data, headers)
+export function get(url, data) {
+  return ajax('GET', url, data)
 }
 
-export function post(url, data, headers) {
-  return ajax('POST', url, data, headers)
+export function post(url, data) {
+  return ajax('POST', url, data)
+}
+
+export function postForm(url, data) {
+  return ajax('POST', url, data, false)
 }

@@ -20,9 +20,16 @@ const set200 = (ctx, body) => {
   ctx.response.body = body
 }
 
+const set400 = (ctx, message) => {
+  ctx.response.type = 'json'
+  ctx.response.status = 400
+  ctx.response.message = message
+}
+
 module.exports = {
   generateId,
   set200,
+  set400,
   isValidString,
   getExt,
 }
