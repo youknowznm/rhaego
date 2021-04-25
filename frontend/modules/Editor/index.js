@@ -20,6 +20,7 @@ import Toast, {toast} from "~/components/Toast"
 import {formatDateToPast, formatDateToString} from "~/utils"
 import {
   GET_ARTICLE_DETAIL,
+  UPLOAD_PIC,
   SAVE_ARTICLE,
 } from '~api'
 
@@ -170,6 +171,32 @@ export default class Editor extends React.Component {
     )
   }
 
+  handlePaste = evt => {
+    const file = evt.clipboardData.files[0]
+    if (file) {
+      if (/\.png|jpg|jpeg|gif$/.test(file.name)) {
+        const formData = new FormData()
+        formData.append('file', file)
+        formData.append('articleId', this.state.articleId)
+        this.setState({
+          isLoading: true
+        })
+        post(UPLOAD_PIC, formData)
+          .then(res => {
+            const text = `\n\n![](/files/${res.fileName})\n\n`
+            document.execCommand('insertText', false, text);
+          })
+          .finally(() => {
+            this.setState({
+              isLoading: false
+            })
+          })
+      } else {
+        toast('只支持图片文件的复制上传')
+      }
+    }
+  }
+
   renderCompareArea = () => {
     return (
       <div className={'compare-wrap'}>
@@ -177,6 +204,7 @@ export default class Editor extends React.Component {
           className={'raw'}
           value={this.state.markdownContent}
           onChange={this.getSetStateMethod('markdownContent')}
+          onPaste={this.handlePaste}
         />
         <div
           className={'parsed rhaego-markdown'}

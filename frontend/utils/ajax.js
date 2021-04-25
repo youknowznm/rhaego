@@ -17,7 +17,6 @@ export function ajax(
     if (isGetMethod) {
       url = setSearchParams(url, data)
     }
-
     xhr.open(method, url)
     xhr.setRequestHeader('Content-Type', 'application/json')
     for (let key in headers) {
@@ -43,7 +42,7 @@ export function ajax(
     xhr.onerror = err => {
       reject(err)
     }
-    xhr.send(JSON.stringify(data))
+    xhr.send(data instanceof FormData ? data : JSON.stringify(data))
   })
 }
 

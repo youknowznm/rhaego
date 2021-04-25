@@ -1,22 +1,17 @@
 const path = require('path')
 const Datastore = require('nedb')
 const request = require('request')
-const {customAlphabet} = require('nanoid/non-secure')
-
 const {GET_GITHUB_REPOS} = require("../api")
+const {
+  isValidString,
+  generateId
+} = require('../utils')
 
 const {
   validateArticleDoc,
   validateCommentDoc,
   validateClientDoc,
 } = require('./validators')
-
-const isValidString = target => typeof target === 'string' && target !== ''
-
-// nano-id non-look-alike
-const generateId = (digit = 10) => {
-  return customAlphabet('346789ABCDEFGHJKLMNPQRTUVWXYabcdefghijkmnpqrtwxyz', digit)()
-}
 
 class RhaegoDb {
 
