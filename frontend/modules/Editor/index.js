@@ -68,13 +68,13 @@ export default class Editor extends React.Component {
   }
 
   tryGetExistedContent = () => {
-    const {articleId = ''} = getSearchParams()
-    if (isValidString(articleId)) {
+    const {id} = getSearchParams()
+    if (isValidString(id)) {
       this.setState({
-        articleId
+        id
       })
       get(GET_ARTICLE_DETAIL, {
-        id: articleId
+        id
       })
         .then(res => {
           this.setState(omit(res.article, '_id'))
@@ -102,9 +102,7 @@ export default class Editor extends React.Component {
     })
     post(SAVE_ARTICLE, params)
       .then(res => {
-        goToSearchParams({
-          articleId: res.article.articleId
-        })
+        goToPath(`/article?id=${res.article.articleId}`)
       })
   }
 
@@ -122,7 +120,7 @@ export default class Editor extends React.Component {
           onChange={this.getSetStateMethod('title')}
           width={480}
           maxLength={16}
-          validatorRegExp={/^\d{2,40}$/}
+          validatorRegExp={/^\s*.{2,40}\s*$/}
           hint={'输入 2~40 字符的标题。'}
           disabled={this.state.isLoading}
           hasValidated={this.state.hasValidated}

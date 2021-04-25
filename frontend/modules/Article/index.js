@@ -2,56 +2,53 @@ import React from 'react';
 import c from 'classnames'
 import marked from 'marked'
 import hljs from "highlight.js";
-import {ajax, animateToScrollHeight, throttle, formatToMaterialSpans, get, getStyleInt, noop} from "~/utils";
+import {
+  ajax,
+  animateToScrollHeight,
+  throttle,
+  formatToMaterialSpans,
+  get,
+  getStyleInt,
+  noop,
+  getSearchParams, isValidString, omit, getTagsFromText, getStyle
+} from "~/utils";
 import TextField from "~/components/TextField";
 import Button from "~/components/Button";
 import {formatDateToPast} from "~/utils"
 import style from './article.scss'
 import {GET_ARTICLE_DETAIL} from '~api'
 import {SvgComment, SvgHeart} from "~/assets/svg";
-
-
-const re = {
-
-  login: {
-    // (zhngnmng)(@sina)(.com)(.cn)
-    emailReg: /^([a-zA-Z0-9]+[\w-]*)(@[\w]{2,})(\.[\w]{2,4})(\.[\w]{2,4})?$/,
-    // 12345678
-    passwordReg: /^.{6,20}$/,
-  },
-
-  editor: {
-    titleReg: /^.{10,40}$/,
-    summaryReg: /^.{10,100}$/,
-    createdDateReg: /^\d{4}-\d{2}-\d{2}$/,
-    contentReg: /\S/,
-  },
-
-  comment: {
-    authorReg: /^.{4,16}$/,
-    emailReg: /^([a-zA-Z0-9]+[\w-]*)(@[\w]{2,})(\.[\w]{2,4})(\.[\w]{2,4})?$/,
-    contentReg: /^.{4,120}$/,
-  },
-
-}
+import Loading from "~/components/Loading";
 
 export default class Article extends React.Component {
 
   state = {
     markdownContent: '',
     headers: [],
-    tags: [112,315],
-    scrollIng: false,
+    articleId: '',
+    title: '',
+    tags: [],
+    isScrollIng: false,
+    isLoading: false,
+    emptyReason: '',
+    commentAuthor: '',
+    commentEmail: '',
+    commentContent: '',
+    parsedHTML: null,
   }
 
-  docRef = null
+  compRef = null
   setRef = ref => {
-    if (this.docRef === null) {
-      this.docRef = ref
+    if (this.compRef === null) {
+      this.compRef = ref
     }
   }
 
-  getParsedHTML = () => {
+  setParsedHTML = () => {
+    const {markdownContent} = this.state
+    if (!isValidString(markdownContent)) {
+      return
+    }
     const renderer = new marked.Renderer()
     renderer.link = (href, title, text) => {
       return `<a target="_blank" href="${href}" title="'${title}">${text}</a>`;
@@ -63,27 +60,96 @@ export default class Article extends React.Component {
         return hljs.highlightAuto(code).value
       }
     })
-    return {
-      __html: marked(this.state.markdownContent)
+    this.setState({
+      parsedHTML: marked(markdownContent)
+    })
+    // 副作用更新了 DOM, 所以下次循环处理
+    setTimeout(() => {
+      this.setCatalog()
+    })
+  }
+
+  setCatalog = () => {
+    // 用 qs 因为 marked() 替换了 ref 获取到的 DOM 节点
+    const headersDOM = this.compRef.querySelector('.rhaego-markdown')
+      .querySelectorAll('h1, h2, h3, h4, h5, h6')
+    let headers = []
+    let minLevel = 1
+    for (let i = 0; i < headersDOM.length; i++) {
+      const curr = headersDOM[i]
+      const level = parseInt(curr.tagName.replace(/\D/g, ''), 10)
+      headers.push({
+        level,
+        label: curr.innerHTML,
+        offsetTop: curr.offsetTop,
+      })
+      minLevel = Math.max(minLevel, level)
     }
+    // 处理为最小 tag 类型为 1
+    for (let i = 0; i < 6; i++) {
+      if (minLevel === 1) {
+        break
+      }
+      headers = headers.map(item => {
+        return {
+          ...item,
+          level: item.level - 1
+        }
+      })
+      minLevel = Math.min(...(headers.map(item => item.level)))
+    }
+    headers.unshift({
+      level: 1,
+      label: '索引',
+      offsetTop: this.SCROLL_OFFSET_MARGIN - 64 - 24
+    })
+    this.setState({
+      headers
+    })
   }
 
   componentDidMount() {
-    get(GET_ARTICLE_DETAIL)
-      .then(res => {
-        this.setState({
-          markdownContent: res.text
-        })
-      })
+    this.getArticleBySearchId()
     window.addEventListener('scroll', this.scrollListener)
+  }
+
+  getArticleBySearchId = () => {
+    const {id} = getSearchParams()
+    if (isValidString(id)) {
+      this.setState({
+        articleId: id,
+        isLoading: true
+      })
+      get(GET_ARTICLE_DETAIL, {
+        id
+      })
+        .then(res => {
+          this.setState({
+            markdownContent: res.article.markdownContent,
+            title: res.article.title,
+            tags: getTagsFromText(res.article.tagsText)
+          })
+          this.setParsedHTML()
+        })
+        .finally(() => {
+          // setTimeout(() => {
+            this.setState({
+              isLoading: false
+            })
+          // }, 2000)
+        })
+    }
   }
 
   // TODO 注释
   // 请原谅这里的 magic numbers...
   scrollListener = throttle(() => {
     const {scrollTop} = document.documentElement
-    var doc = this.docRef
-    var nav = this.navRef
+    var doc = this.compRef
+    var nav = this.compRef.querySelector('.article-navs')
+    if (!nav) {
+      return
+    }
     const navHeight = getStyleInt(nav, 'height')
     const docHeight = doc.clientHeight
     let top
@@ -92,66 +158,25 @@ export default class Article extends React.Component {
     } else {
       top = scrollTop > 192 ? (scrollTop - 192 + 24): 24
     }
-    this.navRef.style.top = `${top}px`
+    nav.style.top = `${top}px`
   })
 
-  componentDidUpdate() {
-    if (this.docRef && this.state.headers.length === 0) {
-      const headersDOM = this.docRef.querySelectorAll('h2, h3, h4')
-      let headers = []
-      let minLevel = -1
-      for (let i = 0; i < headersDOM.length; i++) {
-        const curr = headersDOM[i]
-        const level = parseInt(curr.tagName.replace(/\D/g, ''), 10)
-        headers.push({
-          level,
-          label: curr.innerHTML,
-          offsetTop: curr.offsetTop,
-        })
-        minLevel = Math.max(minLevel, level)
-      }
-      // 处理为最小 tag 类型为 1
-      while (minLevel !== 1) {
-        headers = headers.map(item => {
-          return {
-            ...item,
-            level: item.level - 1
-          }
-        })
-        minLevel = Math.min(...(headers.map(item => item.level)))
-      }
-      headers.unshift({
-        level: 1,
-        label: '索引',
-        offsetTop: this.SCROLL_OFFSET_MARGIN - 64 - 24
-      })
-      this.setState({
-        headers
-      })
-    }
-  }
-
-  navRef = null
-  setNavRef = ref => {
-    if (this.navRef === null) {
-      this.navRef = ref
-    }
-  }
+  componentDidUpdate() {}
 
   SCROLL_OFFSET_MARGIN = 160
 
   getScrollToHeaderFunc = targetScrollTop => evt => {
-    if (this.state.scrollIng) {
+    if (this.state.isScrollIng) {
       return
     }
     this.setState({
-      scrollIng: true
+      isScrollIng: true
     })
     animateToScrollHeight(
       targetScrollTop + this.SCROLL_OFFSET_MARGIN,
       () => {
         this.setState({
-          scrollIng: false
+          isScrollIng: false
         })
       }
     )
@@ -171,15 +196,15 @@ export default class Article extends React.Component {
   renderInfo = () => {
     return <div className={'info'}>
       <div className={'actions'}>
-        <SvgHeart fill={'light'} />
+        <SvgHeart />
         <span className={'like count'}>3</span>
-        <SvgComment fill={'light'} />
+        <SvgComment />
         <span className={'comment count'}>7</span>
       </div>
       <div className={'tags'}>
         {
           this.state.tags.map((item, index) => (
-            <Button  className={'tag'} key={index}>
+            <Button className={'tag'} key={index}>
               {item}
             </Button>
           ))
@@ -189,13 +214,23 @@ export default class Article extends React.Component {
     </div>
   }
 
-  renderComments = () => {
+  getSetStateMethod = stateKey => evt => {
+    this.setState({
+      [stateKey]: evt.target.value
+    })
+  }
+
+  renderCommentEditor = () => {
+    if (!isValidString(this.state.markdownContent)) {
+      return null
+    }
     return <div className={'comment edit'}>
       <p className={'title'}>欢迎留下您的评论。</p>
       <TextField
         className={'comment-author'}
         label={'称呼'}
         value={this.state.commentAuthor}
+        onChange={this.getSetStateMethod('commentAuthor')}
         width={240}
         maxLength={16}
         validatorRegExp={/^\d{2,16}$/}
@@ -204,7 +239,8 @@ export default class Article extends React.Component {
       <TextField
         className={'comment-email'}
         label={'邮箱'}
-        value={this.state.commentAuthor}
+        value={this.state.commentEmail}
+        onChange={this.getSetStateMethod('commentEmail')}
         width={240}
         maxLength={30}
         validatorRegExp={/^\d{2,16}$/}
@@ -213,11 +249,12 @@ export default class Article extends React.Component {
       <TextField
         className={'comment-content'}
         label={'内容'}
-        value={this.state.commentAuthor}
+        value={this.state.commentContent}
+        onChange={this.getSetStateMethod('commentContent')}
         width={492}
         maxLength={120}
         validatorRegExp={/^.{4,120}$/}
-        hint={'输入4至120字符的评论`。`'}
+        hint={'输入4至120字符的评论。'}
       />
       <Button
         className={'submit'}
@@ -228,7 +265,7 @@ export default class Article extends React.Component {
     </div>
   }
 
-  renderComments2 = () => {
+  renderComments = () => {
     const cms = [
       {
         author: 'adf',
@@ -255,38 +292,43 @@ export default class Article extends React.Component {
     </ul>
   }
 
-    render() {
-    const title = 'Progress 进度条组件 Progress 进度条组件 Progress 进度条组件 Progress 进度条组件 '
+  render() {
+    // return null
     return (
-      <div className={'rhaego-article'} ref={this.setRef}>
-        <ul className={'article-navs'} ref={this.setNavRef}>
-          {
-            this.state.headers.map((item, index) => (
-              <li
-                key={index}
-                className={c(
-                  'article-nav',
-                  `level-${item.level}`
-                )}
-                onClick={this.getScrollToHeaderFunc(item.offsetTop)}
-              >
-                {item.label}
-              </li>
-            ))
-          }
-        </ul>
-        <div className={'article-content'} onClick={this.handleClick} ref={this.setRef}>
-          <div className={'article-top'}>
-            <h1 className={'title'}>{formatToMaterialSpans(title)}</h1>
-            {this.renderInfo()}
+      <Loading isLoading={this.state.isLoading} emptyReason={null}>
+        <div className={'rhaego-article'} ref={this.setRef}>
+          <ul className={'article-navs'}>
+            {
+              this.state.headers.map((item, index) => (
+                <li
+                  key={index}
+                  className={c(
+                    'article-nav',
+                    `level-${item.level}`
+                  )}
+                  onClick={this.getScrollToHeaderFunc(item.offsetTop)}
+                >
+                  {item.label}
+                </li>
+              ))
+            }
+          </ul>
+          <div className={'article-content'} onClick={this.handleClick}>
+            <div className={'article-top'}>
+              <h1 className={'title'}>{formatToMaterialSpans(this.state.title)}</h1>
+              {this.renderInfo()}
+            </div>
+            <div
+              className={'rhaego-markdown'}
+              dangerouslySetInnerHTML={{__html: this.state.parsedHTML}}
+            />
           </div>
-          <div className={'rhaego-markdown'} dangerouslySetInnerHTML={this.getParsedHTML()} />
+          <div className={'article-bottom'}>
+            {this.renderCommentEditor()}
+            {this.renderComments()}
+          </div>
         </div>
-        <div className={'article-bottom'}>
-          {this.renderComments()}
-          {this.renderComments2()}
-        </div>
-      </div>
+      </Loading>
     )
   }
 }

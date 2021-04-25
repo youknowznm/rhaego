@@ -15,7 +15,7 @@ $rhaego-button-secondary: rgb(220, 0, 78);
   line-height: 36px;
   cursor: pointer;
   text-align: center;
-  border-radius: 2px;
+  border-radius: 4px;
   border: 0 solid rgb(33, 33, 33);
   color: rgb(33, 33, 33);
   box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%),
@@ -95,6 +95,7 @@ $rhaego-button-secondary: rgb(220, 0, 78);
 
   // 小
   &.size-small {
+    border-radius: 2px;
     height: 30px !important;
     line-height: 30px !important;
     .button-content {

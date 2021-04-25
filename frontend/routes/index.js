@@ -26,7 +26,7 @@ export default function Routes() {
           <Route exact path="/articles">
             <Articles />
           </Route>
-          <Route exact path="/article/:id">
+          <Route exact path="/article">
             <Article />
           </Route>
           <Route exact path="/repos">

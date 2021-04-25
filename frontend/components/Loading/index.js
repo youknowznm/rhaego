@@ -18,13 +18,14 @@ import style from './loading.scss'
 export default class Loading extends React.Component {
 
   static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    emptyReason: PropTypes.string,
+    isLoading: PropTypes.bool.isRequired,
+    // loading 结束, emptyReason 为 null, 表示成功
+    emptyReason: PropTypes.string || null,
     className: PropTypes.string,
   }
 
   static defaultProps = {
-    loading: true,
+    isLoading: true,
     emptyReason: '无内容',
     className: '',
   }
@@ -38,7 +39,7 @@ export default class Loading extends React.Component {
         )}
       >
         {
-          this.props.loading ? (
+          this.props.isLoading ? (
             <div className={'loading-icon'} />
           ) : (
             <p className={'empty-info'}>
@@ -53,11 +54,11 @@ export default class Loading extends React.Component {
   render() {
     const {
       className,
-      loading,
+      isLoading,
       emptyReason,
       children,
     } = this.props
-    if (loading) {
+    if (isLoading) {
       return (
         <div
           className={c(

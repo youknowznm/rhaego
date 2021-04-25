@@ -37,10 +37,6 @@ export const setSearchParams = (url, params) => {
   return result
 }
 
-export const goToPath = (pathName) => {
-  location.href = location.origin + pathName
-}
-
-export const goToSearchParams = (params) => {
-  location.href = setSearchParams(location.href, params)
+export const goToPath = (pathAndAfter) => {
+  location.href = location.origin + pathAndAfter
 }

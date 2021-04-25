@@ -7,7 +7,7 @@ export function callIfCallable(fn) {
 export function noop() {}
 
 export function formatToMaterialSpans(string) {
-  const separated = string.split(/\s+/)
+  const separated = string.split(/\s+/).filter(item => item !== '')
   return (
     <span className={''}>
         {separated.map((item, index) => {
@@ -55,4 +55,9 @@ export function getFontTheme(theme) {
     'orange',
     'grey',
   ].includes(theme) ? 'dark' : 'light'
+}
+
+// 解析#分隔的标签字符串为标签数组
+export function getTagsFromText(tagsText) {
+  return tagsText.split(/\s*#/).filter(item => item !== '')
 }

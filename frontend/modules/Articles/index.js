@@ -7,7 +7,7 @@ import {
   SvgHeart,
 } from "~/assets/svg";
 
-import {ajax, get, getPalette, getFontTheme} from "~/utils";
+import {ajax, get, getPalette, getFontTheme, getTagsFromText} from "~/utils";
 
 import style from './articles.scss'
 import Button from "~/components/Button";
@@ -18,42 +18,43 @@ export default class Articles extends React.Component {
   state = {
     articles: [],
     palette: [],
-    loadingFlag: false
+    isLoading: false,
+    emptyReason: null,
   }
 
   componentDidMount() {
     this.setState({
       palette: getPalette(),
-      loadingFlag: true
+      isLoading: true
     })
     get(GET_ARTICLES)
       .then(res => {
         const articles = res.articles.map(item => {
           return {
             ...item,
-            tags: item.tagsText.split(/\s*#/)
+            tags: getTagsFromText(item.tagsText)
           }
         })
         this.setState({
-          articles
+          articles,
+          emptyReason: articles.length === 0 ? '暂无笔记' : null
         })
       })
       .finally(() => {
-        setTimeout(() => {
           this.setState({
-            loadingFlag: false
+            isLoading: false
           })
-        }, 5000)
       })
   }
 
   renderList = () => {
     const {
       palette,
-      loadingFlag,
+      isLoading,
+      emptyReason,
     } = this.state
     return (
-      <Loading loading={loadingFlag}>
+      <Loading isLoading={isLoading} emptyReason={emptyReason}>
         <div className={'article-list'}>
           {
             this.state.articles.map((item, index) => {
@@ -66,6 +67,7 @@ export default class Articles extends React.Component {
                 fontTheme={fontTheme}
                 title={item.title}
                 content={item.content}
+                link={`/article?id=${item.articleId}`}
               >
                 <div className={'tags'}>
                   {
