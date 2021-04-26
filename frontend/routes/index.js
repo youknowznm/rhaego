@@ -1,8 +1,10 @@
-import React from "react"
+import React, {useEffect} from "react"
 import c from 'classnames'
 import {
   BrowserRouter,
   Switch,
+  withRouter,
+  useLocation,
   Route,
 } from "react-router-dom"
 import Main from "~/modules/Main"
@@ -14,9 +16,18 @@ import Article from "~/modules/Article"
 import Repos from "~/modules/Repos"
 import Admin from "~/modules/Admin"
 
+const ScrollToTop = () => {
+  const {pathname}  = useLocation()
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+  return null
+}
+
 export default function Routes() {
   return (
       <BrowserRouter>
+        <ScrollToTop />
         <Header/>
         <Main>
           <Switch>

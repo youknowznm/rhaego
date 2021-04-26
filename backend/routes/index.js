@@ -128,10 +128,10 @@ router
   })
   // 仓库
   .get(GET_REPOS, async function(ctx) {
-    const repoList = await db.getGithubRepos()
+    const repos = await db.getGithubRepos()
     ctx.body = {
       data: {
-        repoList: JSON.parse(repoList)
+        repos: JSON.parse(repos)
       }
     }
   })

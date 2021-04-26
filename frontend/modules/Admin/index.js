@@ -1,30 +1,21 @@
 import React from 'react';
-
+import {withRouter} from '~/utils'
 import TextField from "~/components/TextField";
 import Button from "~/components/Button";
 
 import style from './admin.scss'
-export default class Admin extends React.Component {
+class Admin extends React.Component {
 
   state = {
     username: '',
     password: '',
   }
 
-  docRef = null
-  setRef = ref => {
-    if (this.docRef === null) {
-      this.docRef = ref
-    }
-  }
   componentDidMount() {
   }
 
-  navRef = null
-  setNavRef = ref => {
-    if (this.navRef === null) {
-      this.navRef = ref
-    }
+  onCancel = () => {
+    this.props.history.goBack()
   }
 
   renderAdminArea = () => {
@@ -55,8 +46,9 @@ export default class Admin extends React.Component {
       >
         登录
       </Button>
-    <Button
+      <Button
         className={'cancel'}
+        onClick={this.onCancel}
       >
         取消
       </Button>
@@ -74,3 +66,5 @@ export default class Admin extends React.Component {
     )
   }
 }
+
+export default withRouter(Admin)

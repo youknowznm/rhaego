@@ -17,7 +17,6 @@ class RhaegoHeader extends React.Component {
   static propTypes = {
     siteName: PropTypes.string.isRequired,
     links: PropTypes.array.isRequired,
-    history: PropTypes.object.isRequired,
   }
 
   static defaultProps = {
@@ -52,16 +51,15 @@ class RhaegoHeader extends React.Component {
 
   constructor(props) {
     super(props)
-    this.shit()
+    this.handleHistoryChange()
   }
 
-  shit = () => {
-    const currPath = location.pathname + location.search
+  handleHistoryChange = (historyState = window.location) => {
+    const currPath = `${historyState.pathname}${historyState.search}`
+    // 根据路由匹配到应高亮的 nav
     let activeNavIndex = this.props.links.findIndex(item => {
-      return item.path === currPath
-      // || item.matches.some(regexp => regexp.test(currPath))
+      return item.path === currPath || item.matches(currPath)
     })
-    // console.log({activeNavIndex})
     if (activeNavIndex < 0) {
       activeNavIndex = 0
     }
@@ -78,14 +76,7 @@ class RhaegoHeader extends React.Component {
   componentDidMount() {
     this.addListeners()
     this.setDefaultNavSize()
-    console.log('mt')
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log(prevProps.history, this.props.history)
-    if (prevProps.history.location.pathname !== this.props.history.location.pathname) {
-      this.shit()
-    }
+    this.props.history.listen(this.handleHistoryChange)
   }
 
   navListDOM = null

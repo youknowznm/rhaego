@@ -77,3 +77,5 @@ marked.setOptions({
 })
 
 export const parseMarkdown = raw => marked(raw)
+
+export const RESUME_ID = 'RESUME'
