@@ -52,19 +52,40 @@ class RhaegoHeader extends React.Component {
 
   constructor(props) {
     super(props)
+    this.shit()
+  }
+
+  shit = () => {
     const currPath = location.pathname + location.search
-    const activeNavIndex = this.props.links.findIndex(item => {
+    let activeNavIndex = this.props.links.findIndex(item => {
       return item.path === currPath
-        // || item.matches.some(regexp => regexp.test(currPath))
+      // || item.matches.some(regexp => regexp.test(currPath))
     })
     // console.log({activeNavIndex})
+    if (activeNavIndex < 0) {
+      activeNavIndex = 0
+    }
     // 索性未匹配的都取首项
-    this.state.activeNavIndex = activeNavIndex < 0 ? 0 : activeNavIndex
+    if (!this.state.activeNavIndex) {
+      this.state.activeNavIndex = activeNavIndex
+    } else {
+      this.setState({
+        activeNavIndex
+      })
+    }
   }
 
   componentDidMount() {
     this.addListeners()
     this.setDefaultNavSize()
+    console.log('mt')
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log(prevProps.history, this.props.history)
+    if (prevProps.history.location.pathname !== this.props.history.location.pathname) {
+      this.shit()
+    }
   }
 
   navListDOM = null

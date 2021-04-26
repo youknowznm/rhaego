@@ -23,9 +23,9 @@ import {
 import {SvgComment, SvgHeart} from "~/assets/svg";
 import Loading from "~/components/Loading";
 import PropTypes from "prop-types";
+import {toast} from "~/components/Toast";
 
 import style from './article.scss'
-import {toast} from "~/components/Toast";
 class Article extends React.Component {
 
   // static propTypes = {
@@ -104,7 +104,7 @@ class Article extends React.Component {
       const level = parseInt(curr.tagName.replace(/\D/g, ''), 10)
       headers.push({
         level,
-        label: curr.innerHTML,
+        label: curr.innerText,
         node: curr,
       })
       minLevel = Math.min(minLevel, level)

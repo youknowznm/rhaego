@@ -1,10 +1,25 @@
 # 教育经历
-- **首都师范大学／本科／英语语言文学** *2010 - 2014*
+- **首都师范大学 | 本科 | 英语语言文学** *2010 - 2014*
 
 # 个人技能
 
+![](/files/RESUME_Ak77Py.png)
+
+hohoho
+
+
+
+![](/files/RESUME_AKBccK.png)
+
+
+
+
+![](/files/RESUME_AbNzXy.png)
+
+发生
+
 ### **前端**
-  - 熟练编写语义化的 `HTML` 和 `CSS` / `SCSS`
+  - 熟练语义化的 `HTML` 和 `CSS` / `SCSS`
   - 熟悉原生 `JavaScript`，熟悉 `ES6` 的常用特性
   - 熟悉 `React` 和 `Redux` 及其相关生态
   - 熟悉 `Vue` 框架

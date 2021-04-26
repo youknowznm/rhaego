@@ -11,6 +11,7 @@ import {
   isValidString,
   post,
   Link,
+  pick,
   addClass, removeClass, goToPath, postForm, parseMarkdown,
   debounce, throttle
 } from "~/utils"
@@ -44,6 +45,7 @@ class Editor extends React.Component {
     dateString: formatDateToString(new Date()),
     isLoading: false,
     hasValidated: false,
+    isResume: false,
   }
 
   componentDidMount() {
@@ -55,7 +57,8 @@ class Editor extends React.Component {
     const {id} = getSearchParams()
     if (isValidString(id)) {
       this.setState({
-        id,
+        articleId: id,
+        isResume: id === 'RESUME',
         isLoading: true
       })
       get(GET_ARTICLE_DETAIL, {
@@ -86,20 +89,28 @@ class Editor extends React.Component {
   }
 
   onSave = () => {
-    const params = omit(this.state, [
-      'hasValidated',
-      'isLoading',
+    const params = pick(this.state, [
+      'articleId',
+      'title',
+      'tagsText',
+      'markdownContent',
+      'dateString',
     ])
     this.setState({
       hasValidated: true
     })
     post(SAVE_ARTICLE, params)
       .then(res => {
-        this.props.history.push(`/article?id=${res.article.articleId}`)
+        this.props.history.push(`/article?id=${res.articleId}`)
       })
   }
 
+  onCancel = () => {
+    this.props.history.goBack()
+  }
+
   renderTopFields = () => {
+    const topFieldsDisabled = this.state.isLoading || this.state.isResume
     return (
       <div className={'editor-fields'}>
         <TextField
@@ -111,7 +122,7 @@ class Editor extends React.Component {
           maxLength={40}
           validatorRegExp={/^\s*.{2,40}\s*$/}
           hint={'输入 2~40 字符的标题。'}
-          disabled={this.state.isLoading}
+          disabled={topFieldsDisabled}
           hasValidated={this.state.hasValidated}
         />
         <TextField
@@ -123,7 +134,7 @@ class Editor extends React.Component {
           maxLength={30}
           validatorRegExp={/^(\s*#[^#]+){1,3}\s*$/}
           hint={'输入 1~3 个以#分隔的标签。'}
-          disabled={this.state.isLoading}
+          disabled={topFieldsDisabled}
           hasValidated={this.state.hasValidated}
         />
         <TextField
@@ -135,7 +146,7 @@ class Editor extends React.Component {
           maxLength={10}
           validatorRegExp={/^\d{4}-\d{2}-\d{2}$/}
           hint={'输入 YYYY/MM/DD 格式的日期。'}
-          disabled={this.state.isLoading}
+          disabled={topFieldsDisabled}
           hasValidated={this.state.hasValidated}
         />
         <div className={'actions'}>
@@ -146,15 +157,14 @@ class Editor extends React.Component {
           >
             保存
           </Button>
-          <Link to={`/articles`}>
             <Button
               className={'cancel'}
               type={'secondary'}
+              onClick={this.onCancel}
               disabled={this.state.isLoading}
             >
               取消
             </Button>
-          </Link>
         </div>
       </div>
     )
@@ -173,7 +183,9 @@ class Editor extends React.Component {
         postForm(UPLOAD_PIC, formData)
           .then(res => {
             const text = `\n\n![](/files/${res.fileName})\n\n`
-            document.execCommand('insertText', false, text);
+            setTimeout(() => {
+              document.execCommand('insertText', false, text);
+            })
           })
           .finally(() => {
             this.setState({

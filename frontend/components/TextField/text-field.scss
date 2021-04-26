@@ -54,6 +54,7 @@ $input-red: rgb(221, 44, 0);
     &.disabled {
       input {
         border-bottom-style: dotted;
+        color: $font-secondary;
       }
     }
     label {

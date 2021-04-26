@@ -50,7 +50,7 @@ export default function Routes() {
 
 // import React from 'react'
 // import {connect} from 'react-redux'
-// import {Router, Route, IndexRoute, browserHistory} from 'react-router'
+// import {Router, Route, IndexRoute, browserHistory} from 'react-routes'
 //
 // import App from '../app'
 // import {view as Articles} from '../../../_modules/articles'

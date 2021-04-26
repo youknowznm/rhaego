@@ -23,7 +23,7 @@ const set200 = (ctx, body = {}) => {
 const set400 = (ctx, message = '出错了') => {
   ctx.response.type = 'json'
   ctx.response.status = 400
-  ctx.response.message = message
+  ctx.response.body = {message}
 }
 
 module.exports = {

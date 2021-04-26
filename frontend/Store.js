@@ -1,7 +1,7 @@
 import {createStore, compose, combineReducers, applyMiddleware} from 'redux'
 import thunkMiddleware from 'redux-thunk'
 
-import {routerReducer} from 'react-router-redux'
+import {routerReducer} from 'react-routes-redux'
 import {reducer as headerReducer} from '../_modules/header'
 import {reducer as productsReducer} from '../_modules/products'
 import {reducer as loginReducer} from '../_modules/login'
