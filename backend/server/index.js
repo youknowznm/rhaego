@@ -95,16 +95,18 @@ router
     }
   })
   .post(DELETE_ARTICLE, async function(ctx) {
-    const {id} = ctx.query
-    console.log({id})
-    // try {
-    //   const article = await db.getArticle(id)
-    //   set200(ctx, {
-    //     article
-    //   })
-    // } catch (err) {
-    //   set400(err.message)
-    // }
+    const {id} = ctx.request.body
+    try {
+      const result = await db.deleteArticle(id)
+      console.log({result})
+      if (result === true) {
+        set200(ctx)
+      } else {
+        set400(ctx)
+      }
+    } catch (err) {
+      set400(err.message)
+    }
   })
   // 文章 - 图片
   .post(UPLOAD_PIC, async function(ctx) {

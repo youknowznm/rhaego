@@ -7,9 +7,12 @@ import {
   omit,
   getSearchParams,
   goToSearchParams,
+  withRouter,
   isValidString,
   post,
+  Link,
   addClass, removeClass, goToPath, postForm, parseMarkdown,
+  debounce, throttle
 } from "~/utils"
 import style from './editor.scss'
 import TextField from "~/components/TextField"
@@ -21,9 +24,8 @@ import {
   UPLOAD_PIC,
   SAVE_ARTICLE,
 } from '~api'
-import {debounce, throttle} from "~utils/lodash";
 
-export default class Editor extends React.Component {
+class Editor extends React.Component {
 
   static propTypes = {
     // articleId: PropTypes.string,
@@ -93,12 +95,8 @@ export default class Editor extends React.Component {
     })
     post(SAVE_ARTICLE, params)
       .then(res => {
-        goToPath(`/article?id=${res.article.articleId}`)
+        this.props.history.push(`/article?id=${res.article.articleId}`)
       })
-  }
-
-  onCancel = () => {
-    goToPath('/articles')
   }
 
   renderTopFields = () => {
@@ -148,14 +146,15 @@ export default class Editor extends React.Component {
           >
             保存
           </Button>
-          <Button
-            className={'cancel'}
-            type={'secondary'}
-            onClick={this.onCancel}
-            disabled={this.state.isLoading}
-          >
-            取消
-          </Button>
+          <Link to={`/articles`}>
+            <Button
+              className={'cancel'}
+              type={'secondary'}
+              disabled={this.state.isLoading}
+            >
+              取消
+            </Button>
+          </Link>
         </div>
       </div>
     )
@@ -222,3 +221,5 @@ export default class Editor extends React.Component {
     )
   }
 }
+
+export default withRouter(Editor)

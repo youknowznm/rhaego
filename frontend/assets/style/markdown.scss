@@ -69,9 +69,10 @@ $rhaego-markdown-quote: #757575;
     }
   }
 
+  // 默认 markdown 的 code 左右无空格.
   code {
     padding: 0 .3em;
-    margin: 0 -.3em;
+    margin: 0 .3em;
     border: 1px solid #dadce0;
     border-radius: 3px;
     font-size: 13px;

@@ -196,13 +196,14 @@ class RhaegoDb {
       })
   })
   // 删除指定 _id 的文章; 删除其下所有评论
-  deleteArticle = _id => new Promise((resolve, reject) => {
+  deleteArticle = articleId => new Promise((resolve, reject) => {
     this.articleDb.remove(
-      {_id},
+      {articleId},
       (err, articleDoc) => {
+        console.log({articleDoc})
         err && reject(err)
         this.commentDb.remove(
-          {articleId: _id},
+          {articleId},
           (err, articleDoc) => {
             err && reject(err)
             resolve(true)

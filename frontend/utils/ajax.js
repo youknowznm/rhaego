@@ -35,7 +35,15 @@ export function ajax(
           }
           resolve(res)
         } else {
-          const errObj = JSON.parse(xhr.response)
+          let errObj = {
+            message: '出错了'
+          }
+          try {
+            errObj = JSON.parse(xhr.response)
+          } catch (e) {
+            toast(errObj.message, 4000)
+            reject(errObj)
+          }
           toast(errObj.message, 4000)
           reject(errObj)
         }

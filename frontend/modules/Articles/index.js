@@ -6,10 +6,7 @@ import {
   SvgComment,
   SvgHeart,
 } from "~/assets/svg";
-import {
-  Link,
-} from "react-router-dom"
-import {ajax, get, getPalette, getFontTheme, getTagsFromText} from "~/utils";
+import {Link, ajax, get, getPalette, getFontTheme, getTagsFromText} from "~/utils";
 
 import Button from "~/components/Button";
 import {GET_ARTICLES} from "~api";

@@ -10,19 +10,23 @@ import {
   noop,
   parseMarkdown,
   debounce,
-  getSearchParams, isValidString, omit, getTagsFromText, getStyle
+  getSearchParams, isValidString, omit, getTagsFromText, getStyle,
+  Link, withRouter, post
 } from "~/utils";
 import TextField from "~/components/TextField";
 import Button from "~/components/Button";
 import {formatDateToPast} from "~/utils"
-import {GET_ARTICLE_DETAIL} from '~api'
+import {
+  GET_ARTICLE_DETAIL,
+  DELETE_ARTICLE,
+} from '~api'
 import {SvgComment, SvgHeart} from "~/assets/svg";
 import Loading from "~/components/Loading";
 import PropTypes from "prop-types";
 
 import style from './article.scss'
 import {toast} from "~/components/Toast";
-export default class Article extends React.Component {
+class Article extends React.Component {
 
   // static propTypes = {
   //   isResume: PropTypes.bool
@@ -216,20 +220,15 @@ export default class Article extends React.Component {
         articleId: id,
         isLoading: true
       })
-      get(GET_ARTICLE_DETAIL, {
+      post(DELETE_ARTICLE, {
         id
       })
         .then(res => {
+          console.log({res})
           this.setState({
-            markdownContent: res.article.markdownContent,
-            parsedHTML: parseMarkdown(res.article.markdownContent),
-            title: res.article.title,
-            tags: getTagsFromText(res.article.tagsText)
+            isLoading: false
           })
-          // 副作用更新了 DOM, 所以下次循环处理
-          setTimeout(() => {
-            this.setCatalog()
-          })
+          this.props.history.push('/articles')
         })
         .finally(() => {
           this.setState({
@@ -242,16 +241,18 @@ export default class Article extends React.Component {
   renderAdmin = () => {
     return (
       <div className={'admin-row'}>
-        <Button
-          className={'edit-article'}
-          type={'primary'}
-          link={`/editor?id=${this.state.articleId}`}
-        >
-          编辑文章
-        </Button>
+        <Link to={`/editor?id=${this.state.articleId}`}>
+          <Button
+            className={'edit-article'}
+            type={'primary'}
+          >
+            编辑文章
+          </Button>
+        </Link>
         <Button
           className={'delete-article'}
           type={'secondary'}
+          onClick={this.deleteArticle}
         >
           删除文章
         </Button>
@@ -404,3 +405,5 @@ export default class Article extends React.Component {
     )
   }
 }
+
+export default withRouter(Article)

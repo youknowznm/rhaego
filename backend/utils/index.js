@@ -14,13 +14,13 @@ const getExt = fileName => {
   return arr[0] ? arr[0] : ''
 }
 
-const set200 = (ctx, body) => {
+const set200 = (ctx, body = {}) => {
   ctx.response.type = 'json'
   ctx.response.status = 200
   ctx.response.body = body
 }
 
-const set400 = (ctx, message) => {
+const set400 = (ctx, message = '出错了') => {
   ctx.response.type = 'json'
   ctx.response.status = 400
   ctx.response.message = message

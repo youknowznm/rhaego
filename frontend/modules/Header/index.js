@@ -6,19 +6,23 @@ export default props => {
   const links = [
     {
       name: '笔记',
-      path: '/articles'
+      path: '/articles',
+      // matches: [/^\/article\?id=[^(RESUME)]/]
     },
     {
       name: '代码',
-      path: '/repos'
+      path: '/repos',
+      // matches: []
     },
     {
       name: '关于我',
-      path: '/article?id=RESUME'
+      path: '/article?id=RESUME',
+      // matches: []
     },
     {
       name: 'login as god',
-      path: '/admin'
+      path: '/admin',
+      // matches: []
     },
   ]
 

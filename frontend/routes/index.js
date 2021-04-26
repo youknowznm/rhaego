@@ -20,17 +20,20 @@ export default function Routes() {
         <Header/>
         <Main>
           <Switch>
+            <Route exact path="/">
+              <Articles />
+            </Route>
             <Route exact path="/articles">
               <Articles />
             </Route>
             <Route exact path="/article">
               <Article />
             </Route>
-            <Route exact path="/repos">
-              <Repos />
-            </Route>
             <Route exact path="/editor">
               <Editor />
+            </Route>
+            <Route exact path="/repos">
+              <Repos />
             </Route>
             <Route exact path="/admin">
               <Admin />

@@ -37,6 +37,12 @@ export const setSearchParams = (url, params) => {
   return result
 }
 
+// 导致页面重载, 慎用
 export const goToPath = (pathAndAfter) => {
   location.href = location.origin + pathAndAfter
 }
+
+export {
+  Link,
+  withRouter
+} from 'react-router-dom'

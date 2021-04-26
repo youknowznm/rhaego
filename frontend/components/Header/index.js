@@ -52,11 +52,14 @@ class RhaegoHeader extends React.Component {
 
   constructor(props) {
     super(props)
+    const currPath = location.pathname + location.search
     const activeNavIndex = this.props.links.findIndex(item => {
-      console.log(item.path, (this.props.history.location))
-      return item.path === (location.pathname + location.search)
+      return item.path === currPath
+        // || item.matches.some(regexp => regexp.test(currPath))
     })
-    this.state.activeNavIndex = activeNavIndex
+    // console.log({activeNavIndex})
+    // 索性未匹配的都取首项
+    this.state.activeNavIndex = activeNavIndex < 0 ? 0 : activeNavIndex
   }
 
   componentDidMount() {
