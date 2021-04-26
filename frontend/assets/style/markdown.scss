@@ -13,13 +13,13 @@ $rhaego-markdown-quote: #757575;
 .rhaego-markdown {
 
   text-align: left;
-  padding: 0 6px;
+  //padding: 0 6px;
   color: $black;
 
   p {
-    line-height: 20px;
+    line-height: 22px;
     font-size: 14px;
-    margin: 16px 0;
+    margin: 0 0 16px 0;
     padding: 0;
   }
 
@@ -50,12 +50,12 @@ $rhaego-markdown-quote: #757575;
   h1 {
     font-size: 34px;
     line-height: 42px;
-    margin-bottom: 10px;
+    margin: 36px 0 12px;
     font-weight: 300;
   }
 
   h2, h3, h4, h5, h6 {
-    margin-bottom: 5px;
+    margin: 12px 0 6px;
     font-size: 20px;
     line-height: 32px;
   }
@@ -82,10 +82,10 @@ $rhaego-markdown-quote: #757575;
   }
 
   pre {
-    margin: 24px 0 12px;
+    margin: 12px 0;
     overflow-x: auto;
     overflow-y: hidden;
-    padding: 8px 16px;
+    padding: 8px;
     position: relative;
     background: $white;
     border: 1px solid $rhaego-markdown-border-light;
@@ -124,7 +124,7 @@ $rhaego-markdown-quote: #757575;
 
   img {
     display: block;
-    margin: 24px auto;
+    margin: 12px auto;
     max-width: 100%;
     cursor: pointer;
     box-shadow: $paper-elevation-low;

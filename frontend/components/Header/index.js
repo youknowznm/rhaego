@@ -6,17 +6,18 @@ import {
   formatToMaterialSpans,
   getStyleInt,
   throttle,
-  animateToScrollHeight, removeClass, addClass
+  animateToScrollHeight, removeClass, addClass, goToPath
 } from '~/utils'
 
-import style from './header.scss'
+import {withRouter} from 'react-router-dom'
 
-export default class RhaegoHeader extends React.Component {
+import style from './header.scss'
+class RhaegoHeader extends React.Component {
 
   static propTypes = {
     siteName: PropTypes.string.isRequired,
     links: PropTypes.array.isRequired,
-    // activeNavIndex:
+    history: PropTypes.object.isRequired,
   }
 
   static defaultProps = {
@@ -42,11 +43,19 @@ export default class RhaegoHeader extends React.Component {
     bannerTitleHidden: false,
     currNavLeft: 0,
     currNavWidth: -1,
-    activeNavIndex: 0,
+    // activeNavIndex: 0,
     navBorderLeft: -1,
     navBorderRight: -1,
     rippleLeft: 0,
     rippleTop: 0
+  }
+
+  constructor(props) {
+    super(props)
+    const activeNavIndex = this.props.links.findIndex(item => {
+      return location.pathname === item.path
+    }) || 0
+    this.state.activeNavIndex = activeNavIndex
   }
 
   componentDidMount() {
@@ -54,19 +63,21 @@ export default class RhaegoHeader extends React.Component {
     this.setDefaultNavSize()
   }
 
-  navListDOM
+  navListDOM = null
   setNavListRef = ref => {
     this.navListDOM = ref
   }
 
   setDefaultNavSize = () => {
     const defaultActiveDOM = this.navListDOM.children[this.state.activeNavIndex]
-    const currNavLeft = getStyleInt(defaultActiveDOM, 'left')
-    const currNavWidth = getStyleInt(defaultActiveDOM, 'width')
-    this.setState({
-      currNavLeft,
-      currNavWidth,
-    })
+    if (defaultActiveDOM) {
+      const currNavLeft = getStyleInt(defaultActiveDOM, 'left')
+      const currNavWidth = getStyleInt(defaultActiveDOM, 'width')
+      this.setState({
+        currNavLeft,
+        currNavWidth,
+      })
+    }
   }
 
   docScrollTop = 0
@@ -175,6 +186,10 @@ export default class RhaegoHeader extends React.Component {
     addClass(ref, targetAtCurrRight ? 'flow-to-right' : 'flow-to-left')
 
     animateToScrollHeight(0)
+    this.props.history.push(item.path)
+  }
+
+  componentWillUnmount() {
   }
 
   render() {
@@ -234,3 +249,5 @@ export default class RhaegoHeader extends React.Component {
     )
   }
 }
+
+export default withRouter(RhaegoHeader)

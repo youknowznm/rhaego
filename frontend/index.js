@@ -12,7 +12,6 @@ window.IS_DEV = process.env.NODE_ENV !== 'production'
 // window.API_CONTEXT = 'http://localhost:4000/api'
 
 ReactDOM.render(
-  // <Main />,
   <Routes />,
 //
 // <Provider store={store}>

@@ -60,13 +60,13 @@ export default class Editor extends React.Component {
         id
       })
         .then(res => {
+          if (res.article === null) {
+            toast('articleId 无效')
+            return
+          }
           this.setState({
             ...omit(res.article, '_id'),
             parsedHTML: parseMarkdown(res.article.markdownContent),
-          })
-        })
-        .finally(() => {
-          this.setState({
             isLoading: false
           })
         })

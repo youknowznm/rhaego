@@ -22,7 +22,6 @@ import {SvgComment, SvgHeart} from "~/assets/svg";
 import Loading from "~/components/Loading";
 
 import style from './article.scss'
-import Card from "~/components/Card";
 export default class Article extends React.Component {
 
   state = {
@@ -112,18 +111,18 @@ export default class Article extends React.Component {
     headers.unshift({
       level: 1,
       label: '索引',
-      offsetTop: this.SCROLL_OFFSET_MARGIN - 64 - 24
+      offsetTop: this.HEADER_BANNER_HEIGHT - 64 - 24
     })
     this.setState({
       headers
     })
   }
 
-  // 请原谅这里的 magic numbers...
-  // TODO 替换为取得的元素尺寸
+  // 调整导航的 top
+  // (请原谅这里的 magic numbers, 见注释)
   scrollListener = throttle(() => {
     const {scrollTop} = document.documentElement
-    var doc = this.compRef
+    var doc = this.compRef.querySelector('.article-content')
     var nav = this.compRef.querySelector('.article-navs')
     if (!nav) {
       return
@@ -131,17 +130,23 @@ export default class Article extends React.Component {
     const navHeight = getStyleInt(nav, 'height')
     const docHeight = doc.clientHeight
     let top
-    if (scrollTop >  docHeight - navHeight) {
-      top = doc.clientHeight - navHeight - 24
+    // 调整 top:
+    if (scrollTop > docHeight - navHeight) {
+      // 滚动高度 大于 (文档高度 - 导航高度),
+      // 说明已经滚过了文章结尾,
+      // 固定导航 top 为 (文档高度 - 导航高度 - 内边距);
+      top = docHeight - navHeight - 24
     } else {
-      top = scrollTop > this.SCROLL_OFFSET_MARGIN
-        ? (scrollTop - this.SCROLL_OFFSET_MARGIN + 24)
+      top = scrollTop > this.HEADER_BANNER_HEIGHT
+        // 如果滚动高度大于 header banner 高度, 则根据前者, 动态计算;
+        ? (scrollTop - this.HEADER_BANNER_HEIGHT + 24)
+        // 否则固定为 内边距
         : 24
     }
     nav.style.top = `${top}px`
   })
 
-  SCROLL_OFFSET_MARGIN = 192
+  HEADER_BANNER_HEIGHT = 192
 
   getScrollToHeaderFunc = catalogItem => evt => {
     if (this.state.isScrollIng) {
@@ -154,7 +159,7 @@ export default class Article extends React.Component {
       ? 0
       : catalogItem.node.offsetTop - 12
     animateToScrollHeight(
-      targetHeight + this.SCROLL_OFFSET_MARGIN,
+      targetHeight + this.HEADER_BANNER_HEIGHT,
       () => {
         this.setState({
           isScrollIng: false
@@ -195,10 +200,34 @@ export default class Article extends React.Component {
     </div>
   }
 
-  getSetStateMethod = stateKey => evt => {
-    this.setState({
-      [stateKey]: evt.target.value
-    })
+  deleteArticle = () => {
+    const {id} = getSearchParams()
+    if (isValidString(id)) {
+      this.setState({
+        articleId: id,
+        isLoading: true
+      })
+      get(GET_ARTICLE_DETAIL, {
+        id
+      })
+        .then(res => {
+          this.setState({
+            markdownContent: res.article.markdownContent,
+            parsedHTML: parseMarkdown(res.article.markdownContent),
+            title: res.article.title,
+            tags: getTagsFromText(res.article.tagsText)
+          })
+          // 副作用更新了 DOM, 所以下次循环处理
+          setTimeout(() => {
+            this.setCatalog()
+          })
+        })
+        .finally(() => {
+          this.setState({
+            isLoading: false
+          })
+        })
+    }
   }
 
   renderAdmin = () => {
@@ -219,6 +248,12 @@ export default class Article extends React.Component {
         </Button>
       </div>
     )
+  }
+
+  getSetStateMethod = stateKey => evt => {
+    this.setState({
+      [stateKey]: evt.target.value
+    })
   }
 
   renderCommentEditor = () => {

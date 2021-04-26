@@ -6,6 +6,7 @@ $indent: 1em;
 
 .rhaego-article {
   position: relative;
+  padding: 0 18px;
 
   .article-content {
     position: relative;
@@ -133,7 +134,7 @@ $indent: 1em;
     }
     .comment {
       position: relative;
-      width: 750px;
+      width: 700px;
       box-sizing: border-box;
       margin-bottom: 24px;
       &.editor {
@@ -192,8 +193,7 @@ $indent: 1em;
         }
         .delete {
           position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
+          top: 5px;
           right: -80px;
         }
       }

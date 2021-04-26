@@ -66,19 +66,21 @@ export default class TextField extends React.Component {
     }
   }
 
-  ref
+  ref = null
   setRef = ref => {
-    this.ref = ref
-    this.ref.addEventListener('focus', () => {
-      this.setState({
-        focused: true,
+    if (this.ref === null) {
+      this.ref = ref
+      this.ref.addEventListener('focus', () => {
+        this.setState({
+          focused: true,
+        })
       })
-    })
-  this.ref.addEventListener('blur', () => {
-      this.setState({
-        focused: false,
+      this.ref.addEventListener('blur', () => {
+        this.setState({
+          focused: false,
+        })
       })
-    })
+    }
   }
 
   render() {

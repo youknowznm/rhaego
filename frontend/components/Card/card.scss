@@ -1,5 +1,7 @@
 @import "~style/main";
 
+$card-padding: 18px;
+
 .rhaego-card {
   position: relative;
   background: $white;
@@ -10,7 +12,7 @@
   height: 300px;
   cursor: pointer;
   box-sizing: border-box;
-  padding: 24px;
+  padding: $card-padding;
   transition: all .6s $materialCubicBezier;
   box-shadow: $paper-elevation-none;
   &:hover {
@@ -33,16 +35,16 @@
     line-height: 1.8em;
     margin: 10px 0 14px;
     min-height: 1.8em;
-    max-height: calc(5 * 1.8em);
+    max-height: calc(6 * 1.8em);
     display: -webkit-box;
     overflow: hidden;
-    -webkit-line-clamp: 5;
+    -webkit-line-clamp: 6;
     -webkit-box-orient: vertical;
   }
   .counts {
     position: absolute;
-    bottom: 24px;
-    left: 24px;
+    bottom: $card-padding;
+    left: $card-padding;
     height: 30px;
     line-height: 30px;
     > span ,
@@ -57,8 +59,8 @@
   }
   .tags {
     position: absolute;
-    bottom: 24px;
-    right: 24px;
+    bottom: $card-padding;
+    right: $card-padding;
     .tag {
       margin-left: 10px;
     }

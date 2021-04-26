@@ -2,7 +2,7 @@ import React from 'react'
 import Header from '~/components/Header'
 import {siteName} from '~config'
 
-export default () => {
+export default props => {
   const links = [
     {
       name: '笔记',
@@ -14,7 +14,7 @@ export default () => {
     },
     {
       name: '关于我',
-      path: '/resume'
+      path: '/articles'
     },
     {
       name: 'login as god',
@@ -26,6 +26,7 @@ export default () => {
     <Header
       siteName={siteName}
       links={links}
+      {...props}
     />
   )
 }

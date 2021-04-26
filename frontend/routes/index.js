@@ -1,11 +1,9 @@
 import React from "react"
 import c from 'classnames'
 import {
-  // HashRouter as Router,
-  BrowserRouter as Router,
+  BrowserRouter,
   Switch,
   Route,
-  Link
 } from "react-router-dom"
 import Main from "~/modules/Main"
 import Header from "~/modules/Header"
@@ -19,35 +17,35 @@ import Login from "~/modules/Login"
 
 export default function Routes() {
   return (
-    <Router>
-      <Header />
-      <Main>
-        <Switch>
-          <Route exact path="/articles">
-            <Articles />
-          </Route>
-          <Route exact path="/article">
-            <Article />
-          </Route>
-          <Route exact path="/repos">
-            <Repos />
-          </Route>
-          <Route exact path="/editor">
-            <Editor />
-          </Route>
-          <Route exact path="/resume">
-            <Resume />
-          </Route>
-          <Route exact path="/login">
-            <Login />
-          </Route>
-          <Route path="/">
-            <p>404</p>
-          </Route>
-        </Switch>
-      </Main>
-      <Footer/>
-    </Router>
+      <BrowserRouter>
+        <Header/>
+        <Main>
+          <Switch>
+            <Route exact path="/articles">
+              <Articles />
+            </Route>
+            <Route exact path="/article">
+              <Article />
+            </Route>
+            <Route exact path="/repos">
+              <Repos />
+            </Route>
+            <Route exact path="/editor">
+              <Editor />
+            </Route>
+            <Route exact path="/resume">
+              <Resume />
+            </Route>
+            <Route exact path="/login">
+              <Login />
+            </Route>
+            <Route path="/">
+              <p>404</p>
+            </Route>
+          </Switch>
+        </Main>
+        <Footer />
+      </BrowserRouter>
   )
 }
 

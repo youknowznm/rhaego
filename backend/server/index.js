@@ -85,7 +85,19 @@ router
       set400(err.message)
     }
   })
-  // 文章- 图片
+  .post(DELETE_ARTICLE, async function(ctx) {
+    const {id} = ctx.query
+    console.log({id})
+    // try {
+    //   const article = await db.getArticle(id)
+    //   set200(ctx, {
+    //     article
+    //   })
+    // } catch (err) {
+    //   set400(err.message)
+    // }
+  })
+  // 文章 - 图片
   .post(UPLOAD_PIC, async function(ctx) {
     let {articleId} = ctx.request.body
     const file = ctx.request.files.file
