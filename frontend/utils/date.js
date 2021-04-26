@@ -5,24 +5,24 @@ export const formatDateToPast = (date) => {
     return ('刚刚')
   }
   if (sec < 60) {
-    return (`${sec} 秒前`)
+    return (`${sec}秒前`)
   }
   if (sec < 60 * 60) {
     const _min = Math.floor(sec / 60)
-    return (`${_min} 分钟前`)
+    return (`${_min}分钟前`)
   }
   if (sec < 60 * 60 * 24) {
     const _hou = Math.floor(sec / (60 * 60))
     const restSeconds = Math.floor(sec % (60 * 60))
     const _min = Math.floor(restSeconds / 60)
-    return (`${_hou} 小时 ${_min} 分钟前`)
+    return (`${_hou}小时 ${_min}分钟前`)
   }
   if (sec < 60 * 60 * 24 * 30) {
     const _day = Math.floor(sec / (60 * 60 * 24))
-    return (`${_day} 天前`)
+    return (`${_day}天前`)
   }
   const _mon = Math.floor(sec / (60 * 60 * 24 * 30))
-  return (`${_mon} 月前`)
+  return (`${_mon}月前`)
 }
 
 // 格式化日期: YYYY-MM-DD HH:MM:SS

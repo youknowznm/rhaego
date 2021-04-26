@@ -22,6 +22,7 @@ import {SvgComment, SvgHeart} from "~/assets/svg";
 import Loading from "~/components/Loading";
 
 import style from './article.scss'
+import Card from "~/components/Card";
 export default class Article extends React.Component {
 
   state = {
@@ -151,7 +152,7 @@ export default class Article extends React.Component {
     })
     const targetHeight = catalogItem.label === '索引'
       ? 0
-      : catalogItem.node.offsetTop - 15
+      : catalogItem.node.offsetTop - 12
     animateToScrollHeight(
       targetHeight + this.SCROLL_OFFSET_MARGIN,
       () => {
@@ -200,76 +201,115 @@ export default class Article extends React.Component {
     })
   }
 
+  renderAdmin = () => {
+    return (
+      <div className={'admin-row'}>
+        <Button
+          className={'edit-article'}
+          type={'primary'}
+          link={`/editor?id=${this.state.articleId}`}
+        >
+          编辑文章
+        </Button>
+        <Button
+          className={'delete-article'}
+          type={'secondary'}
+        >
+          删除文章
+        </Button>
+      </div>
+    )
+  }
+
   renderCommentEditor = () => {
     if (!isValidString(this.state.markdownContent)) {
       return null
     }
-    return <div className={'comment edit'}>
-      <p className={'title'}>欢迎留下您的评论。</p>
-      <TextField
-        className={'comment-author'}
-        label={'称呼'}
-        value={this.state.commentAuthor}
-        onChange={this.getSetStateMethod('commentAuthor')}
-        width={240}
-        maxLength={16}
-        validatorRegExp={/^\d{2,16}$/}
-        hint={'输入2至16个字符的称呼。'}
-      />
-      <TextField
-        className={'comment-email'}
-        label={'邮箱'}
-        value={this.state.commentEmail}
-        onChange={this.getSetStateMethod('commentEmail')}
-        width={240}
-        maxLength={30}
-        validatorRegExp={/^\d{2,16}$/}
-        hint={'输入常见的邮箱格式。'}
-      />
-      <TextField
-        className={'comment-content'}
-        label={'内容'}
-        value={this.state.commentContent}
-        onChange={this.getSetStateMethod('commentContent')}
-        width={492}
-        maxLength={120}
-        validatorRegExp={/^.{4,120}$/}
-        hint={'输入4至120字符的评论。'}
-      />
-      <Button
-        className={'submit'}
-        type={'primary'}
-      >
-        提交
-      </Button>
-    </div>
+    return (
+      <div className={'comment editor'}>
+        <p className={'title'}>欢迎留下您的评论。</p>
+        <TextField
+          className={'comment-author'}
+          label={'称呼'}
+          value={this.state.commentAuthor}
+          onChange={this.getSetStateMethod('commentAuthor')}
+          width={240}
+          maxLength={16}
+          validatorRegExp={/^\d{2,16}$/}
+          hint={'输入2至16个字符的称呼。'}
+        />
+        <TextField
+          className={'comment-email'}
+          label={'邮箱'}
+          value={this.state.commentEmail}
+          onChange={this.getSetStateMethod('commentEmail')}
+          width={240}
+          maxLength={30}
+          validatorRegExp={/^\d{2,16}$/}
+          hint={'输入常见的邮箱格式。'}
+        />
+        <TextField
+          className={'comment-content'}
+          label={'内容'}
+          value={this.state.commentContent}
+          onChange={this.getSetStateMethod('commentContent')}
+          width={492}
+          maxLength={120}
+          validatorRegExp={/^.{4,120}$/}
+          hint={'输入4至120字符的评论。'}
+        />
+        <Button
+          className={'submit'}
+          type={'primary'}
+        >
+          提交
+        </Button>
+      </div>
+    )
   }
 
   renderComments = () => {
     const cms = [
       {
         author: 'adf',
-        content: 'adfafsdfafd',
+        content: '建议马斯克全面退出中国市场，建议马斯克全面退出中国市场，建议马斯克全面退出中国市场，建议马斯克全面退出中国市场，建议马斯克全面退出中国市场，',
         date: new Date('2020-01-01'),
       },
     ]
     for (let i = 0; i < 3; i++) {
       cms.push(cms[0])
     }
-    return <ul className={'comments'}>
-      {
-        cms.map((item, index) => (
-          <li className={'comment existed'} key={index}>
-            <p className={'author'}>
-              {item.author}
-              <span> 发表于 </span>
-              {formatDateToPast(item.date)}
-            </p>
-            <p className={'content'}>{item.content}</p>
-          </li>
-        ))
-      }
-    </ul>
+    return (
+      <ul className={'comments'}>
+        {
+          cms.map((item, index) => (
+            <li className={'comment existed'} key={index}>
+              <p className={'title'}>
+                <span className={'author'}>
+                  {item.author}
+                </span>
+                <span className={'date'}>
+                  {formatDateToPast(item.date)}
+                </span>
+                <span className={'ip'}>
+                  172.184.12.599
+                </span>
+              </p>
+              <p className={'content'}>
+                {item.content}
+              </p>
+              <Button
+                className={'delete'}
+                size={'small'}
+                type={'secondary'}
+              >
+                删除评论
+              </Button>
+            </li>
+          ))
+        }
+      </ul>
+    )
   }
 
   render() {
@@ -305,6 +345,7 @@ export default class Article extends React.Component {
             />
           </div>
           <div className={'article-bottom'}>
+            {this.renderAdmin()}
             {this.renderCommentEditor()}
             {this.renderComments()}
           </div>

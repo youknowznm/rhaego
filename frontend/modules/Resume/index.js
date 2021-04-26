@@ -6,10 +6,10 @@ import {ajax, throttle, animateToScrollHeight, formatToMaterialSpans, get, getSt
 import TextField from "~/components/TextField";
 import Button from "~/components/Button";
 import {formatDateToPast} from "~/utils"
-import style from './article.scss'
 import {GET_ARTICLE_DETAIL} from '~api'
 import {SvgComment, SvgHeart} from "~/assets/svg";
 
+// import style from './article.scss'
 export default class Resume extends React.Component {
 
   state = {

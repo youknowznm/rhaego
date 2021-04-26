@@ -82,7 +82,7 @@ $indent: 1em;
     .article-nav {
       padding-right: 12px;
       list-style: none;
-      font-size: 14px;
+      font-size: 13px;
       line-height: 20px;
       word-wrap: break-word;
       word-break: normal;
@@ -120,20 +120,31 @@ $indent: 1em;
     position: relative;
     //padding: 24px;
     margin-right: 240px;
+    .admin-row {
+      position: relative;
+      margin: 0 0 24px;
+      height: 36px;
+      .edit-article {
+        margin-right: 12px;
+      }
+      .delete-article {
 
+      }
+    }
     .comment {
       position: relative;
-      padding: 24px;
       width: 750px;
-      box-shadow: $paper-elevation-low;
-      border-radius: 3px;
-      background: $white;
-      margin-bottom: 12px;
-      transition: all .6s $materialCubicBezier;
-      &:hover {
-        box-shadow: $paper-elevation-medium;
-      }
-      &.edit {
+      box-sizing: border-box;
+      margin-bottom: 24px;
+      &.editor {
+        padding: 24px;
+        box-shadow: $paper-elevation-low;
+        border-radius: 3px;
+        background: $white;
+        transition: all .6s $materialCubicBezier;
+        &:hover {
+          box-shadow: $paper-elevation-medium;
+        }
         .title {
           font-size: 12px;
           font-style: italic;
@@ -154,11 +165,37 @@ $indent: 1em;
           width: 496px;
         }
       }
-    }
-
-    &.existed {
-      .author {
-
+      // 参考 youtube 的评论样式
+      &.existed {
+        .title {
+          font-size: 13px;
+          line-height: 18px;
+          margin-bottom: 3px;
+          .author {
+            color: #000;
+            font-weight: 500;
+          }
+          .date {
+            margin-left: .3em;
+            color: rgb(96, 96, 96);
+          }
+          .ip {
+            float: right;
+            font-size: 11px;
+            color: $font-secondary;
+          }
+        }
+        .content {
+          color: rgb(3, 3, 3);
+          font-size: 14px;
+          line-height: 20px;
+        }
+        .delete {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          right: -80px;
+        }
       }
     }
   }
