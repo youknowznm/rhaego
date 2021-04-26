@@ -10,17 +10,18 @@ import {
   get,
   getStyleInt,
   noop,
+  parseMarkdown,
+  debounce,
   getSearchParams, isValidString, omit, getTagsFromText, getStyle
 } from "~/utils";
 import TextField from "~/components/TextField";
 import Button from "~/components/Button";
 import {formatDateToPast} from "~/utils"
-import style from './article.scss'
 import {GET_ARTICLE_DETAIL} from '~api'
 import {SvgComment, SvgHeart} from "~/assets/svg";
 import Loading from "~/components/Loading";
-import {debounce} from "~utils/lodash";
 
+import style from './article.scss'
 export default class Article extends React.Component {
 
   state = {
@@ -44,71 +45,6 @@ export default class Article extends React.Component {
       this.compRef = ref
     }
   }
-
-  setParsedHTML = debounce(() => {
-    const {markdownContent} = this.state
-    if (!isValidString(markdownContent)) {
-      return
-    }
-    const renderer = new marked.Renderer()
-    renderer.link = (href, title, text) => {
-      return `<a target="_blank" href="${href}" title="'${title}">${text}</a>`;
-    }
-    marked.setOptions({
-      renderer,
-      breaks: true,
-      highlight: code => {
-        return hljs.highlightAuto(code).value
-      }
-    })
-    this.setState({
-      parsedHTML: marked(markdownContent)
-    })
-    // 副作用更新了 DOM, 所以下次循环处理
-    setTimeout(() => {
-      this.setCatalog()
-    })
-  })
-
-  setCatalog = () => {
-    // 用 qs 因为 marked() 替换了 ref 获取到的 DOM 节点
-    const headersDOM = this.compRef.querySelector('.rhaego-markdown')
-      .querySelectorAll('h1, h2, h3, h4, h5, h6')
-    let headers = []
-    let minLevel = 1
-    for (let i = 0; i < headersDOM.length; i++) {
-      const curr = headersDOM[i]
-      const level = parseInt(curr.tagName.replace(/\D/g, ''), 10)
-      headers.push({
-        level,
-        label: curr.innerHTML,
-        offsetTop: curr.offsetTop,
-      })
-      minLevel = Math.max(minLevel, level)
-    }
-    // 处理为最小 tag 类型为 1
-    for (let i = 0; i < 6; i++) {
-      if (minLevel === 1) {
-        break
-      }
-      headers = headers.map(item => {
-        return {
-          ...item,
-          level: item.level - 1
-        }
-      })
-      minLevel -= 1
-    }
-    headers.unshift({
-      level: 1,
-      label: '索引',
-      offsetTop: this.SCROLL_OFFSET_MARGIN - 64 - 24
-    })
-    this.setState({
-      headers
-    })
-  }
-
   componentDidMount() {
     this.getArticleBySearchId()
     window.addEventListener('scroll', this.scrollListener)
@@ -127,10 +63,14 @@ export default class Article extends React.Component {
         .then(res => {
           this.setState({
             markdownContent: res.article.markdownContent,
+            parsedHTML: parseMarkdown(res.article.markdownContent),
             title: res.article.title,
             tags: getTagsFromText(res.article.tagsText)
           })
-          this.setParsedHTML()
+          // 副作用更新了 DOM, 所以下次循环处理
+          setTimeout(() => {
+            this.setCatalog()
+          })
         })
         .finally(() => {
           this.setState({
@@ -140,8 +80,46 @@ export default class Article extends React.Component {
     }
   }
 
-  // TODO 注释
+  setCatalog = () => {
+    // 用 qs 因为 marked() 替换了 ref 获取到的 DOM 节点
+    const headersDOM = this.compRef.querySelector('.rhaego-markdown')
+      .querySelectorAll('h1, h2, h3, h4, h5, h6')
+    let headers = []
+    let minLevel = 10
+    for (let i = 0; i < headersDOM.length; i++) {
+      const curr = headersDOM[i]
+      const level = parseInt(curr.tagName.replace(/\D/g, ''), 10)
+      headers.push({
+        level,
+        label: curr.innerHTML,
+        node: curr,
+      })
+      minLevel = Math.min(minLevel, level)
+    }
+    // console.log({minLevel})
+    // console.log(headers)
+    // 处理为最小 tag 类型为 1
+    for (let i = 1; i < minLevel; i++) {
+      headers = headers.map(item => {
+        return {
+          ...item,
+          level: item.level - 1
+        }
+      })
+    }
+    // console.log(headers)
+    headers.unshift({
+      level: 1,
+      label: '索引',
+      offsetTop: this.SCROLL_OFFSET_MARGIN - 64 - 24
+    })
+    this.setState({
+      headers
+    })
+  }
+
   // 请原谅这里的 magic numbers...
+  // TODO 替换为取得的元素尺寸
   scrollListener = throttle(() => {
     const {scrollTop} = document.documentElement
     var doc = this.compRef
@@ -155,24 +133,27 @@ export default class Article extends React.Component {
     if (scrollTop >  docHeight - navHeight) {
       top = doc.clientHeight - navHeight - 24
     } else {
-      top = scrollTop > 192 ? (scrollTop - 192 + 24): 24
+      top = scrollTop > this.SCROLL_OFFSET_MARGIN
+        ? (scrollTop - this.SCROLL_OFFSET_MARGIN + 24)
+        : 24
     }
     nav.style.top = `${top}px`
   })
 
-  componentDidUpdate() {}
+  SCROLL_OFFSET_MARGIN = 192
 
-  SCROLL_OFFSET_MARGIN = 160
-
-  getScrollToHeaderFunc = targetScrollTop => evt => {
+  getScrollToHeaderFunc = catalogItem => evt => {
     if (this.state.isScrollIng) {
       return
     }
     this.setState({
       isScrollIng: true
     })
+    const targetHeight = catalogItem.label === '索引'
+      ? 0
+      : catalogItem.node.offsetTop - 15
     animateToScrollHeight(
-      targetScrollTop + this.SCROLL_OFFSET_MARGIN,
+      targetHeight + this.SCROLL_OFFSET_MARGIN,
       () => {
         this.setState({
           isScrollIng: false
@@ -304,7 +285,7 @@ export default class Article extends React.Component {
                     'article-nav',
                     `level-${item.level}`
                   )}
-                  onClick={this.getScrollToHeaderFunc(item.offsetTop)}
+                  onClick={this.getScrollToHeaderFunc(item)}
                 >
                   {item.label}
                 </li>
@@ -313,7 +294,9 @@ export default class Article extends React.Component {
           </ul>
           <div className={'article-content'} onClick={this.handleClick}>
             <div className={'article-top'}>
-              <h1 className={'title'}>{formatToMaterialSpans(this.state.title)}</h1>
+              <h1 className={'main-title'}>
+                {formatToMaterialSpans(this.state.title)}
+              </h1>
               {this.renderInfo()}
             </div>
             <div

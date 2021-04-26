@@ -4,6 +4,8 @@ Intellij Idea-like styling (c) Vasily Polovnyov <vast@whiteants.net>
 
 */
 
+// @zhangenming 移除了 bold, 这样和最新的 idea 风格更像
+
 .hljs {
   display: block;
   overflow-x: auto;
@@ -40,7 +42,7 @@ Intellij Idea-like styling (c) Vasily Polovnyov <vast@whiteants.net>
 .hljs-type,
 .hljs-selector-id,
 .hljs-selector-class {
-  font-weight: bold;
+  //font-weight: bold;
   color: #000080;
 }
 
@@ -48,7 +50,7 @@ Intellij Idea-like styling (c) Vasily Polovnyov <vast@whiteants.net>
 .hljs-number,
 .hljs-regexp,
 .hljs-link {
-  font-weight: bold;
+  //font-weight: bold;
   color: #0000ff;
 }
 
@@ -60,7 +62,7 @@ Intellij Idea-like styling (c) Vasily Polovnyov <vast@whiteants.net>
 
 .hljs-string {
   color: #008000;
-  font-weight: bold;
+  //font-weight: bold;
 }
 
 .hljs-symbol,
@@ -93,5 +95,5 @@ Intellij Idea-like styling (c) Vasily Polovnyov <vast@whiteants.net>
 }
 
 .hljs-strong {
-  font-weight: bold;
+  //font-weight: bold;
 }

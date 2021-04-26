@@ -1,11 +1,8 @@
 @charset "UTF-8";
 @import "./highlight.scss";
 
-$rhaego-markdown-font-light: #3c4043;
 $rhaego-markdown-border-light: rgba(0, 0, 0, 0.12);
 $rhaego-markdown-link: rgb(74,135,240);
-$rhaego-markdown-pre-background: rgb(40, 44, 52);
-$rhaego-markdown-pre-color: #abb2bf;
 $rhaego-markdown-quote: #757575;
 
 // 全局文章样式
@@ -17,7 +14,7 @@ $rhaego-markdown-quote: #757575;
 
   text-align: left;
   padding: 0 6px;
-  color: $rhaego-markdown-font-light;
+  color: $black;
 
   p {
     line-height: 20px;
@@ -50,18 +47,17 @@ $rhaego-markdown-quote: #757575;
     }
   }
 
-  h2, h3, h4, h5, h6 {
-    color: $rhaego-markdown-font-light;
-    //margin: 32px 0 16px;
-    margin-bottom: 7px;
-    font-size: 20px;
-    line-height: 32px;
-  }
-
   h1 {
     font-size: 34px;
     line-height: 42px;
-    margin-bottom: 9px;
+    margin-bottom: 10px;
+    font-weight: 300;
+  }
+
+  h2, h3, h4, h5, h6 {
+    margin-bottom: 5px;
+    font-size: 20px;
+    line-height: 32px;
   }
 
   blockquote {
@@ -86,7 +82,7 @@ $rhaego-markdown-quote: #757575;
   }
 
   pre {
-    margin: 24px 0;
+    margin: 24px 0 12px;
     overflow-x: auto;
     overflow-y: hidden;
     padding: 8px 16px;

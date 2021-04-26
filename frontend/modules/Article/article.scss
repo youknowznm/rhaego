@@ -15,11 +15,11 @@ $indent: 1em;
     //border-bottom: 4px $blue solid;
     .article-top {
       margin-bottom: 12px;
-      .title {
+      .main-title {
         border-bottom: 1px solid $rhaego-markdown-border-light;
-        margin: 40px 0 20px;
+        margin: 0 0 20px;
         padding-bottom: 3px;
-        color: $rhaego-markdown-font-light;
+        color: $black;
         word-break: normal;
         word-wrap: break-word;
         //font-size: 60px;
