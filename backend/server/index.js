@@ -14,7 +14,6 @@ const {
   DELETE_COMMENT,
   UPLOAD_PIC,
   GET_REPOS,
-  GET_RESUME,
   LOGIN,
   LOGOUT,
   GET_GITHUB_REPOS,
@@ -68,21 +67,31 @@ router
       set400(err.message)
     }
   })
-  .get(GET_ARTICLES, async function(ctx) {
-    const articles = await db.getArticles()
-    ctx.body = {
-      articles
-    }
-  })
   .get(GET_ARTICLE_DETAIL, async function(ctx) {
     const {id} = ctx.query
     try {
-      const article = await db.getArticle(id)
+      let article
+      if (id === 'RESUME') {
+        article = {
+          markdownContent: getFileSync('../data/resume.md'),
+          title: '█ █ 铭',
+          dateString: '',
+          tagsText: '',
+        }
+      } else {
+        article = await db.getArticle(id)
+      }
       set200(ctx, {
         article
       })
     } catch (err) {
       set400(err.message)
+    }
+  })
+  .get(GET_ARTICLES, async function(ctx) {
+    const articles = await db.getArticles()
+    ctx.body = {
+      articles
     }
   })
   .post(DELETE_ARTICLE, async function(ctx) {
@@ -122,14 +131,6 @@ router
     ctx.body = {
       data: {
         repoList: JSON.parse(repoList)
-      }
-    }
-  })
-  // 简历
-  .get(GET_RESUME, async function(ctx) {
-    ctx.body = {
-      data: {
-        resume: getFileSync('../data/resume.md')
       }
     }
   })

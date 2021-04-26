@@ -1,7 +1,5 @@
 import React from 'react';
 import c from 'classnames'
-import marked from 'marked'
-import hljs from "highlight.js";
 import {
   ajax,
   animateToScrollHeight,
@@ -20,9 +18,18 @@ import {formatDateToPast} from "~/utils"
 import {GET_ARTICLE_DETAIL} from '~api'
 import {SvgComment, SvgHeart} from "~/assets/svg";
 import Loading from "~/components/Loading";
+import PropTypes from "prop-types";
 
 import style from './article.scss'
+import {toast} from "~/components/Toast";
 export default class Article extends React.Component {
+
+  // static propTypes = {
+  //   isResume: PropTypes.bool
+  // }
+  // static defaultProps = {
+  //   isResume: false
+  // }
 
   state = {
     markdownContent: '',
@@ -33,10 +40,12 @@ export default class Article extends React.Component {
     isScrollIng: false,
     isLoading: false,
     emptyReason: '',
+    comments: [],
     commentAuthor: '',
     commentEmail: '',
     commentContent: '',
     parsedHTML: null,
+    isResume: false,
   }
 
   compRef = null
@@ -46,38 +55,38 @@ export default class Article extends React.Component {
     }
   }
   componentDidMount() {
-    this.getArticleBySearchId()
+    this.initArticleContent()
     window.addEventListener('scroll', this.scrollListener)
   }
 
-  getArticleBySearchId = () => {
+  initArticleContent = () => {
     const {id} = getSearchParams()
-    if (isValidString(id)) {
       this.setState({
         articleId: id,
+        isResume: id === 'RESUME',
         isLoading: true
       })
       get(GET_ARTICLE_DETAIL, {
         id
       })
         .then(res => {
+          if (res.article === null) {
+            toast('articleId 无效')
+            return
+          }
           this.setState({
             markdownContent: res.article.markdownContent,
             parsedHTML: parseMarkdown(res.article.markdownContent),
             title: res.article.title,
-            tags: getTagsFromText(res.article.tagsText)
+            dateString: res.article.dateString,
+            tags: getTagsFromText(res.article.tagsText),
+            isLoading: false,
           })
           // 副作用更新了 DOM, 所以下次循环处理
           setTimeout(() => {
             this.setCatalog()
           })
         })
-        .finally(() => {
-          this.setState({
-            isLoading: false
-          })
-        })
-    }
   }
 
   setCatalog = () => {
@@ -196,7 +205,7 @@ export default class Article extends React.Component {
           ))
         }
       </div>
-      <span className={'date'}>发布于 2020-01-32</span>
+      <span className={'date'}>发布于 {this.state.dateString}</span>
     </div>
   }
 
@@ -350,7 +359,13 @@ export default class Article extends React.Component {
   render() {
     return (
       <Loading isLoading={this.state.isLoading} emptyReason={null}>
-        <div className={'rhaego-article'} ref={this.setRef}>
+        <div
+          className={c(
+            'rhaego-article',
+            this.state.isResume && 'resume'
+          )}
+          ref={this.setRef}
+        >
           <ul className={'article-navs'}>
             {
               this.state.headers.map((item, index) => (

@@ -53,8 +53,9 @@ class RhaegoHeader extends React.Component {
   constructor(props) {
     super(props)
     const activeNavIndex = this.props.links.findIndex(item => {
-      return location.pathname === item.path
-    }) || 0
+      console.log(item.path, (this.props.history.location))
+      return item.path === (location.pathname + location.search)
+    })
     this.state.activeNavIndex = activeNavIndex
   }
 

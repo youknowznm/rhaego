@@ -1,13 +1,10 @@
 import React from 'react';
-import c from 'classnames'
 
 import TextField from "~/components/TextField";
 import Button from "~/components/Button";
-import {formatDateToPast} from "~/utils";
 
-import  './login.scss'
-
-export default class Login extends React.Component {
+import style from './admin.scss'
+export default class Admin extends React.Component {
 
   state = {
     username: '',
@@ -30,7 +27,7 @@ export default class Login extends React.Component {
     }
   }
 
-  renderLoginArea = () => {
+  renderAdminArea = () => {
     return <div className={'login-area'}>
       <p className={'title'}>以管理员身份登录，编辑文章和评论。</p>
       <TextField
@@ -71,8 +68,8 @@ export default class Login extends React.Component {
 
   render() {
     return (
-      <div className={'rhaego-login'}>
-        {this.renderLoginArea()}
+      <div className={'rhaego-admin'}>
+        {this.renderAdminArea()}
       </div>
     )
   }

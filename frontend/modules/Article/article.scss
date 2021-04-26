@@ -23,10 +23,6 @@ $indent: 1em;
         color: $black;
         word-break: normal;
         word-wrap: break-word;
-        //font-size: 60px;
-        //line-height: 72px;
-        //font-weight: 300;
-        //letter-spacing: -0.01em;
         span {
           font-size: 60px;
           line-height: 72px;
@@ -199,6 +195,17 @@ $indent: 1em;
       }
     }
   }
-
-
+  &.resume {
+    .article-top {
+      .info {
+        display: none;
+      }
+    }
+    .article-bottom {
+      .comment,
+      .comments {
+        display: none;
+      }
+    }
+  }
 }

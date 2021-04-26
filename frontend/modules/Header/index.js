@@ -14,7 +14,7 @@ export default props => {
     },
     {
       name: '关于我',
-      path: '/articles'
+      path: '/article?id=RESUME'
     },
     {
       name: 'login as god',

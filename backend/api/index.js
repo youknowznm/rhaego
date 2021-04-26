@@ -21,9 +21,6 @@ const UPLOAD_PIC = `${API_CONTEXT}/upload`
 // 作品
 const GET_REPOS = `${API_CONTEXT}/getRepos`
 
-// 简历
-const GET_RESUME = `${API_CONTEXT}/getResume`
-
 // 管理
 const LOGIN = `${API_CONTEXT}/login`
 const LOGOUT = `${API_CONTEXT}/logout`
@@ -43,7 +40,6 @@ module.exports = {
   DELETE_COMMENT,
   UPLOAD_PIC,
   GET_REPOS,
-  GET_RESUME,
   LOGIN,
   LOGOUT,
   GET_GITHUB_REPOS,

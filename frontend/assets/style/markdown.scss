@@ -38,7 +38,6 @@ $rhaego-markdown-quote: #757575;
     border-bottom: 1px solid $rhaego-markdown-link;
     padding: 0 .2em;
     margin: 0 .2em;
-    line-height: 24px;
     transition: all .2s $materialCubicBezier;
     &:hover {
       border-bottom-color: $white;
@@ -71,8 +70,8 @@ $rhaego-markdown-quote: #757575;
   }
 
   code {
-    padding: 0 .2em;
-    margin: 0 .2em;
+    padding: 0 .3em;
+    margin: 0 -.3em;
     border: 1px solid #dadce0;
     border-radius: 3px;
     font-size: 13px;

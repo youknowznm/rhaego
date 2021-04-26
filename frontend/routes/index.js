@@ -12,8 +12,7 @@ import Editor from "~/modules/Editor"
 import Articles from "~/modules/Articles"
 import Article from "~/modules/Article"
 import Repos from "~/modules/Repos"
-import Resume from "~/modules/Resume"
-import Login from "~/modules/Login"
+import Admin from "~/modules/Admin"
 
 export default function Routes() {
   return (
@@ -33,11 +32,8 @@ export default function Routes() {
             <Route exact path="/editor">
               <Editor />
             </Route>
-            <Route exact path="/resume">
-              <Resume />
-            </Route>
-            <Route exact path="/login">
-              <Login />
+            <Route exact path="/admin">
+              <Admin />
             </Route>
             <Route path="/">
               <p>404</p>
@@ -56,7 +52,7 @@ export default function Routes() {
 // import App from '../app'
 // import {view as Articles} from '../../../_modules/articles'
 // import {view as Products} from '../../../_modules/products'
-// import {view as Login} from '../../../_modules/login'
+// import {view as Admin} from '../../../_modules/Admin'
 // import {view as Admin} from '../../../_modules/admin'
 // import {view as Editor} from '../../../_modules/editor'
 // import {view as Article} from '../../../_modules/article'
@@ -76,7 +72,7 @@ export default function Routes() {
 //       <Route path="article" component={Article} />
 //       <Route path="products" component={Products} />
 //       <Route path="messages" component={Messages} />
-//       <Route path="login" component={Login} />
+//       <Route path="Admin" component={Admin} />
 //       <Route path="admin" onEnter={willEnterAdminRoute}>
 //         <IndexRoute component={Admin} />
 //         <Route path="editor" component={Editor} />
@@ -99,7 +95,7 @@ export default function Routes() {
 //     const {pathname, search} = nextState.location
 //     const targetUrl = encodeURIComponent(`${pathname}${search}`)
 //     if (!adminLoggedIn) {
-//       replace(`/login?referer=${targetUrl}`)
+//       replace(`/Admin?referer=${targetUrl}`)
 //     }
 //   }
 // })
