@@ -15,7 +15,7 @@ export const formatDateToPast = (date) => {
     const _hou = Math.floor(sec / (60 * 60))
     const restSeconds = Math.floor(sec % (60 * 60))
     const _min = Math.floor(restSeconds / 60)
-    return (`${_hou}小时 ${_min}分钟前`)
+    return (`${_hou}小时${_min}分钟前`)
   }
   if (sec < 60 * 60 * 24 * 30) {
     const _day = Math.floor(sec / (60 * 60 * 24))

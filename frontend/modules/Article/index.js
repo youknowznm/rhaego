@@ -1,7 +1,6 @@
-import React from 'react';
+import React from 'react'
 import c from 'classnames'
 import {
-  ajax,
   animateToScrollHeight,
   throttle,
   formatToMaterialSpans,
@@ -11,42 +10,33 @@ import {
   parseMarkdown,
   debounce,
   getSearchParams, isValidString, omit, getTagsFromText, getStyle,
-  Link, withRouter, post
-} from "~/utils";
-import TextField from "~/components/TextField";
-import Button from "~/components/Button";
-import {formatDateToPast} from "~/utils"
-import {
-  GET_ARTICLE_DETAIL,
-  DELETE_ARTICLE,
-} from '~api'
-import {SvgComment, SvgHeart} from "~/assets/svg";
-import Loading from "~/components/Loading";
-import PropTypes from "prop-types";
-import {toast} from "~/components/Toast";
-
+  Link, withRouter, post, RESUME_ID, getNodeOffsetTopToPage
+} from "~utils"
+import TextField from "~/components/TextField"
+import Button from "~/components/Button"
+import {formatDateToPast} from "~utils"
+import api from '~api'
+import {SvgComment, SvgThumbUp} from "~/assets/svg"
+import Loading from "~/components/Loading"
+import PropTypes from "prop-types"
+import {toast} from "~/components/Toast"
+import Comments from "~/modules/Comments"
 import style from './article.scss'
-class Article extends React.Component {
+import {MainContext} from "~/modules/Context"
 
-  // static propTypes = {
-  //   isResume: PropTypes.bool
-  // }
-  // static defaultProps = {
-  //   isResume: false
-  // }
+class Article extends React.Component {
 
   state = {
     markdownContent: '',
     headers: [],
     articleId: '',
     title: '',
+    likedCount: 0,
+    commentCount: 0,
     tags: [],
     isScrollIng: false,
     isLoading: false,
     emptyReason: '',
-    comments: [],
-    commentAuthor: '',
-    commentEmail: '',
     commentContent: '',
     parsedHTML: null,
     isResume: false,
@@ -58,39 +48,65 @@ class Article extends React.Component {
       this.compRef = ref
     }
   }
+
   componentDidMount() {
-    this.initArticleContent()
+    this.getArticle()
     window.addEventListener('scroll', this.scrollListener)
   }
 
-  initArticleContent = () => {
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.location.search !== this.props.location.search) {
+      this.getArticle()
+    }
+  }
+
+  get isResume() {
+    return this.state.articleId === RESUME_ID
+  }
+
+  getArticle = () => {
     const {id} = getSearchParams()
-      this.setState({
-        articleId: id,
-        isResume: id === 'RESUME',
-        isLoading: true
-      })
-      get(GET_ARTICLE_DETAIL, {
-        id
-      })
-        .then(res => {
-          if (res.article === null) {
-            toast('articleId 无效')
-            return
-          }
-          this.setState({
-            markdownContent: res.article.markdownContent,
-            parsedHTML: parseMarkdown(res.article.markdownContent),
-            title: res.article.title,
-            dateString: res.article.dateString,
-            tags: getTagsFromText(res.article.tagsText),
-            isLoading: false,
-          })
-          // 副作用更新了 DOM, 所以下次循环处理
-          setTimeout(() => {
-            this.setCatalog()
-          })
+    this.setState({
+      articleId: id,
+      isLoading: true
+    })
+    get(api.GET_ARTICLE_DETAIL, {
+      id
+    })
+      .then(res => {
+        if (res.article === null) {
+          toast('articleId 无效')
+          return
+        }
+        this.setState({
+          markdownContent: res.article.markdownContent,
+          likedCount: res.article.likedCount,
+          commentCount: res.article.commentCount,
+          parsedHTML: parseMarkdown(res.article.markdownContent),
+          title: res.article.title,
+          dateString: res.article.dateString,
+          tags: getTagsFromText(res.article.tagsText),
+          isLoading: false,
         })
+
+        // 设置文章标题为 header banner 标题
+        if (!this.isResume) {
+          this.context.setBannerTitle(res.article.title)
+          this.context.setDocTitle(res.article.title)
+        } else {
+          this.context.setDocTitle('关于我')
+        }
+
+        // 副作用更新了 DOM, 所以下次循环处理
+        setTimeout(() => {
+          this.setCatalog()
+        })
+      })
+      .catch(err => {
+        this.setState({
+          isLoading: false,
+        })
+      })
   }
 
   setCatalog = () => {
@@ -133,10 +149,10 @@ class Article extends React.Component {
 
   // 调整导航的 top
   // (请原谅这里的 magic numbers, 见注释)
-  scrollListener = throttle(() => {
+  scrollListener = debounce(() => {
     const {scrollTop} = document.documentElement
-    var doc = this.compRef.querySelector('.article-content')
-    var nav = this.compRef.querySelector('.article-navs')
+    const doc = this.compRef.querySelector('.article-content')
+    const nav = this.compRef.querySelector('.article-sidebar')
     if (!nav) {
       return
     }
@@ -146,18 +162,18 @@ class Article extends React.Component {
     // 调整 top:
     if (scrollTop > docHeight - navHeight) {
       // 滚动高度 大于 (文档高度 - 导航高度),
-      // 说明已经滚过了文章结尾,
-      // 固定导航 top 为 (文档高度 - 导航高度 - 内边距);
+      // 说明已经滚过了笔记结尾,
+      // 固定导航 top 为 (文档高度 - 导航高度 - 内边距)
       top = docHeight - navHeight - 24
     } else {
       top = scrollTop > this.HEADER_BANNER_HEIGHT
-        // 如果滚动高度大于 header banner 高度, 则根据前者, 动态计算;
+        // 如果滚动高度大于 header banner 高度, 则根据前者, 动态计算
         ? (scrollTop - this.HEADER_BANNER_HEIGHT + 24)
         // 否则固定为 内边距
         : 24
     }
     nav.style.top = `${top}px`
-  })
+  }, 50)
 
   HEADER_BANNER_HEIGHT = 192
 
@@ -181,7 +197,12 @@ class Article extends React.Component {
     )
   }
 
-  handleClick =(evt) => {
+  scrollToEditor = noop
+  setScrollToEditorFunc = func => {
+    this.scrollToEditor = func
+  }
+
+  handleClickImage =(evt) => {
     const src = evt.nativeEvent.target.getAttribute('src')
     if (src !== null) {
       window.open(src)
@@ -189,28 +210,51 @@ class Article extends React.Component {
   }
 
   componentWillUnmount() {
+    this.context.setBannerTitle('')
+    this.context.setDocTitle('')
     window.removeEventListener('scroll', this.scrollListener)
   }
 
-  renderInfo = () => {
-    return <div className={'info'}>
-      <div className={'actions'}>
-        <SvgHeart />
-        <span className={'like count'}>3</span>
-        <SvgComment />
-        <span className={'comment count'}>7</span>
+  renderArticleTop = () => {
+    return (
+      <div className={'article-top'}>
+        <div className={'actions'}>
+          <SvgThumbUp
+            onClick={this.toggleLikeArticle}
+            fill={'#dc004e'}
+          />
+          <span className={'like count'}>
+              {this.state.likedCount}
+            </span>
+          <SvgComment
+            fill={'#1976d2'}
+            onClick={this.scrollToEditor}
+          />
+          <span className={'comment count'}>
+              {this.state.commentCount}
+            </span>
+        </div>
+        <span className={'date'}>{this.state.dateString}</span>
+        <div className={'tags'}>
+          {
+            this.state.tags.map((item, index) => (
+              <Link
+                to={`/articles?tag=${item}`}
+                key={index}
+              >
+                <Button
+                  size={'small'}
+                  className={'tag'}
+                  key={index}
+                >
+                  {item}
+                </Button>
+              </Link>
+            ))
+          }
+        </div>
       </div>
-      <div className={'tags'}>
-        {
-          this.state.tags.map((item, index) => (
-            <Button className={'tag'} key={index}>
-              {item}
-            </Button>
-          ))
-        }
-      </div>
-      <span className={'date'}>发布于 {this.state.dateString}</span>
-    </div>
+    )
   }
 
   deleteArticle = () => {
@@ -220,7 +264,7 @@ class Article extends React.Component {
         articleId: id,
         isLoading: true
       })
-      post(DELETE_ARTICLE, {
+      post(api.DELETE_ARTICLE, {
         id
       })
         .then(res => {
@@ -230,6 +274,7 @@ class Article extends React.Component {
           })
           this.props.history.push('/articles')
         })
+        .catch(noop)
         .finally(() => {
           this.setState({
             isLoading: false
@@ -238,172 +283,100 @@ class Article extends React.Component {
     }
   }
 
-  renderAdmin = () => {
-    return (
-      <div className={'admin-row'}>
-        <Link to={`/editor?id=${this.state.articleId}`}>
-          <Button
-            className={'edit-article'}
-            type={'primary'}
-          >
-            编辑文章
-          </Button>
-        </Link>
-        <Button
-          className={'delete-article'}
-          type={'secondary'}
-          onClick={this.deleteArticle}
-        >
-          删除文章
-        </Button>
-      </div>
-    )
-  }
-
-  getSetStateMethod = stateKey => evt => {
-    this.setState({
-      [stateKey]: evt.target.value
+  toggleLikeArticle = () => {
+    post(api.TOGGLE_LIKE_ARTICLE, {
+      articleId: this.state.articleId
     })
+      .then(res => {
+        get(api.GET_ARTICLE_DETAIL, {
+          id: this.state.articleId
+        })
+          .then(res => {
+            this.setState({
+              likedCount: res.article.likedCount,
+            })
+          })
+          .catch(noop)
+      })
+      .catch(noop)
   }
 
-  renderCommentEditor = () => {
-    if (!isValidString(this.state.markdownContent)) {
-      return null
-    }
+  renderSideBar = () => {
+    const isAdmin = this.context.hasLoggedIn
     return (
-      <div className={'comment editor'}>
-        <p className={'title'}>欢迎留下您的评论。</p>
-        <TextField
-          className={'comment-author'}
-          label={'称呼'}
-          value={this.state.commentAuthor}
-          onChange={this.getSetStateMethod('commentAuthor')}
-          width={240}
-          maxLength={16}
-          validatorRegExp={/^\d{2,16}$/}
-          hint={'输入2至16个字符的称呼。'}
-        />
-        <TextField
-          className={'comment-email'}
-          label={'邮箱'}
-          value={this.state.commentEmail}
-          onChange={this.getSetStateMethod('commentEmail')}
-          width={240}
-          maxLength={30}
-          validatorRegExp={/^\d{2,16}$/}
-          hint={'输入常见的邮箱格式。'}
-        />
-        <TextField
-          className={'comment-content'}
-          label={'内容'}
-          value={this.state.commentContent}
-          onChange={this.getSetStateMethod('commentContent')}
-          width={492}
-          maxLength={120}
-          validatorRegExp={/^.{4,120}$/}
-          hint={'输入4至120字符的评论。'}
-        />
-        <Button
-          className={'submit'}
-          type={'primary'}
-        >
-          提交
-        </Button>
-      </div>
-    )
-  }
-
-  renderComments = () => {
-    const cms = [
-      {
-        author: 'adf',
-        content: '建议马斯克全面退出中国市场，建议马斯克全面退出中国市场，建议马斯克全面退出中国市场，建议马斯克全面退出中国市场，建议马斯克全面退出中国市场，',
-        date: new Date('2020-01-01'),
-      },
-    ]
-    for (let i = 0; i < 3; i++) {
-      cms.push(cms[0])
-    }
-    return (
-      <ul className={'comments'}>
-        {
-          cms.map((item, index) => (
-            <li className={'comment existed'} key={index}>
-              <p className={'title'}>
-                <span className={'author'}>
-                  {item.author}
-                </span>
-                <span className={'date'}>
-                  {formatDateToPast(item.date)}
-                </span>
-                <span className={'ip'}>
-                  172.184.12.599
-                </span>
-              </p>
-              <p className={'content'}>
-                {item.content}
-              </p>
-              <Button
-                className={'delete'}
-                size={'small'}
-                type={'secondary'}
+      <div className={c('article-sidebar', this.state.isLoading && 'disabled')}>
+        <ul className={'nav-list'}>
+          {
+            this.state.headers.map((item, index) => (
+              <li
+                key={index}
+                className={c(
+                  'nav-item',
+                  `level-${item.level}`
+                )}
+                onClick={this.getScrollToHeaderFunc(item)}
               >
-                删除评论
-              </Button>
-            </li>
-          ))
-        }
-      </ul>
+                {item.label}
+              </li>
+            ))
+          }
+        </ul>
+        <div className={c('admin-actions', !isAdmin && 'hidden')}>
+            <Button
+              className={'edit-article'}
+              type={'primary'}
+              onClick={() => this.props.history.push(`/editor?id=${this.state.articleId}`)}
+            >
+              编辑笔记
+            </Button>
+            <Button
+              className={'delete-article'}
+              type={'secondary'}
+              onClick={this.deleteArticle}
+            >
+              删除笔记
+            </Button>
+        </div>
+      </div>
     )
   }
 
   render() {
     return (
-      <Loading isLoading={this.state.isLoading} emptyReason={null}>
+      <Loading
+        isLoading={this.state.isLoading}
+        emptyReason={null}
+      >
         <div
           className={c(
             'rhaego-article',
-            this.state.isResume && 'resume'
+            'content-pop-in',
+            this.isResume && 'resume'
           )}
           ref={this.setRef}
         >
-          <ul className={'article-navs'}>
-            {
-              this.state.headers.map((item, index) => (
-                <li
-                  key={index}
-                  className={c(
-                    'article-nav',
-                    `level-${item.level}`
-                  )}
-                  onClick={this.getScrollToHeaderFunc(item)}
-                >
-                  {item.label}
-                </li>
-              ))
-            }
-          </ul>
-          <div className={'article-content'} onClick={this.handleClick}>
-            <div className={'article-top'}>
-              <h1 className={'main-title'}>
-                {formatToMaterialSpans(this.state.title)}
-              </h1>
-              {this.renderInfo()}
-            </div>
+          {this.renderSideBar()}
+          <div className={'article-content'} onClick={this.handleClickImage}>
+            {this.renderArticleTop()}
             <div
               className={'rhaego-markdown'}
               dangerouslySetInnerHTML={{__html: this.state.parsedHTML}}
             />
           </div>
-          <div className={'article-bottom'}>
-            {this.renderAdmin()}
-            {this.renderCommentEditor()}
-            {this.renderComments()}
-          </div>
         </div>
+        {
+          !this.isResume && (
+            <Comments
+              articleId={this.state.articleId}
+              getScrollToEditorFunc={this.setScrollToEditorFunc}
+            />
+          )
+        }
       </Loading>
     )
   }
 }
+
+Article.contextType = MainContext
 
 export default withRouter(Article)

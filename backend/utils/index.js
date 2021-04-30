@@ -1,9 +1,17 @@
 const {customAlphabet} = require('nanoid/non-secure')
 const fs = require('fs')
 const path = require('path')
+const {
+  users
+} = require('../secret.json')
+const api = require('../api')
+const db = require('../data')
+const {
+  omit
+} = require('lodash')
 
 // nano-id non-look-alike
-const generateId = (digit = 10) => {
+const generateId = (digit = 7) => {
   return customAlphabet('346789ABCDEFGHJKLMNPQRTUVWXYabcdefghijkmnpqrtwxyz', digit)()
 }
 
@@ -14,22 +22,55 @@ const getExt = fileName => {
   return arr[0] ? arr[0] : ''
 }
 
-const set200 = (ctx, body = {}) => {
-  ctx.response.type = 'json'
-  ctx.response.status = 200
-  ctx.response.body = body
+const isAdmin = (ctx) => {
+  const username = ctx.cookies.get('username', {
+    signed: true
+  })
+  console.log(`当前用户: ${username || '未登录'}`)
+  return users.some(item => item.username === username)
 }
 
-const set400 = (ctx, message = '出错了') => {
-  ctx.response.type = 'json'
-  ctx.response.status = 400
-  ctx.response.body = {message}
+const DEFAULT_DAILY_ATTEMPTS = 5
+const RESUME_ID = 'RESUME'
+
+const validateParams = (params, validators) => {
+  let paramValue
+  let errorParamKey = null
+  for (let [paramKey, validator] of Object.entries(validators)) {
+    paramValue = params[paramKey]
+    if (typeof validator === 'string') {
+      // typeof
+      if (typeof paramValue !== validator) {
+        errorParamKey = paramKey
+        break
+      }
+    } else if (validator instanceof RegExp) {
+      // 正则
+      if (!validator.test(paramValue)) {
+        errorParamKey = paramKey
+        break
+      }
+    } else if (typeof validator === 'function') {
+      // 方法
+      if (!validator(paramValue)) {
+        errorParamKey = paramKey
+        break
+      }
+    } else {
+      // 其它验证方式待定
+    }
+  }
+  return errorParamKey ? `入参错误: ${errorParamKey}` : ''
 }
+
 
 module.exports = {
   generateId,
-  set200,
-  set400,
   isValidString,
   getExt,
+  isAdmin,
+  RESUME_ID,
+  DEFAULT_DAILY_ATTEMPTS,
+  omit,
+  validateParams,
 }

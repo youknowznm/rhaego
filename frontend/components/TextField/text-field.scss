@@ -22,7 +22,7 @@ $input-red: rgb(221, 44, 0);
       height: 26px;
       line-height: 26px;
       background: transparent;
-      color: $black;
+      color: $font-primary;
       padding: 2px 2px 1px 2px;
       border: 0;
       border-radius: 0;
@@ -115,7 +115,7 @@ $input-red: rgb(221, 44, 0);
       cursor: default;
     }
   }
-  // 输入内容未通过验证时
+  // 内容未通过验证时
   &.invalid {
     .hint {
       color: $input-red !important;

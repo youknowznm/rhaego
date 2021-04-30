@@ -1,4 +1,4 @@
-@import "reset";
+@import './reset';
 
 /*
 z-index 计数
@@ -22,7 +22,6 @@ $materialCubicBezier: cubic-bezier(0.25, 0.8, 0.25, 1);
 
 $translucent-black: rgba(#000, .3);
 $translucent-white: rgba(#fff, .5);
-$black: rgba(#000, .87);
 $white: #fff;
 
 $red: #f44336;
@@ -41,6 +40,7 @@ $brown: #795548;
 $grey: #9e9e9e;
 $bluegrey: #607d8b;
 
+$font-primary: rgba(#000, .87);
 $font-secondary: rgba(#000, .54);
 
 $paper-elevation-none: none;
@@ -49,6 +49,10 @@ $paper-elevation-medium: 0px 6px 6px -3px rgb(0 0 0 / 20%), 0px 10px 14px 1px rg
 $paper-elevation-high: 0px 10px 13px -6px rgb(0 0 0 / 20%), 0px 20px 31px 3px rgb(0 0 0 / 14%), 0px 8px 38px 7px rgb(0 0 0 / 12%);
 
 $font-family: "JetBrains Mono", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+
+$rhaego-markdown-border-light: rgba(0, 0, 0, 0.12);
+$rhaego-markdown-link: rgb(74,135,240);
+$rhaego-markdown-quote: #757575;
 
 * {
   font-family: $font-family;
@@ -65,7 +69,7 @@ body {
     .rhaego-footer, {
       display: none;
     }
-    .rhaego-main-container {
+    .rhaego-container {
       margin-top: 0;
     }
     .rhaego-editor {
@@ -82,11 +86,8 @@ body {
   @media (min-width: 1200px) {
     width: 1200px;
   }
-  @media (min-width: 1600px) {
+  @media (min-width: 1440px) {
     width: 1440px;
-  }
-  @media (min-width: 2000px) {
-    width: 1680px;
   }
 }
 
@@ -94,6 +95,7 @@ body {
   display: inline-block;
   transition: opacity .4s $materialCubicBezier;
   &::after {
+    display: inline-block;
     content: '·';
     opacity: .4;
   }
@@ -105,11 +107,21 @@ body {
   }
 }
 
+.content-pop-in {
+  animation: popIn .4s $materialCubicBezier;
+}
+
 @mixin top-left-center {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translateY(-50%) translateX(-50%);
+}
+
+@mixin one-line-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 @keyframes fadeIn {
@@ -125,17 +137,6 @@ body {
   from {
     opacity: 0;
     transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes popInLarge {
-  from {
-    opacity: 0;
-    transform: translateY(64px);
   }
   to {
     opacity: 1;

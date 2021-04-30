@@ -1,12 +1,8 @@
 @charset "UTF-8";
 @import "./highlight.scss";
 
-$rhaego-markdown-border-light: rgba(0, 0, 0, 0.12);
-$rhaego-markdown-link: rgb(74,135,240);
-$rhaego-markdown-quote: #757575;
-
-// 全局文章样式
-// 用于编辑页的预览区和文章详情页
+// 全局笔记样式
+// 用于编辑页的预览区和笔记详情页
 // 参考 material-ui 的 typography 部分
 // https://material-ui-next.com/style/typography/#typography
 
@@ -14,7 +10,7 @@ $rhaego-markdown-quote: #757575;
 
   text-align: left;
   //padding: 0 6px;
-  color: $black;
+  color: $font-primary;
 
   p {
     line-height: 22px;
@@ -49,12 +45,14 @@ $rhaego-markdown-quote: #757575;
   h1 {
     font-size: 34px;
     line-height: 42px;
-    margin: 36px 0 12px;
+    margin: 48px 0 24px;
     font-weight: 300;
+    padding-bottom: .2em;
+    border-bottom: 1px solid $rhaego-markdown-border-light;
   }
 
   h2, h3, h4, h5, h6 {
-    margin: 12px 0 6px;
+    margin: 12px 0;
     font-size: 20px;
     line-height: 32px;
   }
@@ -71,12 +69,13 @@ $rhaego-markdown-quote: #757575;
 
   // 默认 markdown 的 code 左右无空格.
   code {
+    display: inline-block;
     padding: 0 .3em;
-    margin: 0 .3em;
+    margin: 0 .5em;
+    font-size: .8em;
+    line-height: 1.4;
     border: 1px solid #dadce0;
     border-radius: 3px;
-    font-size: 13px;
-    line-height: 20px;
     word-break: normal;
     background-color: #f8f9fa;
   }
@@ -94,7 +93,7 @@ $rhaego-markdown-quote: #757575;
       border: unset;
       background-color: unset;
       font-size: 12px;
-      line-height: 1.4;
+      line-height: 18px;
     }
   }
 
@@ -108,11 +107,10 @@ $rhaego-markdown-quote: #757575;
       margin: .1em 0;
 
     }
-
     p {
       margin: 0;
       display: inline-block;
-      line-height: 22px !important;
+      line-height: 22px;
     }
   }
   ul > li {
@@ -127,8 +125,8 @@ $rhaego-markdown-quote: #757575;
     margin: 12px auto;
     max-width: 100%;
     cursor: pointer;
-    box-shadow: $paper-elevation-low;
-    transition: all .2s $materialCubicBezier;
+    box-shadow: $paper-elevation-medium;
+    transition: all .4s $materialCubicBezier;
     &:hover {
       box-shadow: $paper-elevation-high;
     }
@@ -139,6 +137,30 @@ $rhaego-markdown-quote: #757575;
     width: 60%;
     margin: 63px auto;
     border-bottom: 1px solid $rhaego-markdown-border-light;
+  }
+
+  table {
+    display: block;
+    width: 100%;
+    overflow: auto;
+    border-spacing: 0;
+    border-collapse: collapse;
+    margin: 12px 0;
+    th {
+      font-weight: 500;
+    }
+    td,
+    th {
+      padding: 6px 13px;
+      border: 1px solid #dfe2e5;
+    }
+    tr {
+      background-color: #fff;
+      border-top: 1px solid #c6cbd1;
+    }
+    tr:nth-child(2n) {
+      background-color: #f6f8fa;
+    }
   }
 }
 

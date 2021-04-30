@@ -1,14 +1,11 @@
 // 参数读写
-const encode = encodeURIComponent
-const decode = encodeURIComponent
-
 export const getParams = paramString => {
   const paramArr = paramString.split('&')
   const result = {}
   for (let i = 0; i < paramArr.length; i++) {
     let [key, value] = paramArr[i].split('=')
     if (key !== '' && value !== undefined) {
-      result[decode(key)] = decode(value)
+      result[key] = value
     }
   }
   return result
@@ -26,7 +23,7 @@ export const setSearchParams = (url, params) => {
   }
   let fullSearchString = ''
   for (let key in params) {
-    fullSearchString += `${encode(key)}=${encode(params[key])}`
+    fullSearchString += `${key}=${params[key]}`
   }
   let result = url
   if (/\?/.test(url)) {

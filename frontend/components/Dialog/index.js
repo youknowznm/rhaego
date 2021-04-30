@@ -12,10 +12,10 @@ import {
   noop,
   getScrollBarWidth,
   hasClass, addClass, removeClass,
-} from '~/utils'
+} from '~utils'
 
 import style from './dialog.scss'
-import * as ReactDOM from "react-dom";
+import * as ReactDOM from "react-dom"
 
 export default class Dialog extends React.Component {
 

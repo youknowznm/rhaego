@@ -36,8 +36,11 @@ class Svg extends React.Component {
     const {
       width,
       height,
+      defaultFill,
+      fill,
       path,
       className,
+      ...otherProps
     } = this.props
     return (
       <svg
@@ -47,6 +50,7 @@ class Svg extends React.Component {
         viewBox="0 0 24 24"
         width={`${width}px`}
         fill={this.computedFill}
+        {...otherProps}
       >
         <path d="M0 0h24v24H0V0z" fill="none"/>
         <path d={path}/>
@@ -63,10 +67,18 @@ export const SvgHeart = props => (
   />
 )
 
+export const SvgThumbUp = props => (
+  <Svg
+    path={'M9 21h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.58 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2zM9 9l4.34-4.34L12 10h9v2l-3 7H9V9zM1 9h4v12H1z'}
+    defaultFill={'#5f6368'}
+    {...props}
+  />
+)
+
 export const SvgComment = props => (
   <Svg
     path={'M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18zM20 4v13.17L18.83 16H4V4h16zM6 12h12v2H6zm0-3h12v2H6zm0-3h12v2H6z'}
-    defaultFill={'#607D8B'}
+    defaultFill={'#5f6368'}
     {...props}
   />
 )
@@ -74,7 +86,7 @@ export const SvgComment = props => (
 export const SvgDeviceHub = props => (
   <Svg
     path={'M17 16l-4-4V8.82C14.16 8.4 15 7.3 15 6c0-1.66-1.34-3-3-3S9 4.34 9 6c0 1.3.84 2.4 2 2.82V12l-4 4H3v5h5v-3.05l4-4.2 4 4.2V21h5v-5h-4z'}
-    defaultFill={'#000'}
+    defaultFill={'#5f6368'}
     {...props}
   />
 )
@@ -82,7 +94,7 @@ export const SvgDeviceHub = props => (
 export const SvgStar = props => (
   <Svg
     path={'M12,17.27L18.18,21l-1.64-7.03L22,9.24l-7.19-0.61L12,2L9.19,8.63L2,9.24l5.46,4.73L5.82,21L12,17.27z'}
-    defaultFill={'#000'}
+    defaultFill={'#5f6368'}
     {...props}
   />
 )

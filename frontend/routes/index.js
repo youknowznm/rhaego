@@ -1,4 +1,4 @@
-import React, {useEffect} from "react"
+import React, {useEffect, useContext} from "react"
 import c from 'classnames'
 import {
   BrowserRouter,
@@ -7,8 +7,13 @@ import {
   useLocation,
   Route,
 } from "react-router-dom"
-import Main from "~/modules/Main"
-import Header from "~/modules/Header"
+import {
+  MainContext,
+  MainProvider,
+  MainConsumer,
+} from "~/modules/Context"
+import Container from "~/modules/Container"
+import Header, {links} from "~/modules/Header"
 import Footer from "~/modules/Footer"
 import Editor from "~/modules/Editor"
 import Articles from "~/modules/Articles"
@@ -17,23 +22,30 @@ import Repos from "~/modules/Repos"
 import Admin from "~/modules/Admin"
 
 const ScrollToTop = () => {
-  const {pathname}  = useLocation()
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [pathname])
+  const {
+    pathname,
+    search,
+  }  = useLocation()
+  const ctx = useContext(MainContext)
+  useEffect(
+    () => {
+      const currLinkItem = links.find(item => item.path === `${pathname}${search}`)
+      currLinkItem && ctx.setDocTitle(currLinkItem.name)
+      window.scrollTo(0, 0)
+    },
+    [pathname, search]
+  )
   return null
 }
 
 export default function Routes() {
   return (
+    <MainProvider>
       <BrowserRouter>
         <ScrollToTop />
         <Header/>
-        <Main>
+        <Container>
           <Switch>
-            <Route exact path="/">
-              <Articles />
-            </Route>
             <Route exact path="/articles">
               <Articles />
             </Route>
@@ -53,9 +65,10 @@ export default function Routes() {
               <p>404</p>
             </Route>
           </Switch>
-        </Main>
+        </Container>
         <Footer />
       </BrowserRouter>
+    </MainProvider>
   )
 }
 

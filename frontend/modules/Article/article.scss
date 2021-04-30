@@ -1,6 +1,5 @@
 @import "~style/main";
 @import "~style/markdown";
-@import "~style/highlight.scss";
 
 $indent: 1em;
 
@@ -10,200 +9,129 @@ $indent: 1em;
 
   .article-content {
     position: relative;
-    padding: 24px 24px 24px 0;
+    padding: 24px 0;
     margin-right: 240px;
-    //min-height: 600px;
-    //border-bottom: 4px $blue solid;
     .article-top {
-      margin-bottom: 12px;
-      .main-title {
-        border-bottom: 1px solid $rhaego-markdown-border-light;
-        margin: 0 0 20px;
-        padding-bottom: 3px;
-        color: $black;
-        word-break: normal;
-        word-wrap: break-word;
-        span {
-          font-size: 60px;
-          line-height: 72px;
-          font-weight: 300;
-          letter-spacing: -0.01em;
-        }
-      }
-      .info {
-        position: relative;
-        .actions {
+      margin-bottom: 24px;
+      position: relative;
+      height: 48px;
+      line-height: 48px;
+      .actions {
+        > span ,
+        svg {
           display: inline-block;
+          margin-right: .5em;
+          font-size: 14px;
+          color: $font-primary;
           height: 48px;
           line-height: 48px;
-          > span ,
-          > svg {
-            display: inline-block;
-            margin-right: .5em;
-            font-size: 12px;
-            color: $black;
-            height: 30px;
-            line-height: 30px;
-            vertical-align: middle;
+          vertical-align: middle;
+        }
+        svg {
+          cursor: pointer;
+          opacity: .5;
+          filter: brightness(0.8);
+          transition: all .4s $materialCubicBezier;
+          &:hover {
+            opacity: 1;
+            filter: brightness(1.1);
           }
         }
-        .tags {
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          right: 0;
-          .tag {
-            margin-left: 10px;
-          }
-        }
-        .date {
-          position: absolute;
-          font-size: 14px;
-          color: $font-secondary;
-          font-style: italic;
-          @include top-left-center;
+      }
+      .date {
+        position: absolute;
+        font-size: 13px;
+        color: $font-secondary;
+        font-style: italic;
+        @include top-left-center;
+      }
+      .tags {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 0;
+        .tag {
+          margin-left: 10px;
         }
       }
     }
   }
 
-  .article-navs {
+  .article-sidebar {
     position: absolute;
     box-sizing: border-box;
     width: 240px;
-    //background: $white;
     right: 0;
     top: 24px;
-    border-left: 4px solid #1e88e5;
-    padding-left: 12px;
-    .article-nav {
-      padding-right: 12px;
-      list-style: none;
-      font-size: 13px;
-      line-height: 18px;
-      word-wrap: break-word;
-      word-break: normal;
-      cursor: pointer;
-      margin-top: 8px;
-      transition: all .2s $materialCubicBezier;
-      &:first-child {
-        color: #757575;
-        font-weight: 500;
-        margin: 0;
-      }
-      &.level-2 {
-        padding-left: calc(1 * #{$indent});
-      }
-      &.level-3 {
-        padding-left: calc(2 * #{$indent});
-      }
-      &.level-4 {
-        padding-left: calc(3 * #{$indent});
-      }
-      &.level-5 {
-        padding-left: calc(4 * #{$indent});
-      }
-      &.level-6 {
-        padding-left: calc(5 * #{$indent});
-      }
-      &:hover {
-        color: $blue;
-        font-weight: 500;
-      }
-    }
-  }
+    .nav-list {
+      border-left: 4px solid #1e88e5;
+      padding-left: 12px;
+      .nav-item {
+        padding-right: 12px;
+        list-style: none;
+        font-size: 13px;
+        line-height: 18px;
+        word-wrap: break-word;
+        word-break: normal;
+        cursor: pointer;
+        margin-top: 8px;
+        transition: all .2s $materialCubicBezier;
+        &:first-child {
+          color: #757575;
+          font-weight: 500;
+          margin: 0;
+        }
+        &.level-2 {
+          padding-left: calc(1 * #{$indent});
+        }
+        &.level-3 {
+          padding-left: calc(2 * #{$indent});
+        }
+        &.level-4 {
+          padding-left: calc(3 * #{$indent});
+        }
+        &.level-5 {
+          padding-left: calc(4 * #{$indent});
+        }
 
-  .article-bottom {
-    position: relative;
-    //padding: 24px;
-    margin-right: 240px;
-    .admin-row {
-      position: relative;
-      margin: 0 0 24px;
-      height: 36px;
-      .edit-article {
-        margin-right: 12px;
-      }
-      .delete-article {
-
-      }
-    }
-    .comment {
-      position: relative;
-      width: 700px;
-      box-sizing: border-box;
-      margin-bottom: 24px;
-      &.editor {
-        padding: 24px;
-        box-shadow: $paper-elevation-low;
-        border-radius: 3px;
-        background: $white;
-        transition: all .6s $materialCubicBezier;
+        &.level-6 {
+          padding-left: calc(5 * #{$indent});
+        }
         &:hover {
-          box-shadow: $paper-elevation-medium;
-        }
-        .title {
-          font-size: 12px;
-          font-style: italic;
-          color: $font-secondary;
-          margin-bottom: 12px;
-        }
-        .comment-author {
-          margin-right: 12px;
-        }
-        .comment-email {
-          //margin-right: 12px;
-        }
-        .comment-content {
-          //margin-right: 12px;
-        }
-        .submit {
-          margin: 12px 0 6px;
-          width: 496px;
-        }
-      }
-      // 参考 youtube 的评论样式
-      &.existed {
-        .title {
-          font-size: 13px;
-          line-height: 18px;
-          margin-bottom: 3px;
-          .author {
-            color: #000;
-            font-weight: 500;
-          }
-          .date {
-            margin-left: .3em;
-            color: rgb(96, 96, 96);
-          }
-          .ip {
-            float: right;
-            font-size: 11px;
-            color: $font-secondary;
-          }
-        }
-        .content {
-          color: rgb(3, 3, 3);
-          font-size: 14px;
-          line-height: 20px;
-        }
-        .delete {
-          position: absolute;
-          top: 5px;
-          right: -80px;
+          color: $blue;
+          font-weight: 500;
         }
       }
     }
-  }
-  &.resume {
-    .article-top {
-      .info {
+    .admin-actions {
+      margin: 18px;
+      .rhaego-button {
+        display: block;
+        width: 100%;
+        margin-bottom: 12px;
+      }
+      &.hidden {
         display: none;
       }
     }
-    .article-bottom {
-      .comment,
-      .comments {
+    &.disabled {
+      svg {
+        cursor: default;
+
+        :hover {
+          opacity: unset;
+          filter: unset;
+        }
+      }
+    }
+  }
+
+  &.resume {
+    .article-top {
+      display: none;
+    }
+    .article-sidebar {
+      .admin-actions {
         display: none;
       }
     }

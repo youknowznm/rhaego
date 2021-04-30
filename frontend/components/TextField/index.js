@@ -9,7 +9,7 @@ import {
   formatToMaterialSpans,
   formatDate,
   noop, isValidString,
-} from '~/utils'
+} from '~utils'
 
 import style from './text-field.scss'
 

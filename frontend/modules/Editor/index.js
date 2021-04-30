@@ -13,28 +13,17 @@ import {
   Link,
   pick,
   addClass, removeClass, goToPath, postForm, parseMarkdown,
-  debounce, throttle
-} from "~/utils"
+  debounce, throttle, RESUME_ID, noop
+} from "~utils"
 import style from './editor.scss'
 import TextField from "~/components/TextField"
 import Button from "~/components/Button"
 import Toast, {toast} from "~/components/Toast"
-import {formatDateToPast, formatDateToString} from "~/utils"
-import {
-  GET_ARTICLE_DETAIL,
-  UPLOAD_PIC,
-  SAVE_ARTICLE,
-} from '~api'
+import {formatDateToPast, formatDateToString} from "~utils"
+import api from '~api'
+import {MainContext} from "~/modules/Context";
 
 class Editor extends React.Component {
-
-  static propTypes = {
-    // articleId: PropTypes.string,
-  }
-
-  static defaultProps = {
-    // articleId: '',
-  }
 
   state = {
     articleId: '',
@@ -51,6 +40,7 @@ class Editor extends React.Component {
   componentDidMount() {
     addClass(document.body, 'full-vh-content')
     this.tryGetExistedContent()
+    this.context.setDocTitle('编辑笔记')
   }
 
   tryGetExistedContent = () => {
@@ -58,10 +48,10 @@ class Editor extends React.Component {
     if (isValidString(id)) {
       this.setState({
         articleId: id,
-        isResume: id === 'RESUME',
+        isResume: id === RESUME_ID,
         isLoading: true
       })
-      get(GET_ARTICLE_DETAIL, {
+      get(api.GET_ARTICLE_DETAIL, {
         id
       })
         .then(res => {
@@ -75,6 +65,7 @@ class Editor extends React.Component {
             isLoading: false
           })
         })
+        .catch(noop)
     }
   }
 
@@ -99,14 +90,11 @@ class Editor extends React.Component {
     this.setState({
       hasValidated: true
     })
-    post(SAVE_ARTICLE, params)
+    post(api.SAVE_ARTICLE, params)
       .then(res => {
         this.props.history.push(`/article?id=${res.articleId}`)
       })
-  }
-
-  onCancel = () => {
-    this.props.history.goBack()
+      .catch(noop)
   }
 
   renderTopFields = () => {
@@ -121,7 +109,7 @@ class Editor extends React.Component {
           width={480}
           maxLength={40}
           validatorRegExp={/^\s*.{2,40}\s*$/}
-          hint={'输入 2~40 字符的标题。'}
+          hint={'2~40 字符的标题'}
           disabled={topFieldsDisabled}
           hasValidated={this.state.hasValidated}
         />
@@ -133,7 +121,7 @@ class Editor extends React.Component {
           width={240}
           maxLength={30}
           validatorRegExp={/^(\s*#[^#]+){1,3}\s*$/}
-          hint={'输入 1~3 个以#分隔的标签。'}
+          hint={'1~3 个以#起始, 以空格分隔的标签'}
           disabled={topFieldsDisabled}
           hasValidated={this.state.hasValidated}
         />
@@ -145,7 +133,7 @@ class Editor extends React.Component {
           width={240}
           maxLength={10}
           validatorRegExp={/^\d{4}-\d{2}-\d{2}$/}
-          hint={'输入 YYYY/MM/DD 格式的日期。'}
+          hint={'YYYY/MM/DD 格式的日期'}
           disabled={topFieldsDisabled}
           hasValidated={this.state.hasValidated}
         />
@@ -160,7 +148,7 @@ class Editor extends React.Component {
             <Button
               className={'cancel'}
               type={'secondary'}
-              onClick={this.onCancel}
+              onClick={() => {this.props.history.goBack()}}
               disabled={this.state.isLoading}
             >
               取消
@@ -173,18 +161,18 @@ class Editor extends React.Component {
   handlePaste = evt => {
     const file = evt.clipboardData.files[0]
     if (file) {
-      if (/\.png|jpg|jpeg|gif$/.test(file.name)) {
+      if (/\.(svg|png|gif|jpe?g|bmp)$/.test(file.name)) {
         const formData = new FormData()
         formData.append('file', file)
         formData.append('articleId', this.state.articleId)
         this.setState({
           isLoading: true
         })
-        postForm(UPLOAD_PIC, formData)
+        postForm(api.UPLOAD_FILE, formData)
           .then(res => {
             const text = `\n\n![](/files/${res.fileName})\n\n`
             setTimeout(() => {
-              document.execCommand('insertText', false, text);
+              document.execCommand('insertText', false, text)
             })
           })
           .finally(() => {
@@ -204,7 +192,7 @@ class Editor extends React.Component {
       markdownContent: value,
       parsedHTML: parseMarkdown(value),
     })
-  }, 400)
+  }, 200)
 
   renderCompareArea = () => {
     return (
@@ -233,5 +221,7 @@ class Editor extends React.Component {
     )
   }
 }
+
+Editor.contextType = MainContext
 
 export default withRouter(Editor)

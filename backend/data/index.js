@@ -1,153 +1,94 @@
+const fs = require('fs')
 const path = require('path')
 const Datastore = require('nedb')
 const request = require('request')
+const {DEFAULT_DAILY_ATTEMPTS} = require("../utils")
 const {GET_GITHUB_REPOS} = require("../api")
-const {
-  isValidString,
-  generateId
-} = require('../utils')
 
-const {
-  validateArticleDoc,
-  validateCommentDoc,
-  validateClientDoc,
-} = require('./validators')
-
+// 入参校验一律在路由层, 这里直接入库
 class RhaegoDb {
 
   init = () => {
-    this.generalDb = new Datastore({
-      filename: path.resolve(__dirname, './general.db'),
-      autoload: true,
-    })
-    this.initGeneralDb()
-
     this.articleDb = new Datastore({
       filename: path.resolve(__dirname, './articles.db'),
       autoload: true,
     })
-
     this.commentDb = new Datastore({
       filename: path.resolve(__dirname, './comments.db'),
       autoload: true,
     })
-
     this.clientDb = new Datastore({
       filename: path.resolve(__dirname, './clients.db'),
       autoload: true,
     })
+    this.REPO_DATA_EXPIRE_TIME = 10 * 60 * 1000
+    this.reposJsonPath = path.resolve(__dirname, './github-repos.json')
+    this.initGithubReposJson()
   }
 
-  // ===== 通用 =====
-
-  initGeneralDb = () => {
-    this.generalDb.findOne({label: 'githubRepos'}, (err, generalDoc) => {
-      if (generalDoc !== null) {
-        return
-      }
-      this.generalDb.insert({
-        label: 'githubRepos',
+  initGithubReposJson = () => {
+    try {
+      fs.readFileSync(this.reposJsonPath, 'utf8')
+    } catch (e) {
+      fs.writeFileSync(this.reposJsonPath, JSON.stringify({
         repos: null,
         updated: new Date().valueOf(),
-      })
-    })
-  this.generalDb.findOne({label: 'visitCount'}, (err, generalDoc) => {
-      if (generalDoc !== null) {
-        return
-      }
-      this.generalDb.insert({
-        label: 'visitCount',
-        count: 0,
-      })
-    })
+      }))
+    }
   }
-
-  // 10 分钟过期
-  REPO_DATA_EXPIRE_TIME = 10 * 60 * 1000
-
+  
   // 获取 github 仓库信息, 从库中或 github api
   getGithubRepos = () => new Promise((resolve, reject) => {
-    const nowDate = new Date().valueOf()
-    this.generalDb.findOne(
-      {label: 'githubRepos'},
-      (err, generalDoc) => {
+    const now = new Date().valueOf()
+    const localData = JSON.parse(fs.readFileSync(this.reposJsonPath, 'utf8'))
+    if (now - localData.updated >= this.REPO_DATA_EXPIRE_TIME) {
+      // 未初始化或已过期, 请求
+      request(
+        {
+          url: GET_GITHUB_REPOS,
+          headers: {
+            'User-Agent': 'rhaego-server'
+          }
+        },
+        (error, response, body) => {
+          if (!error) {
+            fs.writeFileSync(this.reposJsonPath, JSON.stringify({
+              repos: body,
+              updated: now,
+            }))
+            resolve(body)
+          }
+        }
+      )
+    } else {
+      // 否则使用库中的
+      resolve(localData.repos)
+    }
+  })
+
+  // ===== 笔记 =====
+
+  // 获取指定标签或全部的笔记
+  getArticles = tag => new Promise((resolve, reject) => {
+    this.articleDb.find(
+      {},
+      (err, docs) => {
         err && reject(err)
-        if (
-          generalDoc.repos === null
-          || (nowDate - generalDoc.updated >= this.REPO_DATA_EXPIRE_TIME)
-        ) {
-          // 未初始化或已过期, 请求
-          request(
-            {
-              url: GET_GITHUB_REPOS,
-              headers: {
-                'User-Agent': 'rhaego-server'
-              }
-            },
-            (error, response, body) => {
-              if (!error) {
-                this.generalDb.update(
-                  {label: 'githubRepos'},
-                  {
-                    $set: {
-                      repos: body,
-                      updated: nowDate,
-                    }
-                  },
-                  (err, generalDoc) => {
-                    resolve(body)
-                  }
-                )
-              }
-            }
-          )
+        if (tag === '') {
+          resolve(docs)
         } else {
-          // 否则使用库中的
-          resolve(generalDoc.repos)
+          const filtered = docs.filter(item => {
+            return item.tagsText
+              .split(/\s*#/)
+              .filter(item => item !== '')
+              .indexOf(tag) > -1
+          })
+          resolve(filtered)
         }
       }
     )
   })
-
-  // 递增访问数量
-  increaseVisitCount = () => new Promise((resolve, reject) => {
-    this.generalDb.findOne(
-      {label: 'visitCount'},
-      (err, generalDoc) => {
-        err && reject(err)
-        this.generalDb.update(
-          {label: 'visitCount'},
-          {
-            $set: {
-              count: generalDoc.visitCount += 1,
-            }
-          },
-          (err, generalDoc) => {
-            err && reject(err)
-            resolve(generalDoc)
-          }
-        )
-      }
-    )
-  })
-
-  // ===== 文章 =====
-
-  // 获取指定标签或全部的文章
-  getArticles = (tagsText = '') => new Promise((resolve, reject) => {
-    let query = {}
-    // if (tagsText !== '') {
-    //   tagsText
-    // }
-    this.articleDb.find(
-      query,
-      (err, articleDoc) => {
-        err && reject(err)
-        resolve(articleDoc)
-      }
-    )
-  })
-  // 获取指定 _id 的文章
+  // 获取笔记
   getArticle = articleId => new Promise((resolve, reject) => {
     this.articleDb.findOne(
       {articleId},
@@ -157,21 +98,15 @@ class RhaegoDb {
       }
     )
   })
-  // 新建或更新文章
+  // 新建或更新笔记
   saveArticle = articleFields => new Promise((resolve, reject) => {
-    if (articleFields.articleId === '') {
-      articleFields.articleId = generateId()
-    }
-    const validateError = validateArticleDoc(articleFields)
-    if (validateError) {
-      reject(validateError)
-      return
-    }
     this.getArticle(articleFields.articleId)
       .then(articleDoc => {
         if (articleDoc === null) {
           this.articleDb.insert(
-            {...articleFields},
+            {
+              ...articleFields,
+            },
             (err, articleDoc) => {
               err && reject(err)
               resolve(articleDoc)
@@ -180,7 +115,9 @@ class RhaegoDb {
         } else {
           this.articleDb.update(
             articleDoc,
-            {...articleFields},
+            {
+              ...articleFields
+            },
             {
               returnUpdatedDocs: true
             },
@@ -195,34 +132,22 @@ class RhaegoDb {
         reject(err)
       })
   })
-  // 删除指定 _id 的文章; 删除其下所有评论
+  // 删除笔记
   deleteArticle = articleId => new Promise((resolve, reject) => {
     this.articleDb.remove(
       {articleId},
       (err, articleDoc) => {
-        console.log({articleDoc})
-        err && reject(err)
-        this.commentDb.remove(
-          {articleId},
-          (err, articleDoc) => {
-            err && reject(err)
-            resolve(true)
-          }
-        )
+        resolve(true)
       }
     )
   })
 
-  // ===== 文件服务 =====
-
-  // upload =
-
   // ===== 用户 =====
 
   // 获取指定设备号的用户
-  getClient = (clientId = '') => new Promise((resolve, reject) => {
-    this.clientDb.find(
-      isValidString(clientId) ? {clientId} : {},
+  getClient = (clientIp = '') => new Promise((resolve, reject) => {
+    this.clientDb.findOne(
+      {clientIp},
       (err, clientDoc) => {
         err && reject(err)
         resolve(clientDoc)
@@ -232,16 +157,10 @@ class RhaegoDb {
   // 新建或更新用户
   saveClient = params => new Promise((resolve, reject) => {
     const {
-      clientId,
-      dailyAttempts,
-      restricted,
+      clientIp,
+      ...otherParams
     } = params
-    const validationError = validateClientDoc(params)
-    if (validationError !== null) {
-      reject(validationError)
-      return
-    }
-    this.getClient(clientId)
+    this.getClient(clientIp)
       .then(clientDoc => {
         if (clientDoc === null) {
           this.clientDb.insert(
@@ -253,13 +172,16 @@ class RhaegoDb {
           )
         } else {
           this.clientDb.update(
-            clientDoc,
-            {$set: {...params}},
-            {},
-            (err, numAffected, articleDoc) => {
-              // console.log('?', err, numAffected, articleDoc)
+            {clientIp},
+            {
+              $set: {...otherParams}
+            },
+            {
+              returnUpdatedDocs: true
+            },
+            (err, numAffected, doc) => {
               err && reject(err)
-              resolve(numAffected)
+              resolve(doc)
             }
           )
         }
@@ -268,73 +190,96 @@ class RhaegoDb {
         reject(err)
       })
   })
+  // 所有访客的访问次数和
+  getVisitCount = () => new Promise((resolve, reject) => {
+    this.clientDb.find({}, (err, allClients)=>{
+      err && reject(err)
+      resolve(
+        allClients.reduce((prev, curr) => {
+          return (prev.visitCount || 0) + (curr.visitCount || 0)
+        }, 0)
+      )
+    })
+  })
+  // 修改访客单每日尝试次数
+  setClientDailyAttempt = (clientIp, updateType) => new Promise((resolve, reject) => {
+    this.getClient(clientIp)
+      .then(doc => {
+        let currDailyAttempts = doc.dailyAttempts
+        switch (updateType) {
+          case 'decrease':
+            currDailyAttempts -= 1
+            break
+          case 'increase':
+            currDailyAttempts += 1
+            break
+          case 'reset':
+            currDailyAttempts = DEFAULT_DAILY_ATTEMPTS
+            break
+        }
+        this.saveClient({
+          clientIp,
+          dailyAttempts: currDailyAttempts
+        })
+          .then(doc => {
+            resolve(doc)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+      .catch(err => {
+        reject(err)
+      })
+  })
+  // 重置所有访客的每日尝试次数
+  resetAllClientDailyAttempts = () => new Promise((resolve, reject) => {
+    // this.clientDb.update({}, (err, allClients)=>{
+    //   err && reject(err)
+    //   resolve(
+    //     allClients.reduce((prev, curr) => {
+    //       return (prev.visitCount || 0) + (curr.visitCount || 0)
+    //     }, 0)
+    //   )
+    // })
+  })
 
   // ===== 赞 =====
 
   // 点赞
-  likeArticle = (params = {}) => new Promise((resolve, reject) => {
+  toggleLikeArticle = (params = {}) => new Promise((resolve, reject) => {
     const {
       articleId = '',
-      clientId,
+      clientIp,
     } = params
-    if (!/^\d+$/.test(clientId)) {
-      reject('缺少客户端 id')
-      return
-    }
     this.getArticle(articleId)
       .then(articleDoc => {
         if (articleDoc === null) {
-          reject('未找到目标文章')
+          reject('未找到目标笔记')
         } else {
-          const likedBy = articleDoc.likedBy || []
-          const targetClientIndex = likedBy.findIndex(clientId)
-          if (targetClientIndex > -1) {
-            reject('已经赞过啦')
-          }
-          likedBy.push(clientId)
-          this.articleDb.update(
-            articleDoc,
-            {
-              $set: {likedBy}
-            },
-            {},
-            (err, articleDoc) => {
-              err && reject(err)
-              resolve(articleDoc)
-            }
-          )
-        }
-      })
-  })
-  // 取消点赞
-  cancelLikeArticle = (params = {}) => new Promise((resolve, reject) => {
-    const {
-      articleId = '',
-      clientId,
-    } = params
-    if (!/^\d+$/.test(clientId)) {
-      reject('缺少客户端 id')
-      return
-    }
-    this.getArticle(articleId)
-      .then(articleDoc => {
-        if (articleDoc === null) {
-          reject('未找到目标文章')
-        } else {
-          const likedBy = articleDoc.likedBy || []
-          const targetClientIndex = likedBy.findIndex(clientId)
+          let likedBy = articleDoc.likedBy.slice()
+          const targetClientIndex = likedBy.findIndex(item => item === clientIp)
+          let message
           if (targetClientIndex > -1) {
             likedBy.splice(targetClientIndex, 1)
+            message = '已取消赞'
+          } else {
+            likedBy.push(clientIp)
+            message = '已赞'
+            // 产生一次'赞', 消耗一次每日尝试次数
+            this.setClientDailyAttempt(clientIp, 'decrease')
           }
           this.articleDb.update(
             articleDoc,
             {
               $set: {likedBy}
             },
-            {},
-            (err, articleDoc) => {
+            {
+              returnUpdatedDocs: true
+            },
+            (err, na, articleDoc) => {
               err && reject(err)
-              resolve(articleDoc)
+              resolve(message)
             }
           )
         }
@@ -343,44 +288,86 @@ class RhaegoDb {
 
   // ===== 评论 =====
 
-  // 获取指定文章的评论
+  // 获取指定笔记的评论
   getComments = (articleId = '') => new Promise((resolve, reject) => {
-    this.commentDb.find(
-      isValidString(articleId) ? {articleId} : {},
-      (err, commentDoc) => {
-        err && reject(err)
-        resolve(commentDoc)
-      }
-    )
+    this.getArticle(articleId)
+      .then(articleDoc => {
+        if (!articleDoc) {
+          resolve([])
+        } else {
+          resolve(articleDoc.comments.sort((prev, curr) => {
+            return -(prev.createDate - curr.createDate)
+          }))
+        }
+      })
+      .catch(err => {
+        reject(err)
+      })
   })
   // 新建评论
   saveComment = params => new Promise((resolve, reject) => {
-    const {_id, ...commentFields} = params
-    const validateError = validateCommentDoc(commentFields)
-    if (validateError) {
-      reject(validateError)
-      return
-    }
-    this.commentDb.insert(
-      {
-        ...commentFields,
-        createDate: new Date().valueOf()
-      },
-      (err, commentDoc) => {
-        err && reject(err)
-        resolve(commentDoc)
-      }
-    )
+    const {
+      // commentId,
+      clientIp,
+      articleId,
+      // commentAuthor,
+      // commentEmail,
+      // commentContent,
+    } = params
+    this.getArticle(articleId)
+      .then(articleDoc => {
+        if (articleDoc === null) {
+          reject('未找到目标笔记')
+        } else {
+          let comments = articleDoc.comments.slice()
+          comments.push(params)
+          // 发布一个评论, 消耗一次每日尝试次数
+          this.setClientDailyAttempt(clientIp, 'decrease')
+          this.articleDb.update(
+            articleDoc,
+            {
+              $set: {comments}
+            },
+            {
+              returnUpdatedDocs: true
+            },
+            (err, na, articleDoc) => {
+              err && reject(err)
+              resolve(articleDoc)
+            }
+          )
+        }
+      })
   })
   // 删除评论
-  deleteComment = _id => new Promise((resolve, reject) => {
-    this.commentDb.remove(
-      {_id},
-      (err, commentDoc) => {
-        err && reject(err)
-        resolve(true)
-      }
-    )
+  deleteComment = params => new Promise((resolve, reject) => {
+    const {
+      articleId,
+      commentId,
+    } = params
+    this.getArticle(articleId)
+      .then(articleDoc => {
+        if (articleDoc === null) {
+          reject('未找到目标笔记')
+        } else {
+          let comments = articleDoc.comments.slice()
+          const targetCommentIndex = comments.findIndex(item => item.commentId === commentId)
+          comments.splice(targetCommentIndex, 1)
+          this.articleDb.update(
+            articleDoc,
+            {
+              $set: {comments}
+            },
+            {
+              returnUpdatedDocs: true
+            },
+            (err, na, articleDoc) => {
+              err && reject(err)
+              resolve(articleDoc)
+            }
+          )
+        }
+      })
   })
 
 }

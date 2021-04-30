@@ -11,11 +11,17 @@
   .loading-area {
     width: 50px;
     height: 50px;
-    background: url("~images/loading.gif");
   }
   .empty-reason {
-    color: $black;
+    color: $font-secondary;
     width: auto;
     max-width: 360px;
+    font-size: 14px;
+  }
+  &.delay-has-passed {
+    .loading-area {
+      background: url("~images/loading.gif") no-repeat;
+      animation: fadeIn .5s $materialCubicBezier;
+    }
   }
 }

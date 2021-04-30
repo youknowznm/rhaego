@@ -6,26 +6,32 @@ $rhaego-header-red: rgb(234, 67, 53);
 $rhaego-header-green: rgb(52, 168, 83);
 
 [data-header-theme=grey] {
+  .nav-bar {}
   background-color: $rhaego-header-grey;
 }
 
 [data-header-theme=silver] {
+  .nav-bar {}
   background-color: $rhaego-header-silver;
 }
 
 [data-header-theme=blue] {
+  .nav-bar {}
   background-color: $rhaego-header-blue;
 }
 
 [data-header-theme=yellow] {
+  .nav-bar {}
   background-color: $rhaego-header-yellow;
 }
 
 [data-header-theme=red] {
+  .nav-bar {}
   background-color: $rhaego-header-red;
 }
 
 [data-header-theme=green] {
+  .nav-bar {}
   background-color: $rhaego-header-green;
 }
 
@@ -53,11 +59,11 @@ $rhaego-header-green: rgb(52, 168, 83);
 [data-header-theme=silver],
 [data-header-theme=yellow] {
   * {
-    color: $black !important;
+    color: $font-primary !important;
   }
   .nav-button {
     &.active {
-      border-color: $black !important;
+      border-color: $font-primary !important;
     }
     &.clicking,
     &:not(.active):hover {
@@ -65,6 +71,6 @@ $rhaego-header-green: rgb(52, 168, 83);
     }
   }
   .nav-border {
-    background-color: $black !important;
+    background-color: $font-primary !important;
   }
 }

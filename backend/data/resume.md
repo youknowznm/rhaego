@@ -1,31 +1,18 @@
 # 教育经历
 - **首都师范大学 | 本科 | 英语语言文学** *2010 - 2014*
 
+saf
+
 # 个人技能
-
-![](/files/RESUME_Ak77Py.png)
-
-hohoho
-
-
-
-![](/files/RESUME_AKBccK.png)
-
-
-
-
-![](/files/RESUME_AbNzXy.png)
-
-发生
 
 ### **前端**
   - 熟练语义化的 `HTML` 和 `CSS` / `SCSS`
   - 熟悉原生 `JavaScript`，熟悉 `ES6` 的常用特性
-  - 熟悉 `React` 和 `Redux` 及其相关生态
-  - 熟悉 `Vue` 框架
-  - 熟悉 `jQuery` 和 `Bootstrap` 库
-  - 熟悉 `Gulp` 和前端自动化
-  - 熟悉 `Webpack` 和模块化开发
+  - 熟悉`React`和`Redux`及其相关生态
+  - 熟悉`Vue` 框架
+  - 熟悉`jQuery` 和 `Bootstrap` 库
+  - 熟悉`Gulp` 和前端自动化
+  - 熟悉`Webpack` 和模块化开发
   - 熟悉微信小程序的开发
 
 ### **后端**
@@ -39,7 +26,7 @@ hohoho
   - 熟悉 macOS 下的开发
   - 英语专业八级
 
-# 工作经历
+# 工作`Java`经历
 
 ## **百度／前端开发／2018.04 至今**
 
@@ -65,13 +52,13 @@ hohoho
 - 完全原创、独立完成的个人站点的前端
 - 基于 React + Redux + Material-UI
 - Material Design 风格，对不同设备的浏览器响应适配
-- 可编辑和展示文章标题、摘要、Markdown 内容、标签和创建日期
+- 可编辑和展示笔记标题、摘要、Markdown 内容、标签和创建日期
 - 可在编辑器内实时预览 Markdown 内容
 - 支持图片的上传和托管
-- 管理员可创建或编辑文章，并管理访客在文章下的评论
-- 访客无需注册即可对文章进行点赞、评论
+- 管理员可创建或编辑笔记，并管理访客在笔记下的评论
+- 访客无需注册即可对笔记进行点赞、评论
 - 根据浏览器指纹控制访客在一定时间内的评论数
-- 支持按指定的标签类别展示文章，阅读时展示文章的索引
+- 支持按指定的标签类别展示笔记，阅读时展示笔记的索引
 - 根据配置展示 GitHub 作品、社交资料和个人简历
 - 线上地址在[这里](https://www.youknowznm.com/)
 
@@ -101,7 +88,7 @@ hohoho
 ## *[jqueryMaterial.js](https://github.com/youknowznm/jQueryMaterial.js)*
 - Material Design 风格的 jQuery 组件库，适用于桌面端和移动端的快速建站
 - 交互行为和样式参考了若干 Google 的设计相关站点
-- 包含：页头、背景生成器、按钮、输入框、对话框、单选组、标签组、页脚和富文本编辑器
+- 包含：页头、背景生成器、按钮、框、对话框、单选组、标签组、页脚和富文本编辑器
 - Demo 地址在[这里](https://youknowznm.github.io/demos/jquery-material)
 
 ## *[protoQuery.js](https://github.com/youknowznm/protoQuery.js)*

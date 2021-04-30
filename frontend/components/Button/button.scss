@@ -1,7 +1,7 @@
 @import "~style/main";
 
 $rhaego-button-primary: #1976d2;
-$rhaego-button-secondary: rgb(220, 0, 78);
+$rhaego-button-secondary: #dc004e;
 
 /*
 ***** 常规 ****
@@ -30,9 +30,7 @@ $rhaego-button-secondary: rgb(220, 0, 78);
   .button-content {
     font-family: $font-family;
     display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    @include one-line-ellipsis;
     font-weight: 500;
     font-size: 14px;
     z-index: 89;

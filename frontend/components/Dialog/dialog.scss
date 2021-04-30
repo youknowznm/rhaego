@@ -28,7 +28,7 @@
     padding: 24px 24px 12px;
     opacity: 0;
     box-sizing: border-box;
-    transition: all .2s ease-out;
+    transition: all .2s $materialCubicBezier;
   }
 
   &.visible {
@@ -46,7 +46,7 @@
     font-size: 18px;
     margin-bottom: 12px;
     line-height: 30px;
-    color: $black;
+    color: $font-primary;
   }
 
   .modal-content {
@@ -54,7 +54,7 @@
     font-size: 16px;
     line-height: 24px;
     margin: 12px 0;
-    color: $black;
+    color: $font-primary;
   }
 
   .modal-action-buttons {

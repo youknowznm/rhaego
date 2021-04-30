@@ -6,12 +6,13 @@ import {
   formatToMaterialSpans,
   getStyleInt,
   throttle,
-  animateToScrollHeight, removeClass, addClass, goToPath
-} from '~/utils'
+  animateToScrollHeight, removeClass, addClass, goToPath, isValidString, callIfCallable
+} from '~utils'
 
 import {withRouter} from 'react-router-dom'
 
 import style from './header.scss'
+import {MainContext} from "~/modules/Context";
 class RhaegoHeader extends React.Component {
 
   static propTypes = {
@@ -58,12 +59,8 @@ class RhaegoHeader extends React.Component {
     const currPath = `${historyState.pathname}${historyState.search}`
     // 根据路由匹配到应高亮的 nav
     let activeNavIndex = this.props.links.findIndex(item => {
-      return item.path === currPath || item.matches(currPath)
+      return item.path === currPath || callIfCallable(item.matches, currPath)
     })
-    if (activeNavIndex < 0) {
-      activeNavIndex = 0
-    }
-    // 索性未匹配的都取首项
     if (!this.state.activeNavIndex) {
       this.state.activeNavIndex = activeNavIndex
     } else {
@@ -71,6 +68,17 @@ class RhaegoHeader extends React.Component {
         activeNavIndex
       })
     }
+  }
+
+  get bannerTitle() {
+    // 常规文章页, 不获取 siteName, 避免文章标题的闪烁
+    if (
+      location.pathname === ('/article')
+      && !/RESUME/.test(location.search)
+    ) {
+      return this.context.bannerTitle
+    }
+    return this.props.siteName
   }
 
   componentDidMount() {
@@ -98,22 +106,22 @@ class RhaegoHeader extends React.Component {
 
   docScrollTop = 0
 
+  setBannerHeight = (() => {
+    const {scrollTop} = document.documentElement
+    this.setState({
+      bannerHeight: (this.BANNER_HEIGHT - scrollTop) < 0
+        ? 0
+        : (this.BANNER_HEIGHT - scrollTop),
+      bannerTitleHidden: scrollTop > this.TITLE_HIDDEN_FROM
+    })
+    this.docScrollTop = scrollTop
+  })
+
   addListeners = () => {
     // 全局 mouseup
     document.body.addEventListener('mouseup', this.onNavMouseUp)
-
     // 全局滚动
-    window.addEventListener('scroll', throttle(() => {
-      const {scrollTop} = document.documentElement
-      this.setState({
-        bannerHeight: (this.BANNER_HEIGHT - scrollTop) < 0
-          ? 0
-          : (this.BANNER_HEIGHT - scrollTop),
-        bannerTitleHidden: scrollTop > this.TITLE_HIDDEN_FROM
-      })
-      this.docScrollTop = scrollTop
-    }), 200)
-
+    window.addEventListener('scroll', this.setBannerHeight)
     // 下划线和波纹的动画结束
     const {
       navBorderRef,
@@ -168,7 +176,9 @@ class RhaegoHeader extends React.Component {
       activeNavIndex: prevActiveNavIndex
     } = this.state
 
+    // 点击当前 nav 时, 只切换路由, 不搞其它花里胡哨
     if (prevActiveNavIndex === index) {
+      this.props.history.push(item.path)
       return
     }
 
@@ -209,7 +219,10 @@ class RhaegoHeader extends React.Component {
   }
 
   render() {
-    const {COLORS} = this
+    const {
+      COLORS,
+      bannerTitle
+    } = this
     const {
       bannerTitleHidden,
       activeNavIndex,
@@ -230,10 +243,14 @@ class RhaegoHeader extends React.Component {
     return (
       <header className={'rhaego-header'} data-header-theme={themeColorName}>
         <div className={'header-content rhaego-responsive'}>
-          <nav className={'nav-bar'}>
-            <a className={c('site-title', !bannerTitleHidden && 'transparent')} href="/">
-              {formatToMaterialSpans(this.props.siteName)}
-            </a>
+          {/* nav-bar 也设置背景色, 以遮挡快速滚动时的 banner */}
+          <nav className={'nav-bar'} data-header-theme={themeColorName}>
+            <span
+              className={c('page-title', !bannerTitleHidden && 'transparent')}
+              title={bannerTitle}
+            >
+              {formatToMaterialSpans(bannerTitle)}
+            </span>
             <ul className="nav-buttons" ref={this.setNavListRef} >
               {
                 this.props.links.map((item, index) => (
@@ -251,8 +268,11 @@ class RhaegoHeader extends React.Component {
             </ul>
           </nav>
           <div className={c('banner')} style={bannerStyle}>
-            <h1 className={c('title', bannerTitleHidden && 'transparent')}>
-              {formatToMaterialSpans(this.props.siteName)}
+            <h1
+              className={c('page-title', bannerTitleHidden && 'transparent')}
+              title={bannerTitle}
+            >
+              {formatToMaterialSpans(bannerTitle)}
             </h1>
           </div>
         </div>
@@ -265,5 +285,7 @@ class RhaegoHeader extends React.Component {
     )
   }
 }
+
+RhaegoHeader.contextType = MainContext
 
 export default withRouter(RhaegoHeader)

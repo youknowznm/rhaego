@@ -11,7 +11,7 @@ import {
   formatDate,
   callIfCallable,
   hasClass,
-} from '~/utils'
+} from '~utils'
 
 import style from './card.scss'
 
@@ -68,7 +68,7 @@ export default class Card extends React.Component {
       children,
       link,
       linkTarget,
-      onClick,
+      // onClick,
       ...otherProps
     } = this.props
     return (
@@ -76,7 +76,7 @@ export default class Card extends React.Component {
         className={c('rhaego-card', className)}
         data-card-theme={theme}
         data-card-font-theme={fontTheme}
-        onClick={this.goToLinkIfAny}
+        // onClick={this.goToLinkIfAny}
         {...otherProps}
       >
         <h1 className={'title'}>{formatToMaterialSpans(title)}</h1>

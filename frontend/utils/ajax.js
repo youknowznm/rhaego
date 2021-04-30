@@ -1,5 +1,5 @@
 import {setSearchParams} from './index'
-import {toast} from "~/components/Toast";
+import {toast} from "~/components/Toast"
 
 // get 和 post
 // 默认请求和响应均为 json
@@ -27,25 +27,21 @@ export function ajax(
     xhr.onreadystatechange = () => {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
-          let res
+          let res = xhr.response
           try {
             res = JSON.parse(xhr.response)
-          } catch (e) {
-            resolve(xhr.response)
+          } catch (e) {}
+          if (res.message) {
+            toast(res.message)
           }
           resolve(res)
         } else {
-          let errObj = {
-            message: '出错了'
-          }
+          let errorMessage = xhr.response
           try {
-            errObj = JSON.parse(xhr.response)
-          } catch (e) {
-            toast(errObj.message, 4000)
-            reject(errObj)
-          }
-          toast(errObj.message, 4000)
-          reject(errObj)
+            errorMessage = JSON.parse(xhr.response)
+          } catch (e) {}
+          toast(errorMessage)
+          reject(errorMessage)
         }
       }
     }

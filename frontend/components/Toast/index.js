@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import c from 'classnames'
 
-import {callIfCallable, noop} from '~/utils'
+import {callIfCallable, noop} from '~utils'
 
 import style from './toast.scss'
 export default class Toast extends React.Component {
@@ -15,8 +15,8 @@ export default class Toast extends React.Component {
   }
 
   static defaultProps = {
-    content: '这是一个命令式的 toast',
-    duration: 3000,
+    content: '空内容的 toast',
+    duration: 4000,
     onToastDisappear: noop,
   }
 

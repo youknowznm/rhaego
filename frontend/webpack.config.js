@@ -1,15 +1,16 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
+  context: path.resolve(__dirname),
   mode: 'development',
-  entry: './frontend/index.js',
+  entry: './index.js',
   output: {
-    path: path.resolve(__dirname, './backend/static'),
+    path: path.resolve(__dirname, '../backend/static'),
     filename: 'main.js',
   },
   devServer: {
-    contentBase: '.backend/static',
+    contentBase: '../backend/static',
     port: 3000,
     proxy: {
       '/api': 'http://localhost:4000',
@@ -66,19 +67,20 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './frontend/index.html'
+      template: path.resolve(__dirname, 'index.html'),
+      favicon: './assets/images/identicon.png',
     })
   ],
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
-      '~': path.resolve(__dirname, 'frontend'),
-      '~style': path.resolve(__dirname, 'frontend/assets/style'),
-      '~images': path.resolve(__dirname, 'frontend/assets/images'),
-      '~api': path.resolve(__dirname, 'backend/api'),
-      '~config': path.resolve(__dirname, 'config'),
-      '~utils': path.resolve(__dirname, 'frontend/utils'),
+      '~': path.resolve(__dirname, ''),
+      '~style': path.resolve(__dirname, 'assets/style'),
+      '~images': path.resolve(__dirname, 'assets/images'),
+      '~api': path.resolve(__dirname, '../backend/api'),
+      '~config': path.resolve(__dirname, '../config'),
+      '~utils': path.resolve(__dirname, 'utils'),
     }
   },
-};
+}
 

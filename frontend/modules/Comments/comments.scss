@@ -1,0 +1,78 @@
+@import "~style/main";
+
+.rhaego-article-comment {
+  position: relative;
+  padding: 0 24px;
+  margin-right: 240px;
+  .comment {
+    position: relative;
+    width: 700px;
+    box-sizing: border-box;
+    margin-bottom: 24px;
+    &.editor {
+      margin-bottom: 36px;
+      padding: 24px;
+      box-shadow: $paper-elevation-low;
+      border-radius: 3px;
+      background: $white;
+      transition: all .6s $materialCubicBezier;
+      &:hover {
+        box-shadow: $paper-elevation-medium;
+      }
+      .title {
+        font-size: 12px;
+        font-style: italic;
+        color: $font-secondary;
+        margin-bottom: 12px;
+      }
+      .comment-author {
+        margin-right: 12px;
+      }
+      .comment-email {
+        //margin-right: 12px;
+      }
+      .comment-content {
+        //margin-right: 12px;
+      }
+      .submit {
+        margin: 12px 0 6px;
+        width: 496px;
+      }
+    }
+    // 参考 youtube 的评论样式
+    &.existed {
+      .title {
+        font-size: 12px;
+        line-height: 18px;
+        margin-bottom: .2em;
+        color: $font-secondary;
+        .author {
+          font-weight: 500;
+        }
+        .separator {
+          margin: 0 .3em;
+        }
+        .date {
+        }
+      }
+      .content {
+        color: $font-primary;
+        font-size: 14px;
+        line-height: 20px;
+      }
+      .delete {
+        position: absolute;
+        top: 5px;
+        right: -90px;
+        &.hidden {
+          display: none;
+        }
+      }
+    }
+  }
+  .comments-loader {
+    position: relative;
+    width: 700px;
+    height: 120px;
+  }
+}

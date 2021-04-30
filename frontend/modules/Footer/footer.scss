@@ -28,7 +28,7 @@
         cursor: pointer;
         transition: all .2s $materialCubicBezier;
         opacity: .8;
-        .anchor {
+        > a {
           position: absolute;
           left: 0;
           top: 0;
@@ -81,7 +81,11 @@
       height: 144px;
       line-height: 144px;
       color: #999;
-      .site {
+      .left,
+      .center,
+      .right {
+        position: absolute;
+        display: inline-block;
         font-size: 14px;
         text-align: center;
         > * {
@@ -92,15 +96,30 @@
           cursor: pointer;
           margin: 0 0 0 .5em;
           font-weight: 500;
-          color: #999;
           text-decoration: underline;
+          color: #999;
           transition: all .2s $materialCubicBezier;
           &:hover {
-            color: $black;
+            color: $font-primary;
           }
         }
         .heart {
           margin: 0 .5em;
+        }
+      }
+      .left {
+        left: 0;
+      }
+      .center {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .right {
+        right: 0;
+        .visit-count {
+          color: $font-primary;
+          font-weight: 500;
+          margin-left: .2em;
         }
       }
     }

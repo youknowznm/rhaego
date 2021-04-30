@@ -1,22 +1,27 @@
-import {callIfCallable} from "./index";
+import {callIfCallable} from "./index"
 
 export function animateToScrollHeight(height = 0, onDone) {
   const doc = document.documentElement
   function step() {
-    const {scrollTop} = doc
+    const {
+      scrollTop,
+      clientHeight,
+      scrollHeight,
+    } = doc
     const id = window.requestAnimationFrame(step)
-    const reachedBottom = scrollTop + doc.clientHeight === doc.scrollHeight
+    // 已经滚动至底端, 仍要滚动? 婷婷
+    const reachedBottom = scrollTop + clientHeight === scrollHeight
     if (scrollTop === height) {
       cancelAnimationFrame(id)
       callIfCallable(onDone)
     } else if (scrollTop > height) {
-      doc.scrollTop = scrollTop - Math.max((scrollTop - height) / 5, 1)
+      doc.scrollTop = scrollTop - Math.max((scrollTop - height) / 4, 1)
     } else {
       if (reachedBottom) {
         cancelAnimationFrame(id)
         callIfCallable(onDone)
       }
-      doc.scrollTop = scrollTop + Math.max((height - scrollTop) / 5, 1)
+      doc.scrollTop = scrollTop + Math.max((height - scrollTop) / 4, 1)
     }
   }
   step()
@@ -54,4 +59,18 @@ export const getScrollBarWidth = () => {
   const result = node.offsetWidth - node.clientWidth
   document.body.removeChild(node)
   return result
+}
+
+export const getNodeOffsetTopToPage = node => {
+  let res = 0
+  let curr = node
+  while (true) {
+    if (curr.offsetParent !== null) {
+      res += curr.offsetTop
+      curr = curr.offsetParent
+    } else {
+      break
+    }
+  }
+  return res
 }

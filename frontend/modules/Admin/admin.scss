@@ -1,13 +1,12 @@
 @import "~style/main";
 @import "~style/markdown";
-@import "~style/highlight.scss";
 
 .rhaego-admin {
   position: relative;
   padding: 24px;
   width: 100%;
-
-  .login-area {
+  .login-area,
+  .admin-area {
     position: relative;
     width: 320px;
     padding: 24px;
@@ -21,21 +20,22 @@
     }
     .title {
       font-size: 12px;
+      line-height: 18px;
+      height: 20px;
       font-style: italic;
       color: $font-secondary;
-      margin-bottom: 12px;
+      margin-bottom: 36px;
     }
     .username,
-    .email {
+    .password {
       display: block;
     }
-    .submit {
-      width: 100%;
-      margin: 24px 0 6px;
-    }
+    .edit-resume,
+    .new-article,
+    .submit,
     .cancel {
       width: 100%;
-      margin: 6px 0;
+      margin-bottom: 12px;
     }
   }
 }

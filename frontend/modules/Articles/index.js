@@ -1,22 +1,37 @@
-import React from 'react';
+import React from 'react'
 import c from 'classnames'
-import Card from "~/components/Card";
-import Loading from "~/components/Loading";
+import Card from "~/components/Card"
+import Loading from "~/components/Loading"
 import {
   SvgComment,
-  SvgHeart,
-} from "~/assets/svg";
-import {Link, ajax, get, getPalette, getFontTheme, getTagsFromText} from "~/utils";
-
-import Button from "~/components/Button";
-import {GET_ARTICLES} from "~api";
+  SvgThumbUp,
+} from "~/assets/svg"
+import {
+  Link,
+  ajax,
+  get,
+  getPalette,
+  getFontTheme,
+  getTagsFromText,
+  RESUME_ID,
+  hasClass,
+  getSearchParams,
+  parseMarkdown, isValidString, noop
+} from "~utils"
+import Button from "~/components/Button"
+import api from "~api"
+import {withRouter} from "react-router-dom"
+import {toast} from "~/components/Toast"
 
 import style from './articles.scss'
-export default class Articles extends React.Component {
+import {MainContext} from "~/modules/Context";
+import Repos from "~/modules/Repos";
+class Articles extends React.Component {
 
   state = {
     articles: [],
     palette: [],
+    tag: '',
     isLoading: false,
     emptyReason: null,
   }
@@ -24,9 +39,23 @@ export default class Articles extends React.Component {
   componentDidMount() {
     this.setState({
       palette: getPalette(),
+    })
+    this.getArticles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.location.search !== this.props.location.search) {
+      this.getArticles()
+    }
+  }
+
+  getArticles = () => {
+    const {tag = ''} = getSearchParams()
+    this.setState({
+      tag,
       isLoading: true
     })
-    get(GET_ARTICLES)
+    get(api.GET_ARTICLES, isValidString(tag) ? {tag} : {})
       .then(res => {
         const articles = res.articles.map(item => {
           // 移除一些 md 的标记, 作为简介更加可读
@@ -35,7 +64,6 @@ export default class Articles extends React.Component {
           )
           return {
             ...item,
-            // title: '移除一些 md 的标记, 作为简介更加可读, 移除一些 md 的标记, 作为简介更加可读',
             tags: getTagsFromText(item.tagsText),
             contentWithoutMarkers,
           }
@@ -45,12 +73,31 @@ export default class Articles extends React.Component {
           emptyReason: articles.length === 0 ? '暂无笔记' : null
         })
       })
+      .catch(noop)
       .finally(() => {
-          this.setState({
-            isLoading: false
-          })
+        this.setState({
+          isLoading: false
+        })
       })
   }
+
+  // getHandleClickCardMethod = cardItem => evt => {
+  //   console.log(evt.nativeEvent.currentTarget, evt.currentTarget)
+  //   if (hasClass(evt.currentTarget, 'article-card')) {
+  //     this.props.history.push(`/article?id=${cardItem.articleId}`)
+  //   } else {
+  //     evt.preventDefault()
+  //   }
+  // }
+  //
+  // getHandleClickTagButtonMethod = cardItem => evt => {
+  //   console.log(evt.nativeEvent.currentTarget, evt.currentTarget)
+  //   if (hasClass(evt.currentTarget, 'tag')) {
+  //     this.props.history.push(`/admin`)
+  //   } else {
+  //     evt.preventDefault()
+  //   }
+  // }
 
   renderList = () => {
     const {
@@ -59,8 +106,11 @@ export default class Articles extends React.Component {
       emptyReason,
     } = this.state
     return (
-      <Loading isLoading={isLoading} emptyReason={emptyReason}>
-        <div className={'article-list'}>
+      <Loading
+        isLoading={isLoading}
+        emptyReason={emptyReason}
+      >
+        <div className={'article-list content-pop-in'}>
           {
             this.state.articles.map((item, index) => {
               const theme = palette[index % palette.length]
@@ -80,22 +130,30 @@ export default class Articles extends React.Component {
                     <div className={'tags'}>
                       {
                         item.tags.map((item, index) => (
-                          // <Link
-                          //   to={`/editor?id=${item.articleId}`}
-                          //   key={index}
-                          // >
-                            <Button size={'small'} className={'tag'} key={index}>
+                          <Link
+                            to={`/articles?tag=${item}`}
+                            key={index}
+                          >
+                            <Button
+                              size={'small'}
+                              className={'tag'}
+                              key={index}
+                            >
                               {item}
                             </Button>
-                          // </Link>
+                          </Link>
                         ))
                       }
                     </div>
                     <div className={'counts'}>
-                      <SvgHeart lassName={'liked icon'} fill={fontTheme} />
-                      <span className={'liked count'}>3</span>
-                      <SvgComment lassName={'comment icon'} fill={fontTheme} />
-                      <span className={'comment count'}>7</span>
+                      <SvgThumbUp className={'liked icon'} fill={fontTheme} />
+                      <span className={'liked count'}>
+                        {item.likedCount}
+                      </span>
+                      <SvgComment className={'comment icon'} fill={fontTheme} />
+                      <span className={'comment count'}>
+                        {item.commentCount}
+                      </span>
                     </div>
                   </Card>
                 </Link>
@@ -115,3 +173,7 @@ export default class Articles extends React.Component {
     )
   }
 }
+
+Articles.contextType = MainContext
+
+export default withRouter(Articles)

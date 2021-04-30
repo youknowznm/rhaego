@@ -1,9 +1,9 @@
 import React from 'react'
 import marked from 'marked'
-import hljs from "highlight.js"
+import highlight from 'highlight.js'
 
-export function callIfCallable(fn) {
-  typeof fn === 'function' && fn()
+export function callIfCallable(fn, ...params) {
+  return typeof fn === 'function' && fn(...params)
 }
 
 export function noop() {}
@@ -11,7 +11,7 @@ export function noop() {}
 export function formatToMaterialSpans(string) {
   const separated = string.split(/\s+/).filter(item => item !== '')
   return (
-    <span className={''}>
+    <>
         {separated.map((item, index) => {
           return (
             <span className={'rhaego-single-word'} key={index}>
@@ -19,7 +19,7 @@ export function formatToMaterialSpans(string) {
             </span>
           )
         })}
-    </span>
+    </>
   )
 }
 
@@ -44,7 +44,7 @@ export function getPalette() {
     'brown',
     'grey',
     'bluegrey',
-  ].sort(() => Math.random() - .5);
+  ].sort(() => Math.random() - .5)
 }
 
 export function getFontTheme(theme) {
@@ -57,6 +57,12 @@ export function getFontTheme(theme) {
     'orange',
     'grey',
   ].includes(theme) ? 'dark' : 'light'
+}
+
+export function mockTimeout(func, timeout = 2000) {
+  setTimeout(function() {
+    callIfCallable(func)
+  }, timeout)
 }
 
 // 解析#分隔的标签字符串为标签数组
@@ -72,10 +78,12 @@ marked.setOptions({
   renderer,
   breaks: true,
   highlight: code => {
-    return hljs.highlightAuto(code).value
+    return highlight.highlightAuto(code).value
   }
 })
 
 export const parseMarkdown = raw => marked(raw)
 
 export const RESUME_ID = 'RESUME'
+
+export const LOGIN_STATUS_KEY = 'rhaego-logged-in'

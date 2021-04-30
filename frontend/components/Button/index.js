@@ -6,8 +6,8 @@ import {
   getStyleInt,
   animateToScrollHeight,
   formatToMaterialSpans,
-  formatDate, callIfCallable, isValidString, removeClass, addClass,
-} from '~/utils'
+  formatDate, callIfCallable, isValidString, removeClass, addClass, noop,
+} from '~utils'
 
 
 import style from './button.scss'
@@ -23,6 +23,7 @@ export default class Button extends React.Component {
     size: PropTypes.oneOf(['normal', 'small']),
     link: PropTypes.string,
     linkTarget: PropTypes.string, // 也可以用 oneOf, 这里不更深控制
+    onClick: PropTypes.func,
   }
 
   static defaultProps = {
@@ -34,6 +35,7 @@ export default class Button extends React.Component {
     size: 'normal',
     link: '',
     linkTarget: '_self',
+    onClick: noop,
   }
 
   state = {
@@ -120,6 +122,7 @@ export default class Button extends React.Component {
     // idea: https://stackoverflow.com/questions/30466129/window-open-blocked-by-chrome-with-change-event/35752647
     // 非点击事件`直接目标`的事件, 所触发的 window.open 会被认为是恶意的, 被拦截
     const DOMTag = isAnchor ? 'a' : 'button'
+    // 更健壮地, 在自身事件触发时调用父组件的事件, 这里暂不处理
     return (
       <DOMTag
         className={className}

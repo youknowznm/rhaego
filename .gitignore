@@ -3,7 +3,6 @@
 src/**/*.css
 **/.DS_Store
 .idea
-__old
 /build
 /dist
 
@@ -12,3 +11,4 @@ __old
 /backend/data/*.db
 /backend/files/
 /backend/static/
+/backend/secret.json
