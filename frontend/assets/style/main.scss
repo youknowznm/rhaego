@@ -2,20 +2,17 @@
 
 /*
 z-index 计数
-200 .rhaego-toast
+200 toast
 
-110 .rhaego-modal
+111 110 modal
 
-102 .ripple
-101 .rhaego-header .rhaego-nav
-100 .banner
-99 .rhaego-main-wrap
+101 header
 
-91 .rhaego-card:hover
-90 .rhaego-card
+91 card:hover
+90 card
 
-90 .rhaego-button
-89 .rhaego-button-content
+90 button
+89 button-content
 */
 
 $materialCubicBezier: cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -64,6 +61,7 @@ body {
   font-family: $font-family;
   -webkit-font-smoothing: antialiased;
   background: #fafafa;
+  padding-top: 256px;
   &.full-vh-content {
     .rhaego-header,
     .rhaego-footer, {

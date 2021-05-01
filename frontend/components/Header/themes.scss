@@ -5,33 +5,28 @@ $rhaego-header-yellow: rgb(251, 188, 5);
 $rhaego-header-red: rgb(234, 67, 53);
 $rhaego-header-green: rgb(52, 168, 83);
 
-[data-header-theme=grey] {
-  .nav-bar {}
+[data-header-theme=grey],
+[data-header-theme=grey] .nav-full-width-wrapper {
   background-color: $rhaego-header-grey;
 }
-
-[data-header-theme=silver] {
-  .nav-bar {}
+[data-header-theme=silver],
+[data-header-theme=silver] .nav-full-width-wrapper {
   background-color: $rhaego-header-silver;
 }
-
-[data-header-theme=blue] {
-  .nav-bar {}
+[data-header-theme=blue],
+[data-header-theme=blue] .nav-full-width-wrapper {
   background-color: $rhaego-header-blue;
 }
-
-[data-header-theme=yellow] {
-  .nav-bar {}
+[data-header-theme=yellow],
+[data-header-theme=yellow] .nav-full-width-wrapper {
   background-color: $rhaego-header-yellow;
 }
-
-[data-header-theme=red] {
-  .nav-bar {}
+[data-header-theme=red],
+[data-header-theme=red] .nav-full-width-wrapper {
   background-color: $rhaego-header-red;
 }
-
-[data-header-theme=green] {
-  .nav-bar {}
+[data-header-theme=green],
+[data-header-theme=green] .nav-full-width-wrapper {
   background-color: $rhaego-header-green;
 }
 

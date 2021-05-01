@@ -240,13 +240,21 @@ class RhaegoHeader extends React.Component {
       height: this.state.bannerHeight
     }
     const themeColorName = COLORS[activeNavIndex % COLORS.length]
+    const className = c(
+      'rhaego-header',
+      bannerTitleHidden && 'banner-title-hidden',
+      this.props.className,
+    )
     return (
-      <header className={'rhaego-header'} data-header-theme={themeColorName}>
-        <div className={'header-content rhaego-responsive'}>
+      <header
+        className={className}
+        data-header-theme={themeColorName}
+      >
+        <div className={'nav-full-width-wrapper'}>
           {/* nav-bar 也设置背景色, 以遮挡快速滚动时的 banner */}
-          <nav className={'nav-bar'} data-header-theme={themeColorName}>
+          <nav className={'nav-bar rhaego-responsive'}>
             <span
-              className={c('page-title', !bannerTitleHidden && 'transparent')}
+              className={'page-title'}
               title={bannerTitle}
             >
               {formatToMaterialSpans(bannerTitle)}
@@ -267,9 +275,11 @@ class RhaegoHeader extends React.Component {
               <li className="nav-border" key={-1} style={navBorderStyle} ref={this.setNavBorderRef} />
             </ul>
           </nav>
-          <div className={c('banner')} style={bannerStyle}>
+        </div>
+        <div className={'header-full-width-wrapper'}>
+          <div className={'banner rhaego-responsive'} style={bannerStyle}>
             <h1
-              className={c('page-title', bannerTitleHidden && 'transparent')}
+              className={'page-title'}
               title={bannerTitle}
             >
               {formatToMaterialSpans(bannerTitle)}

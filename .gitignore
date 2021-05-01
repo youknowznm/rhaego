@@ -1,13 +1,8 @@
 /node_modules/
 .DS_Store
-src/**/*.css
 **/.DS_Store
 .idea
-/build
-/dist
-
-/frontend/_modules
-
+/backend/data/github-repos.json
 /backend/data/*.db
 /backend/files/
 /backend/static/

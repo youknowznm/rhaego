@@ -5,7 +5,7 @@ import {
   Switch,
   withRouter,
   useLocation,
-  Route,
+  Route, Redirect,
 } from "react-router-dom"
 import {
   MainContext,
@@ -46,6 +46,9 @@ export default function Routes() {
         <Header/>
         <Container>
           <Switch>
+            <Route exact path="/">
+              <Redirect to="/articles" />
+            </Route>
             <Route exact path="/articles">
               <Articles />
             </Route>
