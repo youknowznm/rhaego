@@ -171,6 +171,7 @@ class Editor extends React.Component {
         postForm(api.UPLOAD_FILE, formData)
           .then(res => {
             const text = `\n\n![](/files/${res.fileName})\n\n`
+            // 神奇, 本轮循环粘贴不出来
             setTimeout(() => {
               document.execCommand('insertText', false, text)
             })

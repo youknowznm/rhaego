@@ -65,6 +65,7 @@ body {
   background: #fafafa;
   padding-top: 256px;
   &.full-vh-content {
+    padding-top: 0;
     .rhaego-header,
     .rhaego-footer, {
       display: none;

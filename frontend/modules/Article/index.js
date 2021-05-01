@@ -10,7 +10,7 @@ import {
   parseMarkdown,
   debounce,
   getSearchParams, isValidString, omit, getTagsFromText, getStyle,
-  Link, withRouter, post, RESUME_ID, getNodeOffsetTopToPage, addClass, hasClass
+  Link, withRouter, post, RESUME_ID, getNodeOffsetTopToPage, addClass, hasClass, mockTimeout
 } from "~utils"
 import TextField from "~/components/TextField"
 import Button from "~/components/Button"
@@ -87,7 +87,6 @@ class Article extends React.Component {
           title: res.article.title,
           dateString: res.article.dateString,
           tags: getTagsFromText(res.article.tagsText),
-          isLoading: false,
         })
 
         // 设置文章标题为 header banner 标题
@@ -97,10 +96,12 @@ class Article extends React.Component {
         } else {
           this.context.setDocTitle('关于我')
         }
-        this.setCatalog()
-        this.repositionSideNav()
+        setTimeout(() => {
+          this.setCatalog()
+        })
       })
-      .catch(err => {
+      .catch(noop)
+      .finally(() => {
         this.setState({
           isLoading: false,
         })
@@ -145,6 +146,7 @@ class Article extends React.Component {
     this.setState({
       headers
     })
+    this.repositionSideNav()
   }
 
   // 调整导航的 top
@@ -220,7 +222,8 @@ class Article extends React.Component {
   componentWillUnmount() {
     this.context.setBannerTitle('')
     this.context.setDocTitle('')
-    window.removeEventListener('scroll resize', this.repositionSideNav)
+    window.removeEventListener('scroll', this.repositionSideNav)
+    window.removeEventListener('resize', this.repositionSideNav)
   }
 
   renderArticleTop = () => {
