@@ -1,5 +1,16 @@
 import React from 'react'
-import {getStorage, Link, LOGIN_STATUS_KEY, noop, post, RESUME_ID, setStorage, withRouter} from '~utils'
+import {
+  getStorage,
+  get,
+  Link,
+  LOGIN_STATUS_KEY,
+  noop,
+  post,
+  RESUME_ID,
+  setStorage,
+  withRouter,
+  formatDateToPast
+} from '~utils'
 import TextField from "~/components/TextField"
 import Button from "~/components/Button"
 import {
@@ -19,11 +30,31 @@ class Admin extends React.Component {
     password: '',
     isLoading: false,
     hasValidated: false,
+    visitors: []
   }
 
   componentDidMount() {
+    this.tryGetVisitors()
   }
-  
+
+  tryGetVisitors = () => {
+    if (getStorage(LOGIN_STATUS_KEY) === true) {
+      get(api.GET_VISITORS)
+        .then((res) => {
+          this.setState({
+            isLoading: true,
+            visitors: res.visitors
+          })
+        })
+        .catch(noop)
+        .finally(() => {
+          this.setState({
+            isLoading: false,
+          })
+        })
+      }
+  }
+
   onClickLogin = () => {
     this.setState({
       hasValidated: true,
@@ -33,6 +64,7 @@ class Admin extends React.Component {
       .then(() => {
         setStorage(LOGIN_STATUS_KEY, true)
         this.context.markLogin()
+        this.tryGetVisitors()
       })
       .catch(noop)
       .finally(() => {
@@ -71,6 +103,9 @@ class Admin extends React.Component {
   }
 
   renderLogin = () => {
+    if (this.context.hasLoggedIn) {
+      return null
+    }
     return (
       <div className={'login-area'}>
         <div className={'title'}>
@@ -118,6 +153,9 @@ class Admin extends React.Component {
   }
 
   renderAdmin = () => {
+    if (!this.context.hasLoggedIn) {
+      return null
+    }
     return (
       <div className={'admin-area'}>
         <div className={'title'}>
@@ -149,15 +187,53 @@ class Admin extends React.Component {
     )
   }
 
+  renderVisitors = () => {
+    if (!this.context.hasLoggedIn) {
+      return null
+    }
+    return (
+      <table className={'visitor-list'}>
+        <tr>
+          <th>IP</th>
+          <th>每日有效请求次数</th>
+          <th>上次访问</th>
+          <th>禁用</th>
+          <th>访问次数</th>
+        </tr>
+        {
+          this.state.visitors.map(item => (
+            <tr>
+              <td>
+                {item.clientIp}
+              </td>
+              <td>
+                {item.dailyAttempts}
+              </td>
+              <td>
+                {formatDateToPast(item.lastVisited)}
+              </td>
+              <td>
+                {item.restricted === true ? '是' : '否'}
+              </td>
+              <td>
+                {item.visitCount}
+              </td>
+            </tr>
+          ))
+        }
+      </table>
+    )
+  }
+
   componentWillUnmount() {
   }
 
   render() {
     return (
       <div className={'rhaego-admin content-pop-in'}>
-        {
-          this.context.hasLoggedIn ? this.renderAdmin() : this.renderLogin()
-        }
+        {this.renderAdmin()}
+        {this.renderLogin()}
+        {this.renderVisitors()}
       </div>
     )
   }

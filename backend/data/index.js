@@ -13,14 +13,11 @@ class RhaegoDb {
       filename: path.resolve(__dirname, './articles.db'),
       autoload: true,
     })
-    this.commentDb = new Datastore({
-      filename: path.resolve(__dirname, './comments.db'),
-      autoload: true,
-    })
     this.clientDb = new Datastore({
       filename: path.resolve(__dirname, './clients.db'),
       autoload: true,
     })
+    this.resetAllClientDailyAttempts()
     this.REPO_DATA_EXPIRE_TIME = 10 * 60 * 1000
     this.reposJsonPath = path.resolve(__dirname, './github-repos.json')
     this.initGithubReposJson()
@@ -36,7 +33,7 @@ class RhaegoDb {
       }))
     }
   }
-  
+
   // 获取 github 仓库信息, 从库中或 github api
   getGithubRepos = () => new Promise((resolve, reject) => {
     const now = new Date().valueOf()
@@ -193,13 +190,20 @@ class RhaegoDb {
         reject(err)
       })
   })
+  // 所有访客
+  getVisitors = () => new Promise((resolve, reject) => {
+    this.clientDb.find({}, (err, allClients)=>{
+      err && reject(err)
+      resolve(allClients)
+    })
+  })
   // 所有访客的访问次数和
   getVisitCount = () => new Promise((resolve, reject) => {
     this.clientDb.find({}, (err, allClients)=>{
       err && reject(err)
       resolve(
         allClients.reduce((prev, curr) => {
-          return (prev.visitCount || 0) + (curr.visitCount || 0)
+          return prev + curr.visitCount
         }, 0)
       )
     })
@@ -235,17 +239,34 @@ class RhaegoDb {
         reject(err)
       })
   })
-  // 重置所有访客的每日尝试次数
-  resetAllClientDailyAttempts = () => new Promise((resolve, reject) => {
-    // this.clientDb.update({}, (err, allClients)=>{
-    //   err && reject(err)
-    //   resolve(
-    //     allClients.reduce((prev, curr) => {
-    //       return (prev.visitCount || 0) + (curr.visitCount || 0)
-    //     }, 0)
-    //   )
-    // })
-  })
+  // 十分钟检查一次, 到第二天就重置所有访客的每日尝试次数
+  resetAllClientDailyAttempts = () => {
+    let prevDay = new Date().getDay()
+    setInterval(() => {
+      let nowDay = new Date().getDay()
+      if (nowDay !== prevDay) {
+        // 一天过去了
+        this.clientDb.update(
+          {},
+          {
+            $set: {
+              dailyAttempts: DEFAULT_DAILY_ATTEMPTS
+            }
+          },
+          {
+            returnUpdatedDocs: true,
+            multi: true,
+          },
+          (err, numAffected, docs) => {
+            err && console.log(err)
+            console.log(docs)
+            // resolve(docs)
+          }
+        )
+      }
+      prevDay = nowDay
+    }, 10 * 60 * 1000)
+  }
 
   // ===== 赞 =====
 

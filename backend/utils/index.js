@@ -30,7 +30,7 @@ const isAdmin = (ctx) => {
   return users.some(item => item.username === username)
 }
 
-const DEFAULT_DAILY_ATTEMPTS = 5
+const DEFAULT_DAILY_ATTEMPTS = 20
 const RESUME_ID = 'RESUME'
 
 const validateParams = (params, validators) => {

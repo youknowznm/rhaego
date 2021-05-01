@@ -81,24 +81,6 @@ class Articles extends React.Component {
       })
   }
 
-  // getHandleClickCardMethod = cardItem => evt => {
-  //   console.log(evt.nativeEvent.currentTarget, evt.currentTarget)
-  //   if (hasClass(evt.currentTarget, 'article-card')) {
-  //     this.props.history.push(`/article?id=${cardItem.articleId}`)
-  //   } else {
-  //     evt.preventDefault()
-  //   }
-  // }
-  //
-  // getHandleClickTagButtonMethod = cardItem => evt => {
-  //   console.log(evt.nativeEvent.currentTarget, evt.currentTarget)
-  //   if (hasClass(evt.currentTarget, 'tag')) {
-  //     this.props.history.push(`/admin`)
-  //   } else {
-  //     evt.preventDefault()
-  //   }
-  // }
-
   renderList = () => {
     const {
       palette,

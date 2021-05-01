@@ -282,4 +282,13 @@ router
     ctx.body = {}
   })
 
+  // 获取所有访客
+
+  .get(api.GET_VISITORS, async function(ctx) {
+    const visitors = await db.getVisitors()
+    ctx.body = {
+      visitors
+    }
+  })
+
 module.exports = router.routes()

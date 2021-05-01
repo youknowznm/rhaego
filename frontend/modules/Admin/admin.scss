@@ -5,6 +5,7 @@
   position: relative;
   padding: 24px;
   width: 100%;
+  text-align: center;
   .login-area,
   .admin-area {
     position: relative;
@@ -36,6 +37,30 @@
     .cancel {
       width: 100%;
       margin-bottom: 12px;
+    }
+  }
+  .visitor-list {
+    display: inline-block;
+    margin: 24px 0;
+    border-spacing: 0;
+    border-collapse: collapse;
+    //margin: 12px 0;
+    text-align: left;
+    font-size: 14px;
+    th {
+      font-weight: 500;
+    }
+    td,
+    th {
+      padding: 6px 13px;
+      border: 1px solid #dfe2e5;
+    }
+    tr {
+      background-color: #fff;
+      border-top: 1px solid #c6cbd1;
+    }
+    tr:nth-child(2n) {
+      background-color: #f6f8fa;
     }
   }
 }

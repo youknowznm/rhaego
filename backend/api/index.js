@@ -29,7 +29,9 @@ module.exports = {
 
   // 访问次数
   VISIT_COUNT: `${API_CONTEXT}/visitCount`,
+  // 所有访客
+  GET_VISITORS: `${API_CONTEXT}/visitors`,
 
-  // github 仓库
+  // github 仓库列表
   GET_GITHUB_REPOS: `https://api.github.com/users/${githubUser}/repos?visibility=public`,
 }

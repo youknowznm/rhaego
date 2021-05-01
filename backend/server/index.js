@@ -38,7 +38,7 @@ app.use(async (ctx, next) => {
   await next()
 })
 
-// 统计访问次数, 间隔 30s 以上即视为新访问
+// 统计访问次数, 间隔 20s 以上即视为新访问
 app.use(async (ctx, next) => {
   const clientIp = ctx.request.ip
   const clientDoc = await db.getClient(clientIp)
@@ -54,7 +54,7 @@ app.use(async (ctx, next) => {
       .then(doc => {
         console.log(`新访客 ${clientIp}`)
       })
-  } else if ((now - clientDoc.lastVisited) > 30 * 1000) {
+  } else if ((now - clientDoc.lastVisited) > 20 * 1000) {
     db.saveClient({
       clientIp,
       visitCount: clientDoc.visitCount + 1,
@@ -74,6 +74,7 @@ app.use(async function isAdminMiddleWare(ctx, next) {
     api.DELETE_ARTICLE,
     api.DELETE_COMMENT,
     api.UPLOAD_FILE,
+    api.GET_VISITORS,
   ]
   if (targetRoutes.includes(ctx.url) && !isAdmin(ctx)) {
     ctx.throw(401, '请以管理员身份登录')
@@ -94,7 +95,7 @@ app.use(async function visitorAttemptControlMiddleWare(ctx, next) {
     const client = await db.getClient(ctx.request.ip)
     console.log('剩余请求数', client.dailyAttempts)
     // db.setClientDailyAttempt(ctx.request.ip, 'reset')
-    if (client.dailyAttempts === 0) {
+    if (client.dailyAttempts <= 0) {
       ctx.throw(403, '今日操作次数已达上限')
     } else {
       await next()
@@ -120,3 +121,4 @@ app.use(async (ctx,next) => {
 })
 
 app.listen(4000)
+console.log('rhaego 服务运行在 4000 端口')
