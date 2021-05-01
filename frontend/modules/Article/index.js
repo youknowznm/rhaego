@@ -10,7 +10,7 @@ import {
   parseMarkdown,
   debounce,
   getSearchParams, isValidString, omit, getTagsFromText, getStyle,
-  Link, withRouter, post, RESUME_ID, getNodeOffsetTopToPage
+  Link, withRouter, post, RESUME_ID, getNodeOffsetTopToPage, addClass, hasClass
 } from "~utils"
 import TextField from "~/components/TextField"
 import Button from "~/components/Button"
@@ -51,7 +51,8 @@ class Article extends React.Component {
 
   componentDidMount() {
     this.getArticle()
-    window.addEventListener('scroll', this.scrollListener)
+    window.addEventListener('scroll', this.repositionSideNav)
+    window.addEventListener('resize', this.repositionSideNav)
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -96,11 +97,8 @@ class Article extends React.Component {
         } else {
           this.context.setDocTitle('关于我')
         }
-
-        // 副作用更新了 DOM, 所以下次循环处理
-        setTimeout(() => {
-          this.setCatalog()
-        })
+        this.setCatalog()
+        this.repositionSideNav()
       })
       .catch(err => {
         this.setState({
@@ -108,6 +106,8 @@ class Article extends React.Component {
         })
       })
   }
+
+  HEADER_BANNER_HEIGHT = 192
 
   setCatalog = () => {
     // 用 qs 因为 marked() 替换了 ref 获取到的 DOM 节点
@@ -149,33 +149,41 @@ class Article extends React.Component {
 
   // 调整导航的 top
   // (请原谅这里的 magic numbers, 见注释)
-  scrollListener = debounce(() => {
+  repositionSideNav = () => {
     const {scrollTop} = document.documentElement
     const doc = this.compRef.querySelector('.article-content')
     const nav = this.compRef.querySelector('.article-sidebar')
-    if (!nav) {
-      return
-    }
     const navHeight = getStyleInt(nav, 'height')
     const docHeight = doc.clientHeight
-    let top
+    const {
+      left,
+      width,
+    } = doc.getBoundingClientRect()
+    const navLeft = left + width + 24
+    let navTop
     // 调整 top:
     if (scrollTop > docHeight - navHeight) {
       // 滚动高度 大于 (文档高度 - 导航高度),
-      // 说明已经滚过了笔记结尾,
-      // 固定导航 top 为 (文档高度 - 导航高度 - 内边距)
-      top = docHeight - navHeight - 24
+      // 说明已经滚过了笔记结尾, 隐藏掉
+      nav.style.left = `${navLeft}px`
+      nav.style.visibility = 'hidden'
     } else {
-      top = scrollTop > this.HEADER_BANNER_HEIGHT
+      navTop = scrollTop > this.HEADER_BANNER_HEIGHT
         // 如果滚动高度大于 header banner 高度, 则根据前者, 动态计算
-        ? (scrollTop - this.HEADER_BANNER_HEIGHT + 24)
+        ? (64 + 24)
         // 否则固定为 内边距
-        : 24
+        : (this.HEADER_BANNER_HEIGHT + 64 + 24 - scrollTop)
+      nav.style.left = `${navLeft}px`
+      nav.style.top = `${navTop}px`
+      nav.style.visibility = 'visible'
     }
-    nav.style.top = `${top}px`
-  }, 50)
-
-  HEADER_BANNER_HEIGHT = 192
+    // 窄视口下有个莫名其妙的闪烁问题, 换个方式弥补吧
+    if (!hasClass(nav, 'init')) {
+      setTimeout(() => {
+        addClass(nav, 'init')
+      }, 500)
+    }
+  }
 
   getScrollToHeaderFunc = catalogItem => evt => {
     if (this.state.isScrollIng) {
@@ -212,7 +220,7 @@ class Article extends React.Component {
   componentWillUnmount() {
     this.context.setBannerTitle('')
     this.context.setDocTitle('')
-    window.removeEventListener('scroll', this.scrollListener)
+    window.removeEventListener('scroll resize', this.repositionSideNav)
   }
 
   renderArticleTop = () => {

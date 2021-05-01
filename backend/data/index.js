@@ -41,7 +41,10 @@ class RhaegoDb {
   getGithubRepos = () => new Promise((resolve, reject) => {
     const now = new Date().valueOf()
     const localData = JSON.parse(fs.readFileSync(this.reposJsonPath, 'utf8'))
-    if (now - localData.updated >= this.REPO_DATA_EXPIRE_TIME) {
+    if (
+      localData.repos === null
+      || now - localData.updated >= this.REPO_DATA_EXPIRE_TIME
+    ) {
       // 未初始化或已过期, 请求
       request(
         {

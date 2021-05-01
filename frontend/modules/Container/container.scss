@@ -5,7 +5,8 @@
   height: 100%;
   // 最小高度为 视口height - footer height - footer marginTop
   min-height: calc(100vh - 216px - 160px);
-  z-index: 100;
+  z-index: 99;
+  overflow: hidden;
 }
 
 
