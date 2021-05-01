@@ -87,3 +87,18 @@ export const parseMarkdown = raw => marked(raw)
 export const RESUME_ID = 'RESUME'
 
 export const LOGIN_STATUS_KEY = 'rhaego-logged-in'
+
+// 12345 => 12,345
+export const addCommaToInt = string => {
+  string = '' + string
+  let result = ''
+  let counter = 0
+  for (let i = string.length - 1; i >= 0; i--) {
+    counter++
+    result = string.charAt(i) + result
+    if (!(counter % 3) && i !== 0) {
+      result = `,${result}`
+    }
+  }
+  return result
+}

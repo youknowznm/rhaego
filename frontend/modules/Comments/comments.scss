@@ -6,7 +6,8 @@
   margin-right: 240px;
   .comment {
     position: relative;
-    width: 700px;
+    width: 100%;
+    max-width: 700px;
     box-sizing: border-box;
     margin-bottom: 24px;
     &.editor {
@@ -25,18 +26,25 @@
         color: $font-secondary;
         margin-bottom: 12px;
       }
-      .comment-author {
-        margin-right: 12px;
+      .author-wrap {
+        position: relative;
+        display: inline-block;
+        width: 49%;
       }
-      .comment-email {
-        //margin-right: 12px;
+      .email-wrap {
+        position: relative;
+        display: inline-block;
+        margin-left: 2%;
+        width: 49%;
       }
+      .comment-author,
+      .comment-email,
       .comment-content {
-        //margin-right: 12px;
+          display: block;
       }
       .submit {
         margin: 12px 0 6px;
-        width: 496px;
+        width: 100%;
       }
     }
     // 参考 youtube 的评论样式
@@ -72,7 +80,7 @@
   }
   .comments-loader {
     position: relative;
-    width: 700px;
+    width: 100%;
     height: 120px;
   }
 }

@@ -7,12 +7,11 @@ import {
   SvgStar,
 } from "~/assets/svg"
 import {Link, ajax, get, getPalette, getFontTheme, getTagsFromText, noop} from "~utils"
-
 import Button from "~/components/Button"
 import api from "~api"
-
 import style from './repos.scss'
 import {MainContext} from "~/modules/Context";
+
 class Repos extends React.Component {
 
   state = {

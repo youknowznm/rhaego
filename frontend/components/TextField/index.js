@@ -10,7 +10,6 @@ import {
   formatDate,
   noop, isValidString,
 } from '~utils'
-
 import style from './text-field.scss'
 
 export default class TextField extends React.Component {

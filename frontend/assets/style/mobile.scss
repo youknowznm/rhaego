@@ -1,0 +1,89 @@
+body.device-mobile {
+  @media (max-width: 600px) {
+    .rhaego-card {
+      width: 100%;
+    }
+  }
+  @media (max-width: 750px) {
+    .rhaego-header {
+      .nav-bar {
+        .page-title {
+          display: none;
+        }
+      }
+    }
+    .rhaego-card {
+      padding: 12px;
+      .counts {
+        left: 12px;
+        bottom: 12px;
+      }
+      .tags {
+        right: 12px;
+        bottom: 12px;
+      }
+    }
+    .rhaego-article {
+      padding: 0 12px;
+      .article-top {
+        height: auto;
+        .actions {
+          height: auto;
+        }
+        .date {
+          right: 0;
+          left: auto;
+          transform: translateX(0) translateY(-48px);
+        }
+        .tags {
+          position: relative;
+          display: block;
+          float: right;
+          transform: none;
+          top: 0;
+          left: 0;
+        }
+        &:after {
+          content: "不显示哦, 哇哈哈哈哈";
+          display: block;
+          height: 0;
+          clear: both;
+          visibility: hidden;
+        }
+      }
+      .article-content {
+        margin-right: 0;
+      }
+      .article-sidebar {
+        display: none;
+      }
+    }
+    .rhaego-article-comment {
+      padding: 0 12px;
+      margin-right: 0;
+      .editor {
+        padding: 12px;
+      }
+      .delete {
+        display: none;
+      }
+    }
+    .rhaego-admin {
+      padding: 12px;
+      .admin-area,
+      .login-area {
+        margin: 12px 0;
+        padding: 12px;
+      }
+    }
+    .rhaego-footer {
+      .info {
+        height: 72px;
+        line-height: 72px;
+      }
+      .center {
+        display: none !important;
+      }
+    }
+  }
+}

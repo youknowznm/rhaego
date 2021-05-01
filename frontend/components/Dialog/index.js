@@ -13,7 +13,6 @@ import {
   getScrollBarWidth,
   hasClass, addClass, removeClass,
 } from '~utils'
-
 import style from './dialog.scss'
 import * as ReactDOM from "react-dom"
 

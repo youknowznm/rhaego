@@ -8,8 +8,6 @@ import {
   formatToMaterialSpans,
   formatDate, callIfCallable, isValidString, removeClass, addClass, noop,
 } from '~utils'
-
-
 import style from './button.scss'
 
 export default class Button extends React.Component {

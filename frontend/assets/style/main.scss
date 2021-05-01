@@ -1,4 +1,5 @@
 @import './reset';
+@import './mobile';
 
 /*
 z-index 计数
@@ -60,6 +61,7 @@ $rhaego-markdown-quote: #757575;
 body {
   position: relative;
   height: 100%;
+  //min-width: 320px;
   font-family: $font-family;
   -webkit-font-smoothing: antialiased;
   background: #fafafa;
@@ -81,7 +83,6 @@ body {
 
 .rhaego-responsive {
   width: 100%;
-  min-width: 900px;
   margin-left: auto;
   margin-right: auto;
   @media (min-width: 1200px) {
@@ -143,4 +144,10 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.page-not-found {
+  font-size: 14px;
+  color: $font-secondary;
+  @include top-left-center;
 }

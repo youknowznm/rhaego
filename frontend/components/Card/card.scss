@@ -15,6 +15,7 @@ $card-padding: 18px;
   padding: $card-padding;
   transition: all .6s $materialCubicBezier;
   box-shadow: $paper-elevation-none;
+  user-select: none;
   &:hover {
     z-index: 91;
     box-shadow: $paper-elevation-high;

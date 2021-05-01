@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import c from 'classnames'
-
 import {callIfCallable, noop} from '~utils'
 
 import style from './toast.scss'

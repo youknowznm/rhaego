@@ -12,7 +12,6 @@ import {
   callIfCallable,
   hasClass,
 } from '~utils'
-
 import style from './card.scss'
 
 export default class Card extends React.Component {

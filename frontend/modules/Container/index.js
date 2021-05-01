@@ -1,7 +1,7 @@
 import React from 'react'
 import c from 'classnames'
-
 import style from './container.scss'
+
 export default class Container extends React.Component {
   render() {
     return (

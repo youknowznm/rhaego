@@ -16,9 +16,9 @@ import {SvgComment, SvgThumbUp} from "~/assets/svg"
 import Loading from "~/components/Loading"
 import PropTypes from "prop-types"
 import {toast} from "~/components/Toast"
-
 import style from './comments.scss'
 import {MainContext} from "~/modules/Context";
+
 class Comments extends React.Component {
 
   static propTypes = {
@@ -121,34 +121,38 @@ class Comments extends React.Component {
         <p className={'title'}>
           欢迎留下您的评论.
         </p>
-        <TextField
-          className={'comment-author'}
-          label={'称呼'}
-          value={this.state.commentAuthor}
-          onChange={this.getSetStateMethod('commentAuthor')}
-          width={240}
-          maxLength={16}
-          validatorRegExp={/^\d{2,16}$/}
-          hint={'2~16 字符的称呼'}
-          hasValidated={this.state.hasValidated}
-        />
-        <TextField
-          className={'comment-email'}
-          label={'邮箱'}
-          value={this.state.commentEmail}
-          onChange={this.getSetStateMethod('commentEmail')}
-          width={240}
-          maxLength={30}
-          validatorRegExp={/^\w+@\w+\.\w+$/}
-          hint={'常见的邮箱格式'}
-          hasValidated={this.state.hasValidated}
-        />
+        <div className={'author-wrap'}>
+          <TextField
+            className={'comment-author'}
+            label={'称呼'}
+            value={this.state.commentAuthor}
+            onChange={this.getSetStateMethod('commentAuthor')}
+            width={'100%'}
+            maxLength={16}
+            validatorRegExp={/^\d{2,16}$/}
+            hint={'2~16 字符的称呼'}
+            hasValidated={this.state.hasValidated}
+          />
+        </div>
+        <div className={'email-wrap'}>
+          <TextField
+            className={'comment-email'}
+            label={'邮箱'}
+            value={this.state.commentEmail}
+            onChange={this.getSetStateMethod('commentEmail')}
+            width={'100%'}
+            maxLength={30}
+            validatorRegExp={/^\w+@\w+\.\w+$/}
+            hint={'常见的邮箱格式'}
+            hasValidated={this.state.hasValidated}
+          />
+        </div>
         <TextField
           className={'comment-content'}
           label={'内容'}
           value={this.state.commentContent}
           onChange={this.getSetStateMethod('commentContent')}
-          width={492}
+          width={'100%'}
           maxLength={120}
           validatorRegExp={/^.{4,120}$/}
           hint={'2~120 字符的评论'}

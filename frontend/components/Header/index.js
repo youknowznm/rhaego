@@ -8,11 +8,10 @@ import {
   throttle,
   animateToScrollHeight, removeClass, addClass, goToPath, isValidString, callIfCallable
 } from '~utils'
-
 import {withRouter} from 'react-router-dom'
-
 import style from './header.scss'
 import {MainContext} from "~/modules/Context";
+
 class RhaegoHeader extends React.Component {
 
   static propTypes = {

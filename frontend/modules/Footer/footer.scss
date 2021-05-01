@@ -108,14 +108,14 @@
         }
       }
       .left {
-        left: 0;
+        left: 18px;
       }
       .center {
         left: 50%;
         transform: translateX(-50%);
       }
       .right {
-        right: 0;
+        right: 18px;
         .visit-count {
           color: $font-primary;
           font-weight: 500;
@@ -125,39 +125,3 @@
     }
   }
 }
-
-//
-//@media (min-width: 0) {
-//  .rhaego-footer {
-//    .social {
-//      justify-content: center;
-//    }
-//    .about {
-//      justify-content: center !important;
-//      .file-id {
-//        margin-left: 0 !important;
-//      }
-//      .about-author,
-//      .view-source {
-//        display: none !important;
-//      }
-//    }
-//  }
-//}
-//@media (min-width: 700px) {
-//  .rhaego-footer {
-//    .social {
-//      justify-content: flex-end;
-//    }
-//    .about {
-//      justify-content: space-between !important;
-//      .file-id {
-//        margin-left: 24px !important;
-//      }
-//      .about-author,
-//      .view-source {
-//        display: block !important;
-//      }
-//    }
-//  }
-//}

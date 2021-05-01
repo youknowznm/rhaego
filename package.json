@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack serve --config frontend/webpack.config.js",
-    "build": "webpack --config frontend/webpack.config.js",
+    "build": "webpack --config frontend/webpack.config.js --mode=production",
     "server": "nodemon --exec npm run babel-node backend/server",
     "babel-node": "babel-node --presets='@babel/preset-env''"
   },
@@ -49,6 +49,7 @@
     "style-loader": "2.0.0",
     "url-loader": "^4.1.1",
     "webpack": "^5.33.2",
+    "webpack-bundle-analyzer": "^4.4.1",
     "webpack-cli": "^4.6.0",
     "webpack-dev-server": "^3.11.2"
   },

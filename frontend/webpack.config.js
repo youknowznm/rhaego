@@ -1,10 +1,11 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   context: path.resolve(__dirname),
   mode: 'development',
-  entry: './index.js',
+  entry: './main.js',
   output: {
     path: path.resolve(__dirname, '../backend/static'),
     filename: 'main.js',
@@ -69,7 +70,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'index.html'),
       favicon: './assets/images/identicon.png',
-    })
+    }),
+    new BundleAnalyzerPlugin()
   ],
   resolve: {
     extensions: ['.js', '.jsx'],

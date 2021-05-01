@@ -4,8 +4,8 @@ import c from 'classnames'
 import {
   isValidString,
 } from '~utils'
-
 import style from './loading.scss'
+
 export default class Loading extends React.Component {
 
   static propTypes = {

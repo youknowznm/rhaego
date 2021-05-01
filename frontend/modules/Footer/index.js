@@ -2,10 +2,10 @@ import React from 'react'
 import c from 'classnames'
 import {SvgHeart} from '~/assets/svg'
 import siteData from '~config'
-import {get, getTagsFromText, noop} from "~utils"
+import {addCommaToInt, get, getTagsFromText, noop} from "~utils"
 import api from "~api"
-
 import style from './footer.scss'
+
 export default class Footer extends React.Component {
 
   state = {
@@ -77,7 +77,9 @@ export default class Footer extends React.Component {
             </p>
             <p className={'right'}>
               <span>访问次数: </span>
-              <span className={'visit-count'}>{this.state.visitCount}</span>
+              <span className={'visit-count'}>
+                {addCommaToInt(this.state.visitCount)}
+              </span>
             </p>
           </div>
         </div>
