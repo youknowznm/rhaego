@@ -158,7 +158,7 @@ class Admin extends React.Component {
     return (
       <div className={'admin-area'}>
         <div className={'title'}>
-          <p>已经以管理员身份登录.</p>
+          <p>已经以管理员身份登录</p>
         </div>
         <Button
           className={'new-article'}

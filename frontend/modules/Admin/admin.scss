@@ -46,7 +46,10 @@
     border-spacing: 0;
     border-collapse: collapse;
     text-align: left;
-    font-size: 14px;
+    font-size: 12px;
+    * {
+      white-space: nowrap;
+    }
     th {
       font-weight: 500;
     }
