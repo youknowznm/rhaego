@@ -14,6 +14,11 @@ if [ ! -f "backend/secret.json" ]; then
   cp -r backend/secret.json.example backend/secret.json
 fi
 
+printf "\n-------- 检查文件服务目录 --------\n"
+if [ ! -d "backend/files" ]; then
+  mkdir "backend/files"
+fi
+
 printf "\n-------- 重启服务 --------\n"
 pm2 stop backend/server
 pm2 start backend/server

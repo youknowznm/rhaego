@@ -203,18 +203,18 @@ class Admin extends React.Component {
           this.state.visitors.map(item => (
             <tr key={item._id}>
               <td>
-                {item.clientIp}
+                {item.clientIp.replace(/::ffff:/, '')}
               </td>
-              <td>
+              <td align={'right'}>
                 {item.dailyAttempts}
               </td>
               <td>
                 {formatDateToPast(item.lastVisited)}
               </td>
-              <td>
+              <td align={'center'}>
                 {item.restricted === true ? '是' : '否'}
               </td>
-              <td>
+              <td align={'right'}>
                 {addCommaToInt(item.visitCount)}
               </td>
             </tr>

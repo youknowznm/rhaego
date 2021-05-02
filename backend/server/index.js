@@ -9,9 +9,6 @@ const serve = require('koa-static')
 const db = require('../data')
 const {secretKey} = require('../secret.json')
 const {
-  isValidString,
-  generateId,
-  getExt,
   isAdmin,
   DEFAULT_DAILY_ATTEMPTS,
 } = require('../utils')
@@ -33,11 +30,19 @@ app.use(logger())
 app.use(conditional())
 app.use(etag())
 
-
 // 请求体
 app.use(koaBody({
   multipart: true
 }))
+
+// 全局错误抛出
+app.use(async function(ctx, next) {
+  try {
+    await next()
+  } catch (err) {
+    ctx.throw(err.status || 500, '服务器错误')
+  }
+})
 
 // 统计访问次数, 间隔 10s 以上即视为新访问
 app.use(async (ctx, next) => {
@@ -50,7 +55,7 @@ app.use(async (ctx, next) => {
       dailyAttempts: DEFAULT_DAILY_ATTEMPTS,
       restricted: false,
       lastVisited: new Date().valueOf(),
-      visitCount: 0
+      visitCount: 1
     })
       .then(doc => {
         console.log(`新访客 ${clientIp}`)
@@ -122,4 +127,5 @@ app.use(async (ctx,next) => {
 })
 
 app.listen(4000)
-console.log('rhaego 服务运行在 4000 端口')
+
+console.log('\n-------- rhaego on 4000. --------\n')

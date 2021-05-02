@@ -18,7 +18,7 @@ class RhaegoDb {
       autoload: true,
     })
     this.resetAllClientDailyAttempts()
-    this.REPO_DATA_EXPIRE_TIME = 10 * 60 * 1000
+    this.REPO_DATA_EXPIRE_TIME = 60 * 60 * 1000
     this.reposJsonPath = path.resolve(__dirname, './github-repos.json')
     this.initGithubReposJson()
   }
