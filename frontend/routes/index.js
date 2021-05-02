@@ -1,25 +1,24 @@
 import React, {useEffect, useContext} from "react"
-import c from 'classnames'
 import {
   BrowserRouter,
   Switch,
-  withRouter,
   useLocation,
   Route, Redirect,
 } from "react-router-dom"
+import loadable from '@loadable/component'
 import {
   MainContext,
   MainProvider,
-  MainConsumer,
 } from "~/modules/Context"
-import Container from "~/modules/Container"
-import Header, {links} from "~/modules/Header"
-import Footer from "~/modules/Footer"
-import Editor from "~/modules/Editor"
-import Articles from "~/modules/Articles"
-import Article from "~/modules/Article"
-import Repos from "~/modules/Repos"
-import Admin from "~/modules/Admin"
+import {links} from "~/modules/Header"
+const Container = loadable(() => import("~/modules/Container"))
+const Header = loadable(() => import("~/modules/Header"))
+const Footer = loadable(() => import("~/modules/Footer"))
+const Editor = loadable(() => import("~/modules/Editor"))
+const Articles = loadable(() => import("~/modules/Articles"))
+const Article = loadable(() => import("~/modules/Article"))
+const Repos = loadable(() => import("~/modules/Repos"))
+const Admin = loadable(() => import("~/modules/Admin"))
 
 const ScrollToTop = () => {
   const {

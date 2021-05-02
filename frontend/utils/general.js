@@ -72,7 +72,8 @@ export function getTagsFromText(tagsText) {
 }
 
 class MarkdownParser {
-  constructor(props) {
+
+  constructor() {
     this.marked = marked
     const renderer = new marked.Renderer({
       link: (href, title, text) => {
@@ -91,7 +92,9 @@ class MarkdownParser {
       }
     })
   }
+
   parse = rawMarkdown => this.marked(rawMarkdown)
+
 }
 
 export const markdownParser = new MarkdownParser()
