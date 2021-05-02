@@ -16,7 +16,7 @@ fi
 
 printf "\n-------- 检查简历 markdown --------\n"
 if [ ! -f "backend/data/resume.md" ]; then
-  cp -r backend/resume.md.example backend/resume.md
+  cp -r backend/data/resume.md.example backend/data/resume.md
 fi
 
 printf "\n-------- 检查文件服务目录 --------\n"
