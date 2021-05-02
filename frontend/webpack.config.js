@@ -31,7 +31,6 @@ module.exports = (env, argv) => {
   const babelConfig = {
     presets: [
       ['@babel/env', {
-        loose: true,
         modules: false,
         targets: '> 1%, last 2 versions',
         corejs: 3,
