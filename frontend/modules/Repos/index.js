@@ -72,41 +72,44 @@ class Repos extends React.Component {
                 homepage,
               } = item
               return (
-                <Card
-                  className={'repo-card'}
+                <a
+                  href={html_url}
+                  target={'_blank'}
                   key={index}
-                  theme={theme}
-                  fontTheme={fontTheme}
-                  title={name}
-                  content={description}
-                  link={html_url}
-                  linkTarget={'_blank'}
                 >
-                  <div className={'tags'}>
-                    {
-                      item.homepage && (
-                        <Button
-                          size={'small'}
-                          className={'tag'}
-                          link={homepage}
-                          linkTarget={'_blank'}
-                        >
-                          演示
-                        </Button>
-                      )
-                    }
-                  </div>
-                  <div className={'counts'}>
-                    <SvgStar className={'starred icon'} fill={fontTheme}/>
-                    <span className={'starred count'}>
+                  <Card
+                    className={'repo-card'}
+                    theme={theme}
+                    fontTheme={fontTheme}
+                    title={name}
+                    content={description}
+                  >
+                    <div className={'tags'}>
+                      {
+                        item.homepage && (
+                          <Button
+                            size={'small'}
+                            className={'tag'}
+                            link={homepage}
+                            linkTarget={'_blank'}
+                          >
+                            演示
+                          </Button>
+                        )
+                      }
+                    </div>
+                    <div className={'counts'}>
+                      <SvgStar className={'starred icon'} fill={fontTheme}/>
+                      <span className={'starred count'}>
                       {stargazers_count}
                     </span>
-                    <SvgDeviceHub className={'forked icon'} fill={fontTheme}/>
-                    <span className={'forked count'}>
+                      <SvgDeviceHub className={'forked icon'} fill={fontTheme}/>
+                      <span className={'forked count'}>
                       {forks_count}
                     </span>
-                  </div>
-                </Card>
+                    </div>
+                  </Card>
+                </a>
               )
             })
           }

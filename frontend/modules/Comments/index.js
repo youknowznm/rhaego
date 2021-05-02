@@ -119,7 +119,7 @@ class Comments extends React.Component {
     return (
       <div className={'comment editor content-pop-in'} ref={this.setEditorRef}>
         <p className={'title'}>
-          欢迎留下您的评论.
+          欢迎留下您的评论
         </p>
         <div className={'author-wrap'}>
           <TextField

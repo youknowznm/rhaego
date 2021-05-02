@@ -9,7 +9,7 @@ import {
   RESUME_ID,
   setStorage,
   withRouter,
-  formatDateToPast
+  formatDateToPast, addCommaToInt
 } from '~utils'
 import TextField from "~/components/TextField"
 import Button from "~/components/Button"
@@ -109,8 +109,7 @@ class Admin extends React.Component {
     return (
       <div className={'login-area'}>
         <div className={'title'}>
-          <p>以管理员身份登录, 编辑笔记和评论.</p>
-          <p>管理员信息维护在远端的 secret.json 中.</p>
+          <p>以管理员身份登录, 编辑笔记和评论</p>
         </div>
         <TextField
           className={'username'}
@@ -202,7 +201,7 @@ class Admin extends React.Component {
         </tr>
         {
           this.state.visitors.map(item => (
-            <tr>
+            <tr key={item._id}>
               <td>
                 {item.clientIp}
               </td>
@@ -216,7 +215,7 @@ class Admin extends React.Component {
                 {item.restricted === true ? '是' : '否'}
               </td>
               <td>
-                {item.visitCount}
+                {addCommaToInt(item.visitCount)}
               </td>
             </tr>
           ))

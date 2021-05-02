@@ -93,7 +93,7 @@ app.use(async function visitorAttemptControlMiddleWare(ctx, next) {
     await next()
   } else {
     const client = await db.getClient(ctx.request.ip)
-    console.log('剩余请求数', client.dailyAttempts)
+    // console.log('剩余请求数', client.dailyAttempts)
     // db.setClientDailyAttempt(ctx.request.ip, 'reset')
     if (client.dailyAttempts <= 0) {
       ctx.throw(403, '今日操作次数已达上限')

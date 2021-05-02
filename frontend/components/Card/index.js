@@ -22,8 +22,6 @@ export default class Card extends React.Component {
     theme: PropTypes.string,
     fontTheme: PropTypes.string,
     className: PropTypes.string,
-    link: PropTypes.string,
-    linkTarget: PropTypes.oneOf(['_blank', '_self']),
     tags: PropTypes.array,
   }
 
@@ -34,27 +32,6 @@ export default class Card extends React.Component {
     title: '',
     content: '',
     className: '',
-    link: '',
-    linkTarget: '_self',
-  }
-
-  goToLinkIfAny = evt => {
-    if (hasClass(evt.target, 'rhaego-card')) {
-      const {
-        link,
-        linkTarget,
-        onClick,
-      } = this.props
-      const isAnchor = isValidString(link)
-      callIfCallable(onClick)
-      if (isAnchor) {
-        if (linkTarget === '_blank') {
-          window.open(link)
-        } else {
-          location.href = link
-        }
-      }
-    }
   }
 
   render() {
@@ -75,7 +52,6 @@ export default class Card extends React.Component {
         className={c('rhaego-card', className)}
         data-card-theme={theme}
         data-card-font-theme={fontTheme}
-        // onClick={this.goToLinkIfAny}
         {...otherProps}
       >
         <h1 className={'title'}>{formatToMaterialSpans(title)}</h1>

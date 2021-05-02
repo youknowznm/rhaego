@@ -63,6 +63,9 @@ body.device-mobile {
       margin-right: 0;
       .editor {
         padding: 12px;
+        .title {
+          margin-bottom: 18px;
+        }
       }
       .delete {
         display: none;
@@ -74,6 +77,14 @@ body.device-mobile {
       .login-area {
         margin: 12px 0;
         padding: 12px;
+      }
+      .new-article,
+      .edit-resume,
+      .visitor-list {
+        display: none;
+      }
+     .title {
+        margin-bottom: 18px;
       }
     }
     .rhaego-footer {
