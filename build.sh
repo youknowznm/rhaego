@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/sh
 
 echo "-------- 拉取远端仓库 --------"
 git pull
