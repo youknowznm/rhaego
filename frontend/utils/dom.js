@@ -80,7 +80,9 @@ export const checkDevice = () => {
   let deviceType = 'pc'
   if (/Android|iPhone/i.test(navigator.userAgent)) {
     deviceType = 'mobile'
-    toast('建议使用桌面浏览器以获得更好体验', 5000)
+    setTimeout(() => {
+      toast('建议使用桌面浏览器以获得更好体验', 4000)
+    }, 2000)
   }
   addClass(document.body, `device-${deviceType}`)
 }

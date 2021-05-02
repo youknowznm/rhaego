@@ -1,12 +1,11 @@
 export const debounce = function(fn, time = 200)  {
-  let timerId = null
-  return function(args) {
-    if (timerId) {
-      timerId = setTimeout(fn, time)
-    } else {
-      clearTimeout(timerId)
-      fn.apply(fn, ...args)
-    }
+  let timer = null
+  return function(...args) {
+    const that = this
+    clearTimeout(timer)
+    timer = setTimeout(function() {
+      fn.call(that, ...args)
+    }, time)
   }
 }
 
@@ -38,11 +37,8 @@ export const pick = (target, keys) => {
 
 export const omit = (target, keys) => {
   const copied = deepCopy(target)
-  keys.reduce((result, currKey) => {
-    if (copied[currKey]) {
-      delete copied[currKey]
-    }
-    return copied
-  }, copied)
+  for (let i = 0; i < keys.length; i++) {
+    delete copied[keys[i]]
+  }
   return copied
 }

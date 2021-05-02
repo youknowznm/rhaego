@@ -11,7 +11,7 @@ import {
   post,
   Link,
   pick,
-  addClass, removeClass, goToPath, postForm, parseMarkdown,
+  addClass, removeClass, goToPath, postForm, markdownParser,
   debounce, RESUME_ID, noop
 } from "~utils"
 import style from './editor.scss'
@@ -59,8 +59,8 @@ class Editor extends React.Component {
             return
           }
           this.setState({
-            ...omit(res.article, '_id'),
-            parsedHTML: parseMarkdown(res.article.markdownContent),
+            ...res.article,
+            parsedHTML: markdownParser.parse(res.article.markdownContent),
             isLoading: false
           })
         })
@@ -186,7 +186,7 @@ class Editor extends React.Component {
     }
   }
 
-  onContentChange = debounce((evt) => {
+  onContentChange = debounce(evt => {
     const {value} = evt.target
     this.setState({
       markdownContent: value,

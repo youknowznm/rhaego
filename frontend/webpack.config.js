@@ -1,4 +1,5 @@
 const path = require('path')
+const {markdownCodeLanguages} = require('../config')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
@@ -117,13 +118,15 @@ module.exports = (env, argv) => {
       ],
     },
     plugins: [
-      // new webpack.DefinePlugin({
-      //   'process.env.NODE_ENV': JSON.stringify(mode),
-      // }),
       new HtmlWebpackPlugin({
         template: path.resolve(__dirname, 'index.html'),
         favicon: './assets/images/identicon.png',
       }),
+      // 筛选 hljs 的语言, 按需加载
+      new webpack.ContextReplacementPlugin(
+        /highlight\.js\/lib\/languages$/,
+        new RegExp(`^./(${markdownCodeLanguages.join('|')})$`),
+      ),
       !isDev && new BundleAnalyzerPlugin({
         analyzerMode: 'static',
         openAnalyzer: false,

@@ -1,6 +1,7 @@
 import React from 'react'
 import marked from 'marked'
-import highlight from 'highlight.js'
+import hljs from 'highlight.js/lib/core'
+import {markdownCodeLanguages} from '~config'
 
 export function callIfCallable(fn, ...params) {
   return typeof fn === 'function' && fn(...params)
@@ -70,19 +71,30 @@ export function getTagsFromText(tagsText) {
   return tagsText.split(/\s*#/).filter(item => item !== '')
 }
 
-const renderer = new marked.Renderer()
-renderer.link = (href, title, text) => {
-  return `<a target="_blank" href="${href}" title="${title}">${text}</a>`
-}
-marked.setOptions({
-  renderer,
-  breaks: true,
-  highlight: code => {
-    return highlight.highlightAuto(code).value
+class MarkdownParser {
+  constructor(props) {
+    this.marked = marked
+    const renderer = new marked.Renderer({
+      link: (href, title, text) => {
+        return `<a target="_blank" href="${href}" title="${title}">${text}</a>`
+      }
+    })
+    markdownCodeLanguages.forEach((langName) => {
+      const langModule = require(`highlight.js/lib/languages/${langName}`);
+      hljs.registerLanguage(langName, langModule);
+    })
+    marked.setOptions({
+      renderer,
+      breaks: true,
+      highlight: code => {
+        return hljs.highlightAuto(code).value
+      }
+    })
   }
-})
+  parse = rawMarkdown => this.marked(rawMarkdown)
+}
 
-export const parseMarkdown = raw => marked(raw)
+export const markdownParser = new MarkdownParser()
 
 export const RESUME_ID = 'RESUME'
 

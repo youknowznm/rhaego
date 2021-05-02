@@ -84,10 +84,14 @@
     margin: 12px 0;
     overflow-x: auto;
     overflow-y: hidden;
-    padding: 8px;
     position: relative;
+    padding: 0.5em;
     background: $white;
+    color: $font-primary;
     border: 1px solid $rhaego-markdown-border-light;
+    white-space: pre-wrap;
+    font-size: 12px;
+    line-height: 18px;
     code {
       color: unset;
       border: unset;

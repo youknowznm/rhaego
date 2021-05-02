@@ -1,99 +1,104 @@
 /*
 
-Intellij Idea-like styling (c) Vasily Polovnyov <vast@whiteants.net>
+XCode style (c) Angel Garcia <angelgarcia.mail@gmail.com>
 
 */
-
-// @zhangenming 移除了 bold, 这样和最新的 idea 风格更像
 
 .hljs {
   display: block;
   overflow-x: auto;
   padding: 0.5em;
-  color: #000;
   background: #fff;
+  color: black;
 }
 
-.hljs-subst,
-.hljs-title {
-  font-weight: normal;
-  color: #000;
+/* Gray DOCTYPE selectors like WebKit */
+.xml .hljs-meta {
+  color: #c0c0c0;
 }
 
 .hljs-comment,
 .hljs-quote {
-  color: #808080;
-  font-style: italic;
+  color: #007400;
 }
 
-.hljs-meta {
-  color: #808000;
-}
-
-.hljs-tag {
-  background: #efefef;
-}
-
-.hljs-section,
-.hljs-name,
-.hljs-literal,
+.hljs-tag,
+.hljs-attribute,
 .hljs-keyword,
 .hljs-selector-tag,
-.hljs-type,
-.hljs-selector-id,
-.hljs-selector-class {
-  //font-weight: bold;
-  color: #000080;
-}
-
-.hljs-attribute,
-.hljs-number,
-.hljs-regexp,
-.hljs-link {
-  //font-weight: bold;
-  color: #0000ff;
-}
-
-.hljs-number,
-.hljs-regexp,
-.hljs-link {
-  font-weight: normal;
-}
-
-.hljs-string {
-  color: #008000;
-  //font-weight: bold;
-}
-
-.hljs-symbol,
-.hljs-bullet,
-.hljs-formula {
-  color: #000;
-  background: #d0eded;
-  font-style: italic;
-}
-
-.hljs-doctag {
-  text-decoration: underline;
+.hljs-literal,
+.hljs-name {
+  color: #aa0d91;
 }
 
 .hljs-variable,
 .hljs-template-variable {
-  color: #660e7a;
+  color: #3F6E74;
+}
+
+.hljs-code,
+.hljs-string,
+.hljs-meta-string {
+  color: #c41a16;
+}
+
+.hljs-regexp,
+.hljs-link {
+  color: #0E0EFF;
+}
+
+.hljs-title,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-number {
+  color: #1c00cf;
+}
+
+.hljs-section,
+.hljs-meta {
+  color: #643820;
+}
+
+
+.hljs-class .hljs-title,
+.hljs-type,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-params {
+  color: #5c2699;
+}
+
+.hljs-attr {
+  color: #836C28;
+}
+
+.hljs-subst {
+  color: #000;
+}
+
+.hljs-formula {
+  background-color: #eee;
+  font-style: italic;
 }
 
 .hljs-addition {
-  background: #baeeba;
+  background-color: #baeeba;
 }
 
 .hljs-deletion {
-  background: #ffc8bd;
+  background-color: #ffc8bd;
+}
+
+.hljs-selector-id,
+.hljs-selector-class {
+  color: #9b703f;
+}
+
+.hljs-doctag,
+.hljs-strong {
+  font-weight: bold;
 }
 
 .hljs-emphasis {
   font-style: italic;
-}
-
-.hljs-strong {
-  //font-weight: bold;
 }

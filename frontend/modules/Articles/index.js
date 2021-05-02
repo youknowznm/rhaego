@@ -60,7 +60,7 @@ class Articles extends React.Component {
         const articles = res.articles.map(item => {
           // 移除一些 md 的标记, 作为简介更加可读
           const contentWithoutMarkers = item.markdownContent.replace(
-            /#|!?\[\S*]\([^)]*\)/g, ''
+            /```\S+\s|#|!?\[\S*]\([^)]*\)/g, ''
           )
           return {
             ...item,

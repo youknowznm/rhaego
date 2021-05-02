@@ -6,9 +6,9 @@ import {
   get,
   getStyleInt,
   noop,
-  parseMarkdown,
+  markdownParser,
   getSearchParams, isValidString, omit, getTagsFromText, getStyle,
-  Link, withRouter, post, RESUME_ID, getNodeOffsetTopToPage, addClass, hasClass, mockTimeout
+  Link, withRouter, post, RESUME_ID, getNodeOffsetTopToPage, addClass, hasClass,
 } from "~utils"
 import TextField from "~/components/TextField"
 import Button from "~/components/Button"
@@ -81,7 +81,7 @@ class Article extends React.Component {
           markdownContent: res.article.markdownContent,
           likedCount: res.article.likedCount,
           commentCount: res.article.commentCount,
-          parsedHTML: parseMarkdown(res.article.markdownContent),
+          parsedHTML: markdownParser.parse(res.article.markdownContent),
           title: res.article.title,
           dateString: res.article.dateString,
           tags: getTagsFromText(res.article.tagsText),
