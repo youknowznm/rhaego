@@ -4,6 +4,7 @@
 .idea
 /backend/data/github-repos.json
 /backend/data/*.db
+/backend/data/resume.md
 /backend/files/
 /backend/static/
 /backend/secret.json
