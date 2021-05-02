@@ -9,18 +9,18 @@ import {
   markdownParser,
   getSearchParams, isValidString, omit, getTagsFromText, getStyle,
   Link, withRouter, post, RESUME_ID, getNodeOffsetTopToPage, addClass, hasClass,
-} from "~utils"
-import TextField from "~/components/TextField"
-import Button from "~/components/Button"
-import {formatDateToPast} from "~utils"
+} from '~utils'
+import TextField from '~/components/TextField'
+import Button from '~/components/Button'
+import {formatDateToPast} from '~utils'
 import api from '~api'
-import {SvgComment, SvgThumbUp} from "~/assets/svg"
-import Loading from "~/components/Loading"
-import PropTypes from "prop-types"
-import {toast} from "~/components/Toast"
-import Comments from "~/modules/Comments"
+import {SvgComment, SvgThumbUp} from '~/assets/svg'
+import Loading from '~/components/Loading'
+import PropTypes from 'prop-types'
+import {toast} from '~/components/Toast'
+import Comments from '~/modules/Comments'
 import style from './article.scss'
-import {MainContext} from "~/modules/Context"
+import {MainContext} from '~/modules/Context'
 
 class Article extends React.Component {
 

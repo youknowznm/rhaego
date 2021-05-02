@@ -1,5 +1,5 @@
-import {callIfCallable} from "./index"
-import {toast} from "~/components/Toast";
+import {callIfCallable} from './index'
+import {toast} from '~/components/Toast';
 
 export function animateToScrollHeight(height = 0, onDone) {
   const doc = document.documentElement

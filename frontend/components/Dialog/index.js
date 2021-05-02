@@ -12,7 +12,7 @@ import {
   hasClass, addClass, removeClass,
 } from '~utils'
 import style from './dialog.scss'
-import * as ReactDOM from "react-dom"
+import * as ReactDOM from 'react-dom'
 
 export default class Dialog extends React.Component {
 
@@ -122,11 +122,11 @@ export default class Dialog extends React.Component {
         ref={this.setDialogRef}
       >
         <div className={'modal-innner'}>
-          <h1 className="modal-title">{title}</h1>
-          <p className="modal-content">{content}</p>
-          <div className="modal-action-buttons">
+          <h1 className='modal-title'>{title}</h1>
+          <p className='modal-content'>{content}</p>
+          <div className='modal-action-buttons'>
             <Button
-              className="modal-confirm"
+              className='modal-confirm'
               onClick={this.props.onConfirm}
               type={'primary'}
               size={'small'}
@@ -135,7 +135,7 @@ export default class Dialog extends React.Component {
             </Button>
             {
               !confirmOnly && <Button
-                className="modal-cancel"
+                className='modal-cancel'
                 onClick={this.props.onCancel}
                 size={'small'}
               >

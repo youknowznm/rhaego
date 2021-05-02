@@ -2,7 +2,7 @@ import React from 'react'
 import {
   LOGIN_STATUS_KEY,
   getStorage, isValidString,
-} from "~utils"
+} from '~utils'
 import {siteNameCondensed} from '~config'
 
 export const MainContext = React.createContext({

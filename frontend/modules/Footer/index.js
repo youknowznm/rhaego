@@ -2,8 +2,8 @@ import React from 'react'
 import c from 'classnames'
 import {SvgHeart} from '~/assets/svg'
 import siteData from '~config'
-import {addCommaToInt, get, getTagsFromText, noop} from "~utils"
-import api from "~api"
+import {addCommaToInt, get, getTagsFromText, noop} from '~utils'
+import api from '~api'
 import style from './footer.scss'
 
 export default class Footer extends React.Component {
@@ -26,32 +26,32 @@ export default class Footer extends React.Component {
     return (
       <div className={'rhaego-footer'}>
         <div className={'social-wrap'}>
-          <div className="social rhaego-responsive">
-            <ul className="links">
-              <li className="link wechat">
-                <div className="hover-content" />
+          <div className='social rhaego-responsive'>
+            <ul className='links'>
+              <li className='link wechat'>
+                <div className='hover-content' />
               </li>
-              <li className="link email">
+              <li className='link email'>
                 <a 
                   href={siteData.email} />
               </li>
-              <li className="link zhihu">
+              <li className='link zhihu'>
                 <a 
                   href={siteData.zhihu}
-                  target="blank"
+                  target='blank'
                 />
               </li>
-              <li className="link github">
+              <li className='link github'>
                 <a 
                   href={siteData.github}
-                  target="blank"
+                  target='blank'
                 />
               </li>
             </ul>
           </div>
         </div>
         <div className={'info-wrap'}>
-          <div className="info rhaego-responsive">
+          <div className='info rhaego-responsive'>
             <p className={'left'}>
               <span>Presented by</span>
               <span>

@@ -13,14 +13,14 @@ import {
   pick,
   addClass, removeClass, goToPath, postForm, markdownParser,
   debounce, RESUME_ID, noop
-} from "~utils"
+} from '~utils'
 import style from './editor.scss'
-import TextField from "~/components/TextField"
-import Button from "~/components/Button"
-import Toast, {toast} from "~/components/Toast"
-import {formatDateToPast, formatDateToString} from "~utils"
+import TextField from '~/components/TextField'
+import Button from '~/components/Button'
+import Toast, {toast} from '~/components/Toast'
+import {formatDateToPast, formatDateToString} from '~utils'
 import api from '~api'
-import {MainContext} from "~/modules/Context";
+import {MainContext} from '~/modules/Context';
 
 class Editor extends React.Component {
 

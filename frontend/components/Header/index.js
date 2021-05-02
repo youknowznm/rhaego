@@ -8,7 +8,7 @@ import {
 } from '~utils'
 import {withRouter} from 'react-router-dom'
 import style from './header.scss'
-import {MainContext} from "~/modules/Context";
+import {MainContext} from '~/modules/Context';
 
 class RhaegoHeader extends React.Component {
 
@@ -256,7 +256,7 @@ class RhaegoHeader extends React.Component {
             >
               {formatToMaterialSpans(bannerTitle)}
             </span>
-            <ul className="nav-buttons" ref={this.setNavListRef} >
+            <ul className='nav-buttons' ref={this.setNavListRef} >
               {
                 this.props.links.map((item, index) => (
                   <li
@@ -269,7 +269,7 @@ class RhaegoHeader extends React.Component {
                   </li>
                 ))
               }
-              <li className="nav-border" key={-1} style={navBorderStyle} ref={this.setNavBorderRef} />
+              <li className='nav-border' key={-1} style={navBorderStyle} ref={this.setNavBorderRef} />
             </ul>
           </nav>
         </div>

@@ -7,17 +7,17 @@ import {
   mockTimeout,
   pick,
   RESUME_ID, getNodeOffsetTopToPage, getStorage, setStorage, post, noop
-} from "~utils"
-import TextField from "~/components/TextField"
-import Button from "~/components/Button"
-import {formatDateToPast} from "~utils"
+} from '~utils'
+import TextField from '~/components/TextField'
+import Button from '~/components/Button'
+import {formatDateToPast} from '~utils'
 import api from '~api'
-import {SvgComment, SvgThumbUp} from "~/assets/svg"
-import Loading from "~/components/Loading"
-import PropTypes from "prop-types"
-import {toast} from "~/components/Toast"
+import {SvgComment, SvgThumbUp} from '~/assets/svg'
+import Loading from '~/components/Loading'
+import PropTypes from 'prop-types'
+import {toast} from '~/components/Toast'
 import style from './comments.scss'
-import {MainContext} from "~/modules/Context";
+import {MainContext} from '~/modules/Context';
 
 class Comments extends React.Component {
 

@@ -1,16 +1,16 @@
 import React from 'react'
 import c from 'classnames'
-import Card from "~/components/Card"
-import Loading from "~/components/Loading"
+import Card from '~/components/Card'
+import Loading from '~/components/Loading'
 import {
   SvgDeviceHub,
   SvgStar,
-} from "~/assets/svg"
-import {Link, ajax, get, getPalette, getFontTheme, getTagsFromText, noop, mockTimeout} from "~utils"
-import Button from "~/components/Button"
-import api from "~api"
+} from '~/assets/svg'
+import {Link, ajax, get, getPalette, getFontTheme, getTagsFromText, noop, mockTimeout} from '~utils'
+import Button from '~/components/Button'
+import api from '~api'
 import style from './repos.scss'
-import {MainContext} from "~/modules/Context";
+import {MainContext} from '~/modules/Context';
 
 class Repos extends React.Component {
 

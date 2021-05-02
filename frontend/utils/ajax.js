@@ -1,5 +1,5 @@
 import {setSearchParams} from './index'
-import {toast} from "~/components/Toast"
+import {toast} from '~/components/Toast'
 
 // get 和 post
 // 默认请求和响应均为 json

@@ -117,14 +117,14 @@ export default class TextField extends React.Component {
             placeholder={placeholder}
             onChange={this.props.onChange}
             disabled={this.props.disabled}
-            spellCheck="false"
+            spellCheck='false'
             {...valueProps}
           />
-          <p className="hint">{this.props.hint}</p>
-          <p className="char-counter">
-            <span className="current">{this.currentCharCount}</span>
+          <p className='hint'>{this.props.hint}</p>
+          <p className='char-counter'>
+            <span className='current'>{this.currentCharCount}</span>
             <span className='separator'>/</span>
-            <span className="maximum">{this.props.maxLength}</span>
+            <span className='maximum'>{this.props.maxLength}</span>
           </p>
         </div>
       </div>

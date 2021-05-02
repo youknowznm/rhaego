@@ -2,8 +2,8 @@ const fs = require('fs')
 const path = require('path')
 const Datastore = require('nedb')
 const request = require('request')
-const {DEFAULT_DAILY_ATTEMPTS} = require("../utils")
-const {GET_GITHUB_REPOS} = require("../api")
+const {DEFAULT_DAILY_ATTEMPTS} = require('../utils')
+const {GET_GITHUB_REPOS} = require('../api')
 
 // 入参校验一律在路由层, 这里直接入库
 class RhaegoDb {

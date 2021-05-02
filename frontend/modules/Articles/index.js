@@ -1,11 +1,11 @@
 import React from 'react'
 import c from 'classnames'
-import Card from "~/components/Card"
-import Loading from "~/components/Loading"
+import Card from '~/components/Card'
+import Loading from '~/components/Loading'
 import {
   SvgComment,
   SvgThumbUp,
-} from "~/assets/svg"
+} from '~/assets/svg'
 import {
   Link,
   ajax,
@@ -17,14 +17,14 @@ import {
   hasClass,
   getSearchParams,
   parseMarkdown, isValidString, noop
-} from "~utils"
-import Button from "~/components/Button"
-import api from "~api"
-import {withRouter} from "react-router-dom"
-import {toast} from "~/components/Toast"
+} from '~utils'
+import Button from '~/components/Button'
+import api from '~api'
+import {withRouter} from 'react-router-dom'
+import {toast} from '~/components/Toast'
 import style from './articles.scss'
-import {MainContext} from "~/modules/Context";
-import Repos from "~/modules/Repos";
+import {MainContext} from '~/modules/Context';
+import Repos from '~/modules/Repos';
 
 class Articles extends React.Component {
 

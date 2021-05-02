@@ -11,16 +11,16 @@ import {
   withRouter,
   formatDateToPast, addCommaToInt
 } from '~utils'
-import TextField from "~/components/TextField"
-import Button from "~/components/Button"
+import TextField from '~/components/TextField'
+import Button from '~/components/Button'
 import {
   pick,
 } from '~utils'
-import api from "~api"
+import api from '~api'
 import {
   MainConsumer,
   MainContext,
-} from "~/modules/Context"
+} from '~/modules/Context'
 
 import style from './admin.scss'
 class Admin extends React.Component {
