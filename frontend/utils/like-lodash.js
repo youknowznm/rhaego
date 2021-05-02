@@ -27,7 +27,7 @@ export const pick = (target, keys) => {
   const copied = deepCopy(target)
   const res = {}
   keys.reduce((result, currKey) => {
-    if (copied[currKey]) {
+    if (copied[currKey] !== undefined) {
       res[currKey] = copied[currKey]
     }
     return res

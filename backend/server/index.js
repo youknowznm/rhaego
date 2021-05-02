@@ -3,6 +3,8 @@ const {resolve} = require('path')
 const Koa = require('koa')
 const logger = require('koa-logger')
 const koaBody = require('koa-body')
+const conditional = require('koa-conditional-get')
+const etag = require('koa-etag')
 const serve = require('koa-static')
 const db = require('../data')
 const {secretKey} = require('../secret.json')
@@ -27,18 +29,17 @@ db.init()
 // 日志
 app.use(logger())
 
+// etag 写入和检查
+app.use(conditional())
+app.use(etag())
+
+
 // 请求体
 app.use(koaBody({
   multipart: true
 }))
 
-// // 响应类型
-// app.use(async (ctx, next) => {
-//   ctx.response.type = 'json'
-//   await next()
-// })
-
-// 统计访问次数, 间隔 20s 以上即视为新访问
+// 统计访问次数, 间隔 10s 以上即视为新访问
 app.use(async (ctx, next) => {
   const clientIp = ctx.request.ip
   const clientDoc = await db.getClient(clientIp)
@@ -54,7 +55,7 @@ app.use(async (ctx, next) => {
       .then(doc => {
         console.log(`新访客 ${clientIp}`)
       })
-  } else if ((now - clientDoc.lastVisited) > 20 * 1000) {
+  } else if ((now - clientDoc.lastVisited) > 10 * 1000) {
     db.saveClient({
       clientIp,
       visitCount: clientDoc.visitCount + 1,

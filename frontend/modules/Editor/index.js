@@ -190,7 +190,7 @@ class Editor extends React.Component {
     const {value} = evt.target
     this.setState({
       markdownContent: value,
-      parsedHTML: parseMarkdown(value),
+      parsedHTML: markdownParser.parse(value),
     })
   })
 
