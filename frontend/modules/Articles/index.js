@@ -57,17 +57,21 @@ class Articles extends React.Component {
     })
     get(api.GET_ARTICLES, isValidString(tag) ? {tag} : {})
       .then(res => {
-        const articles = res.articles.map(item => {
-          // 移除一些 md 的标记, 作为简介更加可读
-          const contentWithoutMarkers = item.markdownContent.replace(
-            /```\S+\s|#|!?\[\S*]\([^)]*\)/g, ''
-          )
-          return {
-            ...item,
-            tags: getTagsFromText(item.tagsText),
-            contentWithoutMarkers,
-          }
-        })
+        const articles = res.articles
+          .map(item => {
+            // 移除一些 md 的标记, 作为简介更加可读
+            const contentWithoutMarkers = item.markdownContent.replace(
+              /```\S+\s|#|!?\[\S*]\([^)]*\)/g, ''
+            )
+            return {
+              ...item,
+              tags: getTagsFromText(item.tagsText),
+              contentWithoutMarkers,
+            }
+          })
+          .sort((prev, curr) => {
+            return -(prev.likedCount - curr.likedCount)
+          })
         this.setState({
           articles,
           emptyReason: articles.length === 0 ? '暂无笔记' : null

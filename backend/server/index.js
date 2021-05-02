@@ -32,11 +32,11 @@ app.use(koaBody({
   multipart: true
 }))
 
-// 响应类型
-app.use(async (ctx, next) => {
-  ctx.response.type = 'json'
-  await next()
-})
+// // 响应类型
+// app.use(async (ctx, next) => {
+//   ctx.response.type = 'json'
+//   await next()
+// })
 
 // 统计访问次数, 间隔 20s 以上即视为新访问
 app.use(async (ctx, next) => {

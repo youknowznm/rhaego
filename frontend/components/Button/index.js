@@ -123,7 +123,6 @@ export default class Button extends React.Component {
     return (
       <DOMTag
         className={className}
-        style={style}
         ref={this.setButtonRef}
         onMouseDown={this.startRipple}
         onMouseUp={this.endRipple}

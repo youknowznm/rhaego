@@ -7,48 +7,52 @@ const TerserPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 
-const postcssLoader = {
-  loader: 'postcss-loader',
-  options: {
-    postcssOptions: {
-      ident: 'postcss',
-      plugins: [
-        require('autoprefixer')(),
-        require('cssnano')({
-          preset: 'default',
-        }),
-      ],
-    },
-  },
-}
-
-const babelConfig = {
-  presets: [
-    ['@babel/env', {
-      loose: true,
-      modules: false,
-      targets: '> 1%, last 2 versions',
-      corejs: 3,
-      useBuiltIns: 'entry',
-    }],
-    '@babel/react',
-  ],
-  plugins: [
-    '@babel/transform-runtime',
-    '@babel/proposal-class-properties',
-  ],
-}
-
 module.exports = (env, argv) => {
   const {mode} = argv
   const isDev = mode !== 'production'
+
+  const styleLoader = isDev ? 'style-loader' : MiniCssExtractPlugin.loader
+
+  const postcssLoader = {
+    loader: 'postcss-loader',
+    options: {
+      postcssOptions: {
+        ident: 'postcss',
+        plugins: [
+          require('autoprefixer')(),
+          require('cssnano')({
+            preset: 'default',
+          }),
+        ],
+      },
+    },
+  }
+
+  const babelConfig = {
+    presets: [
+      ['@babel/env', {
+        loose: true,
+        modules: false,
+        targets: '> 1%, last 2 versions',
+        corejs: 3,
+        useBuiltIns: 'entry',
+      }],
+      '@babel/react',
+    ],
+    plugins: [
+      '@babel/transform-runtime',
+      '@babel/proposal-class-properties',
+    ],
+  }
+
   return {
     mode,
     context: path.resolve(__dirname),
     entry: './main.js',
     output: {
+      clean: true,
       path: path.resolve(__dirname, '../backend/static'),
-      filename: 'main.js',
+      filename: '[name].[contenthash].js',
     },
     devServer: isDev ? {
       contentBase: '../backend/static',
@@ -59,7 +63,6 @@ module.exports = (env, argv) => {
       },
       historyApiFallback: true,
     } : {},
-    // devtool: 'eval-cheap-module-source-map',
     devtool: isDev && 'eval-cheap-module-source-map',
     module: {
       rules: [
@@ -76,7 +79,7 @@ module.exports = (env, argv) => {
         {
           test: /\.css$/,
           use: [
-            'style-loader',
+            styleLoader,
             'css-loader',
             postcssLoader,
           ],
@@ -84,9 +87,10 @@ module.exports = (env, argv) => {
         {
           test: /\.s[ac]ss$/,
           use: [
-            'style-loader',
+            styleLoader,
             'css-loader',
-            // 'resolve-url-loader',
+            // postcssLoader,
+
             {
               loader: 'sass-loader',
               options: {
@@ -97,14 +101,14 @@ module.exports = (env, argv) => {
           ],
         },
         {
-          test: /\.(jpe?g|bmp|png|gif)$/,
+          test: /\.(jpe?g|bmp|png|gif|svg)$/,
           loader: 'url-loader',
           options: {
             limit: 10240,
           },
         },
         {
-          test: /\.(ttf|svg)$/,
+          test: /\.(ttf)$/,
           loader: 'file-loader',
         },
       ]
@@ -116,8 +120,16 @@ module.exports = (env, argv) => {
         }),
         new CssMinimizerPlugin(),
       ],
+      runtimeChunk: 'single',
+      splitChunks: {
+        name: 'common',
+        chunks: 'all',
+      },
     },
     plugins: [
+      new webpack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify(mode),
+      }),
       new HtmlWebpackPlugin({
         template: path.resolve(__dirname, 'index.html'),
         favicon: './assets/images/identicon.png',

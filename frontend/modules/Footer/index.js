@@ -69,8 +69,8 @@ export default class Footer extends React.Component {
               <span>Made with</span>
               <SvgHeart
                 className={'heart'}
-                width={14}
-                height={14}
+                width={12}
+                height={12}
                 fill={'#ff5252'}
               />
               <span>by znm.</span>
