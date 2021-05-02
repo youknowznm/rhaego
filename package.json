@@ -4,10 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack serve --config frontend/webpack.config.js",
+    "dev": "webpack serve --config frontend/webpack.config.js --mode=development",
     "build": "webpack --config frontend/webpack.config.js --mode=production",
-    "server": "nodemon --exec npm run babel-node backend/server",
-    "babel-node": "babel-node --presets='@babel/preset-env''"
+    "server": "node backend/server"
   },
   "repository": {
     "type": "git",
@@ -18,14 +17,18 @@
   "license": "ISC",
   "dependencies": {
     "@babel/core": "^7.13.15",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/plugin-transform-runtime": "^7.13.15",
     "@babel/preset-env": "^7.13.15",
     "@babel/preset-react": "^7.13.13",
+    "autoprefixer": "^10.2.5",
     "babel-loader": "^8.2.2",
     "babel-plugin-polyfill-corejs2": "^0.2.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-polyfill": "^6.26.0",
     "classnames": "^2.2.6",
     "css-loader": "^5.2.1",
+    "css-minimizer-webpack-plugin": "^2.0.0",
     "file-loader": "^6.2.0",
     "highlight.js": "^10.7.2",
     "html-webpack-plugin": "^5.3.1",
@@ -35,6 +38,7 @@
     "koa-router": "^10.0.0",
     "koa-static": "^5.0.0",
     "marked": "^2.0.3",
+    "mini-css-extract-plugin": "^1.6.0",
     "nanoid": "^3.1.22",
     "nedb": "^1.8.0",
     "prop-types": "^15.7.2",
@@ -42,23 +46,16 @@
     "react-dom": "^17.0.2",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
+    "react-syntax-highlighter": "^15.4.3",
     "request": "^2.88.2",
     "sass": "^1.32.8",
     "sass-loader": "^11.0.1",
     "style-loader": "2.0.0",
+    "terser-webpack-plugin": "^5.1.1",
     "url-loader": "^4.1.1",
     "webpack": "^5.33.2",
     "webpack-bundle-analyzer": "^4.4.1",
     "webpack-cli": "^4.6.0",
     "webpack-dev-server": "^3.11.2"
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-env",
-      "@babel/preset-react"
-    ],
-    "plugins": [
-      "babel-plugin-transform-class-properties"
-    ]
   }
 }

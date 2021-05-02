@@ -2,11 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import c from 'classnames'
 import {
-  debounce,
   getStyleInt,
   animateToScrollHeight,
   formatToMaterialSpans,
-  formatDate, callIfCallable, isValidString, removeClass, addClass, noop,
+  callIfCallable, isValidString, removeClass, addClass, noop,
 } from '~utils'
 import style from './button.scss'
 

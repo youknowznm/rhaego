@@ -1,9 +1,45 @@
 const path = require('path')
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const TerserPlugin = require('terser-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+
+const postcssLoader = {
+  loader: 'postcss-loader',
+  options: {
+    postcssOptions: {
+      ident: 'postcss',
+      plugins: [
+        require('autoprefixer')(),
+        require('cssnano')({
+          preset: 'default',
+        }),
+      ],
+    },
+  },
+}
+
+const babelConfig = {
+  presets: [
+    ['@babel/env', {
+      loose: true,
+      modules: false,
+      targets: '> 1%, last 2 versions',
+      corejs: 3,
+      useBuiltIns: 'entry',
+    }],
+    '@babel/react',
+  ],
+  plugins: [
+    '@babel/transform-runtime',
+    '@babel/proposal-class-properties',
+  ],
+}
 
 module.exports = (env, argv) => {
-  const {mode = 'production'} = argv
+  const {mode} = argv
   const isDev = mode !== 'production'
   return {
     mode,
@@ -13,7 +49,7 @@ module.exports = (env, argv) => {
       path: path.resolve(__dirname, '../backend/static'),
       filename: 'main.js',
     },
-    devServer: {
+    devServer: isDev ? {
       contentBase: '../backend/static',
       port: 3000,
       proxy: {
@@ -21,15 +57,17 @@ module.exports = (env, argv) => {
         '/files': 'http://localhost:4000',
       },
       historyApiFallback: true,
-    },
-    devtool: 'eval-cheap-module-source-map',
+    } : {},
+    // devtool: 'eval-cheap-module-source-map',
+    devtool: isDev && 'eval-cheap-module-source-map',
     module: {
       rules: [
         {
-          test: /\.(t|j)sx?$/,
+          test: /\.t|jsx?$/,
           use: [
             {
               loader: 'babel-loader',
+              options: babelConfig,
             },
           ],
           exclude: /node_modules/,
@@ -39,6 +77,7 @@ module.exports = (env, argv) => {
           use: [
             'style-loader',
             'css-loader',
+            postcssLoader,
           ],
         },
         {
@@ -64,18 +103,36 @@ module.exports = (env, argv) => {
           },
         },
         {
-          test: [/\.(woff2?|ttf|svg|eot)$/],
+          test: /\.(ttf|svg)$/,
           loader: 'file-loader',
         },
       ]
     },
+    optimization: {
+      minimizer: [
+        new TerserPlugin({
+          parallel: true,
+        }),
+        new CssMinimizerPlugin(),
+      ],
+    },
     plugins: [
+      // new webpack.DefinePlugin({
+      //   'process.env.NODE_ENV': JSON.stringify(mode),
+      // }),
       new HtmlWebpackPlugin({
         template: path.resolve(__dirname, 'index.html'),
         favicon: './assets/images/identicon.png',
       }),
-      new BundleAnalyzerPlugin()
-    ],
+      !isDev && new BundleAnalyzerPlugin({
+        analyzerMode: 'static',
+        openAnalyzer: false,
+      }),
+      !isDev && new MiniCssExtractPlugin({
+        filename: '[name].[contenthash].css',
+        chunkFilename: '[name].[contenthash].css',
+      })
+    ].filter(Boolean),
     resolve: {
       extensions: ['.js', '.jsx'],
       alias: {

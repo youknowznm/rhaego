@@ -6,7 +6,7 @@ import {
   SvgDeviceHub,
   SvgStar,
 } from "~/assets/svg"
-import {Link, ajax, get, getPalette, getFontTheme, getTagsFromText, noop} from "~utils"
+import {Link, ajax, get, getPalette, getFontTheme, getTagsFromText, noop, mockTimeout} from "~utils"
 import Button from "~/components/Button"
 import api from "~api"
 import style from './repos.scss'

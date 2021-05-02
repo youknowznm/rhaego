@@ -6,14 +6,13 @@ import {
   get,
   omit,
   getSearchParams,
-  goToSearchParams,
   withRouter,
   isValidString,
   post,
   Link,
   pick,
   addClass, removeClass, goToPath, postForm, parseMarkdown,
-  debounce, throttle, RESUME_ID, noop
+  debounce, RESUME_ID, noop
 } from "~utils"
 import style from './editor.scss'
 import TextField from "~/components/TextField"
@@ -193,7 +192,7 @@ class Editor extends React.Component {
       markdownContent: value,
       parsedHTML: parseMarkdown(value),
     })
-  }, 200)
+  })
 
   renderCompareArea = () => {
     return (

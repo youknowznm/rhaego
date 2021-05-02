@@ -2,13 +2,11 @@ import React from 'react'
 import c from 'classnames'
 import {
   animateToScrollHeight,
-  throttle,
   formatToMaterialSpans,
   get,
   getStyleInt,
   noop,
   parseMarkdown,
-  debounce,
   getSearchParams, isValidString, omit, getTagsFromText, getStyle,
   Link, withRouter, post, RESUME_ID, getNodeOffsetTopToPage, addClass, hasClass, mockTimeout
 } from "~utils"
@@ -155,6 +153,9 @@ class Article extends React.Component {
     const {scrollTop} = document.documentElement
     const doc = this.compRef.querySelector('.article-content')
     const nav = this.compRef.querySelector('.article-sidebar')
+    if (!nav) {
+      return
+    }
     const navHeight = getStyleInt(nav, 'height')
     const docHeight = doc.clientHeight
     const {

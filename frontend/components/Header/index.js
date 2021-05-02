@@ -2,10 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import c from 'classnames'
 import {
-  // throttle,
   formatToMaterialSpans,
   getStyleInt,
-  throttle,
   animateToScrollHeight, removeClass, addClass, goToPath, isValidString, callIfCallable
 } from '~utils'
 import {withRouter} from 'react-router-dom'

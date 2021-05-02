@@ -3,12 +3,10 @@ import PropTypes from 'prop-types'
 import c from 'classnames'
 import Button from '~/components/Button'
 import {
-  debounce,
   getStyleInt,
   animateToScrollHeight,
   formatToMaterialSpans,
   isValidString,
-  formatDate,
   callIfCallable,
   hasClass,
 } from '~utils'

@@ -4,11 +4,9 @@ import c from 'classnames'
 import Button from '~/components/Button'
 import {findDOMNode} from 'react-dom'
 import {
-  debounce,
   getStyleInt,
   animateToScrollHeight,
   formatToMaterialSpans,
-  formatDate,
   noop,
   getScrollBarWidth,
   hasClass, addClass, removeClass,

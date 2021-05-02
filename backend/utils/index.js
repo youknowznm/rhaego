@@ -6,9 +6,6 @@ const {
 } = require('../secret.json')
 const api = require('../api')
 const db = require('../data')
-const {
-  omit
-} = require('lodash')
 
 // nano-id non-look-alike
 const generateId = (digit = 7) => {
@@ -71,6 +68,5 @@ module.exports = {
   isAdmin,
   RESUME_ID,
   DEFAULT_DAILY_ATTEMPTS,
-  omit,
   validateParams,
 }

@@ -3,11 +3,9 @@ import PropTypes from 'prop-types'
 import c from 'classnames'
 import Button from '~/components/Button'
 import {
-  debounce,
   getStyleInt,
   animateToScrollHeight,
   formatToMaterialSpans,
-  formatDate,
   noop, isValidString,
 } from '~utils'
 import style from './text-field.scss'

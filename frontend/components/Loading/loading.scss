@@ -20,7 +20,7 @@
   }
   &.delay-has-passed {
     .loading-area {
-      background: url("~images/loading.gif") no-repeat;
+      background: url("~images/loading.svg") no-repeat;
       animation: fadeIn .5s $materialCubicBezier;
     }
   }
