@@ -108,9 +108,6 @@ class Admin extends React.Component {
     }
     return (
       <div className={'login-area'}>
-        <div className={'title'}>
-          <p>以管理员身份登录, 编辑笔记和评论</p>
-        </div>
         <TextField
           className={'username'}
           label={'用户名'}
@@ -157,9 +154,6 @@ class Admin extends React.Component {
     }
     return (
       <div className={'admin-area'}>
-        <div className={'title'}>
-          <p>已经以管理员身份登录</p>
-        </div>
         <Button
           className={'new-article'}
           disabled={this.state.isLoading}

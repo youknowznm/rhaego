@@ -36,6 +36,9 @@
     .cancel {
       width: 100%;
       margin-bottom: 12px;
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
   }
   .visitor-list {

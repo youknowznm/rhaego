@@ -250,7 +250,8 @@ router
       commentContent: /^.{2,120}$/,
     })
     if (isValidString(errorMessage)) {
-      ctx.throw(400, errorMessage)
+      // 翻译一下
+      ctx.throw(400, '请检查输入')
       return
     }
     params.createDate = new Date().valueOf()

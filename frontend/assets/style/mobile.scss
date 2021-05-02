@@ -31,6 +31,8 @@ body.device-mobile {
           height: auto;
         }
         .date {
+          display: block;
+          white-space: nowrap;
           right: 0;
           left: auto;
           transform: translateX(0) translateY(-48px);
@@ -53,6 +55,7 @@ body.device-mobile {
       }
       .article-content {
         margin-right: 0;
+        overflow: visible;
       }
       .article-sidebar {
         display: none;

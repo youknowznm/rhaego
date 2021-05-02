@@ -40,7 +40,7 @@ app.use(async function(ctx, next) {
   try {
     await next()
   } catch (err) {
-    ctx.throw(err.status || 500, '服务器错误')
+    ctx.throw(err.status || 500, err.message || '服务器错误')
   }
 })
 

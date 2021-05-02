@@ -118,9 +118,6 @@ class Comments extends React.Component {
   renderCommentEditor = () => {
     return (
       <div className={'comment editor content-pop-in'} ref={this.setEditorRef}>
-        <p className={'title'}>
-          欢迎留下您的评论
-        </p>
         <div className={'author-wrap'}>
           <TextField
             className={'comment-author'}
@@ -149,13 +146,13 @@ class Comments extends React.Component {
         </div>
         <TextField
           className={'comment-content'}
-          label={'内容'}
+          label={'评论'}
           value={this.state.commentContent}
           onChange={this.getSetStateMethod('commentContent')}
           width={'100%'}
           maxLength={120}
-          validatorRegExp={/^.{4,120}$/}
-          hint={'2~120 字符的评论'}
+          validatorRegExp={/^.{2,120}$/}
+          hint={'2~120 字符的评论内容'}
           hasValidated={this.state.hasValidated}
         />
         <Button
@@ -227,7 +224,7 @@ class Comments extends React.Component {
   }
 
   scrollToCommentEditor = () => {
-    animateToScrollHeight(getNodeOffsetTopToPage(this.editorRef) + 192 - 24)
+    animateToScrollHeight(getNodeOffsetTopToPage(this.editorRef) - 64 - 24)
   }
 
   componentWillUnmount() {
