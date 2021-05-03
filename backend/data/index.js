@@ -196,12 +196,19 @@ class RhaegoDb {
         reject(err)
       })
   })
-  // 所有访客
+  // 获取所有 访问至少 2 次的用户
   getVisitors = () => new Promise((resolve, reject) => {
-    this.clientDb.find({}, (err, allClients)=>{
-      err && reject(err)
-      resolve(allClients.sort((prev, curr) => -(prev.lastVisited - curr.lastVisited)))
-    })
+    this.clientDb.find(
+      {
+        visitCount: {
+          $gt: 1
+        }
+      },
+      (err, allClients)=>{
+        err && reject(err)
+        resolve(allClients.sort((prev, curr) => -(prev.lastVisited - curr.lastVisited)))
+      }
+    )
   })
   // 所有访客的访问次数和
   getVisitCount = () => new Promise((resolve, reject) => {

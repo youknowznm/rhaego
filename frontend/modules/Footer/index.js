@@ -35,7 +35,7 @@ export default class Footer extends React.Component {
               </li>
               <li className='link email'>
                 <a 
-                  href={siteData.email} />
+                  href={`mailto:${siteData.email}`} />
               </li>
               <li className='link zhihu'>
                 <a 

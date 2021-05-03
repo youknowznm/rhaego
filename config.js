@@ -8,7 +8,7 @@ const siteName = 'youknowznm'
 const githubUsername = 'youknowznm'
 
 // 社交相关, 在 footer 展示, 按需增减
-const email = 'mailto:znm92@icloud.com'
+const email = 'znm92@icloud.com'
 const zhihu = 'https://www.zhihu.com/people/youkonwznm'
 
 // 笔记 markdown 代码的语言列表, 用以优化 hljs 的体积

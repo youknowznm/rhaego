@@ -9,11 +9,10 @@
 .rhaego-markdown {
 
   text-align: left;
-  //padding: 0 6px;
   color: $font-primary;
 
   p {
-    line-height: 22px;
+    line-height: 1.6;
     font-size: 14px;
     margin: 0 0 16px 0;
     padding: 0;
@@ -21,25 +20,23 @@
 
   strong {
     font-weight: 500;
-    margin: 0 .2em;
-  }
-
-  i, {
-    margin: 0 .2em;
   }
 
   a {
     color: $rhaego-markdown-link;
-    box-sizing: border-box;
+    line-height: 1.6;
     border-bottom: 1px solid $rhaego-markdown-link;
-    padding: 0 .2em;
-    margin: 0 .2em;
     transition: all .2s $materialCubicBezier;
     &:hover {
       border-bottom-color: $white;
       background: $rhaego-markdown-link;
       color: $white;
     }
+  }
+
+  em,
+  i {
+    color: $font-secondary;
   }
 
   h1 {
@@ -49,6 +46,9 @@
     font-weight: 300;
     padding-bottom: .2em;
     border-bottom: 1px solid $rhaego-markdown-border-light;
+    &:first-child {
+      margin-top: 0;
+    }
   }
 
   h2, h3, h4, h5, h6 {
@@ -67,17 +67,16 @@
     }
   }
 
-  // 默认 markdown 的 code 左右无空格.
   code {
     display: inline-block;
     padding: 0 .3em;
-    margin: 0 .5em;
     font-size: .8em;
-    line-height: 1.4;
+    line-height: 1.5;
     border: 1px solid #dadce0;
     border-radius: 3px;
     word-break: normal;
-    background-color: #f8f9fa;
+    background: rgba(0, 0, 0, .05);
+    color: #000;
   }
 
   pre {
@@ -103,25 +102,28 @@
 
   ul, ol {
     padding-left: 1.5em;
+    margin-bottom: 12px;
     li {
       font-size: 14px;
-      line-height: 22px;
+      line-height: 1.6;
       padding: 0;
       position: relative;
-      margin: .1em 0;
-
+      margin: .2em 0;
     }
     p {
       margin: 0;
       display: inline-block;
-      line-height: 22px;
+      line-height: 1.6;
     }
   }
   ul > li {
-    list-style: disc inside;
+    list-style: disc outside;
   }
   ol > li {
-    list-style: decimal inside;
+    list-style: decimal outside;
+  }
+  li > ul > li {
+    list-style: circle outside;
   }
 
   img {

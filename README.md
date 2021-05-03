@@ -17,7 +17,7 @@
 
 - **未使用任何组件库和样式库**
 - 交互和样式设计参考 [Google Design 旧站](https://web.archive.org/web/20170516175305/https://design.google.com), [AngularJS Material](https://material.angularjs.org/latest/), [Google 开发者](https://developer.chrome.com/) 等站点
-- **尽可能地**不依赖前端工具类库
+- 依赖尽可能少的前端工具库
 - 基于嵌入式数据库 [NeDB](https://github.com/louischatriot/nedb), 即插即用
 - 根据真实客户端 IP 限制访客的有效请求次数
 
