@@ -1,21 +1,20 @@
 # Rhaego
 
-## 开箱即用的 Material Design 风格博客系统
+开箱即用的 Material Design 风格博客系统
 
 ### 功能
 
-- Material Design 风格
-- 响应式布局的单页应用 
+- 响应式布局的单页应用
+- [Material Design](https://material.io/) 风格
 - 访客无需注册即可对文章点赞和评论
-- 编辑文章时可粘贴上传剪贴板的图片内容
-- 编辑文章时可实时预览 Markdown 
-- 可按文章的类别标签筛选展示
+- 编辑文章时, 粘贴上传剪贴板的图片内容
+- 编辑文章时, 实时预览 markdown 
+- 按文章的类别标签筛选展示
 - 阅读文章时展示索引
 - 根据配置展示 GitHub 仓库, 社交资料和个人简历
 
 ### 技术要点
 
-[comment]: <> (- 基于 `React` + `Sass` + `Koa`)
 - **未使用任何组件库和样式库**
 - 交互和样式设计参考 [Google Design 旧站](https://web.archive.org/web/20170516175305/https://design.google.com), [AngularJS Material](https://material.angularjs.org/latest/), [Google 开发者](https://developer.chrome.com/) 等站点
 - **尽可能地**不依赖前端工具类库
@@ -27,8 +26,8 @@
 #### 1. 服务器需求
 
 - 较新的 LTS 版本 nodejs
-  - 支持类的箭头方法即可, 我的是 `14.16.0`
-- 全局安装的 [PM2](https://www.npmjs.com/package/pm2)
+  - 支持类的箭头方法即可, 亲测`14.16.0`可用
+- 全局安装 [PM2](https://www.npmjs.com/package/pm2)
 - nginx 关键配置:
   ```nginx
   http {
@@ -50,7 +49,7 @@
 
 - fork 此仓库
 - 在 `config.js` 按需配置站点信息
-- 克隆到你的服务器
+- 克隆至远端服务器
 - `npm run deploy`
 - 在远端 `backend/secret.json` 配置管理员账户和 koa 秘钥
 - Ready to roll!
@@ -58,13 +57,15 @@
 ### 二次开发
 
 - fork 此仓库
+- 克隆至本地
+- 全局安装 [nodemon](https://www.npmjs.com/package/nodemon)
 - `npm run setup`
 - `npm run server` 启动后端
 - `npm run dev` 启动前端开发环境
 
 ### _What is Rhaego?_
 
-**Rhaego (雷戈)** 是小说`冰与火之歌`中`丹妮莉丝 · 坦格利安`与`卓戈卡奥`之子的名字.
+**Rhaego (雷戈)** 是小说`冰与火之歌`中`丹妮莉丝·坦格利安`与`卓戈卡奥`之子的名字.
 
 > 「至于卓戈之子雷戈，骑着世界的骏马，我也要送他一件礼物。我要送他那张他母亲的父亲坐过的铁椅子，我要送他七大王国。我，卓戈，卡奥，要做这件事。」他的音量渐高，举起拳头对天呼喊，「我要带着我的卡拉萨向西走到世界尽头，骑着木马横渡黑色咸水，做出古往今来其他卡奥都从来没有做过的事。我要杀死穿铁衣服的人，拆了他们的石头房子。我要强奸他们的女人，抓他们的小孩来做奴隶，把他们无用的神像带回维斯·多斯拉克，向圣母山行礼。我，拔尔勃之子卓戈在此发誓，在圣母山前发誓，以天上群星为证。」  
 > 
