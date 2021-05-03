@@ -1,94 +1,71 @@
 # Rhaego
 
+## 开箱即用的 Material Design 风格博客系统
 
-https://www.npmjs.com/package/n
+### 功能
 
-**TODO**
+- Material Design 风格
+- 响应式布局的单页应用 
+- 访客无需注册即可对文章点赞和评论
+- 编辑文章时可粘贴上传剪贴板的图片内容
+- 编辑文章时可实时预览 Markdown 
+- 可按文章的类别标签筛选展示
+- 阅读文章时展示索引
+- 根据配置展示 GitHub 仓库, 社交资料和个人简历
 
----
+### 技术要点
 
-> 以下为旧版本的描述, 有兴趣可检出`archive`分支查看
+[comment]: <> (- 基于 `React` + `Sass` + `Koa`)
+- **未使用任何组件库和样式库**
+- 交互和样式设计参考 [Google Design 旧站](https://web.archive.org/web/20170516175305/https://design.google.com), [AngularJS Material](https://material.angularjs.org/latest/), [Google 开发者](https://developer.chrome.com/) 等站点
+- **尽可能地**不依赖前端工具类库
+- 基于嵌入式数据库 [NeDB](https://github.com/louischatriot/nedb), 即插即用
+- 根据真实客户端 IP 限制访客的有效请求次数
 
-# React Rhaego
+### 使用姿势
 
-### **完全原创、独立完成**的[个人站点](https://www.youknowznm.com/)的前端
+#### 1. 服务器需求
 
-#### 特点：
-
-  - Material Design 风格，自适应于不同设备的浏览器
-  - 可编辑和展示笔记标题、摘要、Markdown 内容、标签和创建日期
-  - 可在编辑器内实时预览 Markdown 内容
-  - 支持图片的上传和托管
-  - 管理员可创建或编辑笔记，并管理访客在笔记下的评论
-  - 访客无需注册即可对笔记进行点赞、评论
-  - 根据浏览器指纹控制访客在一定时间内的评论数
-  - 支持按指定的标签类别展示笔记，阅读时展示笔记的索引
-  - 根据配置展示 GitHub 作品、社交资料和个人简历
-
-#### 技术栈：
-
-前端：
-
-  - 使用 [react-redux](https://github.com/reactjs/react-redux) 处理数据的渲染和单向流动
-  - 使用 [redux-thunk](https://github.com/troch/react-thunk) 和 [redux-action-tools](https://github.com/kpaxqin/redux-action-tools) 处理异步 action
-  - 使用 [material-ui-next](https://github.com/mui-org/material-ui) 组件库和 [material-ui-icons](https://github.com/MODX-Club/material-ui-icons) 图标库实现全站的 Material Design 风格
-  - 使用 [fingerprint.js](https://github.com/Valve/fingerprintjs2) 作为客户端的访客身份标识
-  - 使用 [react-syntax-highlighter](https://github.com/conorhastings/react-syntax-highlighter) 实现展示笔记时的代码高亮
-  - 使用 [marked](https://github.com/markedjs/marked) 渲染笔记的 Markdown 内容为 HTML
-  - 使用 [axios](https://github.com/axios/axios) 处理客户端 HTTP 请求
-  - 使用 [node-sass-chokidar](https://github.com/michaelwayman/node-sass-chokidar) 转译 SCSS 为 CSS
-
-后端：
-
-  - 使用 [mini-express](https://github.com/youknowznm/mini-express)（我的另一个项目）作为简易的服务器框架
-  - 使用 [mongodb](https://www.mongodb.com/) 存取数据
-  - 使用 [mongoose](http://mongoosejs.com/) 简化对 MongoDB 的操作
-  - 使用 [shortid](https://github.com/dylang/shortid) 生成文档的 _id
-
-> 请注意 [material-ui-next](https://github.com/mui-org/material-ui) 组件库的 api 尚不稳定，建议不要安装高于当前 package.json 中的版本
-
-#### 调试：
-
-  1. 克隆 [react-material-blog](https://github.com/youknowznm/react-material-blog) 和 [react-material-blog-server](https://github.com/youknowznm/react-material-blog-server)
-
-  2. 安装 mongodb
-
-  3. 进入 react-material-blog 项目
-
-  ```bash
-  npm i
-  npm run scss
-  npm run dev
+- 较新的 LTS 版本 nodejs
+  - 支持类的箭头方法即可, 我的是 `14.16.0`
+- 全局安装的 [PM2](https://www.npmjs.com/package/pm2)
+- nginx 关键配置:
+  ```nginx
+  http {
+    server {
+      location / {
+  
+        # 反向代理至 koa 服务
+        proxy_pass http://localhost:4000;
+   
+        # 提供 koa 真实的客户端 IP, 而不是反向代理的
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  
+      }
+    }
+  }
   ```
 
-  4. 进入 react-material-blog-server 项目
+#### 2. 部署
 
-  ```bash
-  npm i
-  npm run dev
-  ```
+- fork 此仓库
+- 在 `config.js` 按需配置站点信息
+- 克隆到你的服务器
+- `npm run deploy`
+- 在远端 `backend/secret.json` 配置管理员账户和 koa 秘钥
+- Ready to roll!
 
-  5. 在 `localhost:3000` 查看
+### 二次开发
 
+- fork 此仓库
+- `npm run setup`
+- `npm run server` 启动后端
+- `npm run dev` 启动前端开发环境
 
-#### 预览：
+### _What is Rhaego?_
 
-桌面端：
+**Rhaego (雷戈)** 是小说`冰与火之歌`中`丹妮莉丝 · 坦格利安`与`卓戈卡奥`之子的名字.
 
-  ![桌面端1](http://wx3.sinaimg.cn/large/005Pjl1Cly1foxhftlmunj313c0jtafo.jpg)
-
-  ![桌面端2](http://wx1.sinaimg.cn/large/005Pjl1Cly1foxhfti40rj313k0k2dki.jpg)
-
-  ![桌面端3](https://wx4.sinaimg.cn/mw1024/005Pjl1Cly1foxhfses1dj313j0k2775.jpg)
-
-  ![桌面端4](https://wx3.sinaimg.cn/mw1024/005Pjl1Cly1foxhfs6k55j313k0k0myi.jpg)
-
-移动端：
-
-  ![移动端1](https://wx1.sinaimg.cn/mw1024/005Pjl1Cly1foxhft517cj30bk0kjq4x.jpg)
-
-  ![移动端2](https://wx1.sinaimg.cn/mw1024/005Pjl1Cly1foxhfswjfhj30bh0ki76a.jpg)
-
-  ![移动端3](https://wx1.sinaimg.cn/mw1024/005Pjl1Cly1foxhfsjuz8j30bj0kitam.jpg)
-
-  ![移动端4](https://wx1.sinaimg.cn/mw1024/005Pjl1Cly1foxhfs2s8fj30bg0kgaap.jpg)
+> 「至于卓戈之子雷戈，骑着世界的骏马，我也要送他一件礼物。我要送他那张他母亲的父亲坐过的铁椅子，我要送他七大王国。我，卓戈，卡奥，要做这件事。」他的音量渐高，举起拳头对天呼喊，「我要带着我的卡拉萨向西走到世界尽头，骑着木马横渡黑色咸水，做出古往今来其他卡奥都从来没有做过的事。我要杀死穿铁衣服的人，拆了他们的石头房子。我要强奸他们的女人，抓他们的小孩来做奴隶，把他们无用的神像带回维斯·多斯拉克，向圣母山行礼。我，拔尔勃之子卓戈在此发誓，在圣母山前发誓，以天上群星为证。」  
+> 
+> _《冰与火之歌 · 卷一 · 权力的游戏》_
