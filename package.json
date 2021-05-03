@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "webpack serve --config frontend/webpack.config.js --mode=development",
     "build": "webpack --config frontend/webpack.config.js --mode=production",
-    "server": "nodemon backend/server"
+    "server": "nodemon backend/server",
+    "setup": "sh scripts/setup.sh",
+    "deploy": "sh scripts/deploy.sh"
   },
   "repository": {
     "type": "git",
