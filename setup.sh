@@ -1,11 +1,10 @@
-#! /bin/sh -e
+#! /bin/bash
+set -e
 
-printf "\n-------- 拉取远端仓库 --------\n"
-git pull
-
-printf "\n-------- npm ci --------\n"
-rm -rf node_modules
-npm ci
+printf "\n-------- npm i --------\n"
+if [ ! -d "node_modules" ]; then
+  npm i
+fi
 
 printf "\n-------- 前端构建 --------\n"
 npm run build
@@ -25,11 +24,4 @@ if [ ! -d "backend/files" ]; then
   mkdir "backend/files"
 fi
 
-printf "\n-------- 重启服务 --------\n"
-pm2 stop backend/server
-pm2 start backend/server
-
-printf "\n-------- 重启 nginx --------\n"
-nginx -s reload
-
-printf "\n-------- rhaego 已就绪. --------\n"
+printf "\n-------- 初始化完成 --------\n"

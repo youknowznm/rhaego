@@ -13,12 +13,12 @@ import {MainContext} from '~/modules/Context';
 class RhaegoHeader extends React.Component {
 
   static propTypes = {
-    siteName: PropTypes.string.isRequired,
+    bannerTitle: PropTypes.string.isRequired,
     links: PropTypes.array.isRequired,
   }
 
   static defaultProps = {
-    siteName: 'Rhaego Example Header',
+    bannerTitle: 'Rhaego Example Header',
     links: [],
   }
 
@@ -68,14 +68,14 @@ class RhaegoHeader extends React.Component {
   }
 
   get bannerTitle() {
-    // 常规文章页, 不获取 siteName, 避免文章标题的闪烁
+    // 常规文章页, 不获取 bannerTitle, 避免文章标题的闪烁
     if (
       location.pathname === ('/article')
       && !/RESUME/.test(location.search)
     ) {
       return this.context.bannerTitle
     }
-    return this.props.siteName
+    return this.props.bannerTitle
   }
 
   componentDidMount() {

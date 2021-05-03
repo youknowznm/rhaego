@@ -128,4 +128,4 @@ app.use(async (ctx,next) => {
 
 app.listen(4000)
 
-console.log('\n-------- rhaego on 4000. --------\n')
+console.log('\n-------- rhaego 已运行于 http://localhost:4000 --------\n')

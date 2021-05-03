@@ -1,5 +1,5 @@
 const API_CONTEXT = '/api'
-const {githubUser} = require('../../config')
+const {githubUsername} = require('../../config')
 
 module.exports = {
   // 笔记
@@ -33,5 +33,5 @@ module.exports = {
   GET_VISITORS: `${API_CONTEXT}/visitors`,
 
   // github 仓库列表
-  GET_GITHUB_REPOS: `https://api.github.com/users/${githubUser}/repos?visibility=public`,
+  GET_GITHUB_REPOS: `https://api.github.com/users/${githubUsername}/repos?visibility=public`,
 }

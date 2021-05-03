@@ -21,9 +21,6 @@ export function ajax(
     if (isJson) {
       xhr.setRequestHeader('Content-Type', 'application/json')
     }
-    // for (let key in headers) {
-    //   xhr.setRequestHeader(key, headers[key])
-    // }
     xhr.onreadystatechange = () => {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
@@ -43,10 +40,8 @@ export function ajax(
           toast(errorMessage)
           reject(errorMessage)
         }
-        // 无权限时写 ls, 重载
-        if (status === 401) {
+        if (xhr.status === 401) {
           setStorage(LOGIN_STATUS, false)
-          location.reload()
         }
       }
     }

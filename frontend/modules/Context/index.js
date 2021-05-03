@@ -3,7 +3,7 @@ import {
   LOGIN_STATUS,
   getStorage, isValidString, setStorage,
 } from '~utils'
-import {siteNameCondensed} from '~config'
+import {siteName} from '~config'
 
 export const MainContext = React.createContext({
   hasLoggedIn: false,
@@ -48,8 +48,8 @@ export class MainProvider extends React.Component {
       docTitle
     })
     document.title = isValidString(docTitle)
-      ? `${docTitle} · ${siteNameCondensed}`
-      : siteNameCondensed
+      ? `${docTitle} · ${siteName}`
+      : siteName
   }
 
   setBannerTitle = bannerTitle => {

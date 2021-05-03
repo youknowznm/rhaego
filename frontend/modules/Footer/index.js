@@ -6,6 +6,8 @@ import {addCommaToInt, get, getTagsFromText, noop} from '~utils'
 import api from '~api'
 import style from './footer.scss'
 
+const REPO_SOURCE = 'https://github.com/youknowznm/rhaego'
+
 export default class Footer extends React.Component {
 
   state = {
@@ -58,7 +60,7 @@ export default class Footer extends React.Component {
                 <a
                   className={'link'}
                   target={'_blank'}
-                  href={siteData.repoSource}
+                  href={REPO_SOURCE}
                 >
                   Rhaego
                 </a>

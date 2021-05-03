@@ -1,6 +1,6 @@
 import React from 'react'
 import RhaegoHeader from '~/components/Header'
-import {siteName} from '~config'
+import {bannerDefaultTitle} from '~config'
 import {
   RESUME_ID,
 } from '~utils'
@@ -40,7 +40,7 @@ class Header extends React.Component {
 
     return (
       <RhaegoHeader
-        siteName={siteName}
+        bannerTitle={bannerDefaultTitle}
         links={links}
         {...this.props}
       />
