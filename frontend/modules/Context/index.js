@@ -1,7 +1,7 @@
 import React from 'react'
 import {
-  LOGIN_STATUS_KEY,
-  getStorage, isValidString,
+  LOGIN_STATUS,
+  getStorage, isValidString, setStorage,
 } from '~utils'
 import {siteNameCondensed} from '~config'
 
@@ -25,7 +25,7 @@ export class MainProvider extends React.Component {
 
   componentDidMount() {
     this.setState({
-      hasLoggedIn: getStorage(LOGIN_STATUS_KEY),
+      hasLoggedIn: getStorage(LOGIN_STATUS),
     })
   }
 
@@ -33,12 +33,14 @@ export class MainProvider extends React.Component {
     this.setState({
       hasLoggedIn: true
     })
+    setStorage(LOGIN_STATUS, true)
   }
 
   markLogout = () => {
     this.setState({
       hasLoggedIn: false
     })
+    setStorage(LOGIN_STATUS, false)
   }
 
   setDocTitle = docTitle => {

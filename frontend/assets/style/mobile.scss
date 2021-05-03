@@ -82,11 +82,14 @@ body.device-mobile {
         padding: 12px;
       }
       .new-article,
-      .edit-resume,
-      .visitor-list {
+      .edit-resume {
         display: none;
       }
-     .title {
+      .visitors {
+        margin-left: 0;
+        transform: none;
+      }
+      .title {
         margin-bottom: 18px;
       }
     }

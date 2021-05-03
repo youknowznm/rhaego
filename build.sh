@@ -1,4 +1,5 @@
 #! /bin/sh -e
+
 printf "\n-------- 拉取远端仓库 --------\n"
 git pull
 
@@ -14,7 +15,7 @@ if [ ! -f "backend/secret.json" ]; then
   cp -r backend/secret.json.example backend/secret.json
 fi
 
-printf "\n-------- 检查简历 markdown --------\n"
+printf "\n-------- 检查 resume.md --------\n"
 if [ ! -f "backend/data/resume.md" ]; then
   cp -r backend/data/resume.md.example backend/data/resume.md
 fi

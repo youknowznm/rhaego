@@ -59,18 +59,22 @@ class Articles extends React.Component {
       .then(res => {
         const articles = res.articles
           .map(item => {
-            // 移除一些 md 的标记, 作为简介更加可读
-            const contentWithoutMarkers = item.markdownContent.replace(
-              /```\S+\s|#|!?\[\S*]\([^)]*\)/g, ''
-            )
             return {
               ...item,
               tags: getTagsFromText(item.tagsText),
-              contentWithoutMarkers,
+              // 移除一些 md 的标记, 作为简介更加可读
+              contentWithoutMarkers: item.markdownContent.replace(
+                /```\S+\s|#|!?\[\S*]\([^)]*\)/g, ''
+              ),
             }
           })
           .sort((prev, curr) => {
-            return -(prev.likedCount - curr.likedCount)
+            if (new Date(prev.dateString) > new Date(curr.dateString)) {
+              return -1
+            }
+            if (prev.likedCount > curr.likedCount) {
+              return -1
+            }
           })
         this.setState({
           articles,

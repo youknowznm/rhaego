@@ -1,4 +1,4 @@
-import {setSearchParams} from './index'
+import {LOGIN_STATUS, setSearchParams, setStorage} from './index'
 import {toast} from '~/components/Toast'
 
 // get 和 post
@@ -42,6 +42,11 @@ export function ajax(
           } catch (e) {}
           toast(errorMessage)
           reject(errorMessage)
+        }
+        // 无权限时写 ls, 重载
+        if (status === 401) {
+          setStorage(LOGIN_STATUS, false)
+          location.reload()
         }
       }
     }

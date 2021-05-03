@@ -101,7 +101,7 @@ export const markdownParser = new MarkdownParser()
 
 export const RESUME_ID = 'RESUME'
 
-export const LOGIN_STATUS_KEY = 'rhaego-logged-in'
+export const LOGIN_STATUS = 'rhaego-logged-in'
 
 // 12345 => 12,345
 export const addCommaToInt = string => {

@@ -116,7 +116,9 @@ class RhaegoDb {
           this.articleDb.update(
             articleDoc,
             {
-              ...articleFields
+              $set: {
+                ...articleFields
+              }
             },
             {
               returnUpdatedDocs: true
@@ -164,7 +166,9 @@ class RhaegoDb {
       .then(clientDoc => {
         if (clientDoc === null) {
           this.clientDb.insert(
-            {...params},
+            {
+              ...params
+            },
             (err, articleDoc) => {
               err && reject(err)
               resolve(articleDoc)
@@ -174,7 +178,9 @@ class RhaegoDb {
           this.clientDb.update(
             {clientIp},
             {
-              $set: {...otherParams}
+              $set: {
+                ...otherParams
+              }
             },
             {
               returnUpdatedDocs: true
@@ -194,7 +200,7 @@ class RhaegoDb {
   getVisitors = () => new Promise((resolve, reject) => {
     this.clientDb.find({}, (err, allClients)=>{
       err && reject(err)
-      resolve(allClients)
+      resolve(allClients.sort((prev, curr) => -(prev.lastVisited - curr.lastVisited)))
     })
   })
   // 所有访客的访问次数和
@@ -257,11 +263,11 @@ class RhaegoDb {
             returnUpdatedDocs: true,
             multi: true,
           },
-          (err, numAffected, docs) => {
-            err && console.log(err)
-            console.log(docs)
-            // resolve(docs)
-          }
+          // (err, numAffected, docs) => {
+          //   err && console.log(err)
+          //   console.log(docs)
+          //   // resolve(docs)
+          // }
         )
       }
       prevDay = nowDay

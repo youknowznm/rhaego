@@ -49,11 +49,7 @@ router
 
     if (params.articleId === '') {
       params.articleId = generateId()
-    }
-    if (!Array.isArray(params.likedBy)) {
       params.likedBy = []
-    }
-    if (!Array.isArray(params.comments)) {
       params.comments = []
     }
 
@@ -194,7 +190,7 @@ router
     }
     const user = users.find(item => item.username === username)
     if (!user || user.password !== password) {
-      ctx.throw(400, '用户名或密码错误')
+      ctx.throw(401, '用户名或密码错误')
       return
     }
     console.log(`已登录: ${username}`)
