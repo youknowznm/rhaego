@@ -1,9 +1,10 @@
-body.device-mobile {
-  @media (max-width: 600px) {
-    .rhaego-card {
-      width: 100%;
-    }
+@media (max-width: 600px) {
+  .rhaego-card {
+    width: 100%;
   }
+}
+
+body.device-mobile {
   @media (max-width: 750px) {
     .rhaego-header {
       .nav-bar {
