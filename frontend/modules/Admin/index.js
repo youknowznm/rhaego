@@ -154,6 +154,7 @@ class Admin extends React.Component {
       <div className={'admin-area'}>
         <Button
           className={'new-article'}
+          type={'primary'}
           disabled={this.state.isLoading}
           onClick={() => this.props.history.push(`/editor`)}
         >
@@ -165,6 +166,13 @@ class Admin extends React.Component {
           onClick={() => this.props.history.push(`/editor?id=${RESUME_ID}`)}
         >
           编辑简历
+        </Button>
+        <Button
+          className={'edit-resume'}
+          disabled={this.state.isLoading}
+          onClick={() => this.props.history.push(`/article?id=${RESUME_ID}`)}
+        >
+          查看简历
         </Button>
         <Button
           className={'cancel'}

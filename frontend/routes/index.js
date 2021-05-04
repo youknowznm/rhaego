@@ -55,6 +55,9 @@ export default function Routes() {
             <Route exact path='/article'>
               <Article/>
             </Route>
+            <Route exact path='/about'>
+              <Redirect to='/article?id=RESUME'/>
+            </Route>
             <Route exact path='/editor'>
               <Editor/>
             </Route>
@@ -63,9 +66,6 @@ export default function Routes() {
             </Route>
             <Route exact path='/admin'>
               <Admin/>
-            </Route>
-            <Route exact path='/about'>
-              <Redirect to='/article?id=RESUME'/>
             </Route>
             <Route path='/'>
               <p className={'page-not-found'}>

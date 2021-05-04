@@ -11,8 +11,8 @@ import {
   post,
   Link,
   pick,
-  addClass, removeClass, goToPath, postForm, markdownParser,
-  debounce, RESUME_ID, noop
+  addClass, removeClass, postForm, markdownParser,
+  debounce, RESUME_ID, noop, setStorage, getStorage
 } from '~utils'
 import style from './editor.scss'
 import TextField from '~/components/TextField'
@@ -21,6 +21,8 @@ import Toast, {toast} from '~/components/Toast'
 import {formatDateToPast, formatDateToString} from '~utils'
 import api from '~api'
 import {MainContext} from '~/modules/Context';
+
+const EDITOR_CONTENT_KEY = 'editor-content'
 
 class Editor extends React.Component {
 
@@ -40,6 +42,16 @@ class Editor extends React.Component {
     addClass(document.body, 'full-vh-content')
     this.tryGetExistedContent()
     this.context.setDocTitle('编辑笔记')
+  }
+
+  checkLocalStorage = () => {
+    const value = getStorage(EDITOR_CONTENT_KEY)
+    if (isValidString(value)) {
+      this.setState({
+        markdownContent: value,
+        parsedHTML: markdownParser.parse(value),
+      })
+    }
   }
 
   tryGetExistedContent = () => {
@@ -65,6 +77,8 @@ class Editor extends React.Component {
           })
         })
         .catch(noop)
+    } else {
+      this.checkLocalStorage()
     }
   }
 
@@ -92,6 +106,7 @@ class Editor extends React.Component {
     post(api.SAVE_ARTICLE, params)
       .then(res => {
         this.props.history.push(`/article?id=${res.articleId}`)
+        setStorage(EDITOR_CONTENT_KEY, '')
       })
       .catch(noop)
   }
@@ -169,7 +184,7 @@ class Editor extends React.Component {
         })
         postForm(api.UPLOAD_FILE, formData)
           .then(res => {
-            const text = `\n\n![](/files/${res.fileName})\n\n`
+            const text = `\n![](/files/${res.fileName})\n`
             // 神奇, 本轮循环粘贴不出来
             setTimeout(() => {
               document.execCommand('insertText', false, text)
@@ -192,6 +207,7 @@ class Editor extends React.Component {
       markdownContent: value,
       parsedHTML: markdownParser.parse(value),
     })
+    setStorage(EDITOR_CONTENT_KEY, value)
   })
 
   renderCompareArea = () => {

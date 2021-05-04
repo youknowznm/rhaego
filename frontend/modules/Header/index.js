@@ -1,20 +1,17 @@
 import React from 'react'
 import RhaegoHeader from '~/components/Header'
 import {bannerDefaultTitle} from '~config'
-import {
-  RESUME_ID,
-} from '~utils'
+import {RESUME_ID} from "~utils";
 
 export const links = [
   {
     name: '笔记',
     path: '/articles',
     matches: path => {
-      if (/^\/articles/.test(path)) {
-        return true
-      }
-      const arr = /^\/article\?id=(\S+)/.exec(path)
-      return arr ? arr[1] !== RESUME_ID : false
+      return /^\/article/.test(path)
+      // 如果期望让简历链接展示在首页, 打开此注释
+      // const arr = /^\/article\?id=(\S+)/.exec(path)
+      // return arr ? arr[1] !== RESUME_ID : false
     }
   },
   {
@@ -22,7 +19,7 @@ export const links = [
     path: '/repos',
     matches: null,
   },
-  // 如果希望让简历链接展示在首页, 打开此注释
+  // 如果期望让简历链接展示在首页, 打开此注释
   // {
   //   name: '关于我',
   //   path: '/article?id=RESUME',

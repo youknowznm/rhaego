@@ -4,7 +4,7 @@ import c from 'classnames'
 import {
   formatToMaterialSpans,
   getStyleInt,
-  animateToScrollHeight, removeClass, addClass, goToPath, isValidString, callIfCallable
+  animateToScrollHeight, removeClass, addClass, callIfCallable
 } from '~utils'
 import {withRouter} from 'react-router-dom'
 import style from './header.scss'

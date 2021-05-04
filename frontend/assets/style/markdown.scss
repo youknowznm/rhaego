@@ -51,8 +51,15 @@
     }
   }
 
-  h2, h3, h4, h5, h6 {
-    margin: 36px 0 12px;
+  h2 {
+    margin: 36px 0 18px;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 32px;
+  }
+
+  h3, h4, h5, h6 {
+    margin: 12px 0 12px;
     font-size: 20px;
     line-height: 32px;
   }
@@ -88,15 +95,15 @@
     background: $white;
     color: $font-primary;
     border: 1px solid $rhaego-markdown-border-light;
-    white-space: pre-wrap;
-    font-size: 12px;
-    line-height: 18px;
+    //white-space: pre-wrap;
+    font-size: 1em;
+    line-height: 1.5;
     code {
       color: unset;
       border: unset;
       background-color: unset;
-      font-size: 12px;
-      line-height: 18px;
+      //font-size: 12px;
+      //line-height: 18px;
     }
   }
 
@@ -108,7 +115,7 @@
       line-height: 1.6;
       padding: 0;
       position: relative;
-      //margin: .2em 0;
+      margin: .2em 0;
     }
     p {
       margin: 0;
@@ -128,7 +135,7 @@
 
   img {
     display: block;
-    margin: 12px auto;
+    margin: 24px auto;
     max-width: 100%;
     cursor: pointer;
     box-shadow: $paper-elevation-medium;
