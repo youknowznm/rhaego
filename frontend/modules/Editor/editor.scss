@@ -4,6 +4,7 @@
 .rhaego-editor {
   position: relative;
   overflow: scroll;
+  padding: 0 12px;
   min-width: 1200px;
   .editor-fields {
     position: relative;
@@ -27,8 +28,9 @@
   }
   .compare-wrap {
     position: absolute;
-    width: 100%;
     top: 120px;
+    left: 12px;
+    right: 12px;
     bottom: 12px;
     background: $white;
     .raw,

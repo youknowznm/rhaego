@@ -5,5 +5,4 @@
   // 最小高度为 (视口 height) - (footer height & marginTop) - (banner height)
   min-height: calc(100vh - 216px - 160px - 256px);
   z-index: 99;
-  overflow: hidden;
 }

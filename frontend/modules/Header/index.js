@@ -22,11 +22,12 @@ export const links = [
     path: '/repos',
     matches: null,
   },
-  {
-    name: '关于我',
-    path: '/article?id=RESUME',
-    matches: null,
-  },
+  // 如果希望让简历链接展示在首页, 打开此注释
+  // {
+  //   name: '关于我',
+  //   path: '/article?id=RESUME',
+  //   matches: null,
+  // },
   {
     name: '管理员登录',
     path: '/admin',

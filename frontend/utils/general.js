@@ -44,7 +44,8 @@ export function getPalette() {
     'orange',
     'brown',
     'grey',
-    'bluegrey',
+    // 蓝灰和导航 2 的主题色太接近, 不要了
+    // 'bluegrey',
   ].sort(() => Math.random() - .5)
 }
 

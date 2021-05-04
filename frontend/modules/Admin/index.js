@@ -199,7 +199,7 @@ class Admin extends React.Component {
             this.state.visitors.map(item => (
               <tr key={item._id}>
                 <td>
-                  {item.clientIp.replace(/::ffff:/, '')}
+                  {item.clientIp}
                 </td>
                 <td align={'right'}>
                   {item.dailyAttempts}
@@ -218,12 +218,12 @@ class Admin extends React.Component {
           }
           </tbody>
         </table>
-        <p className={'sum'}>
-          访问设备总计:
-          <span className={'num'}>
-            {this.state.visitors.length}
-          </span>
-        </p>
+        {/*<p className={'sum'}>*/}
+        {/*  访问两次以上的设备总计:*/}
+        {/*  <span className={'num'}>*/}
+        {/*    {this.state.visitors.length}*/}
+        {/*  </span>*/}
+        {/*</p>*/}
       </div>
     )
   }
