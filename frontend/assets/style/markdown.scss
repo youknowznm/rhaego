@@ -93,17 +93,12 @@
     position: relative;
     padding: 0.5em;
     background: $white;
-    color: $font-primary;
     border: 1px solid $rhaego-markdown-border-light;
-    //white-space: pre-wrap;
-    font-size: 1em;
-    line-height: 1.5;
+    font-size: 0.875em;
     code {
       color: unset;
       border: unset;
       background-color: unset;
-      //font-size: 12px;
-      //line-height: 18px;
     }
   }
 
