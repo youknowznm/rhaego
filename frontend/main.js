@@ -12,3 +12,8 @@ ReactDOM.render(
   <Routes />,
   document.getElementById('root')
 )
+
+console.log(
+  '%cMay the flames guide thee.',
+  'font-weight: 500; color: #ea4335'
+)
