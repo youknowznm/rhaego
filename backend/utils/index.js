@@ -16,7 +16,7 @@ const isValidString = target => typeof target === 'string' && target !== ''
 
 const getExt = fileName => {
   const arr = /\.\S+$/.exec(fileName)
-  return arr[0] ? arr[0] : ''
+  return arr ? arr[0] : ''
 }
 
 const isAdmin = (ctx) => {

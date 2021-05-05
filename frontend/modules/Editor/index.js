@@ -144,7 +144,7 @@ class Editor extends React.Component {
           label={'发布时间'}
           value={this.state.dateString}
           onChange={this.getSetStateMethod('dateString')}
-          width={240}
+          width={200}
           maxLength={10}
           validatorRegExp={/^\d{4}-\d{2}-\d{2}$/}
           hint={'YYYY/MM/DD 格式的日期'}
@@ -155,13 +155,13 @@ class Editor extends React.Component {
           <Button
             className={'submit'}
             disabled={this.state.isLoading}
+            type={'primary'}
             onClick={this.onSave}
           >
             保存
           </Button>
             <Button
               className={'cancel'}
-              type={'secondary'}
               onClick={() => {this.props.history.goBack()}}
               disabled={this.state.isLoading}
             >

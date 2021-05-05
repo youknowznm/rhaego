@@ -151,12 +151,12 @@ router
     }
   })
 
-  // 读图片
+  // 读文件
 
   .get('/files/:filename', async function(ctx) {
     const filePath = ctx.request.url
     ctx.type = getExt(filePath)
-    ctx.body = fs.createReadStream(resolve(__dirname, `../${filePath}`))
+    ctx.body = fs.createReadStream(resolve(__dirname, `../${filePath}`), 'utf8')
   })
 
   // 读 github 仓库
