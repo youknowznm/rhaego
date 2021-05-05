@@ -25,22 +25,22 @@ $card-padding: 18px;
     line-height: 32px;
     min-height: 32px;
     display: -webkit-box;
-    max-height: calc(2 * 32px);
     overflow: hidden;
-    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+    max-height: calc(1 * 32px);
+    -webkit-line-clamp: 1;
   }
   .content {
     position: relative;
     font-size: 14px;
-    line-height: 1.8em;
+    line-height: 1.8;
     margin: 10px 0 14px;
     min-height: 1.8em;
-    max-height: calc(6 * 1.8em);
     display: -webkit-box;
     overflow: hidden;
-    -webkit-line-clamp: 6;
     -webkit-box-orient: vertical;
+    -webkit-line-clamp: 7;
+    max-height: calc(7 * 1.8em);
   }
   .counts {
     position: absolute;

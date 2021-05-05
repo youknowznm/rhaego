@@ -87,23 +87,25 @@
   }
 
   pre {
-    margin: 12px 0;
+    margin: 24px 0;
     overflow-x: auto;
     overflow-y: hidden;
     position: relative;
     padding: 0.5em;
     background: $white;
-    border: 1px solid $rhaego-markdown-border-light;
-    font-size: 0.875em;
+    box-shadow: $paper-elevation-low;
+    border-radius: 3px;
+    font-size: 0.75em;
     code {
       color: unset;
       border: unset;
       background-color: unset;
+      font-size: unset;
     }
   }
 
   ul, ol {
-    padding-left: 1.5em;
+    margin-left: 2em;
     margin-bottom: 12px;
     li {
       font-size: 14px;
@@ -154,6 +156,7 @@
     border-spacing: 0;
     border-collapse: collapse;
     margin: 12px 0;
+    font-size: 14px;
     th {
       font-weight: 500;
     }

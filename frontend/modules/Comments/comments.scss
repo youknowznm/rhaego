@@ -17,9 +17,9 @@
       border-radius: 3px;
       background: $white;
       transition: all .6s $materialCubicBezier;
-      &:hover {
-        box-shadow: $paper-elevation-medium;
-      }
+      //&:hover {
+      //  box-shadow: $paper-elevation-medium;
+      //}
       .title {
         font-size: 12px;
         color: $font-secondary;

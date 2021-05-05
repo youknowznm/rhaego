@@ -24,7 +24,6 @@ import {withRouter} from 'react-router-dom'
 import {toast} from '~/components/Toast'
 import style from './articles.scss'
 import {MainContext} from '~/modules/Context';
-import Repos from '~/modules/Repos';
 
 class Articles extends React.Component {
 
@@ -63,8 +62,10 @@ class Articles extends React.Component {
               ...item,
               tags: getTagsFromText(item.tagsText),
               // 移除一些 md 的标记, 作为简介更加可读
+              // TODO 分组声明易于维护
               contentWithoutMarkers: item.markdownContent.replace(
-                /```\S+\s|#|!?\[\S*]\([^)]*\)/g, ''
+                // * | # 空格 标题 | - | ` | 图片 | 链接
+                /\*|#+\s\S+|-|`|!?\[\S*]\([^)]*\)/g, ''
               ),
             }
           })

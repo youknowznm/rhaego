@@ -23,11 +23,11 @@ class RhaegoHeader extends React.Component {
   }
 
   COLORS = [
-    'silver',
     'grey',
+    'silver',
+    'red',
     'yellow',
     'blue',
-    'red',
     'green',
   ]
 
