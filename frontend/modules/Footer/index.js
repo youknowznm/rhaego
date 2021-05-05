@@ -75,7 +75,17 @@ export default class Footer extends React.Component {
                 height={12}
                 fill={'#ff5252'}
               />
-              <span>by znm.</span>
+              <span>by</span>
+              <span>
+                <a
+                  className={'link'}
+                  target={'_blank'}
+                  href={'https://github.com/youknowznm'}
+                >
+                  znm
+                </a>
+              <span>.</span>
+              </span>
             </p>
             <p className={'right'}>
               <span>访问次数: </span>

@@ -65,7 +65,7 @@
   blockquote {
     padding-left: 12px;
     box-sizing: border-box;
-    margin: 0 0 4px 0;
+    margin: 18px 0;
     border-left: 4px solid rgb(207, 216, 230);
     * {
       color: $rhaego-markdown-quote !important;
@@ -141,8 +141,9 @@
 
   hr {
     border: 0;
-    width: 60%;
-    margin: 63px auto;
+    width: 80%;
+    min-width: 256px;
+    margin: 48px auto;
     border-bottom: 1px solid $rhaego-markdown-border-light;
   }
 

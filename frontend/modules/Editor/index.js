@@ -132,7 +132,7 @@ class Editor extends React.Component {
           label={'标签'}
           value={this.state.tagsText}
           onChange={this.getSetStateMethod('tagsText')}
-          width={240}
+          width={280}
           maxLength={30}
           validatorRegExp={/^(\s*#[^#]+){1,3}\s*$/}
           hint={'1~3 个以#起始, 以空格分隔的标签'}
