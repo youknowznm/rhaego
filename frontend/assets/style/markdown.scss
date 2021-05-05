@@ -3,8 +3,6 @@
 
 // 全局笔记样式
 // 用于编辑页的预览区和笔记详情页
-// 参考 material-ui 的 typography 部分
-// https://material-ui-next.com/style/typography/#typography
 
 .rhaego-markdown {
 
@@ -12,9 +10,9 @@
   color: $font-primary;
 
   p {
-    line-height: 1.6;
+    line-height: 1.5;
     font-size: 14px;
-    margin: 0 0 16px 0;
+    margin: 12px 0;
     padding: 0;
   }
 
@@ -105,11 +103,10 @@
   }
 
   ul, ol {
-    margin-left: 2em;
-    margin-bottom: 12px;
+    margin: 12px 0 12px 2em;
     li {
       font-size: 14px;
-      line-height: 1.6;
+      line-height: 1.5;
       padding: 0;
       position: relative;
       margin: .2em 0;
@@ -117,7 +114,7 @@
     p {
       margin: 0;
       display: inline-block;
-      line-height: 1.6;
+      line-height: 1.5;
     }
   }
   ul > li {
