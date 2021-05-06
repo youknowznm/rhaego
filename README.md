@@ -72,3 +72,7 @@
 > 「至于卓戈之子雷戈，骑着世界的骏马，我也要送他一件礼物。我要送他那张他母亲的父亲坐过的铁椅子，我要送他七大王国。我，卓戈，卡奥，要做这件事。」他的音量渐高，举起拳头对天呼喊，「我要带着我的卡拉萨向西走到世界尽头，骑着木马横渡黑色咸水，做出古往今来其他卡奥都从来没有做过的事。我要杀死穿铁衣服的人，拆了他们的石头房子。我要强奸他们的女人，抓他们的小孩来做奴隶，把他们无用的神像带回维斯·多斯拉克，向圣母山行礼。我，拔尔勃之子卓戈在此发誓，在圣母山前发誓，以天上群星为证。」  
 > 
 > _《冰与火之歌 · 卷一 · 权力的游戏》_
+
+> And to Rhaego son of Drogo, the stallion who will mount the world, to him I also pledge a gift. To him I will give this iron chair his mother's father sat in. I will give him Seven Kingdoms. I, Drogo, khal, will do this thing. I will take my khalasar west to where the world ends, and ride the wooden horses across the black salt water as no khal has done before. I will kill the men in the iron suits and tear down their stone houses. I will rape their women, take their children as slaves, and bring their broken gods back to Vaes Dothrak to bow down before the Mother of Mountains, as the stars look down to witness.
+> 
+> _A Game of Thrones_
