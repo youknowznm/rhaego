@@ -1,6 +1,8 @@
 # Rhaego
 
-开箱即用的 Material Design 风格博客系统
+个人开发和设计, 基于 react + koa, 开箱即用的 Material Design 风格博客系统.  
+基于嵌入式数据库 NeDB.  
+未使用任何组件库 / 样式库 / 动画库.
 
 ### 功能
 
