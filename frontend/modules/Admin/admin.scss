@@ -15,9 +15,6 @@
     border-radius: 3px;
     background: $white;
     transition: all .6s $materialCubicBezier;
-    //&:hover {
-    //  box-shadow: $paper-elevation-medium;
-    //}
     .title {
       font-size: 12px;
       line-height: 18px;
@@ -38,6 +35,17 @@
       &:last-child {
         margin-bottom: 0;
       }
+    }
+  }
+  .sum {
+    text-align: center;
+    font-size: 12px;
+    margin: 12px 0;
+    color: $font-secondary;
+    .num {
+      color: $font-primary;
+      font-weight: 500;
+      margin-left: .2em;
     }
   }
   .visitors-wrap {
@@ -71,16 +79,5 @@
         background-color: #f6f8fa;
       }
     }
-    //.sum {
-    //  text-align: center;
-    //  font-size: 13px;
-    //  margin-top: 1.2em;
-    //  color: $font-secondary;
-    //  .num {
-    //    color: $font-primary;
-    //    font-weight: 500;
-    //    margin-left: .2em;
-    //  }
-    //}
   }
 }

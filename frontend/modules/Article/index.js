@@ -339,14 +339,14 @@ class Article extends React.Component {
               type={'primary'}
               onClick={() => this.props.history.push(`/editor?id=${this.state.articleId}`)}
             >
-              编辑笔记
+              编辑
             </Button>
             <Button
               className={'delete-article'}
               type={'secondary'}
               onClick={this.deleteArticle}
             >
-              删除笔记
+              删除
             </Button>
         </div>
       </div>

@@ -21,8 +21,8 @@ import {
   MainConsumer,
   MainContext,
 } from '~/modules/Context'
-
 import style from './admin.scss'
+
 class Admin extends React.Component {
 
   state = {
@@ -191,48 +191,50 @@ class Admin extends React.Component {
       return null
     }
     return (
-      <div className={'visitors-wrap rhaego-responsive'}>
-        <table className={'visitors'}>
-          <thead>
-          <tr>
-            <th>IP</th>
-            <th>今日剩余请求次数</th>
-            <th>上次访问</th>
-            <th>禁用</th>
-            <th>访问次数</th>
-          </tr>
-          </thead>
-          <tbody>
-          {
-            this.state.visitors.map(item => (
-              <tr key={item._id}>
-                <td>
-                  {item.clientIp}
-                </td>
-                <td align={'right'}>
-                  {item.dailyAttempts}
-                </td>
-                <td>
-                  {formatDateToPast(item.lastVisited)}
-                </td>
-                <td align={'center'}>
-                  {item.restricted === true ? '是' : '否'}
-                </td>
-                <td align={'right'}>
-                  {addCommaToInt(item.visitCount)}
-                </td>
-              </tr>
-            ))
-          }
-          </tbody>
-        </table>
-        {/*<p className={'sum'}>*/}
-        {/*  访问两次以上的设备总计:*/}
-        {/*  <span className={'num'}>*/}
-        {/*    {this.state.visitors.length}*/}
-        {/*  </span>*/}
-        {/*</p>*/}
-      </div>
+      <>
+        <p className={'sum'}>
+          访问两次以上的设备总计:
+          <span className={'num'}>
+            {this.state.visitors.length}
+          </span>
+        </p>
+        <div className={'visitors-wrap rhaego-responsive'}>
+          <table className={'visitors'}>
+            <thead>
+            <tr>
+              <th>IP</th>
+              <th>今日剩余请求次数</th>
+              <th>上次访问</th>
+              <th>禁用</th>
+              <th>访问次数</th>
+            </tr>
+            </thead>
+            <tbody>
+            {
+              this.state.visitors.map(item => (
+                <tr key={item._id}>
+                  <td>
+                    {item.clientIp}
+                  </td>
+                  <td align={'right'}>
+                    {item.dailyAttempts}
+                  </td>
+                  <td>
+                    {formatDateToPast(item.lastVisited)}
+                  </td>
+                  <td align={'center'}>
+                    {item.restricted === true ? '是' : '否'}
+                  </td>
+                  <td align={'right'}>
+                    {addCommaToInt(item.visitCount)}
+                  </td>
+                </tr>
+              ))
+            }
+            </tbody>
+          </table>
+        </div>
+      </>
     )
   }
 

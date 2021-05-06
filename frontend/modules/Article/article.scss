@@ -133,7 +133,8 @@ $indent: 1em;
       display: none;
     }
     .article-sidebar {
-      .admin-actions {
+      //.admin-actions {
+      .delete-article {
         display: none;
       }
     }
