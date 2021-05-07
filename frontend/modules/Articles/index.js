@@ -70,10 +70,12 @@ class Articles extends React.Component {
             }
           })
           .sort((prev, curr) => {
-            if (new Date(prev.dateString) > new Date(curr.dateString)) {
+            // 先按点赞量
+            if (prev.likedCount > curr.likedCount) {
               return -1
             }
-            if (prev.likedCount > curr.likedCount) {
+            // 再按日期
+            if (new Date(prev.dateString) > new Date(curr.dateString)) {
               return -1
             }
           })
