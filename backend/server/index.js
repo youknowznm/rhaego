@@ -27,7 +27,12 @@ db.init()
 // 日志
 app.use(logger())
 
-// etag 写入和检查
+// 强缓存
+app.use(cacheControl({
+  maxAge: 5
+}));
+
+// 协商缓存
 app.use(conditional())
 app.use(etag())
 
