@@ -20,7 +20,7 @@ import Button from '~/components/Button'
 import Toast, {toast} from '~/components/Toast'
 import {formatDateToPast, formatDateToString} from '~utils'
 import api from '~api'
-import {MainContext} from '~/modules/Context';
+import {MainContext} from '~/modules/Context'
 
 const EDITOR_CONTENT_KEY = 'editor-content'
 

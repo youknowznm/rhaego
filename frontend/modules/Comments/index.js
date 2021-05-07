@@ -17,7 +17,7 @@ import Loading from '~/components/Loading'
 import PropTypes from 'prop-types'
 import {toast} from '~/components/Toast'
 import style from './comments.scss'
-import {MainContext} from '~/modules/Context';
+import {MainContext} from '~/modules/Context'
 
 class Comments extends React.Component {
 

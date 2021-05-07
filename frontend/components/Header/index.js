@@ -8,7 +8,7 @@ import {
 } from '~utils'
 import {withRouter} from 'react-router-dom'
 import style from './header.scss'
-import {MainContext} from '~/modules/Context';
+import {MainContext} from '~/modules/Context'
 
 class RhaegoHeader extends React.Component {
 

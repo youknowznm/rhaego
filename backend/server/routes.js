@@ -155,6 +155,9 @@ router
 
   .get('/files/:filename', async function(ctx) {
     const filePath = ctx.request.url
+    ctx.cacheControl = {
+      maxAge: 60 * 60 * 24 * 30
+    }
     ctx.type = getExt(filePath)
     ctx.body = fs.createReadStream(resolve(__dirname, `../${filePath}`))
   })

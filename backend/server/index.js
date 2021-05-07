@@ -4,6 +4,7 @@ const Koa = require('koa')
 const logger = require('koa-logger')
 const koaBody = require('koa-body')
 const conditional = require('koa-conditional-get')
+const cacheControl = require('koa-cache-control')
 const etag = require('koa-etag')
 const serve = require('koa-static')
 const db = require('../data')
@@ -111,7 +112,10 @@ app.use(async function visitorAttemptControlMiddleWare(ctx, next) {
 
 // 前端静态资源服务
 app.use(serve(
-  resolve(__dirname,  '../static')
+  resolve(__dirname,  '../static'),
+  {
+    maxage: 60 * 60 * 24 * 30
+  }
 ))
 
 // 业务路由

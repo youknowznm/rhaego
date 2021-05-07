@@ -23,7 +23,7 @@ import api from '~api'
 import {withRouter} from 'react-router-dom'
 import {toast} from '~/components/Toast'
 import style from './articles.scss'
-import {MainContext} from '~/modules/Context';
+import {MainContext} from '~/modules/Context'
 
 class Articles extends React.Component {
 

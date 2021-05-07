@@ -10,7 +10,7 @@ import {Link, ajax, get, getPalette, getFontTheme, getTagsFromText, noop, mockTi
 import Button from '~/components/Button'
 import api from '~api'
 import style from './repos.scss'
-import {MainContext} from '~/modules/Context';
+import {MainContext} from '~/modules/Context'
 
 class Repos extends React.Component {
 

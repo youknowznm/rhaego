@@ -81,8 +81,8 @@ class MarkdownParser {
       return `<a target='_blank' href='${href}' title='${title}'>${text}</a>`
     }
     markdownCodeLanguages.forEach((langName) => {
-      const langModule = require(`highlight.js/lib/languages/${langName}`);
-      hljs.registerLanguage(langName, langModule);
+      const langModule = require(`highlight.js/lib/languages/${langName}`)
+      hljs.registerLanguage(langName, langModule)
     })
     marked.setOptions({
       renderer,
