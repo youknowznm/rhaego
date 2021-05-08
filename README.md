@@ -1,10 +1,10 @@
 # Rhaego
 
-![](https://youknowznm.github.io/demos/vue-memo/src/images/icons/icon-dropdown.png)
+个人开发和设计, 基于 react + koa, 开箱即用的 Material Design 风格博客系统  
+基于嵌入式数据库 NeDB  
+未使用任何组件库 / 样式库 / 动画库  
 
-个人开发和设计, 基于 react + koa, 开箱即用的 Material Design 风格博客系统.  
-基于嵌入式数据库 NeDB.  
-未使用任何组件库 / 样式库 / 动画库.
+截图在本文末尾
 
 ### 功能
 
@@ -24,28 +24,6 @@
 - 依赖尽可能少的前端工具库
 - 基于嵌入式数据库 [NeDB](https://github.com/louischatriot/nedb), 即插即用
 - 根据真实客户端 IP 限制访客的有效请求次数
-
-### 截图
-
-笔记列表
-
-![](https://youknowznm.com/files/rhaego-1-articles.png)
-
-笔记详情
-
-![](https://youknowznm.com/files/rhaego-2-article.png)
-
-代码仓库列表
-
-![](https://youknowznm.com/files/rhaego-3-repos.png)
-
-编辑笔记
-
-![](https://youknowznm.com/files/rhaego-4-edit.png)
-
-笔记评论
-
-![](https://youknowznm.com/files/rhaego-5-comment.png)
 
 ### 使用方式
 
@@ -100,3 +78,25 @@
 > "And to Rhaego son of Drogo, the stallion who will mount the world, to him I also pledge a gift. To him I will give this iron chair his mother's father sat in. I will give him Seven Kingdoms. I, Drogo, khal, will do this thing. I will take my khalasar west to where the world ends, and ride the wooden horses across the black salt water as no khal has done before. I will kill the men in the iron suits and tear down their stone houses. I will rape their women, take their children as slaves, and bring their broken gods back to Vaes Dothrak to bow down before the Mother of Mountains, as the stars look down to witness."
 > 
 > _A Game of Thrones, 1996_
+
+### 截图
+
+笔记列表
+
+![](https://youknowznm.github.io/demos/images/rhaego/1-articles.png)
+
+笔记详情
+
+![](https://youknowznm.github.io/demos/images/rhaego/2-article.png)
+
+代码仓库列表
+
+![](https://youknowznm.github.io/demos/images/rhaego/3-repos.png)
+
+编辑笔记
+
+![](https://youknowznm.github.io/demos/images/rhaego/4-edit.png)
+
+笔记评论
+
+![](https://youknowznm.github.io/demos/images/rhaego/5-comment.png)
