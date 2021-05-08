@@ -23,7 +23,29 @@
 - 基于嵌入式数据库 [NeDB](https://github.com/louischatriot/nedb), 即插即用
 - 根据真实客户端 IP 限制访客的有效请求次数
 
-### 部署
+### 截图
+
+笔记列表
+
+![](https://youknowznm.com/files/rhaego-1-articles.png)
+
+笔记详情
+
+![](https://youknowznm.com/files/rhaego-2-article.png)
+
+代码仓库列表
+
+![](https://youknowznm.com/files/rhaego-3-repos.png)
+
+编辑笔记
+
+![](https://youknowznm.com/files/rhaego-4-edit.png)
+
+笔记评论
+
+![](https://youknowznm.com/files/rhaego-5-comment.png)
+
+### 使用方式
 
 #### 1. 准备
 
