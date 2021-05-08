@@ -50,7 +50,9 @@ class Comments extends React.Component {
 
   componentDidMount() {
     this.props.getScrollToEditorFunc(this.scrollToCommentEditor)
-    this.getComments()
+    if (isValidString(this.props.articleId)) {
+      this.getComments()
+    }
   }
   
   getComments = () => {
@@ -58,7 +60,7 @@ class Comments extends React.Component {
       articleId: this.props.articleId,
     }
     this.setState({
-      isLoading: true
+      // isLoading: true
     })
     get(api.GET_COMMENTS, params)
       .then(res => {
@@ -70,7 +72,7 @@ class Comments extends React.Component {
       .catch(noop)
       .finally(() => {
         this.setState({
-          isLoading: false
+          // isLoading: false
         })
       })
   }
@@ -101,11 +103,14 @@ class Comments extends React.Component {
     this.scrollToCommentEditor()
     post(api.SAVE_COMMENT, params)
       .then(res => {
-        this.getComments()
         this.setState({
           commentContent: '',
           hasValidated: false,
         })
+        // nedb 好像有点延迟..
+        setTimeout(() => {
+          this.getComments()
+        }, 600)
       })
       .catch(noop)
       .finally(() => {
