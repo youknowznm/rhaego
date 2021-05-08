@@ -27,8 +27,8 @@ if [ ! -d "./backend/files" ]; then
 fi
 
 printf "\n-------- 重启服务 --------\n"\
-cd backend
-pm2 restart server
+cd backend/server
+pm2 restart index.js
 
 printf "\n-------- 重启 nginx --------\n"
 nginx -s reload
