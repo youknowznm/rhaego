@@ -23,7 +23,7 @@
 - 基于嵌入式数据库 [NeDB](https://github.com/louischatriot/nedb), 即插即用
 - 根据真实客户端 IP 限制访客的有效请求次数
 
-### 使用姿势
+### 部署
 
 #### 1. 服务器需求
 
@@ -47,14 +47,17 @@
   }
   ```
 
-#### 2. 部署
+#### 2. 准备
 
 - fork 此仓库
 - 在 `config.js` 按需配置站点信息
 - 克隆至远端服务器
 - `npm run deploy`
 - 在远端 `backend/secret.json` 配置管理员账户和 koa 秘钥
-- Ready to roll!
+  
+#### 3. 运行
+
+- `pm2 start backend/server/index.js`
 
 ### 二次开发
 

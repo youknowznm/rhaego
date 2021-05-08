@@ -26,11 +26,4 @@ if [ ! -d "./backend/files" ]; then
   mkdir "./backend/files"
 fi
 
-printf "\n-------- 重启服务 --------\n"\
-cd backend/server
-pm2 restart index.js
-
-printf "\n-------- 重启 nginx --------\n"
-nginx -s reload
-
 printf "\n-------- 已就绪 --------\n"
