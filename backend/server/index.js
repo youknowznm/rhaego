@@ -29,8 +29,16 @@ app.use(logger())
 
 // 强缓存
 app.use(cacheControl({
-  maxAge: 5
+  maxAge: 0
 }))
+app.use(async function(ctx, next) {
+  if (/\.(js|css|png|gif|svg)$/.test(ctx.request.url)) {
+    ctx.cacheControl = {
+      maxAge: 60 * 60 * 24 * 30
+    }
+  }
+  await next()
+})
 
 // 协商缓存
 app.use(conditional())
@@ -113,16 +121,6 @@ app.use(async function visitorAttemptControlMiddleWare(ctx, next) {
       await next()
     }
   }
-})
-
-// 强缓存
-app.use(async function(ctx, next) {
-  if (/\.(js|css|png|gif|svg)$/.test(ctx.request.url)) {
-    ctx.cacheControl = {
-      maxAge: 60 * 60 * 24 * 30
-    }
-  }
-  await next()
 })
 
 // 前端静态资源服务

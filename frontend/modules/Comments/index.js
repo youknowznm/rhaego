@@ -107,10 +107,7 @@ class Comments extends React.Component {
           commentContent: '',
           hasValidated: false,
         })
-        // nedb 好像有点延迟..
-        setTimeout(() => {
-          this.getComments()
-        }, 600)
+        this.getComments()
       })
       .catch(noop)
       .finally(() => {
