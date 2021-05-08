@@ -26,9 +26,9 @@ if [ ! -d "./backend/files" ]; then
   mkdir "./backend/files"
 fi
 
-printf "\n-------- 重启服务 --------\n"
-pm2 stop ./backend/server
-pm2 start ./backend/server
+printf "\n-------- 重启服务 --------\n"\
+cd backend
+pm2 restart server
 
 printf "\n-------- 重启 nginx --------\n"
 nginx -s reload
