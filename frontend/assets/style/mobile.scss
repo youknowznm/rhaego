@@ -4,7 +4,6 @@ body.device-mobile {
       width: 100%;
     }
   }
-
   @media (max-width: 750px) {
     .rhaego-header {
       .nav-bar {
@@ -14,6 +13,7 @@ body.device-mobile {
       }
     }
     .rhaego-card {
+      height: 192px;
       padding: 12px;
       .counts {
         left: 12px;
@@ -28,8 +28,8 @@ body.device-mobile {
         -webkit-line-clamp: 2;
       }
       .content {
-        -webkit-line-clamp: 6;
-        max-height: calc(6 * 1.8em);
+        -webkit-line-clamp: 2;
+        max-height: calc(2 * 1.8em);
       }
     }
     .rhaego-article {
@@ -68,6 +68,11 @@ body.device-mobile {
       }
       .article-sidebar {
         display: none;
+      }
+    }
+    .rhaego-markdown {
+      pre {
+        padding: .5em;
       }
     }
     .rhaego-article-comment {

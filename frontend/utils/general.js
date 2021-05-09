@@ -78,7 +78,9 @@ class MarkdownParser {
     this.marked = marked
     const renderer = new marked.Renderer()
     renderer.link = (href, title, text) => {
-      return `<a target='_blank' href='${href}' title='${title}'>${text}</a>`
+      // 同源的链接不新开窗口
+      const target = /^http/.test(href) ? '_blank' : '_self'
+      return `<a target='${target}' href='${href}' title='${title}'>${text}</a>`
     }
     markdownCodeLanguages.forEach((langName) => {
       const langModule = require(`highlight.js/lib/languages/${langName}`)
