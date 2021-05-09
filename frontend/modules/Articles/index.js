@@ -80,6 +80,8 @@ class Articles extends React.Component {
             if (new Date(prev.dateString) > new Date(curr.dateString)) {
               return -1
             }
+          })
+          .sort((prev, curr) => {
             // 再按点赞量
             if (prev.likedCount > curr.likedCount) {
               return -1
