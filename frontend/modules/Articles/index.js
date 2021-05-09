@@ -70,18 +70,18 @@ class Articles extends React.Component {
                 )
                 .replace(
                   // 链接
-                  /\[(\S*)]\([^)]*\)/,
+                  /\[(\S+)]\([^)]*\)/,
                   (all, c1) => c1
                 ),
             }
           })
           .sort((prev, curr) => {
-            // 先按点赞量
-            if (prev.likedCount > curr.likedCount) {
+            // 先按日期
+            if (new Date(prev.dateString) > new Date(curr.dateString)) {
               return -1
             }
-            // 再按日期
-            if (new Date(prev.dateString) > new Date(curr.dateString)) {
+            // 再按点赞量
+            if (prev.likedCount > curr.likedCount) {
               return -1
             }
           })

@@ -13,7 +13,6 @@ body.device-mobile {
       }
     }
     .rhaego-card {
-      height: 192px;
       padding: 12px;
       .counts {
         left: 12px;
@@ -28,8 +27,8 @@ body.device-mobile {
         -webkit-line-clamp: 2;
       }
       .content {
-        -webkit-line-clamp: 2;
-        max-height: calc(2 * 1.8em);
+        -webkit-line-clamp: 4;
+        max-height: calc(4 * 1.8em);
       }
     }
     .rhaego-article {

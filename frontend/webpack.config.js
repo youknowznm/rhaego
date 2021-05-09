@@ -133,7 +133,7 @@ module.exports = (env, argv) => {
         template: path.resolve(__dirname, 'index.html'),
         favicon: './assets/images/identicon.png',
       }),
-      // IDEA: 筛选 hljs 的语言, 按需加载
+      // IDEA: 筛选 hljs 的语言, 按需引入
       new webpack.ContextReplacementPlugin(
         /highlight\.js\/lib\/languages$/,
         new RegExp(`^./(${markdownCodeLanguages.join('|')})$`),
