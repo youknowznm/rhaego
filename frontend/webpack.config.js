@@ -12,6 +12,7 @@ module.exports = (env, argv) => {
   const isDev = mode !== 'production'
 
   const styleLoader = isDev ? 'style-loader' : MiniCssExtractPlugin.loader
+  // const styleLoader = 'style-loader'
 
   const postcssLoader = {
     loader: 'postcss-loader',
@@ -52,6 +53,7 @@ module.exports = (env, argv) => {
       clean: true,
       path: path.resolve(__dirname, '../backend/static'),
       filename: '[name].[contenthash].js',
+      chunkFilename: '[name].[contenthash].js',
     },
     devServer: isDev ? {
       contentBase: '../backend/static',
@@ -119,6 +121,7 @@ module.exports = (env, argv) => {
         }),
         new CssMinimizerPlugin(),
       ],
+      moduleIds: 'deterministic',
       runtimeChunk: 'single',
       splitChunks: {
         name: 'common',
