@@ -12,7 +12,6 @@ module.exports = (env, argv) => {
   const isDev = mode !== 'production'
 
   const styleLoader = isDev ? 'style-loader' : MiniCssExtractPlugin.loader
-  // const styleLoader = 'style-loader'
 
   const postcssLoader = {
     loader: 'postcss-loader',
@@ -50,10 +49,10 @@ module.exports = (env, argv) => {
     context: path.resolve(__dirname),
     entry: './main.js',
     output: {
-      clean: true,
       path: path.resolve(__dirname, '../backend/static'),
       filename: '[name].[contenthash].js',
       chunkFilename: '[name].[contenthash].js',
+      clean: true,
     },
     devServer: isDev ? {
       contentBase: '../backend/static',
@@ -90,8 +89,7 @@ module.exports = (env, argv) => {
           use: [
             styleLoader,
             'css-loader',
-            // postcssLoader,
-
+            postcssLoader,
             {
               loader: 'sass-loader',
               options: {
@@ -136,7 +134,7 @@ module.exports = (env, argv) => {
         template: path.resolve(__dirname, 'index.html'),
         favicon: './assets/images/identicon.png',
       }),
-      // IDEA: 筛选 hljs 的语言, 按需引入
+      // 筛选 hljs 的语言, 按需引入
       new webpack.ContextReplacementPlugin(
         /highlight\.js\/lib\/languages$/,
         new RegExp(`^./(${markdownCodeLanguages.join('|')})$`),
