@@ -41,7 +41,7 @@ $brown: #795548;
 $grey: #9e9e9e;
 $bluegrey: #607d8b;
 
-$font-primary: rgba(#000, .87);
+$font-primary: #121212;
 $font-secondary: rgba(#000, .54);
 
 $paper-elevation-none: none;
@@ -49,7 +49,9 @@ $paper-elevation-low: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0
 $paper-elevation-medium: 0px 6px 6px -3px rgb(0 0 0 / 20%), 0px 10px 14px 1px rgb(0 0 0 / 14%), 0px 4px 18px 3px rgb(0 0 0 / 12%);
 $paper-elevation-high: 0px 10px 13px -6px rgb(0 0 0 / 20%), 0px 20px 31px 3px rgb(0 0 0 / 14%), 0px 8px 38px 7px rgb(0 0 0 / 12%);
 
-$font-family: "JetBrains Mono", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+//$font-family: "JetBrains Mono", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+$font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;
+$font-family-mono: "JetBrains Mono", "Menlo";
 
 $rhaego-markdown-border-light: rgba(0, 0, 0, 0.12);
 $rhaego-markdown-link: rgb(74,135,240);
@@ -97,6 +99,7 @@ body {
 .rhaego-single-word {
   display: inline-block;
   transition: opacity .4s $materialCubicBezier;
+  font-family: $font-family-mono;
   &::after {
     display: inline-block;
     content: '·';

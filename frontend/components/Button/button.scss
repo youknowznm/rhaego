@@ -28,7 +28,6 @@ $rhaego-button-secondary: #dc004e;
   transition: all .4s $materialCubicBezier;
   z-index: 90;
   .button-content {
-    font-family: $font-family;
     display: block;
     @include one-line-ellipsis;
     font-weight: 500;

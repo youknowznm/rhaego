@@ -10,10 +10,11 @@
   color: $font-primary;
 
   p {
-    line-height: 1.5;
-    font-size: 14px;
-    margin: 12px 0;
+    line-height: 1.6;
+    font-size: 16px;
+    margin: 1.4em 0;
     padding: 0;
+    word-break: break-word;
   }
 
   strong {
@@ -21,9 +22,9 @@
   }
 
   a {
-    color: $rhaego-markdown-link;
-    line-height: 1.6;
-    border-bottom: 1px solid $rhaego-markdown-link;
+    //color: $rhaego-markdown-link;
+    //line-height: 1.6;
+    border-bottom: 1px solid $font-primary;
     transition: all .2s $materialCubicBezier;
     &:hover {
       border-bottom-color: $white;
@@ -51,14 +52,14 @@
 
   h2 {
     margin: 36px 0 18px;
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 500;
     line-height: 32px;
   }
 
   h3, h4, h5, h6 {
     margin: 18px 0;
-    font-size: 20px;
+    font-size: 24px;
     line-height: 32px;
   }
 
@@ -76,12 +77,13 @@
     display: inline-block;
     padding: 0 .3em;
     font-size: .8em;
-    line-height: 1.5;
+    line-height: 1.6;
     border: 1px solid #dadce0;
     border-radius: 3px;
     word-break: normal;
     background: rgba(0, 0, 0, .05);
     color: #000;
+    font-family: $font-family-mono;
   }
 
   pre {
@@ -89,11 +91,16 @@
     overflow-x: auto;
     overflow-y: hidden;
     position: relative;
+    font-size: 14px;
     padding: 1em;
     background: $white;
     box-shadow: $paper-elevation-low;
     border-radius: 3px;
-    font-size: 0.75em;
+    font-family: $font-family-mono;
+    * {
+      font-family: $font-family-mono;
+    }
+    //font-size: 0.75em;
     code {
       color: unset;
       border: unset;
@@ -105,8 +112,8 @@
   ul, ol {
     margin: 12px 0 12px 2em;
     li {
-      font-size: 14px;
-      line-height: 1.5;
+      font-size: 16px;
+      line-height: 1.6;
       padding: 0;
       position: relative;
       margin: .2em 0;
@@ -114,7 +121,7 @@
     p {
       margin: 0;
       display: inline-block;
-      line-height: 1.5;
+      line-height: 1.6;
     }
   }
   ul > li {
@@ -154,7 +161,7 @@
     border-spacing: 0;
     border-collapse: collapse;
     margin: 12px 0;
-    font-size: 14px;
+    font-size: 16px;
     th {
       font-weight: 500;
     }

@@ -17,7 +17,7 @@ $indent: 1em;
       height: 48px;
       line-height: 48px;
       .actions {
-        > span ,
+        > span,
         svg {
           display: inline-block;
           margin-right: .5em;
@@ -26,6 +26,7 @@ $indent: 1em;
           height: 48px;
           line-height: 48px;
           vertical-align: middle;
+          font-family: $font-family-mono;
         }
         svg {
           cursor: pointer;
@@ -40,8 +41,11 @@ $indent: 1em;
       }
       .date {
         position: absolute;
+        display: block;
+        white-space: nowrap;
         font-size: 13px;
         color: $font-secondary;
+        font-family: $font-family-mono;
         font-style: italic;
         @include top-left-center;
       }
@@ -102,7 +106,6 @@ $indent: 1em;
         }
         &:hover {
           color: $blue;
-          font-weight: 500;
         }
       }
     }

@@ -88,6 +88,9 @@
         display: inline-block;
         font-size: 12px;
         text-align: center;
+        * {
+          font-family: $font-family-mono;
+        }
         > * {
           display: inline-block;
           vertical-align: middle;
