@@ -22,14 +22,13 @@
   }
 
   a {
-    //color: $rhaego-markdown-link;
-    //line-height: 1.6;
-    border-bottom: 1px solid $font-primary;
+    color: $font-secondary;
+    padding: 0 .1em .1em;
+    border-bottom: 1px solid $font-secondary;
     transition: all .2s $materialCubicBezier;
     &:hover {
-      border-bottom-color: $white;
-      background: $rhaego-markdown-link;
-      color: $white;
+      border-bottom-color: $blue;
+      color: $blue;
     }
   }
 
