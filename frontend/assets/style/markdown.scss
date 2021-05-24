@@ -25,10 +25,10 @@
     color: $font-secondary;
     padding: 0 .1em .1em;
     border-bottom: 1px solid $font-secondary;
-    transition: all .2s $materialCubicBezier;
+    transition: all .2s ease-out;
     &:hover {
-      border-bottom-color: $blue;
-      color: $blue;
+      border-bottom-color:$font-primary;
+      color: $font-primary;
     }
   }
 
