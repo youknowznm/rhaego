@@ -13,7 +13,7 @@ const zhihu = 'https://www.zhihu.com/people/youkonwznm'
 
 // 是否在 header 导航展示简历链接
 // 如不展示, 则需手动前往 `/about` 查看
-const showResumeOnHeaderNav = true
+const showResumeOnHeaderNav = false
 
 // 笔记 markdown 代码的语言列表, 用以优化 hljs 的体积
 const markdownCodeLanguages = ['javascript', 'scss', 'css', 'bash']

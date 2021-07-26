@@ -113,7 +113,7 @@ $duration: .4s;
         right: 18px;
         bottom: calc((192px - 56px) / 2);
         // 水平可滚动
-        overflow-x: scroll;
+        overflow-x: auto;
         overflow-y: hidden;
         white-space: nowrap;
         display: block;

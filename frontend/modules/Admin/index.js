@@ -193,7 +193,7 @@ class Admin extends React.Component {
     return (
       <>
         <p className={'sum'}>
-          访问两次以上的设备总计:
+          访问 10 次以上的设备总计:
           <span className={'num'}>
             {this.state.visitors.length}
           </span>

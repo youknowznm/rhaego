@@ -196,12 +196,12 @@ class RhaegoDb {
         reject(err)
       })
   })
-  // 获取所有 访问至少 2 次的用户
+  // 获取所有 访问至少 10 次的用户
   getVisitors = () => new Promise((resolve, reject) => {
     this.clientDb.find(
       {
         visitCount: {
-          $gt: 1
+          $gt: 9
         }
       },
       (err, allClients)=>{
