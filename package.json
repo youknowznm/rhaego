@@ -43,7 +43,7 @@
     "koa-logger": "^3.2.1",
     "koa-router": "^10.0.0",
     "koa-static": "^5.0.0",
-    "marked": "^2.0.3",
+    "marked": "^4.0.10",
     "mini-css-extract-plugin": "^1.6.0",
     "nanoid": "^3.1.22",
     "nedb": "^1.8.0",
