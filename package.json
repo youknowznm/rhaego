@@ -45,7 +45,7 @@
     "koa-static": "^5.0.0",
     "marked": "^2.0.3",
     "mini-css-extract-plugin": "^1.6.0",
-    "nanoid": "^3.1.22",
+    "nanoid": "^3.1.31",
     "nedb": "^1.8.0",
     "postcss-loader": "^5.2.0",
     "prop-types": "^15.7.2",
