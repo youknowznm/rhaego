@@ -28,8 +28,6 @@
 
 #### 1. 准备
 
-- 较新的 LTS 版本 nodejs
-  - 支持类的箭头方法即可, 亲测`14.16.0`可用
 - 全局安装 [PM2](https://www.npmjs.com/package/pm2)
 - nginx 关键配置:
   ```nginx
