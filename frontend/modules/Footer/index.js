@@ -55,37 +55,39 @@ export default class Footer extends React.Component {
         <div className={'info-wrap'}>
           <div className='info rhaego-responsive'>
             <p className={'left'}>
-              <span>Presented by</span>
-              <span>
-                <a
+              <a
+                  className={'link beian'}
+                  target={'_blank'}
+                  href={siteData.beianLink}
+              >
+                { siteData.beianRecord }
+              </a>
+            </p>
+            <p className={'center'}>
+              Presented by
+              <a
                   className={'link'}
                   target={'_blank'}
                   href={REPO_SOURCE}
-                >
-                  Rhaego
-                </a>
-              </span>
-              <span>.</span>
-            </p>
-            <p className={'center'}>
-              <span>Made with</span>
+              >
+                Rhaego
+              </a>
+              . Made with
               <SvgHeart
                 className={'heart'}
                 width={12}
                 height={12}
                 fill={'#ff5252'}
               />
-              <span>by</span>
-              <span>
-                <a
-                  className={'link'}
-                  target={'_blank'}
-                  href={'https://github.com/youknowznm'}
-                >
-                  znm
-                </a>
-              <span>.</span>
-              </span>
+              by
+              <a
+                className={'link'}
+                target={'_blank'}
+                href={'https://github.com/youknowznm'}
+              >
+                znm
+              </a>
+              .
             </p>
             <p className={'right'}>
               <span>访问次数: </span>

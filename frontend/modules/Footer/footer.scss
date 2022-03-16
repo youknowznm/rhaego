@@ -88,6 +88,7 @@
         display: inline-block;
         font-size: 12px;
         text-align: center;
+        font-family: $font-family-mono;
         * {
           font-family: $font-family-mono;
         }
@@ -99,12 +100,17 @@
           cursor: pointer;
           margin: 0 0 0 .5em;
           font-weight: 500;
-          border-bottom: 1px solid $font-primary;
-          transition: all .2s $materialCubicBezier;
+          border-bottom: 1px solid transparent;
+          transition: all .3s $materialCubicBezier;
+          line-height: 20px;
           &:hover {
-            color: $white;
-            background: $font-primary;
-            border-bottom-color: transparent;
+            border-bottom-color: $font-primary;
+          }
+          &.beian {
+            color: $font-secondary;
+            &:hover {
+              border-bottom-color: $font-secondary;
+            }
           }
         }
         .heart {

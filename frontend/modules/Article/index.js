@@ -124,8 +124,6 @@ class Article extends React.Component {
       })
       minLevel = Math.min(minLevel, level)
     }
-    // console.log({minLevel})
-    // console.log(headers)
     // 处理为最小 tag 类型为 1
     for (let i = 1; i < minLevel; i++) {
       headers = headers.map(item => {
@@ -135,7 +133,6 @@ class Article extends React.Component {
         }
       })
     }
-    // console.log(headers)
     headers.unshift({
       level: 1,
       label: '索引',
@@ -280,7 +277,6 @@ class Article extends React.Component {
         id
       })
         .then(res => {
-          console.log({res})
           this.setState({
             isLoading: false
           })
