@@ -81,6 +81,24 @@ body {
       height: 100vh;
     }
   }
+  &.print-article {
+    padding-top: 0;
+    .rhaego-header,
+    .rhaego-footer, {
+      display: none;
+    }
+    .rhaego-container {
+      margin-top: 0;
+    }
+    .rhaego-article {
+      .article-content {
+        margin-right: 0;
+      }
+      .article-sidebar {
+        display: none;
+      }
+    }
+  }
 }
 
 .rhaego-responsive {

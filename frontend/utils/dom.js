@@ -86,3 +86,9 @@ export const checkDevice = () => {
   }
   addClass(document.body, `device-${deviceType}`)
 }
+
+export const checkUrlPrintParam = () => {
+  if (/print/.test(location.search)) {
+    addClass(document.body, 'print-article')
+  }
+}

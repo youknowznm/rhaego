@@ -1,9 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Routes from '~/routes'
-import {checkDevice} from '~utils'
+import {checkDevice, checkUrlPrintParam} from '~utils'
 
 checkDevice()
+checkUrlPrintParam()
 
 // 不记录滚动位置
 history.scrollRestoration = 'manual'
