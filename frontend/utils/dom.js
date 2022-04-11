@@ -2,30 +2,30 @@ import {callIfCallable} from './index'
 import {toast} from '~/components/Toast'
 
 export function animateToScrollHeight(height = 0, onDone) {
-  const doc = document.documentElement
-  function step() {
-    const {
-      scrollTop,
-      clientHeight,
-      scrollHeight,
-    } = doc
-    const id = window.requestAnimationFrame(step)
-    // 已经滚动至底端, 仍要滚动? 婷婷
-    const reachedBottom = scrollTop + clientHeight === scrollHeight
-    if (scrollTop === height) {
-      cancelAnimationFrame(id)
-      callIfCallable(onDone)
-    } else if (scrollTop > height) {
-      doc.scrollTop = scrollTop - Math.max((scrollTop - height) / 4, 1)
-    } else {
-      if (reachedBottom) {
-        cancelAnimationFrame(id)
-        callIfCallable(onDone)
-      }
-      doc.scrollTop = scrollTop + Math.max((height - scrollTop) / 4, 1)
-    }
-  }
-  step()
+  document.documentElement.scrollTop = height
+  // function step() {
+  //   const {
+  //     scrollTop,
+  //     clientHeight,
+  //     scrollHeight,
+  //   } = doc
+  //   const id = window.requestAnimationFrame(step)
+  //   // 已经滚动至底端, 仍要滚动? 婷婷
+  //   const reachedBottom = scrollTop + clientHeight === scrollHeight
+  //   if (scrollTop === height) {
+  //     cancelAnimationFrame(id)
+  //     callIfCallable(onDone)
+  //   } else if (scrollTop > height) {
+  //     doc.scrollTop = scrollTop - Math.max((scrollTop - height) / 4, 1)
+  //   } else {
+  //     if (reachedBottom) {
+  //       cancelAnimationFrame(id)
+  //       callIfCallable(onDone)
+  //     }
+  //     doc.scrollTop = scrollTop + Math.max((height - scrollTop) / 4, 1)
+  //   }
+  // }
+  // step()
 }
 
 export function hasClass(DOMNode, targetClassName) {
