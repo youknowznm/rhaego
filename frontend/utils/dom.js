@@ -3,6 +3,7 @@ import {toast} from '~/components/Toast'
 
 export function animateToScrollHeight(height = 0, onDone) {
   document.documentElement.scrollTop = height
+  callIfCallable(onDone)
   // function step() {
   //   const {
   //     scrollTop,
