@@ -80,20 +80,20 @@
 
 #### 笔记列表
 
-![](https://youknowznm.github.io/demos/images/rhaego/1-articles.png)
+![](https://youknowznm.github.io/images/rhaego/1-articles.png)
 
 #### 笔记详情
 
-![](https://youknowznm.github.io/demos/images/rhaego/2-article.png)
+![](https://youknowznm.github.io/images/rhaego/2-article.png)
 
 #### 代码仓库列表
 
-![](https://youknowznm.github.io/demos/images/rhaego/3-repos.png)
+![](https://youknowznm.github.io/images/rhaego/3-repos.png)
 
 #### 编辑笔记
 
-![](https://youknowznm.github.io/demos/images/rhaego/4-edit.png)
+![](https://youknowznm.github.io/images/rhaego/4-edit.png)
 
 #### 笔记评论
 
-![](https://youknowznm.github.io/demos/images/rhaego/5-comment.png)
+![](https://youknowznm.github.io/images/rhaego/5-comment.png)
